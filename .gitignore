@@ -1,0 +1,16 @@
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Configuración de editores
+.vscode/
+.idea/
+
+# Node / Logs (si usas Tailwind, SASS o Webpack)
+node_modules/
+npm-debug.log
+*.log
+
+# Archivos de respaldo o temporales
+*.tmp
+*.bak
