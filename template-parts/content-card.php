@@ -1,6 +1,6 @@
 <?php
 /**
- * Tarjeta de entrada usada en el listado del blog.
+ * Post card used in the blog listing.
  *
  * @package Adeptbuild
  */
@@ -24,7 +24,7 @@
 		<p><?php echo esc_html( get_the_excerpt() ); ?></p>
 
 		<a class="ab-link-arrow" href="<?php the_permalink(); ?>">
-			<?php esc_html_e( 'Leer más', 'adeptbuild' ); ?>
+			<?php esc_html_e( 'Read More', 'adeptbuild' ); ?>
 			<?php adeptbuild_icon( 'arrow-right', 16 ); ?>
 		</a>
 	</div>

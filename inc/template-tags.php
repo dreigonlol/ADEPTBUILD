@@ -1,6 +1,6 @@
 <?php
 /**
- * Etiquetas de plantilla y helpers reutilizables.
+ * Reusable template tags and helpers.
  *
  * @package Adeptbuild
  */
@@ -10,12 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Devuelve un icono SVG del set del tema.
+ * Returns an inline SVG icon from the theme's icon set.
  *
- * @param string $name  Nombre del icono.
- * @param int    $size  Tamaño en píxeles.
- * @param string $class Clases CSS extra.
- * @return string Markup SVG.
+ * @param string $name  Icon name.
+ * @param int    $size  Size in pixels.
+ * @param string $class Extra CSS classes.
+ * @return string SVG markup.
  */
 function adeptbuild_get_icon( $name, $size = 20, $class = '' ) {
 
@@ -62,30 +62,30 @@ function adeptbuild_get_icon( $name, $size = 20, $class = '' ) {
 }
 
 /**
- * Imprime un icono del set del tema.
+ * Prints an icon from the theme's icon set.
  */
 function adeptbuild_icon( $name, $size = 20, $class = '' ) {
-	echo adeptbuild_get_icon( $name, $size, $class ); // phpcs:ignore WordPress.Security.EscapingOutput.OutputNotEscaped -- SVG propio del tema.
+	echo adeptbuild_get_icon( $name, $size, $class ); // phpcs:ignore WordPress.Security.EscapingOutput.OutputNotEscaped -- theme's own SVG.
 }
 
 /**
- * Lee una opción del Customizer con su valor por defecto.
+ * Reads a Customizer option with a fallback default.
  */
 function adeptbuild_option( $key, $default = '' ) {
 	return get_theme_mod( 'adeptbuild_' . $key, $default );
 }
 
 /**
- * Enlace "tel:" normalizado a partir de un teléfono legible.
+ * Normalized "tel:" link from a human-readable phone number.
  */
 function adeptbuild_tel_href( $phone ) {
 	return 'tel:' . preg_replace( '/[^0-9+]/', '', $phone );
 }
 
 /**
- * Redes sociales configuradas en el Customizer.
+ * Social network links configured in the Customizer.
  *
- * @return array Lista de arrays con claves `icon`, `url` y `label`.
+ * @return array List of arrays with `icon`, `url` and `label` keys.
  */
 function adeptbuild_social_links() {
 
@@ -112,7 +112,7 @@ function adeptbuild_social_links() {
 }
 
 /**
- * Metadatos de una entrada (fecha, autor, categoría).
+ * Post meta row (date, author, category).
  */
 function adeptbuild_post_meta() {
 	?>
@@ -130,7 +130,7 @@ function adeptbuild_post_meta() {
 }
 
 /**
- * Cabecera de páginas internas con título y miga de pan simple.
+ * Simple inner-page header with title and breadcrumb.
  */
 function adeptbuild_page_hero( $title = '', $subtitle = '' ) {
 	$title = $title ? $title : get_the_title();
@@ -142,7 +142,7 @@ function adeptbuild_page_hero( $title = '', $subtitle = '' ) {
 				<p class="ab-breadcrumb"><?php echo esc_html( $subtitle ); ?></p>
 			<?php else : ?>
 				<p class="ab-breadcrumb">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Inicio', 'adeptbuild' ); ?></a>
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'adeptbuild' ); ?></a>
 					<span aria-hidden="true"> / </span><?php echo esc_html( $title ); ?>
 				</p>
 			<?php endif; ?>
@@ -153,21 +153,21 @@ function adeptbuild_page_hero( $title = '', $subtitle = '' ) {
 }
 
 /**
- * Menú de reserva cuando todavía no se ha asignado ninguno.
- * Solo lo ven los administradores, como atajo hacia la pantalla de menús.
+ * Fallback menu shown when no menu has been assigned yet.
+ * Only visible to administrators, as a shortcut to the menus screen.
  */
 function adeptbuild_menu_fallback() {
 	if ( ! current_user_can( 'edit_theme_options' ) ) {
 		return;
 	}
 	echo '<ul class="main-header-menu"><li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">'
-		. esc_html__( 'Crear un menú', 'adeptbuild' ) . '</a></li></ul>';
+		. esc_html__( 'Create a menu', 'adeptbuild' ) . '</a></li></ul>';
 }
 
 /**
- * Onda decorativa que separa una sección oscura de la siguiente.
+ * Decorative wave that separates a dark section from the next one.
  *
- * @param string $modifier Clase extra, por ejemplo 'ab-wave--alt'.
+ * @param string $modifier Extra class, e.g. 'ab-wave--alt'.
  */
 function adeptbuild_wave( $modifier = '' ) {
 	?>

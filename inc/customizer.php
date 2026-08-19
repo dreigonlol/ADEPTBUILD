@@ -1,9 +1,10 @@
 <?php
 /**
- * Opciones del Personalizador (Apariencia → Personalizar → Adept Build).
+ * Customizer settings (Appearance → Customize → Adept Build).
  *
- * Todo el contenido editable de la portada, los datos de contacto y las redes
- * sociales viven aquí, para que el cliente no tenga que tocar código.
+ * Only header/footer and site-wide content lives here — contact details,
+ * social links and the header CTA button — so the client can edit them
+ * without touching code.
  *
  * @package Adeptbuild
  */
@@ -13,13 +14,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Registra un ajuste de texto en una sola llamada.
+ * Registers a text-type setting/control in a single call.
  *
- * @param WP_Customize_Manager $wp_customize Instancia del personalizador.
- * @param string               $id           Identificador (sin prefijo).
- * @param string               $section      Sección destino.
- * @param string               $label        Etiqueta visible.
- * @param string               $default      Valor por defecto.
+ * @param WP_Customize_Manager $wp_customize Customizer instance.
+ * @param string               $id           Setting id (without prefix).
+ * @param string               $section      Target section.
+ * @param string               $label        Visible label.
+ * @param string               $default      Default value.
  * @param string               $type         text | textarea | url | image.
  */
 function adeptbuild_add_field( $wp_customize, $id, $section, $label, $default = '', $type = 'text' ) {
@@ -67,7 +68,7 @@ function adeptbuild_add_field( $wp_customize, $id, $section, $label, $default = 
 }
 
 /**
- * Registra el panel completo.
+ * Registers the full panel.
  */
 function adeptbuild_customize_register( $wp_customize ) {
 
@@ -75,41 +76,41 @@ function adeptbuild_customize_register( $wp_customize ) {
 		'adeptbuild_panel',
 		array(
 			'title'       => __( 'Adept Build', 'adeptbuild' ),
-			'description' => __( 'Contenido y datos de contacto del tema.', 'adeptbuild' ),
+			'description' => __( 'Header, footer and contact settings.', 'adeptbuild' ),
 			'priority'    => 20,
 		)
 	);
 
 	/* ---------------------------------------------------------------------
-	 * Contacto
+	 * Contact details
 	 * ------------------------------------------------------------------- */
 	$wp_customize->add_section(
 		'adeptbuild_contact',
 		array(
-			'title' => __( 'Datos de contacto', 'adeptbuild' ),
+			'title' => __( 'Contact Details', 'adeptbuild' ),
 			'panel' => 'adeptbuild_panel',
 		)
 	);
 
-	adeptbuild_add_field( $wp_customize, 'phone', 'adeptbuild_contact', __( 'Teléfono', 'adeptbuild' ), '+1 (555) 123-4567' );
-	adeptbuild_add_field( $wp_customize, 'email', 'adeptbuild_contact', __( 'Correo electrónico', 'adeptbuild' ), 'info@adeptbuild.com' );
-	adeptbuild_add_field( $wp_customize, 'address', 'adeptbuild_contact', __( 'Dirección', 'adeptbuild' ), '' );
-	adeptbuild_add_field( $wp_customize, 'hours', 'adeptbuild_contact', __( 'Horario', 'adeptbuild' ), __( 'Lun a Vie · 8:00 - 18:00', 'adeptbuild' ) );
+	adeptbuild_add_field( $wp_customize, 'phone', 'adeptbuild_contact', __( 'Phone', 'adeptbuild' ), '+1 (555) 123-4567' );
+	adeptbuild_add_field( $wp_customize, 'email', 'adeptbuild_contact', __( 'Email', 'adeptbuild' ), 'info@adeptbuild.com' );
+	adeptbuild_add_field( $wp_customize, 'address', 'adeptbuild_contact', __( 'Address', 'adeptbuild' ), '' );
+	adeptbuild_add_field( $wp_customize, 'hours', 'adeptbuild_contact', __( 'Business Hours', 'adeptbuild' ), __( 'Mon - Fri · 8:00 AM - 6:00 PM', 'adeptbuild' ) );
 	adeptbuild_add_field(
 		$wp_customize,
 		'contact_shortcode',
 		'adeptbuild_contact',
-		__( 'Shortcode del formulario (Contact Form 7, WPForms…)', 'adeptbuild' ),
+		__( 'Contact form shortcode (Contact Form 7, WPForms…)', 'adeptbuild' ),
 		''
 	);
 
 	/* ---------------------------------------------------------------------
-	 * Redes sociales
+	 * Social links
 	 * ------------------------------------------------------------------- */
 	$wp_customize->add_section(
 		'adeptbuild_social',
 		array(
-			'title' => __( 'Redes sociales', 'adeptbuild' ),
+			'title' => __( 'Social Links', 'adeptbuild' ),
 			'panel' => 'adeptbuild_panel',
 		)
 	);
@@ -119,89 +120,41 @@ function adeptbuild_customize_register( $wp_customize ) {
 	adeptbuild_add_field( $wp_customize, 'whatsapp_url', 'adeptbuild_social', 'WhatsApp', '', 'url' );
 
 	/* ---------------------------------------------------------------------
-	 * Botón del encabezado
+	 * Header
 	 * ------------------------------------------------------------------- */
 	$wp_customize->add_section(
 		'adeptbuild_header',
 		array(
-			'title' => __( 'Encabezado', 'adeptbuild' ),
+			'title' => __( 'Header', 'adeptbuild' ),
 			'panel' => 'adeptbuild_panel',
 		)
 	);
 
-	adeptbuild_add_field( $wp_customize, 'cta_text', 'adeptbuild_header', __( 'Texto del botón', 'adeptbuild' ), __( 'Presupuesto gratis', 'adeptbuild' ) );
-	adeptbuild_add_field( $wp_customize, 'cta_url', 'adeptbuild_header', __( 'Enlace del botón', 'adeptbuild' ), '#contacto', 'url' );
+	adeptbuild_add_field( $wp_customize, 'cta_text', 'adeptbuild_header', __( 'Button text', 'adeptbuild' ), __( 'Free Estimate', 'adeptbuild' ) );
+	adeptbuild_add_field( $wp_customize, 'cta_url', 'adeptbuild_header', __( 'Button link', 'adeptbuild' ), '/contact-us/', 'url' );
 
 	/* ---------------------------------------------------------------------
-	 * Portada — Hero
-	 * ------------------------------------------------------------------- */
-	$wp_customize->add_section(
-		'adeptbuild_hero',
-		array(
-			'title'       => __( 'Portada · Sección principal', 'adeptbuild' ),
-			'description' => __( 'Se muestra en la página de inicio.', 'adeptbuild' ),
-			'panel'       => 'adeptbuild_panel',
-		)
-	);
-
-	adeptbuild_add_field( $wp_customize, 'hero_image', 'adeptbuild_hero', __( 'Imagen de fondo', 'adeptbuild' ), '', 'image' );
-	adeptbuild_add_field( $wp_customize, 'hero_badge', 'adeptbuild_hero', __( 'Distintivo superior', 'adeptbuild' ), __( 'Más de 15 años construyendo piscinas', 'adeptbuild' ) );
-	adeptbuild_add_field( $wp_customize, 'hero_title', 'adeptbuild_hero', __( 'Título', 'adeptbuild' ), __( 'Diseñamos y construimos', 'adeptbuild' ) );
-	adeptbuild_add_field( $wp_customize, 'hero_title_highlight', 'adeptbuild_hero', __( 'Título resaltado', 'adeptbuild' ), __( 'la piscina de tus sueños', 'adeptbuild' ) );
-	adeptbuild_add_field( $wp_customize, 'hero_text', 'adeptbuild_hero', __( 'Texto', 'adeptbuild' ), __( 'Proyectos llave en mano: diseño 3D, obra civil, climatización y mantenimiento. Un solo equipo desde la primera idea hasta el primer baño.', 'adeptbuild' ), 'textarea' );
-	adeptbuild_add_field( $wp_customize, 'hero_btn1_text', 'adeptbuild_hero', __( 'Botón principal · texto', 'adeptbuild' ), __( 'Solicitar presupuesto', 'adeptbuild' ) );
-	adeptbuild_add_field( $wp_customize, 'hero_btn1_url', 'adeptbuild_hero', __( 'Botón principal · enlace', 'adeptbuild' ), '#contacto', 'url' );
-	adeptbuild_add_field( $wp_customize, 'hero_btn2_text', 'adeptbuild_hero', __( 'Botón secundario · texto', 'adeptbuild' ), __( 'Ver proyectos', 'adeptbuild' ) );
-	adeptbuild_add_field( $wp_customize, 'hero_btn2_url', 'adeptbuild_hero', __( 'Botón secundario · enlace', 'adeptbuild' ), '#proyectos', 'url' );
-
-	for ( $i = 1; $i <= 3; $i++ ) {
-		$defaults = array(
-			1 => array( '250+', __( 'Piscinas entregadas', 'adeptbuild' ) ),
-			2 => array( '15', __( 'Años de experiencia', 'adeptbuild' ) ),
-			3 => array( '10', __( 'Años de garantía', 'adeptbuild' ) ),
-		);
-
-		/* translators: %d: número de dato. */
-		adeptbuild_add_field( $wp_customize, "hero_stat{$i}_value", 'adeptbuild_hero', sprintf( __( 'Dato %d · cifra', 'adeptbuild' ), $i ), $defaults[ $i ][0] );
-		/* translators: %d: número de dato. */
-		adeptbuild_add_field( $wp_customize, "hero_stat{$i}_label", 'adeptbuild_hero', sprintf( __( 'Dato %d · etiqueta', 'adeptbuild' ), $i ), $defaults[ $i ][1] );
-	}
-
-	/* ---------------------------------------------------------------------
-	 * Portada — Sobre nosotros
-	 * ------------------------------------------------------------------- */
-	$wp_customize->add_section(
-		'adeptbuild_about',
-		array(
-			'title' => __( 'Portada · Sobre nosotros', 'adeptbuild' ),
-			'panel' => 'adeptbuild_panel',
-		)
-	);
-
-	adeptbuild_add_field( $wp_customize, 'about_image', 'adeptbuild_about', __( 'Imagen de la sección', 'adeptbuild' ), '', 'image' );
-
-	/* ---------------------------------------------------------------------
-	 * Pie de página
+	 * Footer
 	 * ------------------------------------------------------------------- */
 	$wp_customize->add_section(
 		'adeptbuild_footer',
 		array(
-			'title' => __( 'Pie de página', 'adeptbuild' ),
+			'title' => __( 'Footer', 'adeptbuild' ),
 			'panel' => 'adeptbuild_panel',
 		)
 	);
 
-	adeptbuild_add_field( $wp_customize, 'footer_about', 'adeptbuild_footer', __( 'Texto de presentación', 'adeptbuild' ), __( 'Construcción, renovación y mantenimiento de piscinas residenciales y comerciales. Diseño propio, obra garantizada.', 'adeptbuild' ), 'textarea' );
-	adeptbuild_add_field( $wp_customize, 'footer_copyright', 'adeptbuild_footer', __( 'Aviso de copyright', 'adeptbuild' ), '' );
+	adeptbuild_add_field( $wp_customize, 'footer_about', 'adeptbuild_footer', __( 'About text', 'adeptbuild' ), '', 'textarea' );
+	adeptbuild_add_field( $wp_customize, 'footer_copyright', 'adeptbuild_footer', __( 'Copyright notice (leave empty for the default)', 'adeptbuild' ), '' );
 
-	// Refresco en vivo del título y la descripción del sitio.
+	// Live-refresh the site title and tagline in the preview.
 	$wp_customize->get_setting( 'blogname' )->transport        = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
 }
 add_action( 'customize_register', 'adeptbuild_customize_register' );
 
 /**
- * Script que refresca la vista previa sin recargar.
+ * Script that live-refreshes the Customizer preview without reloading.
  */
 function adeptbuild_customize_preview_js() {
 	wp_enqueue_script(

@@ -2,8 +2,8 @@
 Theme Name: Adeptbuild Theme
 Theme URI: https://test.adeptbuild.com
 Author: Ivan Gerardo Mendoza Alonso
-Description: Tema personalizado para Adept Builders & Design — constructora de piscinas.
-Version: 1.1.0
+Description: Custom theme for Adept Builders & Design — pools, decks, outdoor living and home remodeling.
+Version: 1.2.0
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -12,22 +12,22 @@ Text Domain: adeptbuild
 */
 
 /* ==========================================================================
-   1. TOKENS DE DISEÑO
-   Arquitectura inspirada en Astra: variables globales de color, tipografía
-   y espaciado que el resto del tema consume. Cambiando este bloque cambia
-   toda la web.
+   1. DESIGN TOKENS
+   Astra-inspired architecture: global color, typography and spacing
+   variables consumed by the rest of the theme. Editing this block changes
+   the whole site.
    ========================================================================== */
 
 :root {
-    /* --- Paleta: agua profunda + turquesa + arena --- */
-    --ab-primary: #0E7490;          /* Azul piscina principal */
-    --ab-primary-dark: #0A5468;     /* Hover / textos sobre claro */
-    --ab-primary-light: #E6F4F8;    /* Fondos suaves */
-    --ab-aqua: #22B8CF;             /* Acento agua */
-    --ab-accent: #D99A3E;           /* Arena / dorado para CTA */
+    /* --- Palette: deep water + turquoise + sand --- */
+    --ab-primary: #0E7490;          /* Primary pool blue */
+    --ab-primary-dark: #0A5468;     /* Hover / text on light backgrounds */
+    --ab-primary-light: #E6F4F8;    /* Soft backgrounds */
+    --ab-aqua: #22B8CF;             /* Water accent */
+    --ab-accent: #D99A3E;           /* Sand / gold for CTAs */
     --ab-accent-dark: #BC8130;
 
-    --ab-deep: #0B2F3E;             /* Fondo oscuro corporativo */
+    --ab-deep: #0B2F3E;             /* Dark corporate background */
     --ab-deep-soft: #123E51;
 
     --ab-heading: #0F2A35;
@@ -37,7 +37,7 @@ Text Domain: adeptbuild
     --ab-surface: #FFFFFF;
     --ab-surface-alt: #F6F9FA;
 
-    /* --- Tipografía --- */
+    /* --- Typography --- */
     --ab-font-heading: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --ab-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
@@ -57,7 +57,7 @@ Text Domain: adeptbuild
     --ab-gutter: 24px;
     --ab-section-y: clamp(64px, 8vw, 110px);
 
-    /* --- Formas y sombras --- */
+    /* --- Shapes and shadows --- */
     --ab-radius-sm: 8px;
     --ab-radius: 14px;
     --ab-radius-lg: 24px;
@@ -68,12 +68,12 @@ Text Domain: adeptbuild
 
     --ab-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Altura real del header, la calcula el JS para el scroll con anclas */
+    /* Real header height, computed by JS for anchor-link scrolling */
     --ab-header-h: 84px;
 }
 
 /* ==========================================================================
-   2. RESET Y BASE
+   2. RESET AND BASE STYLES
    ========================================================================== */
 
 *,
@@ -182,7 +182,7 @@ hr {
 ::selection { background: var(--ab-aqua); color: #fff; }
 
 /* ==========================================================================
-   3. ACCESIBILIDAD
+   3. ACCESSIBILITY
    ========================================================================== */
 
 .screen-reader-text {
@@ -245,7 +245,7 @@ hr {
 .ab-grid--3 { grid-template-columns: repeat(3, 1fr); }
 .ab-grid--4 { grid-template-columns: repeat(4, 1fr); }
 
-/* Encabezado de sección */
+/* Section heading */
 .ab-section-head {
     max-width: 720px;
     margin: 0 auto clamp(40px, 5vw, 64px);
@@ -288,7 +288,7 @@ hr {
 .ab-section--deep .ab-eyebrow { color: var(--ab-aqua); }
 
 /* ==========================================================================
-   5. BOTONES
+   5. BUTTONS
    ========================================================================== */
 
 .ast-button,
@@ -371,7 +371,7 @@ a.ab-btn:hover {
     align-items: center;
 }
 
-/* Enlace con flecha */
+/* Arrow link */
 .ab-link-arrow {
     display: inline-flex;
     align-items: center;
@@ -387,7 +387,7 @@ a.ab-btn:hover {
    6. HEADER
    ========================================================================== */
 
-/* Barra superior de contacto */
+/* Top contact bar */
 .ab-topbar {
     background: var(--ab-deep);
     color: rgba(255, 255, 255, 0.82);
@@ -429,7 +429,7 @@ a.ab-btn:hover {
 }
 .ab-social a:hover { background: var(--ab-primary); color: #fff; }
 
-/* Barra principal */
+/* Main bar */
 .site-header {
     position: sticky;
     top: 0;
@@ -476,7 +476,7 @@ a.ab-btn:hover {
     margin-left: auto;
 }
 
-/* --- Navegación --- */
+/* --- Navigation --- */
 .main-navigation ul {
     list-style: none;
     margin: 0;
@@ -517,7 +517,7 @@ a.ab-btn:hover {
 .main-header-menu > li:hover > a,
 .main-header-menu > .current-menu-item > a { color: var(--ab-primary); }
 
-/* Submenús */
+/* Submenus */
 .main-header-menu li { position: relative; }
 
 .main-header-menu .sub-menu {
@@ -559,9 +559,11 @@ a.ab-btn:hover {
 }
 
 .menu-item-has-children > a > .ab-caret { margin-left: 6px; transition: transform var(--ab-transition); }
-.menu-item-has-children:hover > a > .ab-caret { transform: rotate(180deg); }
+.menu-item-has-children:hover > a > .ab-caret,
+.menu-item-has-children.is-expanded > a > .ab-caret,
+.menu-item-has-children > a[aria-expanded="true"] > .ab-caret { transform: rotate(180deg); }
 
-/* Botón hamburguesa */
+/* Hamburger button */
 .menu-toggle {
     display: none;
     align-items: center;
@@ -679,7 +681,7 @@ a.ab-btn:hover {
     color: rgba(255, 255, 255, 0.68);
 }
 
-/* Onda decorativa inferior */
+/* Decorative bottom wave */
 .ab-wave {
     position: absolute;
     left: 0;
@@ -693,7 +695,7 @@ a.ab-btn:hover {
 }
 .ab-wave--alt { color: var(--ab-surface-alt); }
 
-/* Cabecera de páginas internas */
+/* Inner-page header */
 .ab-page-hero {
     position: relative;
     padding: clamp(56px, 7vw, 92px) 0 clamp(72px, 9vw, 110px);
@@ -709,7 +711,7 @@ a.ab-btn:hover {
 .ab-page-hero .ab-breadcrumb a { color: var(--ab-aqua); }
 
 /* ==========================================================================
-   8. TARJETAS Y COMPONENTES
+   8. CARDS AND COMPONENTS
    ========================================================================== */
 
 .ab-card {
@@ -761,7 +763,7 @@ a.ab-btn:hover {
 .ab-card p { font-size: var(--ab-fs-sm); margin-bottom: 18px; }
 .ab-card .ab-link-arrow { margin-top: auto; }
 
-/* Pasos del proceso */
+/* Process steps */
 .ab-step {
     position: relative;
     padding: 32px 28px;
@@ -798,7 +800,7 @@ a.ab-btn:hover {
     z-index: -1;
 }
 
-/* Media: texto + imagen */
+/* Media: text + image */
 .ab-media {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -832,7 +834,7 @@ a.ab-btn:hover {
 .ab-media__badge strong { display: block; font-size: 1.875rem; line-height: 1; }
 .ab-media__badge span { font-size: var(--ab-fs-xs); text-transform: uppercase; letter-spacing: 0.08em; }
 
-/* Lista con check */
+/* Checklist */
 .ab-checklist { list-style: none; padding: 0; margin: 0 0 30px; }
 .ab-checklist li {
     position: relative;
@@ -852,7 +854,7 @@ a.ab-btn:hover {
 }
 .ab-section--deep .ab-checklist li { color: rgba(255, 255, 255, 0.82); }
 
-/* Galería de proyectos */
+/* Project gallery */
 .ab-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
 .ab-gallery__item {
@@ -900,7 +902,7 @@ a.ab-btn:hover {
     color: var(--ab-aqua);
 }
 
-/* Testimonios */
+/* Testimonials */
 .ab-quote {
     padding: 34px 30px;
     background: var(--ab-surface);
@@ -931,7 +933,7 @@ a.ab-btn:hover {
 .ab-quote__author strong { display: block; color: var(--ab-heading); font-size: 0.9375rem; }
 .ab-quote__author span { font-size: var(--ab-fs-xs); color: var(--ab-text-light); }
 
-/* Banda CTA */
+/* CTA banner */
 .ab-cta {
     position: relative;
     padding: clamp(48px, 6vw, 72px) clamp(28px, 5vw, 64px);
@@ -959,7 +961,7 @@ a.ab-btn:hover {
 .ab-cta h2 { color: #fff; margin-bottom: 10px; }
 .ab-cta p { max-width: 520px; margin: 0; }
 
-/* Logos / confianza */
+/* Logos / trust bar */
 .ab-logos {
     display: flex;
     flex-wrap: wrap;
@@ -977,7 +979,7 @@ a.ab-btn:hover {
 }
 
 /* ==========================================================================
-   9. FORMULARIOS
+   9. FORMS
    ========================================================================== */
 
 input[type="text"],
@@ -1029,7 +1031,7 @@ label {
 .ab-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 
 /* ==========================================================================
-   10. BLOG Y CONTENIDO
+   10. BLOG AND CONTENT
    ========================================================================== */
 
 .ab-content-area { padding: var(--ab-section-y) 0; }
@@ -1120,7 +1122,7 @@ label {
 .ab-sidebar li { padding: 9px 0; border-bottom: 1px solid var(--ab-border); font-size: var(--ab-fs-sm); }
 .ab-sidebar li:last-child { border-bottom: 0; }
 
-/* Paginación */
+/* Pagination */
 .ab-pagination { margin-top: 48px; }
 .ab-pagination .page-numbers {
     display: inline-flex;
@@ -1219,7 +1221,7 @@ label {
 .ab-footer-bottom li { margin: 0; }
 
 /* ==========================================================================
-   12. ANIMACIONES
+   12. ANIMATIONS
    ========================================================================== */
 
 .ab-reveal {
@@ -1252,7 +1254,7 @@ label {
 }
 
 @media (max-width: 921px) {
-    /* Breakpoint de menú móvil (el mismo que usa Astra) */
+    /* Mobile menu breakpoint (same one Astra uses) */
     .menu-toggle { display: inline-flex; }
 
     .main-navigation {
@@ -1336,7 +1338,7 @@ label {
 }
 
 /* ==========================================================================
-   14. UTILIDADES
+   14. UTILITIES
    ========================================================================== */
 
 .ab-text-center { text-align: center; }

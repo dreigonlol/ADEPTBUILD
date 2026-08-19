@@ -1,6 +1,6 @@
 <?php
 /**
- * Página estática.
+ * Static page.
  *
  * @package Adeptbuild
  */
@@ -20,7 +20,7 @@ while ( have_posts() ) :
 
 				wp_link_pages(
 					array(
-						'before' => '<div class="ab-pagination">' . esc_html__( 'Páginas:', 'adeptbuild' ),
+						'before' => '<div class="ab-pagination">' . esc_html__( 'Pages:', 'adeptbuild' ),
 						'after'  => '</div>',
 					)
 				);

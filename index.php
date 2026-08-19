@@ -1,6 +1,6 @@
 <?php
 /**
- * Plantilla principal: blog, archivos y resultados de búsqueda.
+ * Main template: blog, archives and search results.
  *
  * @package Adeptbuild
  */
@@ -8,8 +8,8 @@
 get_header();
 
 if ( is_search() ) {
-	/* translators: %s: términos buscados. */
-	$ab_title = sprintf( __( 'Resultados para «%s»', 'adeptbuild' ), get_search_query() );
+	/* translators: %s: search query. */
+	$ab_title = sprintf( __( 'Search Results for "%s"', 'adeptbuild' ), get_search_query() );
 } elseif ( is_archive() ) {
 	$ab_title = wp_strip_all_tags( get_the_archive_title() );
 } else {
@@ -40,8 +40,8 @@ adeptbuild_page_hero( $ab_title );
 						the_posts_pagination(
 							array(
 								'mid_size'  => 2,
-								'prev_text' => esc_html__( 'Anterior', 'adeptbuild' ),
-								'next_text' => esc_html__( 'Siguiente', 'adeptbuild' ),
+								'prev_text' => esc_html__( 'Previous', 'adeptbuild' ),
+								'next_text' => esc_html__( 'Next', 'adeptbuild' ),
 							)
 						);
 						?>

@@ -1,10 +1,10 @@
 /**
- * Adeptbuild Theme — interacciones de la interfaz.
+ * Adeptbuild Theme — interface interactions.
  *
- * - Menú móvil accesible (aria-expanded, cierre con Escape y clic fuera).
- * - Submenús desplegables en móvil.
- * - Sombra del encabezado al hacer scroll.
- * - Animación de aparición de secciones.
+ * - Accessible mobile menu (aria-expanded, close on Escape and outside click).
+ * - Collapsible dropdown submenus on mobile, with synced aria-expanded state.
+ * - Header shadow on scroll.
+ * - Fade-in animation for revealed sections.
  *
  * @package Adeptbuild
  */
@@ -15,13 +15,12 @@
 	document.addEventListener( 'DOMContentLoaded', function () {
 		setHeaderHeight();
 		initMobileMenu();
-		initStickyHeader();
 		initReveal();
 	} );
 
 	/**
-	 * Publica la altura real del encabezado como variable CSS, para que el
-	 * scroll con anclas y el panel móvil se posicionen bien.
+	 * Publishes the real header height as a CSS variable, so anchor-link
+	 * scrolling and the mobile panel position correctly under it.
 	 */
 	function setHeaderHeight() {
 		var header = document.getElementById( 'masthead' );
@@ -34,14 +33,16 @@
 				'--ab-header-h',
 				header.offsetHeight + 'px'
 			);
+			header.classList.toggle( 'is-stuck', window.scrollY > 12 );
 		};
 
 		apply();
 		window.addEventListener( 'resize', debounce( apply, 150 ) );
+		window.addEventListener( 'scroll', apply, { passive: true } );
 	}
 
 	/**
-	 * Menú de navegación en pantallas pequeñas.
+	 * Small-screen navigation panel.
 	 */
 	function initMobileMenu() {
 		var toggle = document.querySelector( '.menu-toggle' );
@@ -65,7 +66,7 @@
 			document.body.classList.toggle( 'ab-menu-open', ! isOpen );
 		} );
 
-		// Cerrar con Escape.
+		// Close on Escape.
 		document.addEventListener( 'keydown', function ( event ) {
 			if ( 'Escape' === event.key && nav.classList.contains( 'is-open' ) ) {
 				close();
@@ -73,7 +74,7 @@
 			}
 		} );
 
-		// Cerrar al pulsar fuera del panel.
+		// Close when tapping outside the panel.
 		document.addEventListener( 'click', function ( event ) {
 			if (
 				nav.classList.contains( 'is-open' ) &&
@@ -84,7 +85,7 @@
 			}
 		} );
 
-		// Cerrar al navegar a un ancla de la misma página.
+		// Close after navigating to an on-page anchor.
 		nav.addEventListener( 'click', function ( event ) {
 			var link = event.target.closest( 'a' );
 			if ( link && link.getAttribute( 'href' ) && link.getAttribute( 'href' ).indexOf( '#' ) === 0 ) {
@@ -96,52 +97,69 @@
 	}
 
 	/**
-	 * Despliegue de submenús con el enlace padre en móvil.
+	 * Dropdown submenus: tap-to-expand on mobile, synced aria-expanded on
+	 * hover/focus at every breakpoint (used for the caret rotation and for
+	 * assistive tech).
 	 *
-	 * @param {HTMLElement} nav Contenedor de la navegación.
+	 * @param {HTMLElement} nav Navigation container.
 	 */
 	function initSubmenus( nav ) {
-		var parents = nav.querySelectorAll( '.menu-item-has-children > a' );
+		var isMobile = function () {
+			return window.matchMedia( '(max-width: 921px)' ).matches;
+		};
 
-		Array.prototype.forEach.call( parents, function ( link ) {
+		var parentItems = nav.querySelectorAll( '.menu-item-has-children' );
+
+		Array.prototype.forEach.call( parentItems, function ( item ) {
+			var link = item.querySelector( ':scope > a' );
+			if ( ! link ) {
+				return;
+			}
+
+			var setExpanded = function ( expanded ) {
+				link.setAttribute( 'aria-expanded', expanded ? 'true' : 'false' );
+				item.classList.toggle( 'is-expanded', expanded );
+			};
+
+			// Mobile: first tap opens the submenu instead of following the link.
 			link.addEventListener( 'click', function ( event ) {
-				// Solo interceptamos en la vista móvil.
-				if ( window.innerWidth > 921 ) {
+				if ( ! isMobile() ) {
 					return;
 				}
 
-				var item = link.parentNode;
 				var isExpanded = item.classList.contains( 'is-expanded' );
-
-				// El primer toque abre el submenú en lugar de navegar.
 				if ( ! isExpanded ) {
 					event.preventDefault();
 				}
+				setExpanded( ! isExpanded );
+			} );
 
-				item.classList.toggle( 'is-expanded', ! isExpanded );
+			// Desktop: keep aria-expanded in sync with the CSS hover/focus reveal.
+			item.addEventListener( 'mouseenter', function () {
+				if ( ! isMobile() ) {
+					setExpanded( true );
+				}
+			} );
+			item.addEventListener( 'mouseleave', function () {
+				if ( ! isMobile() ) {
+					setExpanded( false );
+				}
+			} );
+			item.addEventListener( 'focusin', function () {
+				if ( ! isMobile() ) {
+					setExpanded( true );
+				}
+			} );
+			item.addEventListener( 'focusout', function ( event ) {
+				if ( ! isMobile() && ! item.contains( event.relatedTarget ) ) {
+					setExpanded( false );
+				}
 			} );
 		} );
 	}
 
 	/**
-	 * Añade sombra al encabezado cuando la página se desplaza.
-	 */
-	function initStickyHeader() {
-		var header = document.getElementById( 'masthead' );
-		if ( ! header ) {
-			return;
-		}
-
-		var onScroll = function () {
-			header.classList.toggle( 'is-stuck', window.scrollY > 12 );
-		};
-
-		onScroll();
-		window.addEventListener( 'scroll', onScroll, { passive: true } );
-	}
-
-	/**
-	 * Revela los elementos .ab-reveal al entrar en pantalla.
+	 * Reveals .ab-reveal elements as they enter the viewport.
 	 */
 	function initReveal() {
 		var items = document.querySelectorAll( '.ab-reveal' );
@@ -150,7 +168,7 @@
 			return;
 		}
 
-		// Sin IntersectionObserver o con movimiento reducido: mostrar todo.
+		// No IntersectionObserver, or reduced motion requested: show everything.
 		if (
 			! ( 'IntersectionObserver' in window ) ||
 			window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches
@@ -168,7 +186,7 @@
 						return;
 					}
 
-					// Escalonado suave entre elementos hermanos.
+					// Gentle stagger between sibling elements.
 					entry.target.style.transitionDelay = index * 80 + 'ms';
 					entry.target.classList.add( 'is-visible' );
 					observer.unobserve( entry.target );
@@ -183,11 +201,11 @@
 	}
 
 	/**
-	 * Utilidad: retrasa la ejecución hasta que dejan de llegar eventos.
+	 * Utility: delays execution until events stop firing.
 	 *
-	 * @param {Function} fn    Función a ejecutar.
-	 * @param {number}   delay Milisegundos de espera.
-	 * @return {Function} Función retardada.
+	 * @param {Function} fn    Function to run.
+	 * @param {number}   delay Milliseconds to wait.
+	 * @return {Function} Debounced function.
 	 */
 	function debounce( fn, delay ) {
 		var timer;

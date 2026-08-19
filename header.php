@@ -1,6 +1,6 @@
 <?php
 /**
- * Cabecera del sitio.
+ * Site header.
  *
  * @package Adeptbuild
  */
@@ -17,7 +17,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Ir al contenido', 'adeptbuild' ); ?></a>
+<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'adeptbuild' ); ?></a>
 
 <?php
 $ab_phone  = adeptbuild_option( 'phone' );
@@ -82,7 +82,7 @@ $ab_social = adeptbuild_social_links();
 			<?php endif; ?>
 		</div>
 
-		<nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Navegación principal', 'adeptbuild' ); ?>">
+		<nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Primary Navigation', 'adeptbuild' ); ?>">
 			<?php
 			wp_nav_menu(
 				array(
@@ -100,7 +100,7 @@ $ab_social = adeptbuild_social_links();
 		<div class="ab-header-actions">
 			<?php
 			$ab_cta_text = adeptbuild_option( 'cta_text' );
-			$ab_cta_url  = adeptbuild_option( 'cta_url', '#contacto' );
+			$ab_cta_url  = adeptbuild_option( 'cta_url', '/contact-us/' );
 			?>
 			<?php if ( $ab_cta_text ) : ?>
 				<a class="ast-button ab-btn--accent ab-btn--sm" href="<?php echo esc_url( $ab_cta_url ); ?>">
@@ -112,7 +112,7 @@ $ab_social = adeptbuild_social_links();
 				class="menu-toggle"
 				aria-controls="site-navigation"
 				aria-expanded="false"
-				aria-label="<?php esc_attr_e( 'Abrir menú', 'adeptbuild' ); ?>">
+				aria-label="<?php esc_attr_e( 'Open menu', 'adeptbuild' ); ?>">
 				<span class="menu-toggle__bars" aria-hidden="true">
 					<span></span><span></span><span></span>
 				</span>

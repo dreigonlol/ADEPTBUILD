@@ -1,6 +1,6 @@
 <?php
 /**
- * Entrada individual del blog.
+ * Single blog post.
  *
  * @package Adeptbuild
  */
@@ -32,7 +32,7 @@ while ( have_posts() ) :
 
 						wp_link_pages(
 							array(
-								'before' => '<div class="ab-pagination">' . esc_html__( 'Páginas:', 'adeptbuild' ),
+								'before' => '<div class="ab-pagination">' . esc_html__( 'Pages:', 'adeptbuild' ),
 								'after'  => '</div>',
 							)
 						);
@@ -43,7 +43,7 @@ while ( have_posts() ) :
 						<div class="ab-meta ab-mt-lg"><?php the_tags( '', ' ' ); ?></div>
 					<?php endif; ?>
 
-					<nav class="ab-meta ab-mt-lg" aria-label="<?php esc_attr_e( 'Entradas', 'adeptbuild' ); ?>">
+					<nav class="ab-meta ab-mt-lg" aria-label="<?php esc_attr_e( 'Posts', 'adeptbuild' ); ?>">
 						<?php previous_post_link( '%link', '&larr; %title' ); ?>
 						<?php next_post_link( '%link', '%title &rarr;' ); ?>
 					</nav>

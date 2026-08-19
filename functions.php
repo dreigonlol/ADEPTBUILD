@@ -1,6 +1,6 @@
 <?php
 /**
- * Adeptbuild Theme — funciones y definiciones.
+ * Adeptbuild Theme — setup and definitions.
  *
  * @package Adeptbuild
  */
@@ -9,10 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADEPTBUILD_VERSION', '1.1.0' );
+define( 'ADEPTBUILD_VERSION', '1.2.0' );
 
 /**
- * Configuración básica del tema.
+ * Basic theme setup.
  */
 function adeptbuild_setup() {
 
@@ -43,43 +43,43 @@ function adeptbuild_setup() {
 
 	register_nav_menus(
 		array(
-			'primary-menu' => __( 'Menú Principal', 'adeptbuild' ),
-			'footer-menu'  => __( 'Menú Pie de Página', 'adeptbuild' ),
-			'legal-menu'   => __( 'Menú Legal (barra inferior)', 'adeptbuild' ),
+			'primary-menu' => __( 'Primary Menu', 'adeptbuild' ),
+			'footer-menu'  => __( 'Footer Menu', 'adeptbuild' ),
+			'legal-menu'   => __( 'Legal Menu (bottom bar)', 'adeptbuild' ),
 		)
 	);
 
-	// Paleta disponible en el editor de bloques.
+	// Color palette available in the block editor.
 	add_theme_support(
 		'editor-color-palette',
 		array(
 			array(
-				'name'  => __( 'Azul piscina', 'adeptbuild' ),
+				'name'  => __( 'Pool Blue', 'adeptbuild' ),
 				'slug'  => 'primary',
 				'color' => '#0E7490',
 			),
 			array(
-				'name'  => __( 'Agua', 'adeptbuild' ),
+				'name'  => __( 'Aqua', 'adeptbuild' ),
 				'slug'  => 'aqua',
 				'color' => '#22B8CF',
 			),
 			array(
-				'name'  => __( 'Azul profundo', 'adeptbuild' ),
+				'name'  => __( 'Deep Blue', 'adeptbuild' ),
 				'slug'  => 'deep',
 				'color' => '#0B2F3E',
 			),
 			array(
-				'name'  => __( 'Arena', 'adeptbuild' ),
+				'name'  => __( 'Sand', 'adeptbuild' ),
 				'slug'  => 'accent',
 				'color' => '#D99A3E',
 			),
 			array(
-				'name'  => __( 'Gris claro', 'adeptbuild' ),
+				'name'  => __( 'Light Gray', 'adeptbuild' ),
 				'slug'  => 'surface-alt',
 				'color' => '#F6F9FA',
 			),
 			array(
-				'name'  => __( 'Blanco', 'adeptbuild' ),
+				'name'  => __( 'White', 'adeptbuild' ),
 				'slug'  => 'white',
 				'color' => '#FFFFFF',
 			),
@@ -89,7 +89,7 @@ function adeptbuild_setup() {
 add_action( 'after_setup_theme', 'adeptbuild_setup' );
 
 /**
- * Ancho del contenido (usado por WordPress para embeds e imágenes).
+ * Content width (used by WordPress for embeds and images).
  */
 function adeptbuild_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'adeptbuild_content_width', 1200 );
@@ -97,11 +97,11 @@ function adeptbuild_content_width() {
 add_action( 'after_setup_theme', 'adeptbuild_content_width', 0 );
 
 /**
- * Hojas de estilo y scripts.
+ * Styles and scripts.
  */
 function adeptbuild_scripts() {
 
-	// Tipografías (Outfit para títulos, Inter para texto).
+	// Outfit for headings, Inter for body text.
 	wp_enqueue_style(
 		'adeptbuild-fonts',
 		'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap',
@@ -126,7 +126,7 @@ function adeptbuild_scripts() {
 add_action( 'wp_enqueue_scripts', 'adeptbuild_scripts' );
 
 /**
- * Preconexión a Google Fonts para acelerar la carga.
+ * Preconnects to Google Fonts to speed up loading.
  */
 function adeptbuild_resource_hints( $urls, $relation_type ) {
 	if ( 'preconnect' === $relation_type && wp_style_is( 'adeptbuild-fonts', 'queue' ) ) {
@@ -140,15 +140,15 @@ function adeptbuild_resource_hints( $urls, $relation_type ) {
 add_filter( 'wp_resource_hints', 'adeptbuild_resource_hints', 10, 2 );
 
 /**
- * Áreas de widgets.
+ * Widget areas.
  */
 function adeptbuild_widgets_init() {
 
 	register_sidebar(
 		array(
-			'name'          => __( 'Barra lateral del blog', 'adeptbuild' ),
+			'name'          => __( 'Blog Sidebar', 'adeptbuild' ),
 			'id'            => 'sidebar-1',
-			'description'   => __( 'Se muestra en entradas y archivos del blog.', 'adeptbuild' ),
+			'description'   => __( 'Shown on blog posts and archives.', 'adeptbuild' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h3 class="widget-title">',
@@ -159,10 +159,10 @@ function adeptbuild_widgets_init() {
 	for ( $i = 1; $i <= 2; $i++ ) {
 		register_sidebar(
 			array(
-				/* translators: %d: número de columna. */
-				'name'          => sprintf( __( 'Pie de página — columna %d', 'adeptbuild' ), $i ),
+				/* translators: %d: column number. */
+				'name'          => sprintf( __( 'Footer Column %d', 'adeptbuild' ), $i ),
 				'id'            => 'footer-' . $i,
-				'description'   => __( 'Columna central del pie de página.', 'adeptbuild' ),
+				'description'   => __( 'Middle columns of the footer.', 'adeptbuild' ),
 				'before_widget' => '<section id="%1$s" class="widget %2$s">',
 				'after_widget'  => '</section>',
 				'before_title'  => '<h3 class="widget-title">',
@@ -174,7 +174,7 @@ function adeptbuild_widgets_init() {
 add_action( 'widgets_init', 'adeptbuild_widgets_init' );
 
 /**
- * Longitud y terminación del extracto.
+ * Excerpt length and "read more" marker.
  */
 function adeptbuild_excerpt_length() {
 	return 24;
@@ -187,7 +187,7 @@ function adeptbuild_excerpt_more() {
 add_filter( 'excerpt_more', 'adeptbuild_excerpt_more' );
 
 /**
- * Clases extra en el body para poder afinar estilos.
+ * Extra body classes so styles can be fine-tuned.
  */
 function adeptbuild_body_classes( $classes ) {
 	if ( ! is_active_sidebar( 'sidebar-1' ) || is_page() || is_front_page() ) {
@@ -201,7 +201,7 @@ function adeptbuild_body_classes( $classes ) {
 add_filter( 'body_class', 'adeptbuild_body_classes' );
 
 /**
- * Añade una flecha a los elementos de menú con submenú.
+ * Appends a caret icon to primary menu items that have a submenu.
  */
 function adeptbuild_menu_caret( $title, $item, $args ) {
 	if ( isset( $args->theme_location ) && 'primary-menu' === $args->theme_location
@@ -211,6 +211,19 @@ function adeptbuild_menu_caret( $title, $item, $args ) {
 	return $title;
 }
 add_filter( 'nav_menu_item_title', 'adeptbuild_menu_caret', 10, 3 );
+
+/**
+ * Adds ARIA attributes to primary menu links that open a dropdown.
+ */
+function adeptbuild_menu_link_attributes( $atts, $item, $args ) {
+	if ( isset( $args->theme_location ) && 'primary-menu' === $args->theme_location
+		&& in_array( 'menu-item-has-children', (array) $item->classes, true ) ) {
+		$atts['aria-haspopup'] = 'true';
+		$atts['aria-expanded'] = 'false';
+	}
+	return $atts;
+}
+add_filter( 'nav_menu_link_attributes', 'adeptbuild_menu_link_attributes', 10, 3 );
 
 require_once get_template_directory() . '/inc/template-tags.php';
 require_once get_template_directory() . '/inc/customizer.php';

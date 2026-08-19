@@ -1,6 +1,6 @@
 <?php
 /**
- * Pie de página del sitio.
+ * Site footer.
  *
  * @package Adeptbuild
  */
@@ -10,6 +10,7 @@ $ab_email   = adeptbuild_option( 'email' );
 $ab_address = adeptbuild_option( 'address' );
 $ab_hours   = adeptbuild_option( 'hours' );
 $ab_social  = adeptbuild_social_links();
+$ab_about   = adeptbuild_option( 'footer_about' );
 ?>
 
 </div><!-- #content -->
@@ -26,7 +27,9 @@ $ab_social  = adeptbuild_social_links();
 					<strong><?php bloginfo( 'name' ); ?></strong>
 				<?php endif; ?>
 
-				<p><?php echo esc_html( adeptbuild_option( 'footer_about' ) ); ?></p>
+				<?php if ( $ab_about ) : ?>
+					<p><?php echo esc_html( $ab_about ); ?></p>
+				<?php endif; ?>
 
 				<?php if ( $ab_social ) : ?>
 					<div class="ab-social" style="margin-top:20px;">
@@ -43,14 +46,16 @@ $ab_social  = adeptbuild_social_links();
 			<div>
 				<?php if ( is_active_sidebar( 'footer-1' ) ) : ?>
 					<?php dynamic_sidebar( 'footer-1' ); ?>
-				<?php else : ?>
-					<h3><?php esc_html_e( 'Servicios', 'adeptbuild' ); ?></h3>
-					<ul>
-						<li><a href="#servicios"><?php esc_html_e( 'Construcción de piscinas', 'adeptbuild' ); ?></a></li>
-						<li><a href="#servicios"><?php esc_html_e( 'Renovación y reformas', 'adeptbuild' ); ?></a></li>
-						<li><a href="#servicios"><?php esc_html_e( 'Climatización y spa', 'adeptbuild' ); ?></a></li>
-						<li><a href="#servicios"><?php esc_html_e( 'Mantenimiento', 'adeptbuild' ); ?></a></li>
-					</ul>
+				<?php elseif ( current_user_can( 'edit_theme_options' ) ) : ?>
+					<p class="ab-muted" style="font-size:.8125rem;">
+						<?php
+						printf(
+							/* translators: %s: link to the widgets screen. */
+							esc_html__( 'Admin only: add a widget to %s (Footer Column 1).', 'adeptbuild' ),
+							'<a href="' . esc_url( admin_url( 'widgets.php' ) ) . '" style="color:inherit;text-decoration:underline;">' . esc_html__( 'Appearance → Widgets', 'adeptbuild' ) . '</a>'
+						);
+						?>
+					</p>
 				<?php endif; ?>
 			</div>
 
@@ -58,7 +63,7 @@ $ab_social  = adeptbuild_social_links();
 				<?php if ( is_active_sidebar( 'footer-2' ) ) : ?>
 					<?php dynamic_sidebar( 'footer-2' ); ?>
 				<?php elseif ( has_nav_menu( 'footer-menu' ) ) : ?>
-					<h3><?php esc_html_e( 'Enlaces', 'adeptbuild' ); ?></h3>
+					<h3><?php esc_html_e( 'Links', 'adeptbuild' ); ?></h3>
 					<?php
 					wp_nav_menu(
 						array(
@@ -68,19 +73,21 @@ $ab_social  = adeptbuild_social_links();
 						)
 					);
 					?>
-				<?php else : ?>
-					<h3><?php esc_html_e( 'Empresa', 'adeptbuild' ); ?></h3>
-					<ul>
-						<li><a href="#nosotros"><?php esc_html_e( 'Sobre nosotros', 'adeptbuild' ); ?></a></li>
-						<li><a href="#proceso"><?php esc_html_e( 'Cómo trabajamos', 'adeptbuild' ); ?></a></li>
-						<li><a href="#proyectos"><?php esc_html_e( 'Proyectos', 'adeptbuild' ); ?></a></li>
-						<li><a href="#contacto"><?php esc_html_e( 'Contacto', 'adeptbuild' ); ?></a></li>
-					</ul>
+				<?php elseif ( current_user_can( 'edit_theme_options' ) ) : ?>
+					<p class="ab-muted" style="font-size:.8125rem;">
+						<?php
+						printf(
+							/* translators: %s: link to the menus screen. */
+							esc_html__( 'Admin only: assign a menu to the Footer Menu location in %s.', 'adeptbuild' ),
+							'<a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" style="color:inherit;text-decoration:underline;">' . esc_html__( 'Appearance → Menus', 'adeptbuild' ) . '</a>'
+						);
+						?>
+					</p>
 				<?php endif; ?>
 			</div>
 
 			<div>
-				<h3><?php esc_html_e( 'Contacto', 'adeptbuild' ); ?></h3>
+				<h3><?php esc_html_e( 'Contact', 'adeptbuild' ); ?></h3>
 				<ul class="ab-footer-contact">
 					<?php if ( $ab_phone ) : ?>
 						<li>
@@ -116,8 +123,8 @@ $ab_social  = adeptbuild_social_links();
 					echo esc_html( $ab_copy );
 				} else {
 					printf(
-						/* translators: 1: año actual, 2: nombre del sitio. */
-						esc_html__( '© %1$s %2$s. Todos los derechos reservados.', 'adeptbuild' ),
+						/* translators: 1: current year, 2: site name. */
+						esc_html__( '© %1$s %2$s. All rights reserved.', 'adeptbuild' ),
 						esc_html( gmdate( 'Y' ) ),
 						esc_html( get_bloginfo( 'name' ) )
 					);

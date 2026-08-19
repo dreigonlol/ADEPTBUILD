@@ -1,6 +1,6 @@
 <?php
 /**
- * Barra lateral del blog.
+ * Blog sidebar.
  *
  * @package Adeptbuild
  */
