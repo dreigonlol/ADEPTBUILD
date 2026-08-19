@@ -1,0 +1,23 @@
+name: Deploy Theme via FTP
+
+on:
+  push:
+    branches:
+      - main  # Se ejecuta cada vez que haces push a la rama main
+
+jobs:
+  web-deploy:
+    name: Deploying to Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v4
+
+      - name: Sync files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Ruta exacta en el servidor donde vive tu tema:
+          server-dir: /public_html/test.adeptbuild.com/wp-content/themes/adeptbuild-theme/
