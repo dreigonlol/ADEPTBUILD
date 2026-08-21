@@ -1,0 +1,125 @@
+<?php
+/**
+ * Site header.
+ *
+ * @package Adeptbuild
+ */
+
+?>
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
+<head>
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<?php wp_head(); ?>
+</head>
+
+<body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
+
+<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'adeptbuild' ); ?></a>
+
+<?php
+$ab_phone  = adeptbuild_option( 'phone' );
+$ab_email  = adeptbuild_option( 'email' );
+$ab_hours  = adeptbuild_option( 'hours' );
+$ab_social = adeptbuild_social_links();
+?>
+
+<?php if ( $ab_phone || $ab_email || $ab_hours || $ab_social ) : ?>
+	<div class="ab-topbar">
+		<div class="ast-container">
+			<div class="ab-topbar__info">
+				<?php if ( $ab_phone ) : ?>
+					<a class="ab-topbar__item" href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>">
+						<?php adeptbuild_icon( 'phone', 14 ); ?><?php echo esc_html( $ab_phone ); ?>
+					</a>
+				<?php endif; ?>
+
+				<?php if ( $ab_email ) : ?>
+					<a class="ab-topbar__item" href="<?php echo esc_url( 'mailto:' . $ab_email ); ?>">
+						<?php adeptbuild_icon( 'mail', 14 ); ?><?php echo esc_html( $ab_email ); ?>
+					</a>
+				<?php endif; ?>
+
+				<?php if ( $ab_hours ) : ?>
+					<span class="ab-topbar__item">
+						<?php adeptbuild_icon( 'clock', 14 ); ?><?php echo esc_html( $ab_hours ); ?>
+					</span>
+				<?php endif; ?>
+			</div>
+
+			<?php if ( $ab_social ) : ?>
+				<div class="ab-social">
+					<?php foreach ( $ab_social as $ab_link ) : ?>
+						<a href="<?php echo esc_url( $ab_link['url'] ); ?>" target="_blank" rel="noopener noreferrer">
+							<span class="screen-reader-text"><?php echo esc_html( $ab_link['label'] ); ?></span>
+							<?php adeptbuild_icon( $ab_link['icon'], 15 ); ?>
+						</a>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
+		</div>
+	</div>
+<?php endif; ?>
+
+<header id="masthead" class="site-header ast-primary-header-bar">
+	<div class="ast-container">
+
+		<div class="site-branding">
+			<?php if ( has_custom_logo() ) : ?>
+				<?php the_custom_logo(); ?>
+			<?php else : ?>
+				<div>
+					<p class="site-title">
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+					</p>
+					<?php $ab_description = get_bloginfo( 'description', 'display' ); ?>
+					<?php if ( $ab_description ) : ?>
+						<p class="site-description"><?php echo esc_html( $ab_description ); ?></p>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
+		</div>
+
+		<nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Primary Navigation', 'adeptbuild' ); ?>">
+			<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'primary-menu',
+					'menu_class'     => 'main-header-menu',
+					'menu_id'        => 'primary-menu',
+					'container'      => false,
+					'depth'          => 3,
+					'fallback_cb'    => 'adeptbuild_menu_fallback',
+				)
+			);
+			?>
+		</nav>
+
+		<div class="ab-header-actions">
+			<?php
+			$ab_cta_text = adeptbuild_option( 'cta_text' );
+			$ab_cta_url  = adeptbuild_option( 'cta_url', '/contact-us/' );
+			?>
+			<?php if ( $ab_cta_text ) : ?>
+				<a class="ast-button ab-btn--accent ab-btn--sm" href="<?php echo esc_url( $ab_cta_url ); ?>">
+					<?php echo esc_html( $ab_cta_text ); ?>
+				</a>
+			<?php endif; ?>
+
+			<button
+				class="menu-toggle"
+				aria-controls="site-navigation"
+				aria-expanded="false"
+				aria-label="<?php esc_attr_e( 'Open menu', 'adeptbuild' ); ?>">
+				<span class="menu-toggle__bars" aria-hidden="true">
+					<span></span><span></span><span></span>
+				</span>
+			</button>
+		</div>
+
+	</div>
+</header>
+
+<div id="content" class="site-content">
