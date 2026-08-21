@@ -227,3 +227,4 @@ add_filter( 'nav_menu_link_attributes', 'adeptbuild_menu_link_attributes', 10, 3
 
 require_once get_template_directory() . '/inc/template-tags.php';
 require_once get_template_directory() . '/inc/customizer.php';
+require_once get_template_directory() . '/inc/meta-boxes.php';
