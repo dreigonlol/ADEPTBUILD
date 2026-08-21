@@ -121,7 +121,7 @@ function adeptbuild_get_page_hero_title( $post = null ) {
 }
 
 /**
- * Returns the custom breadcrumb/subheading text for a page, if any.
+ * Returns the custom breadcrumb text for a page, if any.
  *
  * @param int|WP_Post $post Post ID or object. Defaults to the current post.
  * @return string

@@ -710,6 +710,19 @@ a.ab-btn:hover {
 }
 .ab-page-hero .ab-breadcrumb a { color: var(--ab-aqua); }
 
+/*
+ * Opt-in utility: pulls a single block up so it overlaps the bottom of the
+ * page hero, instead of sitting in the empty gap below it. Attach it from
+ * the block editor (Advanced panel → Additional CSS Class(es)) to whichever
+ * block needs it — it never runs unless a block explicitly carries it, so it
+ * can't affect any other page.
+ */
+.ab-rise-into-hero {
+    position: relative;
+    z-index: 2;
+    margin-top: -64px !important;
+}
+
 /* ==========================================================================
    8. CARDS AND COMPONENTS
    ========================================================================== */
