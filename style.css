@@ -1346,7 +1346,226 @@ label {
 }
 
 /* ==========================================================================
-   14. UTILITIES
+   14. GUTENBERG BLOCKS
+   Styles for native Gutenberg blocks used across the site after the
+   Elementor-to-blocks migration. Reuses the same tokens, radii and shadows
+   as the .ab-card / .ab-post-card / .ab-gallery components above so these
+   blocks read as part of the same design system.
+   ========================================================================== */
+
+/* --- Columns: 3-up service cards (image + heading + text + button) --- */
+.wp-block-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(28px, 4vw, 48px);
+    margin-bottom: clamp(40px, 5vw, 64px);
+}
+.wp-block-columns:last-child { margin-bottom: 0; }
+
+.wp-block-column {
+    display: flex;
+    flex-direction: column;
+    padding: 34px 30px;
+    background: var(--ab-surface);
+    border: 1px solid var(--ab-border);
+    border-radius: var(--ab-radius-lg);
+    box-shadow: var(--ab-shadow-sm);
+    transition: transform var(--ab-transition), box-shadow var(--ab-transition), border-color var(--ab-transition);
+}
+.wp-block-column:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--ab-shadow);
+    border-color: transparent;
+}
+
+.wp-block-column > *:first-child { margin-top: 0; }
+.wp-block-column > *:last-child { margin-bottom: 0; }
+
+.wp-block-column > .wp-block-image:first-child {
+    margin: -34px -30px 22px;
+}
+.wp-block-column > .wp-block-image:first-child img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--ab-radius-lg) var(--ab-radius-lg) 0 0;
+}
+
+.wp-block-column h2,
+.wp-block-column h3,
+.wp-block-column h4 { font-size: 1.25rem; margin-bottom: 12px; }
+
+.wp-block-column p { font-size: var(--ab-fs-sm); }
+
+.wp-block-column .wp-block-button { margin-top: auto; padding-top: 8px; }
+
+/* --- Gallery: portfolio pages, 18-37 photos in a responsive grid --- */
+.wp-block-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+.wp-block-gallery .wp-block-image {
+    margin: 0;
+    width: auto !important;
+}
+.wp-block-gallery .wp-block-image img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--ab-radius);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.wp-block-gallery .wp-block-image:hover img { transform: scale(1.05); }
+
+/* --- Latest Posts: "More From Our Blog", 3-column grid --- */
+.wp-block-latest-posts.is-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.wp-block-latest-posts li {
+    display: flex;
+    flex-direction: column;
+    background: var(--ab-surface);
+    border: 1px solid var(--ab-border);
+    border-radius: var(--ab-radius-lg);
+    overflow: hidden;
+    transition: transform var(--ab-transition), box-shadow var(--ab-transition);
+}
+.wp-block-latest-posts li:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ab-shadow);
+}
+
+.wp-block-latest-posts__featured-image {
+    margin: 0;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: linear-gradient(140deg, var(--ab-primary), var(--ab-aqua));
+}
+.wp-block-latest-posts__featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.wp-block-latest-posts li:hover .wp-block-latest-posts__featured-image img { transform: scale(1.05); }
+
+.wp-block-latest-posts__post-title {
+    display: block;
+    font-family: var(--ab-font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ab-heading);
+    padding: 26px 26px 0;
+    margin-bottom: 10px;
+}
+.wp-block-latest-posts__post-title:hover { color: var(--ab-primary); }
+
+.wp-block-latest-posts__post-date {
+    display: block;
+    padding: 0 26px;
+    font-size: var(--ab-fs-xs);
+    color: var(--ab-text-light);
+    margin-bottom: 10px;
+}
+
+.wp-block-latest-posts__post-excerpt {
+    padding: 0 26px 26px;
+    font-size: var(--ab-fs-sm);
+    color: var(--ab-text);
+    margin: 0;
+}
+
+/* --- Video and embeds: self-hosted video + YouTube --- */
+.wp-block-video,
+.wp-block-embed { margin-bottom: 1.4em; }
+
+.wp-block-video video {
+    width: 100%;
+    border-radius: var(--ab-radius);
+    box-shadow: var(--ab-shadow-sm);
+}
+
+.wp-block-embed__wrapper {
+    border-radius: var(--ab-radius);
+    overflow: hidden;
+    box-shadow: var(--ab-shadow-sm);
+}
+.wp-block-embed__wrapper iframe { width: 100%; }
+
+.wp-block-video figcaption,
+.wp-block-embed figcaption {
+    font-size: var(--ab-fs-xs);
+    color: var(--ab-text-light);
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* --- List: "Why Choose Adept Builders & Design" style bullet lists --- */
+ul.wp-block-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 0 1.4em;
+}
+ul.wp-block-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+}
+ul.wp-block-list li:last-child { margin-bottom: 0; }
+ul.wp-block-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--ab-accent);
+}
+
+ol.wp-block-list {
+    padding-left: 1.4em;
+    margin: 0 0 1.4em;
+}
+ol.wp-block-list li {
+    padding-left: 6px;
+    margin-bottom: 12px;
+}
+ol.wp-block-list li:last-child { margin-bottom: 0; }
+ol.wp-block-list li::marker {
+    font-family: var(--ab-font-heading);
+    font-weight: 700;
+    color: var(--ab-primary);
+}
+
+@media (max-width: 1024px) {
+    .wp-block-latest-posts.is-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 782px) {
+    .wp-block-columns { flex-direction: column; }
+    .wp-block-column { flex-basis: 100% !important; width: 100% !important; }
+
+    .wp-block-latest-posts.is-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+    .wp-block-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+    }
+}
+
+/* ==========================================================================
+   15. UTILITIES
    ========================================================================== */
 
 .ab-text-center { text-align: center; }
