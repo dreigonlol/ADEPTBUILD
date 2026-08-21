@@ -130,22 +130,14 @@ function adeptbuild_post_meta() {
 }
 
 /**
- * Simple inner-page header with title and breadcrumb.
+ * Simple inner-page header with just the title.
  */
-function adeptbuild_page_hero( $title = '', $subtitle = '' ) {
+function adeptbuild_page_hero( $title = '' ) {
 	$title = $title ? $title : get_the_title();
 	?>
 	<section class="ab-page-hero">
 		<div class="ast-container">
 			<h1><?php echo esc_html( $title ); ?></h1>
-			<?php if ( $subtitle ) : ?>
-				<p class="ab-breadcrumb"><?php echo esc_html( $subtitle ); ?></p>
-			<?php else : ?>
-				<p class="ab-breadcrumb">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'adeptbuild' ); ?></a>
-					<span aria-hidden="true"> / </span><?php echo esc_html( $title ); ?>
-				</p>
-			<?php endif; ?>
 		</div>
 		<?php adeptbuild_wave(); ?>
 	</section>

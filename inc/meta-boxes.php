@@ -37,8 +37,7 @@ function adeptbuild_page_header_meta_box( $post ) {
 
 	wp_nonce_field( 'adeptbuild_save_page_header', 'adeptbuild_page_header_nonce' );
 
-	$heading    = get_post_meta( $post->ID, '_adeptbuild_hero_title', true );
-	$subheading = get_post_meta( $post->ID, '_adeptbuild_hero_subtitle', true );
+	$heading = get_post_meta( $post->ID, '_adeptbuild_hero_title', true );
 	?>
 	<p>
 		<label for="adeptbuild_hero_title"><strong><?php esc_html_e( 'Heading', 'adeptbuild' ); ?></strong></label><br>
@@ -51,18 +50,6 @@ function adeptbuild_page_header_meta_box( $post ) {
 			placeholder="<?php echo esc_attr( get_the_title( $post ) ); ?>">
 		<span class="description">
 			<?php esc_html_e( 'The large title shown at the top of the page. Leave empty to use the page title above.', 'adeptbuild' ); ?>
-		</span>
-	</p>
-	<p>
-		<label for="adeptbuild_hero_subtitle"><strong><?php esc_html_e( 'Breadcrumb / subheading text', 'adeptbuild' ); ?></strong></label><br>
-		<input
-			type="text"
-			id="adeptbuild_hero_subtitle"
-			name="adeptbuild_hero_subtitle"
-			value="<?php echo esc_attr( $subheading ); ?>"
-			class="large-text">
-		<span class="description">
-			<?php esc_html_e( 'Optional. Replaces the default "Home / Page Title" breadcrumb line.', 'adeptbuild' ); ?>
 		</span>
 	</p>
 	<?php
@@ -96,15 +83,6 @@ function adeptbuild_save_page_header_meta_box( $post_id ) {
 			delete_post_meta( $post_id, '_adeptbuild_hero_title' );
 		}
 	}
-
-	if ( isset( $_POST['adeptbuild_hero_subtitle'] ) ) {
-		$subheading = sanitize_text_field( wp_unslash( $_POST['adeptbuild_hero_subtitle'] ) );
-		if ( $subheading ) {
-			update_post_meta( $post_id, '_adeptbuild_hero_subtitle', $subheading );
-		} else {
-			delete_post_meta( $post_id, '_adeptbuild_hero_subtitle' );
-		}
-	}
 }
 add_action( 'save_post_page', 'adeptbuild_save_page_header_meta_box' );
 
@@ -118,15 +96,4 @@ function adeptbuild_get_page_hero_title( $post = null ) {
 	$post_id = $post ? get_post( $post )->ID : get_the_ID();
 	$heading = get_post_meta( $post_id, '_adeptbuild_hero_title', true );
 	return $heading ? $heading : get_the_title( $post_id );
-}
-
-/**
- * Returns the custom breadcrumb text for a page, if any.
- *
- * @param int|WP_Post $post Post ID or object. Defaults to the current post.
- * @return string
- */
-function adeptbuild_get_page_hero_subtitle( $post = null ) {
-	$post_id = $post ? get_post( $post )->ID : get_the_ID();
-	return get_post_meta( $post_id, '_adeptbuild_hero_subtitle', true );
 }

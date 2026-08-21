@@ -703,12 +703,7 @@ a.ab-btn:hover {
     color: rgba(255, 255, 255, 0.82);
     overflow: hidden;
 }
-.ab-page-hero h1 { color: #fff; margin-bottom: 10px; }
-.ab-page-hero .ab-breadcrumb {
-    font-size: var(--ab-fs-sm);
-    color: rgba(255, 255, 255, 0.7);
-}
-.ab-page-hero .ab-breadcrumb a { color: var(--ab-aqua); }
+.ab-page-hero h1 { color: #fff; margin: 0; }
 
 /*
  * Opt-in utility: pulls a single block up so it overlaps the bottom of the

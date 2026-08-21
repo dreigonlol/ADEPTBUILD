@@ -9,7 +9,7 @@ get_header();
 
 while ( have_posts() ) :
 	the_post();
-	adeptbuild_page_hero( adeptbuild_get_page_hero_title(), adeptbuild_get_page_hero_subtitle() );
+	adeptbuild_page_hero( adeptbuild_get_page_hero_title() );
 	?>
 
 	<main id="primary" class="site-main ab-content-area">
