@@ -1767,17 +1767,23 @@ ol.wp-block-list li::marker {
     border-radius: 0;
 }
 
-/* --- 5. Trust bar: plain row of linked logos, no card chrome --- */
+/* --- 5. Trust bar: plain row of linked logos, no card chrome ---
+   WordPress core forces every ".wp-block-column" to "flex-basis:100%
+   !important" below 782px so multi-column content sections stack on
+   mobile — right for Services/Process, wrong here, where it stacks the
+   7 logos into one column instead of letting them wrap into a row. --- */
 .home .ab-proto-trust {
     padding: clamp(36px, 5vw, 56px) 0;
     border-top: 1px solid var(--ab-border);
     border-bottom: 1px solid var(--ab-border);
+    flex-wrap: wrap !important;
     justify-content: center;
     align-items: center;
     gap: clamp(28px, 5vw, 56px) !important;
 }
 .home .ab-proto-trust .wp-block-column {
-    flex: 0 1 auto;
+    flex: 0 1 auto !important;
+    width: auto !important;
     padding: 0;
     background: none;
     border: 0;
@@ -1821,8 +1827,8 @@ ol.wp-block-list li::marker {
 .home .ab-proto-blog .wp-block-latest-posts { margin-top: 40px; }
 
 @media (max-width: 900px) {
-    .home .ab-proto-intro { grid-template-columns: 1fr; }
-    .home .ab-proto-philosophy { grid-template-columns: 1fr; }
+    .home .ab-proto-intro { grid-template-columns: 1fr !important; }
+    .home .ab-proto-philosophy .ab-proto-inner { grid-template-columns: 1fr !important; }
     .home .ab-proto-philosophy-copy { padding-left: 0; border-left: 0; padding-top: 24px; border-top: 1px solid var(--ab-border); }
     .home .ab-proto-process .wp-block-columns { flex-wrap: wrap; }
     .home .ab-proto-process .wp-block-column { flex-basis: calc(50% - 2px) !important; }
