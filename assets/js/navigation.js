@@ -85,8 +85,14 @@
 			}
 		} );
 
-		// Close after navigating to an on-page anchor.
+		// Close after navigating to an on-page anchor. Skip clicks the
+		// submenu toggle below already handled (event.preventDefault()) —
+		// otherwise tapping a dropdown parent like "Services" (href="#")
+		// opens its submenu and closes the whole panel in the same tap.
 		nav.addEventListener( 'click', function ( event ) {
+			if ( event.defaultPrevented ) {
+				return;
+			}
 			var link = event.target.closest( 'a' );
 			if ( link && link.getAttribute( 'href' ) && link.getAttribute( 'href' ).indexOf( '#' ) === 0 ) {
 				close();
@@ -122,13 +128,20 @@
 			};
 
 			// Mobile: first tap opens the submenu instead of following the link.
+			// Placeholder links (href="#", used by dropdown-only parents like
+			// "Services") never navigate anywhere, so always prevent default
+			// for those — otherwise collapsing them re-triggers the browser's
+			// same-page "#" jump and the close-on-anchor handler above.
 			link.addEventListener( 'click', function ( event ) {
 				if ( ! isMobile() ) {
 					return;
 				}
 
 				var isExpanded = item.classList.contains( 'is-expanded' );
-				if ( ! isExpanded ) {
+				var href = link.getAttribute( 'href' );
+				var isPlaceholder = ! href || '#' === href;
+
+				if ( ! isExpanded || isPlaceholder ) {
 					event.preventDefault();
 				}
 				setExpanded( ! isExpanded );
