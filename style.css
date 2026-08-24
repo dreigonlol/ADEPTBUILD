@@ -1419,14 +1419,23 @@ label {
 }
 .wp-block-gallery.has-nested-images > .wp-block-image:hover img { transform: scale(1.05); }
 
-/* --- Latest Posts: "More From Our Blog", 3-column grid --- */
+/* --- Latest Posts: "More From Our Blog", 3-column grid ---
+   !important + explicit li reset: WordPress's own ".is-grid"/".columns-3"
+   core CSS is flex-based and puts a fixed calc() width + right-margin on
+   each <li> for that layout. Left alone, that width fights the grid cell
+   width below and squeezes every card down to roughly its image's
+   intrinsic size — tall, narrow, word-wrapped columns instead of cards. --- */
 .wp-block-latest-posts.is-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 30px;
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 !important;
+}
+.wp-block-latest-posts.is-grid li {
+    width: auto !important;
+    margin: 0 !important;
 }
 
 .wp-block-latest-posts li {
@@ -1589,14 +1598,14 @@ ol.wp-block-list li::marker {
 }
 
 @media (max-width: 1024px) {
-    .wp-block-latest-posts.is-grid { grid-template-columns: repeat(2, 1fr); }
+    .wp-block-latest-posts.is-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
 @media (max-width: 782px) {
     .wp-block-columns { flex-direction: column; }
     .wp-block-column { flex-basis: 100% !important; width: 100% !important; }
 
-    .wp-block-latest-posts.is-grid { grid-template-columns: 1fr; }
+    .wp-block-latest-posts.is-grid { grid-template-columns: 1fr !important; }
 }
 
 @media (max-width: 600px) {
@@ -1629,15 +1638,20 @@ ol.wp-block-list li::marker {
    ========================================================================== */
 
 /* --- 1. Intro: badge + heading + copy on the left, video on the right ---
-   !important below: WordPress's own block-layout system (the ".is-layout-*"
-   rules global-styles-inline-css prints for every Group block) sets
-   display/flex-basis directly and otherwise wins the specificity fight
-   against a plain ".home .ab-proto-intro" selector. --- */
+   This WordPress install still saves Group blocks with the legacy
+   ".wp-block-group__inner-container" wrapper div — so ".ab-proto-intro"'s
+   only real child is that wrapper, not the two pieces of content directly.
+   "display:contents" removes the wrapper from the box model so its own
+   children (the left-column group and the video) become the grid's direct
+   items instead. --- */
 .home .ab-proto-intro {
     display: grid !important;
     grid-template-columns: 1.1fr 1fr !important;
     gap: clamp(32px, 5vw, 64px);
     align-items: center;
+}
+.home .ab-proto-intro > .wp-block-group__inner-container {
+    display: contents;
 }
 .home .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link {
     padding: 7px 20px !important;
@@ -1699,6 +1713,9 @@ ol.wp-block-list li::marker {
     grid-template-columns: 1fr 1.3fr !important;
     gap: clamp(28px, 4vw, 56px);
     align-items: center;
+}
+.home .ab-proto-philosophy .ab-proto-inner > .wp-block-group__inner-container {
+    display: contents;
 }
 .home .ab-proto-philosophy h2 {
     font-size: clamp(2rem, 4vw, 2.75rem);
