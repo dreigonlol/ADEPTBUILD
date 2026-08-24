@@ -1618,34 +1618,39 @@ ol.wp-block-list li::marker {
 .ab-muted { color: var(--ab-text-light); }
 
 /* ==========================================================================
-   16. PAGE — "A full-service Construction & Design Company" (f)
-   Scoped to this one page's body class so nothing here leaks onto any other
-   page built from the same Gutenberg blocks. If the page ID ever changes
-   (e.g. it gets duplicated or recreated), update the ".page-id-5047"
-   selector below to match — WordPress prints the current one in
-   Appearance → whatever shows body_class(), or just view-source and look
-   for "page-id-" on the <body> tag.
+   16. PAGE — "A full-service Construction & Design Company" (the site's
+   front page)
+   Scoped with ".home" instead of a page ID: WordPress adds that class to
+   <body> automatically whenever a page is set as the site's homepage in
+   Settings → Reading, and it stays correct even if the page gets
+   duplicated/recreated and swapped in later — unlike a page ID, which
+   changes every time. Nothing here leaks onto any other page built from
+   the same Gutenberg blocks, since only the homepage carries ".home".
    ========================================================================== */
 
-/* --- 1. Intro: badge + heading + copy on the left, video on the right --- */
-.page-id-5047 .ab-proto-intro {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
+/* --- 1. Intro: badge + heading + copy on the left, video on the right ---
+   !important below: WordPress's own block-layout system (the ".is-layout-*"
+   rules global-styles-inline-css prints for every Group block) sets
+   display/flex-basis directly and otherwise wins the specificity fight
+   against a plain ".home .ab-proto-intro" selector. --- */
+.home .ab-proto-intro {
+    display: grid !important;
+    grid-template-columns: 1.1fr 1fr !important;
     gap: clamp(32px, 5vw, 64px);
     align-items: center;
 }
-.page-id-5047 .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link {
-    padding: 7px 20px;
-    background: var(--ab-primary-light);
-    color: var(--ab-primary-dark);
-    font-size: var(--ab-fs-xs);
+.home .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link {
+    padding: 7px 20px !important;
+    background: var(--ab-primary-light) !important;
+    color: var(--ab-primary-dark) !important;
+    font-size: var(--ab-fs-xs) !important;
     letter-spacing: 0.04em;
 }
-.page-id-5047 .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link:hover {
-    background: var(--ab-primary);
-    color: #fff;
+.home .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link:hover {
+    background: var(--ab-primary) !important;
+    color: #fff !important;
 }
-.page-id-5047 .ab-proto-intro .wp-block-embed { margin-bottom: 0; }
+.home .ab-proto-intro .wp-block-embed { margin-bottom: 0; }
 
 /* --- Full-bleed helper: breaks a Group block out of the theme's 1200px
    content column so its background reaches the edges of the screen, while
@@ -1653,15 +1658,15 @@ ol.wp-block-list li::marker {
    up with the rest of the page. Page.php wraps everything in a centered
    ".ast-container", so this is done with a CSS breakout instead of a
    template change — keeps the fix scoped to this one page. --- */
-.page-id-5047 .ab-proto-services,
-.page-id-5047 .ab-proto-process,
-.page-id-5047 .ab-proto-philosophy,
-.page-id-5047 .ab-proto-blog {
+.home .ab-proto-services,
+.home .ab-proto-process,
+.home .ab-proto-philosophy,
+.home .ab-proto-blog {
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
 }
-.page-id-5047 .ab-proto-inner {
+.home .ab-proto-inner {
     max-width: var(--ab-container);
     margin: 0 auto;
     padding: 0 var(--ab-gutter);
@@ -1669,7 +1674,7 @@ ol.wp-block-list li::marker {
 
 /* --- 2. Our Services: photo background (Group block) + the site's default
    card columns. Swap the URL below for a different photo any time. --- */
-.page-id-5047 .ab-proto-services {
+.home .ab-proto-services {
     padding: clamp(64px, 8vw, 100px) 0;
     background-color: #000;
     background-image:
@@ -1678,41 +1683,41 @@ ol.wp-block-list li::marker {
     background-size: cover;
     background-position: center;
 }
-.page-id-5047 .ab-proto-services h2,
-.page-id-5047 .ab-proto-process h2,
-.page-id-5047 .ab-proto-blog h2 { color: #fff; }
-.page-id-5047 .ab-proto-services p { color: rgba(255, 255, 255, 0.72); max-width: 640px; }
-.page-id-5047 .ab-proto-services .wp-block-columns { margin-top: 40px; margin-bottom: 0; }
+.home .ab-proto-services h2,
+.home .ab-proto-process h2,
+.home .ab-proto-blog h2 { color: #fff; }
+.home .ab-proto-services p { color: rgba(255, 255, 255, 0.72); max-width: 640px; }
+.home .ab-proto-services .wp-block-columns { margin-top: 40px; margin-bottom: 0; }
 
 /* --- 3. Our Philosophy: big heading left, divider + copy right --- */
-.page-id-5047 .ab-proto-philosophy {
+.home .ab-proto-philosophy {
     padding: clamp(56px, 7vw, 90px) 0;
     background: var(--ab-surface-alt);
 }
-.page-id-5047 .ab-proto-philosophy .ab-proto-inner {
-    display: grid;
-    grid-template-columns: 1fr 1.3fr;
+.home .ab-proto-philosophy .ab-proto-inner {
+    display: grid !important;
+    grid-template-columns: 1fr 1.3fr !important;
     gap: clamp(28px, 4vw, 56px);
     align-items: center;
 }
-.page-id-5047 .ab-proto-philosophy h2 {
+.home .ab-proto-philosophy h2 {
     font-size: clamp(2rem, 4vw, 2.75rem);
     color: var(--ab-primary);
     margin: 0;
 }
-.page-id-5047 .ab-proto-philosophy-copy {
+.home .ab-proto-philosophy-copy {
     padding-left: clamp(28px, 4vw, 56px);
     border-left: 1px solid var(--ab-border);
 }
-.page-id-5047 .ab-proto-philosophy-copy p { font-size: 1.0625rem; }
-.page-id-5047 .ab-proto-philosophy-copy a:not(.wp-element-button) {
+.home .ab-proto-philosophy-copy p { font-size: 1.0625rem; }
+.home .ab-proto-philosophy-copy a:not(.wp-element-button) {
     display: inline-block;
     margin-bottom: 22px;
     font-weight: 600;
 }
 
 /* --- 4. How We Work: photo background + four dark overlapping cards --- */
-.page-id-5047 .ab-proto-process {
+.home .ab-proto-process {
     padding: clamp(64px, 8vw, 100px) 0;
     background-image:
         linear-gradient(180deg, rgba(11,47,62,.15) 0%, rgba(11,47,62,.35) 100%),
@@ -1720,8 +1725,8 @@ ol.wp-block-list li::marker {
     background-size: cover;
     background-position: center;
 }
-.page-id-5047 .ab-proto-process .wp-block-columns { gap: 4px; margin: 40px 0 0; }
-.page-id-5047 .ab-proto-process .wp-block-column {
+.home .ab-proto-process .wp-block-columns { gap: 4px; margin: 40px 0 0; }
+.home .ab-proto-process .wp-block-column {
     padding: 30px 24px;
     background: rgba(11, 47, 62, 0.82);
     border: 0;
@@ -1730,14 +1735,14 @@ ol.wp-block-list li::marker {
     box-shadow: none;
     color: rgba(255, 255, 255, 0.85);
 }
-.page-id-5047 .ab-proto-process .wp-block-column:hover { transform: none; }
-.page-id-5047 .ab-proto-process .wp-block-column h3 { color: #fff; }
-.page-id-5047 .ab-proto-process .wp-block-column p { color: rgba(255, 255, 255, 0.72); }
-.page-id-5047 .ab-proto-process .wp-block-image {
+.home .ab-proto-process .wp-block-column:hover { transform: none; }
+.home .ab-proto-process .wp-block-column h3 { color: #fff; }
+.home .ab-proto-process .wp-block-column p { color: rgba(255, 255, 255, 0.72); }
+.home .ab-proto-process .wp-block-image {
     margin: 0 0 18px !important;
     width: 52px;
 }
-.page-id-5047 .ab-proto-process .wp-block-image img {
+.home .ab-proto-process .wp-block-image img {
     width: 52px;
     height: 52px;
     aspect-ratio: auto;
@@ -1746,7 +1751,7 @@ ol.wp-block-list li::marker {
 }
 
 /* --- 5. Trust bar: plain row of linked logos, no card chrome --- */
-.page-id-5047 .ab-proto-trust {
+.home .ab-proto-trust {
     padding: clamp(36px, 5vw, 56px) 0;
     border-top: 1px solid var(--ab-border);
     border-bottom: 1px solid var(--ab-border);
@@ -1754,7 +1759,7 @@ ol.wp-block-list li::marker {
     align-items: center;
     gap: clamp(28px, 5vw, 56px) !important;
 }
-.page-id-5047 .ab-proto-trust .wp-block-column {
+.home .ab-proto-trust .wp-block-column {
     flex: 0 1 auto;
     padding: 0;
     background: none;
@@ -1762,9 +1767,9 @@ ol.wp-block-list li::marker {
     box-shadow: none;
     border-radius: 0;
 }
-.page-id-5047 .ab-proto-trust .wp-block-column:hover { transform: none; }
-.page-id-5047 .ab-proto-trust .wp-block-image { margin: 0; }
-.page-id-5047 .ab-proto-trust .wp-block-image img {
+.home .ab-proto-trust .wp-block-column:hover { transform: none; }
+.home .ab-proto-trust .wp-block-image { margin: 0; }
+.home .ab-proto-trust .wp-block-image img {
     width: 64px;
     height: 64px;
     aspect-ratio: auto;
@@ -1772,23 +1777,23 @@ ol.wp-block-list li::marker {
     border-radius: 0;
     transition: transform var(--ab-transition);
 }
-.page-id-5047 .ab-proto-trust .wp-block-image a:hover img { transform: scale(1.18); }
+.home .ab-proto-trust .wp-block-image a:hover img { transform: scale(1.18); }
 
 /* --- 6. Watch Our Videos: responsive grid, no card chrome around embeds.
    className added directly on each of the two Columns blocks (3 videos,
    then 2), no extra Group wrapper needed. --- */
-.page-id-5047 .wp-block-columns.ab-proto-videos { margin-bottom: 28px; }
-.page-id-5047 .ab-proto-videos .wp-block-column {
+.home .wp-block-columns.ab-proto-videos { margin-bottom: 28px; }
+.home .ab-proto-videos .wp-block-column {
     padding: 0;
     background: none;
     border: 0;
     box-shadow: none;
 }
-.page-id-5047 .ab-proto-videos .wp-block-column:hover { transform: none; }
-.page-id-5047 .ab-proto-videos .wp-block-embed { margin-bottom: 0; }
+.home .ab-proto-videos .wp-block-column:hover { transform: none; }
+.home .ab-proto-videos .wp-block-embed { margin-bottom: 0; }
 
 /* --- 7. From Our Blog: photo background behind the default post cards --- */
-.page-id-5047 .ab-proto-blog {
+.home .ab-proto-blog {
     padding: clamp(64px, 8vw, 100px) 0;
     background-image:
         linear-gradient(180deg, rgba(11,47,62,.55) 0%, rgba(11,47,62,.82) 100%),
@@ -1796,18 +1801,18 @@ ol.wp-block-list li::marker {
     background-size: cover;
     background-position: center;
 }
-.page-id-5047 .ab-proto-blog .wp-block-latest-posts { margin-top: 40px; }
+.home .ab-proto-blog .wp-block-latest-posts { margin-top: 40px; }
 
 @media (max-width: 900px) {
-    .page-id-5047 .ab-proto-intro { grid-template-columns: 1fr; }
-    .page-id-5047 .ab-proto-philosophy { grid-template-columns: 1fr; }
-    .page-id-5047 .ab-proto-philosophy-copy { padding-left: 0; border-left: 0; padding-top: 24px; border-top: 1px solid var(--ab-border); }
-    .page-id-5047 .ab-proto-process .wp-block-columns { flex-wrap: wrap; }
-    .page-id-5047 .ab-proto-process .wp-block-column { flex-basis: calc(50% - 2px) !important; }
+    .home .ab-proto-intro { grid-template-columns: 1fr; }
+    .home .ab-proto-philosophy { grid-template-columns: 1fr; }
+    .home .ab-proto-philosophy-copy { padding-left: 0; border-left: 0; padding-top: 24px; border-top: 1px solid var(--ab-border); }
+    .home .ab-proto-process .wp-block-columns { flex-wrap: wrap; }
+    .home .ab-proto-process .wp-block-column { flex-basis: calc(50% - 2px) !important; }
 }
 
 @media (max-width: 600px) {
-    .page-id-5047 .ab-proto-process .wp-block-column { flex-basis: 100% !important; }
-    .page-id-5047 .ab-proto-trust { gap: 28px !important; }
-    .page-id-5047 .ab-proto-trust .wp-block-image img { width: 52px; height: 52px; }
+    .home .ab-proto-process .wp-block-column { flex-basis: 100% !important; }
+    .home .ab-proto-trust { gap: 28px !important; }
+    .home .ab-proto-trust .wp-block-image img { width: 52px; height: 52px; }
 }

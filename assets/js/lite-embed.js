@@ -8,6 +8,12 @@
  *
  * Works on any page automatically; no changes to page content required.
  *
+ * LiteSpeed Cache lazy-loads iframes: at load time the real embed URL sits
+ * in "data-src" while "src" is a placeholder, and LiteSpeed only swaps it
+ * in later (on scroll, or async after load). A MutationObserver below
+ * catches that swap whenever it happens, instead of only checking once on
+ * DOMContentLoaded.
+ *
  * @package Adeptbuild
  */
 
@@ -21,20 +27,41 @@
 			'.wp-block-embed-youtube iframe, .wp-block-embed.is-provider-youtube iframe'
 		);
 
-		Array.prototype.forEach.call( frames, upgrade );
+		Array.prototype.forEach.call( frames, watch );
 	}
 
 	/**
-	 * Replaces a loaded YouTube iframe with a lite-embed thumbnail button.
+	 * Upgrades a frame immediately if its real YouTube URL is already
+	 * resolved, otherwise watches it until a lazy-loader fills it in.
 	 *
 	 * @param {HTMLIFrameElement} frame The original embed iframe.
 	 */
-	function upgrade( frame ) {
-		var id = getVideoId( frame.src );
-		if ( ! id ) {
+	function watch( frame ) {
+		var id = getVideoId( frame );
+
+		if ( id ) {
+			upgrade( frame, id );
 			return;
 		}
 
+		var observer = new MutationObserver( function () {
+			var lazyId = getVideoId( frame );
+			if ( lazyId ) {
+				observer.disconnect();
+				upgrade( frame, lazyId );
+			}
+		} );
+
+		observer.observe( frame, { attributes: true, attributeFilter: [ 'src', 'data-src' ] } );
+	}
+
+	/**
+	 * Replaces a YouTube iframe with a lite-embed thumbnail button.
+	 *
+	 * @param {HTMLIFrameElement} frame The original embed iframe.
+	 * @param {string}            id    YouTube video id.
+	 */
+	function upgrade( frame, id ) {
 		var wrapper = frame.closest( '.wp-block-embed__wrapper' ) || frame.parentNode;
 
 		var button = document.createElement( 'button' );
@@ -44,15 +71,16 @@
 		button.setAttribute( 'aria-label', 'Play video' );
 		button.setAttribute( 'data-yt-id', id );
 
-		var play = document.createElement( 'span' );
-		play.className = 'lite-video__play';
-		play.innerHTML =
+		var playIcon = document.createElement( 'span' );
+		playIcon.className = 'lite-video__play';
+		playIcon.innerHTML =
 			'<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
 			'<path d="M8 5v14l11-7z"></path></svg>';
-		button.appendChild( play );
+		button.appendChild( playIcon );
 
+		var title = frame.title || 'Video';
 		button.addEventListener( 'click', function () {
-			playVideo( id, button, frame.title || 'Video' );
+			playVideo( id, button, title );
 		} );
 
 		wrapper.replaceChild( button, frame );
@@ -91,13 +119,16 @@
 	}
 
 	/**
-	 * Extracts the video id from a YouTube embed src.
+	 * Extracts the video id from a YouTube embed iframe, checking both the
+	 * live "src" and LiteSpeed's lazy-load "data-src" attribute.
 	 *
-	 * @param {string} src e.g. "https://www.youtube.com/embed/QgnzUcLLAyU?...".
+	 * @param {HTMLIFrameElement} frame
 	 * @return {string|null}
 	 */
-	function getVideoId( src ) {
-		var match = src && src.match( /embed\/([a-zA-Z0-9_-]{6,})/ );
+	function getVideoId( frame ) {
+		var src = frame.getAttribute( 'src' ) || '';
+		var dataSrc = frame.getAttribute( 'data-src' ) || '';
+		var match = src.match( /embed\/([a-zA-Z0-9_-]{6,})/ ) || dataSrc.match( /embed\/([a-zA-Z0-9_-]{6,})/ );
 		return match ? match[ 1 ] : null;
 	}
 } )();
