@@ -133,11 +133,25 @@ function adeptbuild_post_meta() {
  * Simple inner-page header with just the title.
  */
 function adeptbuild_page_hero( $title = '' ) {
-	$title = $title ? $title : get_the_title();
+	$title      = $title ? $title : get_the_title();
+	$is_home    = is_front_page();
+	$video_path = get_theme_file_path( '/assets/img/videohome.mp4' );
+	$has_video  = $is_home && file_exists( $video_path );
 	?>
-	<section class="ab-page-hero">
+	<section class="ab-page-hero<?php echo $has_video ? ' ab-page-hero--video' : ''; ?>">
+		<?php if ( $has_video ) : ?>
+			<video
+				class="ab-page-hero__video"
+				src="<?php echo esc_url( get_theme_file_uri( '/assets/img/videohome.mp4' ) ); ?>"
+				autoplay
+				loop
+				muted
+				playsinline
+				aria-hidden="true"></video>
+			<div class="ab-page-hero__overlay" aria-hidden="true"></div>
+		<?php endif; ?>
 		<div class="ast-container">
-			<h1><?php echo esc_html( $title ); ?></h1>
+			<h1 class="ab-reveal"><?php echo esc_html( $title ); ?></h1>
 		</div>
 		<?php adeptbuild_wave(); ?>
 	</section>

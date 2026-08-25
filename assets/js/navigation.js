@@ -15,8 +15,57 @@
 	document.addEventListener( 'DOMContentLoaded', function () {
 		setHeaderHeight();
 		initMobileMenu();
+		autoTagReveals();
 		initReveal();
+		initCounters();
 	} );
+
+	/**
+	 * Tags the homepage's existing sections with .ab-reveal (and a
+	 * directional variant where it reads better) so they fade/slide in as
+	 * the visitor scrolls to them — no changes to the page content itself.
+	 * Runs before initReveal(), which then picks up everything tagged here
+	 * through its normal ".ab-reveal" query. Scoped to ".home" so it never
+	 * touches any other page.
+	 */
+	function autoTagReveals() {
+		if ( ! document.body.classList.contains( 'home' ) ) {
+			return;
+		}
+
+		var tag = function ( selector, variant ) {
+			var found = document.querySelectorAll( selector );
+			Array.prototype.forEach.call( found, function ( el ) {
+				el.classList.add( 'ab-reveal' );
+				if ( variant ) {
+					el.classList.add( variant );
+				}
+			} );
+		};
+
+		// 1. Intro: copy slides in from the left, the video from the right.
+		tag( '.ab-proto-intro-left', 'ab-reveal--left' );
+		tag( '.ab-proto-intro .wp-block-embed', 'ab-reveal--right' );
+
+		// 2. Our Services: each card fades up, staggered by initReveal().
+		tag( '.ab-proto-services .wp-block-column' );
+
+		// 3. Our Philosophy: heading from the left, copy from the right.
+		tag( '.ab-proto-philosophy h2' );
+		tag( '.ab-proto-philosophy-copy', 'ab-reveal--right' );
+
+		// 4. How We Work: each step fades up in sequence.
+		tag( '.ab-proto-process .wp-block-column' );
+
+		// 5. Trust bar: the whole row scales in as one unit.
+		tag( '.ab-proto-trust', 'ab-reveal--scale' );
+
+		// 6. Watch Our Videos: each thumbnail fades up.
+		tag( '.wp-block-columns.ab-proto-videos .wp-block-column' );
+
+		// 7. From Our Blog: each post card fades up in sequence.
+		tag( '.ab-proto-blog .wp-block-latest-posts li' );
+	}
 
 	/**
 	 * Publishes the real header height as a CSS variable, so anchor-link
@@ -192,17 +241,29 @@
 			return;
 		}
 
+		// Stable stagger, set once: each element's delay is its position
+		// among its OWN siblings that are also .ab-reveal (so the 3 cards
+		// in a row cascade 0/80/160ms relative to each other) rather than
+		// its index within whatever batch of entries IntersectionObserver
+		// happens to report in one callback — that batch depends on scroll
+		// speed and used to make the cascade feel inconsistent.
+		Array.prototype.forEach.call( items, function ( item ) {
+			var siblings = item.parentElement
+				? Array.prototype.filter.call( item.parentElement.children, function ( child ) {
+					return child.classList.contains( 'ab-reveal' );
+				} )
+				: [ item ];
+			var position = Math.max( siblings.indexOf( item ), 0 );
+			item.style.transitionDelay = Math.min( position, 6 ) * 80 + 'ms';
+		} );
+
+		// No unobserve(): visibility stays bound to scroll position for as
+		// long as the page is open, so scrolling back up un-reveals a
+		// section exactly like scrolling down revealed it.
 		var observer = new IntersectionObserver(
 			function ( entries ) {
-				entries.forEach( function ( entry, index ) {
-					if ( ! entry.isIntersecting ) {
-						return;
-					}
-
-					// Gentle stagger between sibling elements.
-					entry.target.style.transitionDelay = index * 80 + 'ms';
-					entry.target.classList.add( 'is-visible' );
-					observer.unobserve( entry.target );
+				entries.forEach( function ( entry ) {
+					entry.target.classList.toggle( 'is-visible', entry.isIntersecting );
 				} );
 			},
 			{ rootMargin: '0px 0px -12% 0px', threshold: 0.08 }
@@ -211,6 +272,98 @@
 		Array.prototype.forEach.call( items, function ( item ) {
 			observer.observe( item );
 		} );
+	}
+
+	/**
+	 * Animated stat counters. Give any text block (a Heading, for example)
+	 * the "ab-counter-value" class via the block editor's Additional CSS
+	 * Class(es) field — no custom HTML/data attributes needed. The script
+	 * reads the number already sitting in the text ("250+", "15 years",
+	 * "98%") and counts up to it from 0 once the element scrolls into
+	 * view, keeping whatever prefix/suffix text surrounded the number.
+	 */
+	function initCounters() {
+		var items = document.querySelectorAll( '.ab-counter-value' );
+
+		if ( ! items.length ) {
+			return;
+		}
+
+		var parsed = Array.prototype.map.call( items, parseCounter ).filter( Boolean );
+
+		if (
+			! ( 'IntersectionObserver' in window ) ||
+			window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches
+		) {
+			return;
+		}
+
+		var observer = new IntersectionObserver(
+			function ( entries ) {
+				entries.forEach( function ( entry ) {
+					if ( ! entry.isIntersecting ) {
+						return;
+					}
+					var match = parsed.filter( function ( p ) {
+						return p.el === entry.target;
+					} )[ 0 ];
+					if ( match ) {
+						observer.unobserve( entry.target );
+						runCount( match );
+					}
+				} );
+			},
+			{ threshold: 0.4 }
+		);
+
+		parsed.forEach( function ( p ) {
+			p.el.textContent = p.prefix + ( 0 ).toFixed( p.decimals ) + p.suffix;
+			observer.observe( p.el );
+		} );
+
+		/**
+		 * Splits an element's text into a leading number plus whatever
+		 * prefix/suffix text surrounds it (e.g. "15+ Years" → prefix "",
+		 * number 15, suffix "+ Years").
+		 */
+		function parseCounter( el ) {
+			var text = el.textContent.trim();
+			var match = text.match( /^(\D*?)(\d[\d.,]*)(\D*)$/ );
+			if ( ! match ) {
+				return null;
+			}
+			var numberText = match[ 2 ].replace( /,/g, '' );
+			return {
+				el: el,
+				prefix: match[ 1 ],
+				suffix: match[ 3 ],
+				target: parseFloat( numberText ),
+				decimals: numberText.indexOf( '.' ) > -1 ? numberText.split( '.' )[ 1 ].length : 0,
+			};
+		}
+
+		function runCount( p ) {
+			var duration = 1600;
+			var start = null;
+
+			var step = function ( timestamp ) {
+				if ( start === null ) {
+					start = timestamp;
+				}
+				var progress = Math.min( ( timestamp - start ) / duration, 1 );
+				// easeOutCubic — fast start, gentle settle.
+				var eased = 1 - Math.pow( 1 - progress, 3 );
+				p.el.textContent = p.prefix + ( p.target * eased ).toFixed( p.decimals ) + p.suffix;
+
+				if ( progress < 1 ) {
+					window.requestAnimationFrame( step );
+				} else {
+					p.el.textContent = p.prefix + p.target.toFixed( p.decimals ) + p.suffix;
+				}
+			};
+
+			window.requestAnimationFrame( step );
+		}
 	}
 
 	/**

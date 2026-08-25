@@ -763,6 +763,36 @@ a.ab-btn:hover {
 }
 .ab-page-hero h1 { color: #fff; margin: 0; }
 
+/* --- Video hero: front page only (adeptbuild_page_hero() only renders
+   the <video> when is_front_page() finds assets/img/videohome.mp4) —
+   taller than the plain gradient banner so the footage has room to read,
+   with a tint overlay so the title stays legible over moving footage. --- */
+.ab-page-hero--video {
+    display: flex;
+    align-items: center;
+    min-height: clamp(480px, 78vh, 820px);
+    background: var(--ab-deep);
+}
+.ab-page-hero__video {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.ab-page-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(115deg, rgba(11, 47, 62, 0.88) 0%, rgba(14, 116, 144, 0.6) 55%, rgba(34, 184, 207, 0.3) 100%);
+}
+.ab-page-hero--video .ast-container { position: relative; z-index: 2; }
+.ab-page-hero--video h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    max-width: 900px;
+}
+
 /*
  * Opt-in utility: pulls a single block up so it overlaps the bottom of the
  * page hero, instead of sitting in the empty gap below it. Attach it from
@@ -1096,6 +1126,38 @@ label {
 }
 .ab-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 
+/* --- Underline form: minimal fields on a dark background, no boxes —
+   for a contact section sitting on a photo/dark backdrop. --- */
+.ab-form--underline {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    gap: 22px;
+}
+.ab-form--underline label {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: var(--ab-fs-xs);
+}
+.ab-form--underline input,
+.ab-form--underline textarea,
+.ab-form--underline select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 0;
+    padding: 10px 2px;
+    color: #fff;
+}
+.ab-form--underline input::placeholder,
+.ab-form--underline textarea::placeholder { color: rgba(255, 255, 255, 0.4); }
+.ab-form--underline input:focus,
+.ab-form--underline textarea:focus,
+.ab-form--underline select:focus {
+    box-shadow: none;
+    border-bottom-color: #fff;
+}
+.ab-form--underline textarea { min-height: 90px; resize: vertical; }
+
 /* ==========================================================================
    10. BLOG AND CONTENT
    ========================================================================== */
@@ -1327,10 +1389,21 @@ label {
 
 .ab-reveal {
     opacity: 0;
-    transform: translateY(26px);
-    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(32px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
 }
 .ab-reveal.is-visible { opacity: 1; transform: none; }
+
+/* Directional variants — same .is-visible toggle, different starting
+   transform. Add one of these alongside .ab-reveal (e.g.
+   class="ab-reveal ab-reveal--left"). */
+.ab-reveal--left { transform: translateX(-40px); }
+.ab-reveal--right { transform: translateX(40px); }
+.ab-reveal--scale { transform: scale(0.92); }
+.ab-reveal--scale.is-visible,
+.ab-reveal--left.is-visible,
+.ab-reveal--right.is-visible { transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -1340,7 +1413,44 @@ label {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
     }
-    .ab-reveal { opacity: 1; transform: none; }
+    .ab-reveal,
+    .ab-reveal--left,
+    .ab-reveal--right,
+    .ab-reveal--scale { opacity: 1; transform: none; }
+}
+
+/* --- Giant gradient headline — for a hero-scale statement heading --- */
+.ab-gradient-heading {
+    font-family: var(--ab-font-heading);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-size: clamp(2.75rem, 7vw, 6rem);
+    margin: 0 0 0.4em;
+    background: linear-gradient(180deg, var(--ab-aqua) 0%, var(--ab-primary) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--ab-primary);
+}
+.ab-gradient-heading--light {
+    background: linear-gradient(180deg, #fff 0%, var(--ab-primary-light) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- Animated stat counter number ---
+   Add this class to any heading via the block editor's Additional CSS
+   Class(es) field. assets/js/navigation.js's initCounters() reads the
+   number already in the text (e.g. "250+") and counts up to it from 0
+   once it scrolls into view; without the script it just displays as-is. */
+.ab-counter-value {
+    background: linear-gradient(180deg, var(--ab-aqua), var(--ab-primary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--ab-primary);
 }
 
 /* ==========================================================================
@@ -1733,6 +1843,36 @@ ol.wp-block-list li::marker {
    the same Gutenberg blocks, since only the homepage carries ".home".
    ========================================================================== */
 
+/* --- 0. Immersive dark base: the whole page shares one background color
+   instead of white gaps between sections — only the sections with a photo
+   of their own (Services, How We Work, From Our Blog) look different, and
+   even those lean on the same dark tone underneath their overlay. The
+   header gets a matching dark/glass treatment on this page only; every
+   other page keeps the light header, since only the front page carries
+   ".home". --- */
+body.home { background: var(--ab-deep); }
+
+/* The wave at the bottom of the page-hero was painted "white" to blend
+   into the old white page background — now that the whole homepage
+   shares one dark background, it needs to match that instead. */
+body.home .ab-wave { color: var(--ab-deep); }
+
+body.home .site-header { background: rgba(11, 47, 62, 0.75); }
+body.home .site-header.is-stuck { background: var(--ab-deep); box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25); }
+body.home .site-title a,
+body.home .site-description { color: #fff; }
+body.home .main-header-menu > li > a { color: rgba(255, 255, 255, 0.88); }
+body.home .main-header-menu > li:hover > a,
+body.home .main-header-menu > .current-menu-item > a {
+    color: var(--ab-aqua);
+    background: linear-gradient(90deg, var(--ab-aqua), #fff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+body.home .menu-toggle { background: rgba(255, 255, 255, 0.14); color: #fff; }
+body.home .menu-toggle:hover { background: var(--ab-primary); color: #fff; }
+
 /* --- 1. Intro: badge + heading + copy on the left, video on the right ---
    This WordPress install still saves Group blocks with the legacy
    ".wp-block-group__inner-container" wrapper div — so ".ab-proto-intro"'s
@@ -1761,6 +1901,22 @@ ol.wp-block-list li::marker {
     color: #fff !important;
 }
 .home .ab-proto-intro .wp-block-embed { margin-bottom: 0; }
+.home .ab-proto-intro-left h2 { color: #fff; }
+.home .ab-proto-intro-left p { color: rgba(255, 255, 255, 0.75); }
+.home .ab-proto-intro-left p strong { color: #fff; }
+/* Solid teal reads close in value to the new dark navy backdrop — swap
+   the primary CTA to the sand/gold accent so it actually pops, the same
+   move Ciudad Maderas makes with gold buttons on navy sections. */
+.home .ab-proto-intro-left .wp-block-buttons:last-child .wp-block-button__link {
+    background: var(--ab-accent) !important;
+    border-color: var(--ab-accent) !important;
+    color: var(--ab-deep) !important;
+}
+.home .ab-proto-intro-left .wp-block-buttons:last-child .wp-block-button__link:hover {
+    background: var(--ab-accent-dark) !important;
+    border-color: var(--ab-accent-dark) !important;
+    color: var(--ab-deep) !important;
+}
 
 /* --- Full-bleed helper: breaks a Group block out of the theme's 1200px
    content column so its background reaches the edges of the screen, while
@@ -1799,10 +1955,11 @@ ol.wp-block-list li::marker {
 .home .ab-proto-services p { color: rgba(255, 255, 255, 0.72); max-width: 640px; }
 .home .ab-proto-services .wp-block-columns { margin-top: 40px; margin-bottom: 0; }
 
-/* --- 3. Our Philosophy: big heading left, divider + copy right --- */
+/* --- 3. Our Philosophy: big heading left, divider + copy right — no photo
+   of its own, so it just sits on the page's dark base like the rest of
+   the immersive sections instead of breaking it up with a light band. --- */
 .home .ab-proto-philosophy {
     padding: clamp(56px, 7vw, 90px) 0;
-    background: var(--ab-surface-alt);
 }
 .home .ab-proto-philosophy .ab-proto-inner {
     display: grid !important;
@@ -1815,18 +1972,36 @@ ol.wp-block-list li::marker {
 }
 .home .ab-proto-philosophy h2 {
     font-size: clamp(2rem, 4vw, 2.75rem);
-    color: var(--ab-primary);
     margin: 0;
+    background: linear-gradient(180deg, #fff 0%, var(--ab-aqua) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--ab-aqua);
 }
 .home .ab-proto-philosophy-copy {
     padding-left: clamp(28px, 4vw, 56px);
-    border-left: 1px solid var(--ab-border);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
 }
-.home .ab-proto-philosophy-copy p { font-size: 1.0625rem; }
+.home .ab-proto-philosophy-copy p {
+    font-size: 1.0625rem;
+    color: rgba(255, 255, 255, 0.75);
+}
 .home .ab-proto-philosophy-copy a:not(.wp-element-button) {
     display: inline-block;
     margin-bottom: 22px;
     font-weight: 600;
+    color: var(--ab-accent);
+}
+.home .ab-proto-philosophy-copy a:not(.wp-element-button):hover { color: var(--ab-accent-dark); }
+.home .ab-proto-philosophy-copy .wp-block-button__link {
+    background: var(--ab-accent) !important;
+    border-color: var(--ab-accent) !important;
+    color: var(--ab-deep) !important;
+}
+.home .ab-proto-philosophy-copy .wp-block-button__link:hover {
+    background: var(--ab-accent-dark) !important;
+    border-color: var(--ab-accent-dark) !important;
 }
 
 /* --- 4. How We Work: photo background + four dark overlapping cards --- */
@@ -1870,8 +2045,8 @@ ol.wp-block-list li::marker {
    7 logos into one column instead of letting them wrap into a row. --- */
 .home .ab-proto-trust {
     padding: clamp(36px, 5vw, 56px) 0;
-    border-top: 1px solid var(--ab-border);
-    border-bottom: 1px solid var(--ab-border);
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
     flex-wrap: wrap !important;
     justify-content: center;
     align-items: center;
@@ -1901,6 +2076,10 @@ ol.wp-block-list li::marker {
 /* --- 6. Watch Our Videos: responsive grid, no card chrome around embeds.
    className added directly on each of the two Columns blocks (3 videos,
    then 2), no extra Group wrapper needed. --- */
+/* "Watch Our Videos" is a plain heading sitting between the trust bar and
+   the video rows — no wrapping section of its own to hang a color rule
+   on, so this reaches it as "the next heading after the trust bar". */
+.home .ab-proto-trust ~ h2 { color: #fff; }
 .home .wp-block-columns.ab-proto-videos { margin-bottom: 28px; }
 .home .ab-proto-videos .wp-block-column {
     padding: 0;
