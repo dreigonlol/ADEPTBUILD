@@ -32,13 +32,16 @@ $ab_about   = adeptbuild_option( 'footer_about' );
 				<?php endif; ?>
 
 				<?php if ( $ab_social ) : ?>
-					<div class="ab-social" style="margin-top:20px;">
-						<?php foreach ( $ab_social as $ab_link ) : ?>
-							<a href="<?php echo esc_url( $ab_link['url'] ); ?>" target="_blank" rel="noopener noreferrer">
-								<span class="screen-reader-text"><?php echo esc_html( $ab_link['label'] ); ?></span>
-								<?php adeptbuild_icon( $ab_link['icon'], 16 ); ?>
-							</a>
-						<?php endforeach; ?>
+					<div class="ab-footer-follow">
+						<span class="ab-footer-follow__label"><?php esc_html_e( 'Follow us', 'adeptbuild' ); ?></span>
+						<div class="ab-social ab-social--outline">
+							<?php foreach ( $ab_social as $ab_link ) : ?>
+								<a href="<?php echo esc_url( $ab_link['url'] ); ?>" target="_blank" rel="noopener noreferrer">
+									<span class="screen-reader-text"><?php echo esc_html( $ab_link['label'] ); ?></span>
+									<?php adeptbuild_icon( $ab_link['icon'], 17 ); ?>
+								</a>
+							<?php endforeach; ?>
+						</div>
 					</div>
 				<?php endif; ?>
 			</div>
@@ -90,8 +93,8 @@ $ab_about   = adeptbuild_option( 'footer_about' );
 				<h3><?php esc_html_e( 'Contact', 'adeptbuild' ); ?></h3>
 				<ul class="ab-footer-contact">
 					<?php if ( $ab_phone ) : ?>
-						<li>
-							<?php adeptbuild_icon( 'phone', 16 ); ?>
+						<li class="ab-footer-contact__phone">
+							<?php adeptbuild_icon( 'phone', 18 ); ?>
 							<a href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>"><?php echo esc_html( $ab_phone ); ?></a>
 						</li>
 					<?php endif; ?>
