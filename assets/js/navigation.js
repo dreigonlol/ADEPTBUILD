@@ -78,9 +78,14 @@
 		}
 
 		var apply = function () {
+			// getBoundingClientRect().bottom (viewport-relative), not
+			// offsetHeight (the element's own box height): the WP admin
+			// bar pushes the whole page down when logged in, so the
+			// header's own height alone would leave the mobile menu
+			// panel starting above where the header actually ends.
 			document.documentElement.style.setProperty(
 				'--ab-header-h',
-				header.offsetHeight + 'px'
+				header.getBoundingClientRect().bottom + 'px'
 			);
 			header.classList.toggle( 'is-stuck', window.scrollY > 12 );
 		};
@@ -199,6 +204,7 @@
 			// Desktop: keep aria-expanded in sync with the CSS hover/focus reveal.
 			item.addEventListener( 'mouseenter', function () {
 				if ( ! isMobile() ) {
+					positionMegaMenu( item );
 					setExpanded( true );
 				}
 			} );
@@ -209,6 +215,7 @@
 			} );
 			item.addEventListener( 'focusin', function () {
 				if ( ! isMobile() ) {
+					positionMegaMenu( item );
 					setExpanded( true );
 				}
 			} );
@@ -218,6 +225,39 @@
 				}
 			} );
 		} );
+	}
+
+	/**
+	 * Centers a mega-menu panel under its trigger link, then nudges it
+	 * back inside the viewport if that would run it off either edge.
+	 * CSS alone can't do this: it has no way to know where a given
+	 * trigger actually sits on screen, only where the panel is relative
+	 * to it. Skipped for a plain (non-mega) submenu — those are narrow
+	 * enough that the CSS-only left:0 placement never overflows.
+	 *
+	 * @param {HTMLElement} item A ".menu-item-has-children" <li>.
+	 */
+	function positionMegaMenu( item ) {
+		var panel = item.querySelector( ':scope > .sub-menu.mega-menu' );
+		if ( ! panel ) {
+			return;
+		}
+
+		// Reset to the CSS default (left:0, i.e. flush with the trigger)
+		// before measuring, so a stale offset from a previous open/resize
+		// can't throw off this calculation.
+		panel.style.left = '';
+
+		var margin = 16;
+		var itemRect = item.getBoundingClientRect();
+		var panelRect = panel.getBoundingClientRect();
+		var idealLeft = itemRect.left + itemRect.width / 2 - panelRect.width / 2;
+		var maxLeft = window.innerWidth - panelRect.width - margin;
+		var clampedLeft = Math.max( margin, Math.min( idealLeft, maxLeft ) );
+
+		// `left` on the panel is relative to its trigger <li> (its
+		// positioned ancestor), not the viewport, so convert back.
+		panel.style.left = ( clampedLeft - itemRect.left ) + 'px';
 	}
 
 	/**

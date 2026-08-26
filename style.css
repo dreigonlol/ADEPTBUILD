@@ -445,6 +445,18 @@ a.ab-btn:hover {
     box-shadow: 0 6px 24px rgba(11, 47, 62, 0.10);
 }
 
+/* backdrop-filter (like transform/filter) makes an element a new
+   "containing block" for any position:fixed descendant — which includes
+   .main-navigation's mobile panel, nested inside this header. That traps
+   the fixed panel's fixed inset against the ~84px-tall header box instead
+   of the real viewport, collapsing it to a sliver. Dropping the blur only
+   while the mobile menu is open removes that trap; the header is fully
+   covered by the white panel at that point anyway, so the blur isn't missed. */
+body.ab-menu-open .site-header {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
 .ast-primary-header-bar > .ast-container {
     display: flex;
     align-items: center;
@@ -570,18 +582,19 @@ a.ab-btn:hover {
 }
 
 /* Mega menu — "Services" / "Featured" dropdowns render as image cards
-   instead of a plain text list. grid-auto-flow:column + a fixed column
-   width (rather than a fixed column *count*) means the panel always lays
-   out as a single horizontal row no matter how many items a dropdown
-   has (6 for Services, 4 for Featured) — width:max-content then sizes
-   the panel to exactly fit that row. Mobile switches this to a single
-   vertical column inside the max-width:921px block further down. */
+   instead of a plain text list. A fixed 3-column grid (wrapping to a 2nd
+   row for Services' 6 items) at a capped width, rather than forcing every
+   item into one ever-widening row: a single-row panel for 6 items runs
+   ~1050px wide, which can't fit centered under a trigger sitting near the
+   edge of a merely-desktop-width (not ultra-wide) window. The panel's
+   horizontal position is clamped to the viewport by JS on open — see
+   positionMegaMenu() in navigation.js — since that requires knowing the
+   trigger's actual on-screen position, which pure CSS has no access to.
+   Mobile switches this to a single vertical column further down. */
 .main-header-menu .sub-menu.mega-menu {
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 160px;
-    width: max-content;
-    max-width: calc(100vw - 32px);
+    grid-template-columns: repeat(3, minmax(140px, 1fr));
+    width: min(560px, calc(100vw - 32px));
     gap: 12px;
     padding: 18px;
 }
@@ -626,18 +639,6 @@ a.ab-btn:hover {
     font-size: 0.9375rem;
     font-weight: 600;
     line-height: 1.3;
-}
-
-@media (min-width: 922px) {
-    /* Dropdowns near the end of the bar open from the right edge instead
-       of the left, so a wide mega panel never runs off the viewport.
-       (Anchored to the trigger <li> rather than centered on the viewport,
-       so hovering down from the link into the panel stays a continuous
-       path — no gap where the CSS-driven dropdown could lose :hover.) */
-    .main-header-menu > li:nth-last-child(-n+3) > .sub-menu.mega-menu {
-        left: auto;
-        right: 0;
-    }
 }
 
 .menu-item-has-children > a > .ab-caret { margin-left: 6px; transition: transform var(--ab-transition); }
@@ -1554,7 +1555,7 @@ label {
         opacity: 0;
         visibility: hidden;
         transition: transform var(--ab-transition), opacity var(--ab-transition), visibility var(--ab-transition);
-        z-index: 99;
+        z-index: 999;
     }
     .main-navigation.is-open { transform: translateY(0); opacity: 1; visibility: visible; }
 
@@ -1605,6 +1606,24 @@ label {
     }
     .main-header-menu .sub-menu.mega-menu .mega-menu__thumb { flex: 0 0 96px; aspect-ratio: 4 / 3; }
     .main-header-menu .sub-menu.mega-menu .mega-menu__label { font-size: 0.9375rem; }
+
+    /* On the home page, the top-level links are near-white to sit on the
+       transparent dark header — but the mobile panel is solid white on
+       every page including home, so that override left the labels
+       essentially invisible (white on white) once opened. The panel is
+       never transparent, so always use the normal dark heading color
+       inside it regardless of which page it's on. */
+    body.home .main-navigation .main-header-menu > li > a {
+        color: var(--ab-heading);
+        background: none;
+        -webkit-text-fill-color: currentColor;
+    }
+    body.home .main-navigation .main-header-menu > li:hover > a,
+    body.home .main-navigation .main-header-menu > .current-menu-item > a {
+        color: var(--ab-primary);
+        background: none;
+        -webkit-text-fill-color: currentColor;
+    }
 
     .ab-header-actions .ast-button { display: none; }
 
