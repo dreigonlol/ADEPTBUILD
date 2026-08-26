@@ -159,6 +159,38 @@ function adeptbuild_page_hero( $title = '' ) {
 }
 
 /**
+ * Maps a primary-menu submenu item's title to its mega-menu thumbnail in
+ * assets/img/. Add an entry here when a new submenu item should show an
+ * image; anything without a match just renders without one.
+ *
+ * @param string $title Menu item title, as typed in wp-admin.
+ * @return string Image URL, or '' if there's no match.
+ */
+function adeptbuild_menu_item_image( $title ) {
+
+	static $map = array(
+		'full home renovation' => 'Full Home Renovation.jpg',
+		'adus'                  => 'ADUS.jpg',
+		'decking'               => 'DECKING.jpg',
+		'pools'                 => 'POOLS.jpg',
+		'pergolas'              => 'PERGOLAS.jpeg',
+		'landscaping'           => 'LADNSCAPING.jpeg',
+		'agnew project'         => 'AGNEW.jpeg',
+		'ensley project'        => 'ENSLEY.jpeg',
+		'santa monica project'  => 'SANTA MONICA.jpg',
+		'sheens project'        => 'SHEENS.jpg',
+	);
+
+	$key = strtolower( trim( $title ) );
+
+	if ( ! isset( $map[ $key ] ) ) {
+		return '';
+	}
+
+	return get_theme_file_uri( '/assets/img/' ) . rawurlencode( $map[ $key ] );
+}
+
+/**
  * Fallback menu shown when no menu has been assigned yet.
  * Only visible to administrators, as a shortcut to the menus screen.
  */

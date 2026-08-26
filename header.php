@@ -92,6 +92,7 @@ $ab_social = adeptbuild_social_links();
 					'container'      => false,
 					'depth'          => 3,
 					'fallback_cb'    => 'adeptbuild_menu_fallback',
+					'walker'         => new Adeptbuild_Mega_Menu_Walker(),
 				)
 			);
 			?>
