@@ -87,13 +87,47 @@ function adeptbuild_save_page_header_meta_box( $post_id ) {
 add_action( 'save_post_page', 'adeptbuild_save_page_header_meta_box' );
 
 /**
- * Returns the custom hero heading for a page, or the page title if none is set.
+ * Returns the custom hero heading for a page or post.
+ *
+ * Priority: the "Heading" meta box field, then the first <h1> found in the
+ * content itself, then the saved post title as a last resort.
  *
  * @param int|WP_Post $post Post ID or object. Defaults to the current post.
  * @return string
  */
 function adeptbuild_get_page_hero_title( $post = null ) {
 	$post_id = $post ? get_post( $post )->ID : get_the_ID();
+
 	$heading = get_post_meta( $post_id, '_adeptbuild_hero_title', true );
-	return $heading ? $heading : get_the_title( $post_id );
+	if ( $heading ) {
+		return $heading;
+	}
+
+	$content = get_post_field( 'post_content', $post_id );
+	if ( $content && preg_match( '/<h1\b[^>]*>(.*?)<\/h1>/is', $content, $matches ) ) {
+		return wp_strip_all_tags( $matches[1] );
+	}
+
+	return get_the_title( $post_id );
+}
+
+/**
+ * Strips the first <h1> from the rendered content when it was reused as the
+ * page hero heading, so the same heading doesn't appear twice on the page.
+ *
+ * Hook this in right before a single `the_content()` call with:
+ *     add_filter( 'the_content', 'adeptbuild_hide_content_h1_in_hero' );
+ * It removes itself after running once.
+ *
+ * @param string $content Filtered post content.
+ * @return string
+ */
+function adeptbuild_hide_content_h1_in_hero( $content ) {
+	remove_filter( 'the_content', 'adeptbuild_hide_content_h1_in_hero' );
+
+	if ( get_post_meta( get_the_ID(), '_adeptbuild_hero_title', true ) ) {
+		return $content;
+	}
+
+	return preg_replace( '/<h1\b[^>]*>.*?<\/h1>/is', '', $content, 1 );
 }

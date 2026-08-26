@@ -16,6 +16,7 @@ while ( have_posts() ) :
 		<div class="ast-container">
 			<article id="post-<?php the_ID(); ?>" <?php post_class( 'ab-entry-content' ); ?>>
 				<?php
+				add_filter( 'the_content', 'adeptbuild_hide_content_h1_in_hero' );
 				the_content();
 
 				wp_link_pages(
