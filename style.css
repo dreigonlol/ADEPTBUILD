@@ -86,13 +86,21 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
+/* Site-wide dark-blue background (used to be body.home only) so every
+   page reads as one continuous surface between .ab-page-hero above and
+   .site-footer below, both already this color everywhere. Self-contained
+   "card" components (.ab-card, .ab-post-card, .ab-sidebar .widget, form
+   inputs) keep their own light background and default dark text, so they
+   stay legible floating on top of it unchanged — only bare text that
+   used to sit directly on the old white page background needs a
+   light-on-dark override, scoped to .ab-entry-content and .ab-404 below. */
 body {
     margin: 0;
     font-family: var(--ab-font-body);
     font-size: var(--ab-fs-base);
     line-height: var(--ab-lh-body);
     color: var(--ab-text);
-    background: var(--ab-surface);
+    background: var(--ab-deep);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -811,7 +819,8 @@ body.ab-menu-open .site-header {
     color: rgba(255, 255, 255, 0.68);
 }
 
-/* Decorative bottom wave */
+/* Decorative bottom wave — matches the page background it blends into,
+   which is now dark blue site-wide (see the body rule above). */
 .ab-wave {
     position: absolute;
     left: 0;
@@ -820,7 +829,7 @@ body.ab-menu-open .site-header {
     z-index: 1;
     width: 100%;
     height: auto;
-    color: var(--ab-surface);
+    color: var(--ab-deep);
     pointer-events: none;
 }
 .ab-wave--alt { color: var(--ab-surface-alt); }
@@ -1292,6 +1301,38 @@ label {
 .ab-entry-content img,
 .ab-entry-content .wp-block-image img { border-radius: var(--ab-radius); }
 
+/* Light-on-dark type for page/post body copy now that it sits directly
+   on the site's dark-blue background (see the body rule near the top of
+   this file) — .ab-entry-content is only ever the actual article/page
+   text (page.php, single.php), never mixed with the light "card"
+   components (.ab-card, .ab-post-card, .ab-sidebar .widget) elsewhere in
+   the theme, so this can't wash out text that already has its own light
+   background to sit on. */
+.ab-entry-content h1,
+.ab-entry-content h2,
+.ab-entry-content h3,
+.ab-entry-content h4,
+.ab-entry-content h5,
+.ab-entry-content h6 { color: #fff; }
+.ab-entry-content,
+.ab-entry-content p,
+.ab-entry-content li,
+.ab-entry-content strong { color: rgba(255, 255, 255, 0.8); }
+.ab-entry-content a:not(.wp-element-button) { color: var(--ab-aqua); }
+.ab-entry-content a:not(.wp-element-button):hover { color: #fff; }
+.ab-entry-content blockquote {
+    background: rgba(255, 255, 255, 0.06);
+    border-left-color: var(--ab-aqua);
+    color: rgba(255, 255, 255, 0.85);
+}
+.ab-entry-content hr { background: rgba(255, 255, 255, 0.18); }
+.ab-entry-content table { color: rgba(255, 255, 255, 0.8); }
+.ab-entry-content th,
+.ab-entry-content td { border-color: rgba(255, 255, 255, 0.18); }
+.ab-entry-content th { background: rgba(255, 255, 255, 0.06); color: #fff; }
+.ab-entry-content .wp-caption-text,
+.ab-entry-content .wp-block-image figcaption { color: rgba(255, 255, 255, 0.6); }
+
 .wp-caption-text,
 .wp-block-image figcaption {
     font-size: var(--ab-fs-xs);
@@ -1323,6 +1364,10 @@ label {
 .ab-sidebar li:last-child { border-bottom: 0; }
 
 /* Pagination */
+/* Not scoped under .ab-entry-content: also used unwrapped in index.php's
+   blog/archive pagination. A solid light chip (rather than a border-only
+   button in the page's own heading color) keeps it readable regardless
+   of which of those two contexts it's sitting on the dark page bg in. */
 .ab-pagination { margin-top: 48px; }
 .ab-pagination .page-numbers {
     display: inline-flex;
@@ -1332,7 +1377,8 @@ label {
     height: 44px;
     padding: 0 12px;
     margin: 0 4px;
-    border: 1px solid var(--ab-border);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid transparent;
     border-radius: var(--ab-radius-sm);
     font-family: var(--ab-font-heading);
     font-weight: 600;
@@ -1348,6 +1394,8 @@ label {
 
 /* 404 */
 .ab-404 { text-align: center; padding: clamp(70px, 12vw, 140px) 0; }
+.ab-404 h1 { color: #fff; }
+.ab-404 .ab-lead { color: rgba(255, 255, 255, 0.75); }
 .ab-404__code {
     font-family: var(--ab-font-heading);
     font-size: clamp(5rem, 18vw, 11rem);
@@ -1960,20 +2008,14 @@ ol.wp-block-list li::marker {
    the same Gutenberg blocks, since only the homepage carries ".home".
    ========================================================================== */
 
-/* --- 0. Immersive dark base: the whole page shares one background color
-   instead of white gaps between sections — only the sections with a photo
-   of their own (Services, How We Work, From Our Blog) look different, and
-   even those lean on the same dark tone underneath their overlay. The
-   header gets a matching dark/glass treatment on this page only; every
-   other page keeps the light header, since only the front page carries
-   ".home". --- */
-body.home { background: var(--ab-deep); }
-
-/* The wave at the bottom of the page-hero was painted "white" to blend
-   into the old white page background — now that the whole homepage
-   shares one dark background, it needs to match that instead. */
-body.home .ab-wave { color: var(--ab-deep); }
-
+/* --- 0. Immersive dark base: the whole SITE shares one background color
+   (see the body rule near the top of this file) instead of white gaps
+   between sections — only the sections with a photo of their own
+   (Services, How We Work, From Our Blog) look different here, and even
+   those lean on the same dark tone underneath their overlay. The header
+   itself still gets a matching dark/glass treatment on this page only;
+   every other page keeps the light header, since only the front page
+   carries ".home". --- */
 body.home .site-header { background: rgba(11, 47, 62, 0.75); }
 body.home .site-header.is-stuck { background: var(--ab-deep); box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25); }
 body.home .site-title a,
@@ -2156,29 +2198,26 @@ body.home .menu-toggle:hover { background: var(--ab-primary); color: #fff; }
 }
 
 /* --- 5. Trust bar: plain row of linked logos, no card chrome ---
-   WordPress core forces every ".wp-block-column" to "flex-basis:100%
-   !important" below 782px so multi-column content sections stack on
-   mobile — right for Services/Process, wrong here, where it stacks the
-   7 logos into one column instead of letting them wrap into a row. --- */
+   Built as a Group block (layout:flex, wrap) with the 7 images as direct
+   children — not a Columns block. Columns exist to hold distinct content
+   columns, so WordPress core forces every ".wp-block-column" to
+   "flex-basis:100% !important" below 782px to stack them for readability
+   on mobile; that rule (plus, apparently, extra !important layout CSS
+   Gutenberg can print per-block instance) kept winning the specificity
+   fight no matter how this was reinforced, because it's simply the wrong
+   tool for "one row of small logos that should just wrap." A Group in
+   flex layout has no such forced-stacking rule to fight, so this needs
+   far less CSS to behave. */
 .home .ab-proto-trust {
     padding: clamp(36px, 5vw, 56px) 0;
     border-top: 1px solid rgba(255, 255, 255, 0.14);
     border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center;
     align-items: center;
-    gap: clamp(28px, 5vw, 56px) !important;
+    gap: clamp(24px, 5vw, 56px) !important;
 }
-.home .ab-proto-trust .wp-block-column {
-    flex: 0 1 auto !important;
-    width: auto !important;
-    padding: 0;
-    background: none;
-    border: 0;
-    box-shadow: none;
-    border-radius: 0;
-}
-.home .ab-proto-trust .wp-block-column:hover { transform: none; }
 .home .ab-proto-trust .wp-block-image { margin: 0; }
 .home .ab-proto-trust .wp-block-image img {
     width: 64px;
@@ -2189,6 +2228,11 @@ body.home .menu-toggle:hover { background: var(--ab-primary); color: #fff; }
     transition: transform var(--ab-transition);
 }
 .home .ab-proto-trust .wp-block-image a:hover img { transform: scale(1.18); }
+
+@media (max-width: 600px) {
+    .home .ab-proto-trust { gap: 20px !important; }
+    .home .ab-proto-trust .wp-block-image img { width: 44px; height: 44px; }
+}
 
 /* --- 6. Watch Our Videos: responsive grid, no card chrome around embeds.
    className added directly on each of the two Columns blocks (3 videos,
@@ -2228,6 +2272,4 @@ body.home .menu-toggle:hover { background: var(--ab-primary); color: #fff; }
 
 @media (max-width: 600px) {
     .home .ab-proto-process .wp-block-column { flex-basis: 100% !important; }
-    .home .ab-proto-trust { gap: 28px !important; }
-    .home .ab-proto-trust .wp-block-image img { width: 52px; height: 52px; }
 }

@@ -21,18 +21,13 @@
 	} );
 
 	/**
-	 * Tags the homepage's existing sections with .ab-reveal (and a
-	 * directional variant where it reads better) so they fade/slide in as
-	 * the visitor scrolls to them — no changes to the page content itself.
-	 * Runs before initReveal(), which then picks up everything tagged here
-	 * through its normal ".ab-reveal" query. Scoped to ".home" so it never
-	 * touches any other page.
+	 * Tags content with .ab-reveal (and a directional variant where it
+	 * reads better) so it fades/slides in as the visitor scrolls to it —
+	 * no changes to the page content itself. Runs before initReveal(),
+	 * which then picks up everything tagged here through its normal
+	 * ".ab-reveal" query.
 	 */
 	function autoTagReveals() {
-		if ( ! document.body.classList.contains( 'home' ) ) {
-			return;
-		}
-
 		var tag = function ( selector, variant ) {
 			var found = document.querySelectorAll( selector );
 			Array.prototype.forEach.call( found, function ( el ) {
@@ -43,28 +38,60 @@
 			} );
 		};
 
-		// 1. Intro: copy slides in from the left, the video from the right.
-		tag( '.ab-proto-intro-left', 'ab-reveal--left' );
-		tag( '.ab-proto-intro .wp-block-embed', 'ab-reveal--right' );
+		if ( document.body.classList.contains( 'home' ) ) {
+			// 1. Intro: copy slides in from the left, the video from the right.
+			tag( '.ab-proto-intro-left', 'ab-reveal--left' );
+			tag( '.ab-proto-intro .wp-block-embed', 'ab-reveal--right' );
 
-		// 2. Our Services: each card fades up, staggered by initReveal().
-		tag( '.ab-proto-services .wp-block-column' );
+			// 2. Our Services: each card fades up, staggered by initReveal().
+			tag( '.ab-proto-services .wp-block-column' );
 
-		// 3. Our Philosophy: heading from the left, copy from the right.
-		tag( '.ab-proto-philosophy h2' );
-		tag( '.ab-proto-philosophy-copy', 'ab-reveal--right' );
+			// 3. Our Philosophy: heading from the left, copy from the right.
+			tag( '.ab-proto-philosophy h2' );
+			tag( '.ab-proto-philosophy-copy', 'ab-reveal--right' );
 
-		// 4. How We Work: each step fades up in sequence.
-		tag( '.ab-proto-process .wp-block-column' );
+			// 4. How We Work: each step fades up in sequence.
+			tag( '.ab-proto-process .wp-block-column' );
 
-		// 5. Trust bar: the whole row scales in as one unit.
-		tag( '.ab-proto-trust', 'ab-reveal--scale' );
+			// 5. Trust bar: the whole row scales in as one unit.
+			tag( '.ab-proto-trust', 'ab-reveal--scale' );
 
-		// 6. Watch Our Videos: each thumbnail fades up.
-		tag( '.wp-block-columns.ab-proto-videos .wp-block-column' );
+			// 6. Watch Our Videos: each thumbnail fades up.
+			tag( '.wp-block-columns.ab-proto-videos .wp-block-column' );
 
-		// 7. From Our Blog: each post card fades up in sequence.
-		tag( '.ab-proto-blog .wp-block-latest-posts li' );
+			// 7. From Our Blog: each post card fades up in sequence.
+			tag( '.ab-proto-blog .wp-block-latest-posts li' );
+			return;
+		}
+
+		// Every other page (services, project, etc.): Home's sections are
+		// tagged by their known className above; a generic page has no such
+		// hooks, so instead this walks whatever top-level blocks the editor
+		// actually produced inside the article and reveals each one as it
+		// scrolls in. Columns and post grids are unwrapped one level so
+		// each column/card fades in on its own — the same staggering
+		// initReveal() already gives Home's Services/Process/Blog rows —
+		// instead of the whole row appearing as a single block.
+		var entry = document.querySelector( '.ab-entry-content' );
+		if ( ! entry ) {
+			return;
+		}
+
+		Array.prototype.forEach.call( entry.children, function ( el ) {
+			if ( el.classList.contains( 'wp-block-columns' ) ) {
+				Array.prototype.forEach.call( el.children, function ( column ) {
+					column.classList.add( 'ab-reveal' );
+				} );
+				return;
+			}
+			if ( el.classList.contains( 'wp-block-latest-posts' ) ) {
+				Array.prototype.forEach.call( el.children, function ( post ) {
+					post.classList.add( 'ab-reveal' );
+				} );
+				return;
+			}
+			el.classList.add( 'ab-reveal' );
+		} );
 	}
 
 	/**
