@@ -1457,6 +1457,37 @@ body.ab-menu-open .site-header {
     color: var(--ab-aqua);
 }
 
+/* 2-column variant — e.g. the "What We Do" service grid on the About page,
+   where 4 square-ish cards read better as 2x2 than the default 3-up grid. */
+.ab-gallery--2 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 640px) {
+    .ab-gallery--2 { grid-template-columns: 1fr; }
+}
+
+/* Founder/owner spotlight (see the About page) — plain WP core
+   ".wp-block-media-text", given the same photo-one-side / copy-the-other
+   treatment as the rest of the theme's media rows, sized down for a
+   portrait rather than a wide hero image. */
+.ab-entry-content .wp-block-media-text {
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) 1fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+}
+.ab-entry-content .wp-block-media-text__media { margin: 0; }
+.ab-entry-content .wp-block-media-text__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--ab-radius);
+    box-shadow: var(--ab-shadow-lg);
+}
+.ab-entry-content .wp-block-media-text__content > * { margin-bottom: 1.1em; }
+.ab-entry-content .wp-block-media-text__content > *:last-child { margin-bottom: 0; }
+@media (max-width: 700px) {
+    .ab-entry-content .wp-block-media-text { grid-template-columns: 1fr; }
+}
+
 /* Testimonials */
 .ab-quote {
     padding: 34px 30px;
@@ -1734,10 +1765,13 @@ label {
    ========================================================================== */
 .ab-content-band {
     position: relative;
+    display: block;
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
     overflow: hidden;
+    color: inherit;
+    text-decoration: none;
 }
 .ab-content-band img {
     display: block;
