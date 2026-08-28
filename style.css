@@ -1917,6 +1917,23 @@ h2.ab-services-showcase__title {
     10%  { opacity: 0; transform: translateY(100%); }
     100% { opacity: 0; transform: translateY(100%); }
 }
+/* Tuned variant for a short list of longer sentences (e.g. "Why Choose
+   Adept Builders & Design", 3 items) — the default timing above assumes
+   10 items and would leave a short list mostly empty between turns; this
+   reuses ".ab-content-band__ticker"'s 3-slot keyframe/timing instead, plus
+   a taller box and smaller type since these entries can wrap to 2 lines. */
+.ab-services-ticker--sm {
+    height: clamp(3.4rem, 11vw, 4.75rem);
+    max-width: 820px;
+}
+.ab-services-ticker--sm .ab-services-ticker__list li {
+    font-size: clamp(0.9375rem, 2vw, 1.1875rem);
+    line-height: 1.35;
+    padding: 0 16px;
+    animation-name: ab-content-ticker-rotate;
+    animation-duration: 12s;
+    animation-delay: calc(var(--i) * 4s);
+}
 @media (prefers-reduced-motion: reduce) {
     .ab-services-ticker { height: auto; overflow: visible; }
     .ab-services-ticker__list li {

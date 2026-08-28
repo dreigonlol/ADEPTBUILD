@@ -1,4 +1,4 @@
-<title>ADUs Page — Preview</title>
+<title>Decking Page — Preview</title>
 <style>
 :root {
     --ab-primary: #F5333F;
@@ -97,41 +97,9 @@ body {
     color: rgba(255, 255, 255, 0.75);
 }
 
-/* ---- mini ticker inside a content-band caption ---- */
-.ab-content-band__ticker {
-    position: relative;
-    width: 100%;
-    max-width: 620px;
-    min-height: 5.5rem;
-    margin-top: 16px;
-    overflow: hidden;
-}
-.ab-content-band__ticker ul { list-style: none; margin: 0; padding: 0; }
-.ab-content-band__ticker li {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transform: translateY(-100%);
-    animation: ab-content-ticker-rotate 12s infinite;
-    animation-delay: calc(var(--i) * 4s);
-}
-.ab-content-band__ticker strong {
-    display: block;
-    font-family: var(--ab-font-heading);
-    font-weight: 700;
-    font-size: 1.0625rem;
-    color: var(--ab-aqua);
-    margin-bottom: 4px;
-}
-.ab-content-band__ticker span {
-    display: block;
-    font-size: var(--ab-fs-sm);
-    color: rgba(255, 255, 255, 0.85);
-}
+/* ---- mini ticker inside a content-band caption (not used on this page,
+   kept here since it shares the "ab-content-ticker-rotate" keyframe with
+   the --sm showcase ticker below) ---- */
 @keyframes ab-content-ticker-rotate {
     0%     { opacity: 0; transform: translateY(-100%); }
     2%     { opacity: 1; transform: translateY(0); }
@@ -192,60 +160,67 @@ h2.ab-services-showcase__title {
     10%  { opacity: 0; transform: translateY(100%); }
     100% { opacity: 0; transform: translateY(100%); }
 }
+/* 3-item variant used on this page ("Why Choose Adept Builders & Design") */
+.ab-services-ticker--sm {
+    height: clamp(3.4rem, 11vw, 4.75rem);
+    max-width: 820px;
+}
+.ab-services-ticker--sm .ab-services-ticker__list li {
+    font-size: clamp(0.9375rem, 2vw, 1.1875rem);
+    line-height: 1.35;
+    padding: 0 16px;
+    animation-name: ab-content-ticker-rotate;
+    animation-duration: 12s;
+    animation-delay: calc(var(--i) * 4s);
+}
 </style>
 
-<div class="demo-note">Preview con fotos de relleno (SVG) porque el sandbox del artifact bloquea imágenes externas — el layout, el hover y el ticker son el código real de style.css / home-content.html (página ADUs).</div>
+<div class="demo-note">Preview con fotos de relleno (SVG) porque el sandbox del artifact bloquea imágenes externas — el layout, el hover y el ticker son el código real de style.css / home-content.html (página Decking).</div>
 <div class="toggle-bar">
   <button id="btn-desktop" class="active">Modo Desktop (hover)</button>
   <button id="btn-mobile">Modo Mobile (texto fijo)</button>
-  <a href="#services">↓ Ir a "We Provide the Following Services"</a>
+  <a href="#services">↓ Ir a "Why Choose Adept Builders & Design"</a>
 </div>
 
 <div class="ast-container">
 <article class="ab-entry-content">
 
 <div class="ab-content-band">
-  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzJiM2E0MiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzEyMzI0MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iNDYiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xOCkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPlBIT1RPIFBMQUNFSE9MREVSPC90ZXh0Pjwvc3ZnPg==" alt="Room Additions, ADUs & Garage Conversions" loading="lazy">
+  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzJiM2E0MiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzEyMzI0MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iNDYiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xOCkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPlBIT1RPIFBMQUNFSE9MREVSPC90ZXh0Pjwvc3ZnPg==" alt="Deck Construction, Installation & Remodeling" loading="lazy">
   <div class="ab-content-band__caption">
-    <h2>Room Additions, ADUs &amp; Garage Conversions</h2>
-    <p>A clear plan and budget saves time and money. Our team is respectful, efficient, and on time — with weekly updates so you always know where your project stands.</p>
+    <h2>Deck Construction, Installation &amp; Remodeling</h2>
+    <p>Custom deck construction, installation, and remodeling — built to elevate your outdoor living space.</p>
   </div>
 </div>
 
 <div class="ab-content-band">
-  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzNhMmIyOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzQxMjMxYSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iNDYiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xOCkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPlBIT1RPIFBMQUNFSE9MREVSPC90ZXh0Pjwvc3ZnPg==" alt="Garage Conversions" loading="lazy">
+  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzNhMmIyOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzQxMjMxYSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iNDYiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xOCkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPlBIT1RPIFBMQUNFSE9MREVSPC90ZXh0Pjwvc3ZnPg==" alt="Materials" loading="lazy">
   <div class="ab-content-band__caption">
-    <h2>Garage Conversions</h2>
-    <p>An ADU, home office, art or music studio, rec room, and more — 20+ years converting garages in Los Angeles.</p>
-    <div class="ab-content-band__ticker">
-      <ul>
-        <li style="--i:0"><strong>Garage to ADU</strong><span>Extra income or space for a growing family — LA county regulations now make this easier than ever.</span></li>
-        <li style="--i:1"><strong>Garage to Home Office</strong><span>A dedicated, distraction-free workspace built for how you work.</span></li>
-        <li style="--i:2"><strong>Garage to Home Studio</strong><span>A space built around your creative process.</span></li>
-      </ul>
-    </div>
+    <h2>Materials</h2>
+    <p>Premium hardwoods, composite decking, and low-maintenance alternatives — matched to your aesthetic and lifestyle.</p>
+  </div>
+</div>
+
+<div class="ab-content-band">
+  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzIzM2EyYiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFhNDEyMyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iNDYiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xOCkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPlBIT1RPIFBMQUNFSE9MREVSPC90ZXh0Pjwvc3ZnPg==" alt="Deck Remodeling" loading="lazy">
+  <div class="ab-content-band__caption">
+    <h2>Deck Remodeling</h2>
+    <p>Refresh an existing deck with integrated seating, custom lighting, or built-in cooking and fire features.</p>
   </div>
 </div>
 
 <div class="ab-services-showcase" id="services">
-  <h2 class="ab-services-showcase__title">We Provide the<br>Following Services</h2>
-  <div class="ab-services-ticker">
+  <h2 class="ab-services-showcase__title">Why Choose<br>Adept Builders &amp; Design</h2>
+  <div class="ab-services-ticker ab-services-ticker--sm">
     <ul class="ab-services-ticker__list">
-      <li style="--i:0">Planning &amp; Design</li>
-      <li style="--i:1">Room Additions</li>
-      <li style="--i:2">Garage Conversions (ADU, duplex, rec room)</li>
-      <li style="--i:3">ADUs (Accessory Dwelling Units)</li>
-      <li style="--i:4">Art &amp; Music Studios</li>
-      <li style="--i:5">Foundation</li>
-      <li style="--i:6">Roofing</li>
-      <li style="--i:7">Home Extensions</li>
-      <li style="--i:8">Bonus Room, Play Room, Bedroom</li>
-      <li style="--i:9">And more…</li>
+      <li style="--i:0">Over a decade of experience in deck construction, installation, and remodeling</li>
+      <li style="--i:1">Fully licensed, bonded, and insured</li>
+      <li style="--i:2">Comprehensive warranty and aftercare support</li>
     </ul>
   </div>
 </div>
 
-<p>Schedule your appointment today.</p>
+<p>Schedule a consultation to start planning your deck.</p>
 
 </article>
 </div>
