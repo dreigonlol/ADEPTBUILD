@@ -27,6 +27,14 @@ Text Domain: adeptbuild
     --ab-accent: #FFCA10;           /* Gold - secondary CTAs */
     --ab-accent-dark: #DBAF00;
 
+    /* Logo blue — the teal-blue already used for the phone-pill button and
+       hero video tint in every page's custom hero block. Used for the
+       animated services titles/tickers (".ab-services-showcase",
+       ".ab-services-ticker", ".ab-content-band__ticker") instead of the
+       red/gold CTA palette above, which read too warm for that spot. */
+    --ab-brand-blue: #0E7490;
+    --ab-brand-blue-light: #7FD8E8;
+
     --ab-deep: #1A1A1A;             /* Near-black corporate background */
     --ab-deep-soft: #262626;
 
@@ -1816,7 +1824,7 @@ label {
     font-family: var(--ab-font-heading);
     font-weight: 700;
     font-size: 1.0625rem;
-    color: var(--ab-aqua);
+    color: var(--ab-brand-blue-light);
     margin-bottom: 4px;
 }
 .ab-content-band__ticker span {
@@ -1877,7 +1885,7 @@ h2.ab-services-showcase__title {
    in plain white if the browser can't clip the gradient to the text. */
 @supports (background-clip: text) or (-webkit-background-clip: text) {
     h2.ab-services-showcase__title {
-        background: linear-gradient(120deg, #fff 0%, var(--ab-aqua) 55%, var(--ab-primary) 100%);
+        background: linear-gradient(120deg, #fff 0%, var(--ab-brand-blue-light) 55%, var(--ab-brand-blue) 100%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -1885,6 +1893,7 @@ h2.ab-services-showcase__title {
 }
 .ab-services-ticker {
     position: relative;
+    width: 100%;
     height: clamp(2.2rem, 5vw, 3rem);
     max-width: 760px;
     margin: 0 auto;
@@ -1904,7 +1913,7 @@ h2.ab-services-showcase__title {
     font-family: var(--ab-font-heading);
     font-weight: 600;
     font-size: clamp(1.0625rem, 2.4vw, 1.5rem);
-    color: var(--ab-aqua);
+    color: var(--ab-brand-blue-light);
     opacity: 0;
     transform: translateY(-100%);
     animation: ab-services-rotate 24s infinite;
