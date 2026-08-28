@@ -1217,9 +1217,13 @@ body.ab-menu-open .site-header {
    its neighbors yield space, via an animated flex-basis rather than JS. */
 .ab-service-strips {
     display: flex;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    width: 100%;
+    max-width: var(--ab-container);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--ab-gutter);
+    padding-right: var(--ab-gutter);
+    box-sizing: border-box;
     min-height: clamp(420px, 50vw, 600px);
     overflow: hidden;
 }
