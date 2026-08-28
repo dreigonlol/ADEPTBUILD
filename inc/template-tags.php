@@ -153,7 +153,6 @@ function adeptbuild_page_hero( $title = '' ) {
 		<div class="ast-container">
 			<h1 class="ab-reveal"><?php echo esc_html( $title ); ?></h1>
 		</div>
-		<?php adeptbuild_wave(); ?>
 	</section>
 	<?php
 }

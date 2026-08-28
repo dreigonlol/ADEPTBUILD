@@ -19,27 +19,28 @@ Text Domain: adeptbuild
    ========================================================================== */
 
 :root {
-    /* --- Palette: deep water + turquoise + sand --- */
-    --ab-primary: #0E7490;          /* Primary pool blue */
-    --ab-primary-dark: #0A5468;     /* Hover / text on light backgrounds */
-    --ab-primary-light: #E6F4F8;    /* Soft backgrounds */
-    --ab-aqua: #22B8CF;             /* Water accent */
-    --ab-accent: #D99A3E;           /* Sand / gold for CTAs */
-    --ab-accent-dark: #BC8130;
+    /* --- Palette: charcoal + signal red + gold, architectural design-build look --- */
+    --ab-primary: #F5333F;          /* Signal red - primary CTAs and links */
+    --ab-primary-dark: #C81E29;     /* Hover / pressed state for red */
+    --ab-primary-light: #FBEAEA;    /* Soft red-tinted backgrounds */
+    --ab-aqua: #FFCA10;             /* Gold accent - labels, underlines, links on dark */
+    --ab-accent: #FFCA10;           /* Gold - secondary CTAs */
+    --ab-accent-dark: #DBAF00;
 
-    --ab-deep: #0B2F3E;             /* Dark corporate background */
-    --ab-deep-soft: #123E51;
+    --ab-deep: #1A1A1A;             /* Near-black corporate background */
+    --ab-deep-soft: #262626;
 
-    --ab-heading: #0F2A35;
-    --ab-text: #4A5A63;
-    --ab-text-light: #7A8A93;
-    --ab-border: #E3E9EC;
+    --ab-heading: #1A1A1A;
+    --ab-text: #3D3D3D;
+    --ab-text-light: #6B6B6B;
+    --ab-border: #E5E5E5;
     --ab-surface: #FFFFFF;
-    --ab-surface-alt: #F6F9FA;
+    --ab-surface-alt: #F6F6F6;
+    --ab-slate: #1B2430;             /* Dark blue-slate — process-row text panels */
 
     /* --- Typography --- */
-    --ab-font-heading: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --ab-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --ab-font-heading: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --ab-font-body: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
     --ab-fs-base: 1.0625rem;   /* 17px */
     --ab-fs-sm: 0.9375rem;
@@ -57,14 +58,15 @@ Text Domain: adeptbuild
     --ab-gutter: 24px;
     --ab-section-y: clamp(64px, 8vw, 110px);
 
-    /* --- Shapes and shadows --- */
-    --ab-radius-sm: 8px;
-    --ab-radius: 14px;
-    --ab-radius-lg: 24px;
-    --ab-radius-pill: 999px;
-    --ab-shadow-sm: 0 2px 8px rgba(11, 47, 62, 0.06);
-    --ab-shadow: 0 12px 32px rgba(11, 47, 62, 0.10);
-    --ab-shadow-lg: 0 24px 60px rgba(11, 47, 62, 0.16);
+    /* --- Shapes and shadows: sharp, architectural corners, except buttons
+       which use the template's soft-square (not fully sharp, not pill) --- */
+    --ab-radius-sm: 0px;
+    --ab-radius: 0px;
+    --ab-radius-lg: 0px;
+    --ab-radius-pill: 6px;
+    --ab-shadow-sm: 0 2px 8px rgba(26, 26, 26, 0.06);
+    --ab-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
+    --ab-shadow-lg: 0 24px 60px rgba(26, 26, 26, 0.16);
 
     --ab-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -156,7 +158,7 @@ code, pre {
 }
 pre {
     background: var(--ab-deep);
-    color: #E6F4F8;
+    color: #FBEAEA;
     padding: 1.25em;
     border-radius: var(--ab-radius);
     overflow-x: auto;
@@ -317,7 +319,7 @@ a.ab-btn {
     border: 2px solid var(--ab-primary);
     border-radius: var(--ab-radius-pill);
     background: var(--ab-primary);
-    color: #fff;
+    color: var(--ab-deep);
     cursor: pointer;
     text-align: center;
     transition: transform var(--ab-transition), box-shadow var(--ab-transition),
@@ -334,7 +336,7 @@ a.ab-btn:hover {
     border-color: var(--ab-primary-dark);
     color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(14, 116, 144, 0.28);
+    box-shadow: 0 12px 24px rgba(200, 30, 41, 0.32);
 }
 
 .ab-btn--accent {
@@ -346,7 +348,7 @@ a.ab-btn:hover {
     background: var(--ab-accent-dark);
     border-color: var(--ab-accent-dark);
     color: var(--ab-deep);
-    box-shadow: 0 12px 24px rgba(217, 154, 62, 0.32);
+    box-shadow: 0 12px 24px rgba(255, 202, 16, 0.32);
 }
 
 .ab-btn--outline {
@@ -437,20 +439,24 @@ a.ab-btn:hover {
 }
 .ab-social a:hover { background: var(--ab-primary); color: #fff; }
 
-/* Main bar — frosted glass while at the top of the page, solid once scrolled */
+/* Main bar — fully transparent, overlaid on the page-hero image/video
+   underneath it (see ".ab-page-hero" margin-top below), like the template's
+   header; it only picks up a solid backdrop once scrolled past the hero. */
 .site-header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.86);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 1px 0 var(--ab-border);
-    transition: box-shadow var(--ab-transition), background-color var(--ab-transition);
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    transition: box-shadow var(--ab-transition), background-color var(--ab-transition), backdrop-filter var(--ab-transition);
 }
 .site-header.is-stuck {
-    background: #fff;
-    box-shadow: 0 6px 24px rgba(11, 47, 62, 0.10);
+    background: rgba(26, 26, 26, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 6px 24px rgba(26, 26, 26, 0.18);
 }
 
 /* backdrop-filter (like transform/filter) makes an element a new
@@ -477,6 +483,29 @@ body.ab-menu-open .site-header {
 .site-branding img,
 .custom-logo { max-height: 56px; width: auto; }
 
+/* Logo centered between two menu halves, like the template — JS-driven:
+   splitMenuAroundLogo() in navigation.js moves the second half of the menu
+   items and the logo itself into this arrangement on desktop only (the
+   logo has to stay put in the closed mobile header bar instead, since the
+   split-open nav panel is hidden until tapped). Without JS, or below the
+   split's breakpoint, nothing here matches and the header just falls back
+   to the plain logo-then-nav row above — never overlapping either way. */
+.main-navigation--split {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: clamp(20px, 3vw, 48px);
+}
+.main-navigation--split .main-header-menu {
+    flex: 1 1 0;
+    min-width: 0;
+}
+.main-navigation--split .main-header-menu--left { justify-content: flex-end; }
+.main-navigation--split .main-header-menu--right { justify-content: flex-start; }
+.main-navigation--split .site-branding { flex: 0 0 auto; }
+
 .site-title {
     font-size: 1.5rem;
     font-weight: 800;
@@ -484,12 +513,12 @@ body.ab-menu-open .site-header {
     margin: 0;
     line-height: 1.15;
 }
-.site-title a { color: var(--ab-heading); }
-.site-title a:hover { color: var(--ab-primary); }
+.site-title a { color: #fff; }
+.site-title a:hover { color: var(--ab-aqua); }
 .site-description {
     margin: 2px 0 0;
     font-size: var(--ab-fs-xs);
-    color: var(--ab-text-light);
+    color: rgba(255, 255, 255, 0.65);
     letter-spacing: 0.04em;
     text-transform: uppercase;
 }
@@ -517,7 +546,7 @@ body.ab-menu-open .site-header {
     font-family: var(--ab-font-heading);
     font-size: 0.9375rem;
     font-weight: 500;
-    color: var(--ab-heading);
+    color: rgba(255, 255, 255, 0.92);
     border-radius: var(--ab-radius-sm);
     position: relative;
 }
@@ -662,10 +691,10 @@ body.ab-menu-open .site-header {
     width: 46px;
     height: 46px;
     padding: 0;
-    background: var(--ab-primary-light);
+    background: rgba(255, 255, 255, 0.14);
     border: 0;
     border-radius: var(--ab-radius-sm);
-    color: var(--ab-primary-dark);
+    color: #fff;
     cursor: pointer;
 }
 .menu-toggle:hover { background: var(--ab-primary); color: #fff; }
@@ -746,9 +775,9 @@ body.ab-menu-open .site-header {
     min-height: clamp(520px, 76vh, 760px);
     padding: clamp(80px, 10vw, 130px) 0 clamp(110px, 12vw, 160px);
     background:
-        linear-gradient(115deg, rgba(11, 47, 62, 0.90) 0%, rgba(14, 116, 144, 0.72) 55%, rgba(34, 184, 207, 0.42) 100%),
-        radial-gradient(circle at 78% 22%, #22B8CF 0%, transparent 55%),
-        linear-gradient(160deg, #0B2F3E 0%, #0E7490 100%);
+        linear-gradient(115deg, rgba(26, 26, 26, 0.90) 0%, rgba(245, 51, 63, 0.72) 55%, rgba(255, 202, 16, 0.42) 100%),
+        radial-gradient(circle at 78% 22%, #FFCA10 0%, transparent 55%),
+        linear-gradient(160deg, #1A1A1A 0%, #F5333F 100%);
     background-size: cover;
     background-position: center;
     color: rgba(255, 255, 255, 0.88);
@@ -782,7 +811,7 @@ body.ab-menu-open .site-header {
 .ab-hero h1 {
     color: #fff;
     margin-bottom: 22px;
-    text-shadow: 0 2px 24px rgba(11, 47, 62, 0.35);
+    text-shadow: 0 2px 24px rgba(26, 26, 26, 0.35);
 }
 .ab-hero h1 em {
     font-style: normal;
@@ -834,11 +863,15 @@ body.ab-menu-open .site-header {
 }
 .ab-wave--alt { color: var(--ab-surface-alt); }
 
-/* Inner-page header */
+/* Inner-page header — pulled up by the header's own (transparent) height
+   and given that much extra top padding, so the background extends behind
+   the overlaid nav bar while the title itself still clears it. Bottom edge
+   stays put since the added padding cancels out the added negative margin. */
 .ab-page-hero {
     position: relative;
-    padding: clamp(56px, 7vw, 92px) 0 clamp(72px, 9vw, 110px);
-    background: linear-gradient(120deg, #0B2F3E 0%, #0E7490 100%);
+    margin-top: calc(-1 * var(--ab-header-h));
+    padding: calc(var(--ab-header-h) + clamp(56px, 7vw, 92px)) 0 clamp(72px, 9vw, 110px);
+    background: linear-gradient(120deg, #1A1A1A 0%, #F5333F 100%);
     color: rgba(255, 255, 255, 0.82);
     overflow: hidden;
 }
@@ -847,11 +880,15 @@ body.ab-menu-open .site-header {
 /* --- Video hero: front page only (adeptbuild_page_hero() only renders
    the <video> when is_front_page() finds assets/img/videohome.mp4) —
    taller than the plain gradient banner so the footage has room to read,
-   with a tint overlay so the title stays legible over moving footage. --- */
+   with a tint overlay so the title stays legible over moving footage.
+   min-height grows by the same header height its margin-top subtracts, so
+   the box extends upward under the header instead of shrinking. --- */
 .ab-page-hero--video {
     display: flex;
-    align-items: center;
-    min-height: clamp(480px, 78vh, 820px);
+    align-items: flex-end;
+    min-height: calc(clamp(480px, 78vh, 820px) + var(--ab-header-h));
+    padding-top: var(--ab-header-h);
+    padding-bottom: clamp(48px, 6vw, 84px);
     background: var(--ab-deep);
 }
 .ab-page-hero__video {
@@ -862,16 +899,19 @@ body.ab-menu-open .site-header {
     height: 100%;
     object-fit: cover;
 }
+/* Plain dark vignette, heaviest low where the title sits, fading to
+   nothing higher up — the footage reads in its own natural color instead
+   of through a brand-color wash. */
 .ab-page-hero__overlay {
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(115deg, rgba(11, 47, 62, 0.88) 0%, rgba(14, 116, 144, 0.6) 55%, rgba(34, 184, 207, 0.3) 100%);
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.85) 0%, rgba(26, 26, 26, 0.4) 40%, rgba(26, 26, 26, 0) 75%);
 }
 .ab-page-hero--video .ast-container { position: relative; z-index: 2; }
 .ab-page-hero--video h1 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    max-width: 900px;
+    font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+    max-width: 640px;
 }
 
 /*
@@ -929,7 +969,7 @@ body.ab-menu-open .site-header {
     width: 60px;
     height: 60px;
     margin-bottom: 22px;
-    border-radius: 18px;
+    border-radius: 0;
     background: var(--ab-primary-light);
     color: var(--ab-primary);
     transition: background-color var(--ab-transition), color var(--ab-transition);
@@ -977,6 +1017,66 @@ body.ab-menu-open .site-header {
     z-index: -1;
 }
 
+/* Full-bleed alternating process rows — photo fills one half edge to edge,
+   a solid dark slate panel with the step number fills the other, flipping
+   sides row to row. Which side the photo is on is set directly by markup
+   order (visual first vs. body first) rather than a reverse/order trick,
+   since these are hand-placed rows rather than a repeating loop.
+
+   Text colors here are pinned with the ".ab-proto-process" prefix (not
+   just the bare "__body h3"/"__body p" class) so they win outright over
+   ".ab-entry-content h3"/"p" (same 2-part specificity, but declared later
+   in the file) — that rule exists for blog-post copy sitting directly on
+   the page's dark base and would otherwise force white text here too,
+   which happened to go unnoticed back when this panel was still cream. */
+.ab-process-rows { display: flex; flex-direction: column; }
+.ab-process-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: clamp(360px, 42vw, 540px);
+}
+.ab-process-row__visual { position: relative; overflow: hidden; }
+.ab-process-row__visual img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.ab-process-row__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--ab-slate);
+    padding: clamp(32px, 5vw, 56px);
+}
+.ab-proto-process .ab-process-row__num {
+    font-family: var(--ab-font-heading);
+    font-size: 1.0625rem;
+    color: var(--ab-aqua);
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+}
+.ab-proto-process .ab-process-row__body h3 { font-size: clamp(1.5rem, 2.5vw, 2rem); margin-bottom: 16px; color: #fff; }
+.ab-proto-process .ab-process-row__body p { max-width: 420px; color: rgba(255, 255, 255, 0.75); margin: 0; }
+
+@media (max-width: 782px) {
+    .ab-process-row { grid-template-columns: 1fr; }
+    .ab-process-row__visual { min-height: 280px; }
+    /* Rows alternate photo-first/text-first for the desktop 2-column
+       layout, so every other row's markup has the text block before the
+       photo. Stacked to one column that reordering would otherwise put
+       two text blocks back to back at the seam between rows (and two
+       photos back to back at the next one) — pinning the visual first
+       and the body second keeps every row photo-then-caption regardless
+       of which way that particular row's markup was written. */
+    .ab-process-row__visual { order: 1; }
+    .ab-process-row__body { order: 2; }
+}
+
 /* Media: text + image */
 .ab-media {
     display: grid;
@@ -992,7 +1092,7 @@ body.ab-menu-open .site-header {
     overflow: hidden;
     box-shadow: var(--ab-shadow);
     aspect-ratio: 4 / 3;
-    background: linear-gradient(140deg, #0E7490 0%, #22B8CF 100%);
+    background: linear-gradient(140deg, #F5333F 0%, #FFCA10 100%);
 }
 .ab-media__visual img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -1027,9 +1127,208 @@ body.ab-menu-open .site-header {
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: var(--ab-primary-light) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230E7490' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 13px no-repeat;
+    background: var(--ab-primary-light) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23F5333F' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 13px no-repeat;
 }
 .ab-section--deep .ab-checklist li { color: rgba(255, 255, 255, 0.82); }
+
+/* Full-bleed hover-expanding service strips — a full-width row of narrow
+   photo panels, each with a vertical label; hovering (or focusing, for
+   keyboard users) grows that one panel and reveals its description while
+   its neighbors yield space, via an animated flex-basis rather than JS. */
+.ab-service-strips {
+    display: flex;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    min-height: clamp(420px, 50vw, 600px);
+    overflow: hidden;
+}
+.ab-service-strip {
+    position: relative;
+    flex: 1 1 0%;
+    min-width: 0;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    color: #fff;
+    transition: flex-grow var(--ab-transition);
+}
+/* Covers the whole card so it's clickable everywhere, sitting above the
+   content visually (highest z-index) but with no fill of its own — the
+   real content underneath still shows through and drives :hover/:focus on
+   the card via the descendant-aware selectors below. It's a real button
+   block (className lands on this wrapping ".wp-block-button" div; link
+   text = the service name, so it stays a proper accessible name for
+   screen readers/keyboard users) — font-size:0 on the link itself just
+   hides that text visually since the card already shows the label. */
+.ab-service-strip__link {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+}
+.ab-service-strip__link .wp-block-button__link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-size: 0;
+    line-height: 0;
+}
+.ab-service-strip__link .wp-block-button__link:hover { background: transparent; box-shadow: none; transform: none; }
+.ab-service-strip::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.9) 0%, rgba(26, 26, 26, 0.45) 45%, rgba(26, 26, 26, 0.18) 100%);
+    transition: background-color var(--ab-transition);
+}
+.ab-service-strip img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.4) brightness(0.75);
+    transform: scale(1.04);
+    transition: filter 0.5s ease, transform 0.6s ease;
+}
+.ab-service-strip__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 26px 18px;
+}
+.ab-service-strip__num {
+    display: block;
+    font-family: var(--ab-font-heading);
+    font-size: var(--ab-fs-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ab-aqua);
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+.ab-service-strip__label {
+    display: block;
+    font-family: var(--ab-font-heading);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    line-height: 1.25;
+    color: #fff;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+}
+.ab-service-strip__desc {
+    display: block;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    font-size: var(--ab-fs-sm);
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 10px;
+    transition: max-height var(--ab-transition), opacity var(--ab-transition);
+}
+.ab-service-strip:hover,
+.ab-service-strip:focus-within {
+    flex-grow: 2.6;
+}
+.ab-service-strip:hover img,
+.ab-service-strip:focus-within img {
+    filter: grayscale(0) brightness(1);
+    transform: scale(1);
+}
+.ab-service-strip:hover::before,
+.ab-service-strip:focus-within::before {
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.85) 0%, rgba(26, 26, 26, 0.2) 60%, rgba(26, 26, 26, 0) 100%);
+}
+.ab-service-strip:hover .ab-service-strip__label,
+.ab-service-strip:focus-within .ab-service-strip__label {
+    writing-mode: horizontal-tb;
+    transform: none;
+}
+.ab-service-strip:hover .ab-service-strip__desc,
+.ab-service-strip:focus-within .ab-service-strip__desc {
+    max-height: 100px;
+    opacity: 1;
+}
+
+@media (max-width: 900px) {
+    .ab-service-strips { flex-direction: column; min-height: 0; }
+    .ab-service-strip { min-height: 130px; flex: none; }
+    .ab-service-strip__label { writing-mode: horizontal-tb; transform: none; }
+    .ab-service-strip__desc { max-height: 100px; opacity: 1; }
+    .ab-service-strip img { filter: grayscale(0) brightness(0.8); transform: none; }
+}
+
+/* Full-bleed horizontal video slider — native scroll-snap (works, and
+   feels smooth, with no JS at all), with prev/next buttons above the track
+   as a progressive enhancement: navigation.js adds ".ab-video-slider--js"
+   once it wires them up (and disables whichever end is already fully
+   scrolled to), so without JS they just never appear and the row is still
+   fully usable by touch/trackpad/scrollbar drag alone. Ghost-button styling
+   (transparent, light border) to sit on the dark page background these
+   normally appear on. */
+.ab-video-slider__nav {
+    display: none;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin: 0 0 14px;
+}
+.ab-video-slider--js .ab-video-slider__nav { display: flex; }
+.ab-video-slider__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--ab-radius-pill);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color var(--ab-transition), border-color var(--ab-transition), color var(--ab-transition);
+}
+.ab-video-slider__btn:hover { background: var(--ab-primary); border-color: var(--ab-primary); color: var(--ab-deep); }
+.ab-video-slider__btn:disabled { opacity: 0.35; cursor: default; }
+.ab-video-slider__btn:disabled:hover { background: transparent; border-color: rgba(255, 255, 255, 0.35); color: #fff; }
+.ab-video-slider__btn svg { width: 18px; height: 18px; }
+
+.ab-video-slider__track {
+    display: flex;
+    gap: 20px;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 4px clamp(20px, 5vw, calc((100vw - var(--ab-container)) / 2 + var(--ab-gutter))) 12px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-padding-left: clamp(20px, 5vw, calc((100vw - var(--ab-container)) / 2 + var(--ab-gutter)));
+    scrollbar-width: none;
+}
+.ab-video-slider__track::-webkit-scrollbar { display: none; }
+.ab-video-slider__item {
+    flex: 0 0 clamp(240px, 30vw, 360px);
+    scroll-snap-align: start;
+}
+.ab-video-slider__item .wp-block-embed { margin-bottom: 0; }
+.ab-video-slider__item .wp-block-embed__wrapper {
+    box-shadow: var(--ab-shadow);
+    transition: transform var(--ab-transition);
+}
+.ab-video-slider__item:hover .wp-block-embed__wrapper { transform: translateY(-4px); }
+
+/* Same legacy inner-container flattening as the other full-bleed
+   components above — each item needs to be a direct flex child of
+   ".ab-video-slider__track", not wrapped one level deeper. */
+.ab-video-slider__track > .wp-block-group__inner-container { display: contents; }
+
+@media (max-width: 600px) {
+    .ab-video-slider__nav { display: none !important; }
+}
 
 /* Project gallery */
 .ab-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -1040,7 +1339,7 @@ body.ab-menu-open .site-header {
     border-radius: var(--ab-radius-lg);
     overflow: hidden;
     aspect-ratio: 4 / 3;
-    background: linear-gradient(150deg, #0B2F3E, #0E7490 60%, #22B8CF);
+    background: linear-gradient(150deg, #1A1A1A, #F5333F 60%, #FFCA10);
     box-shadow: var(--ab-shadow-sm);
 }
 .ab-gallery__item--wide { grid-column: span 2; }
@@ -1059,7 +1358,7 @@ body.ab-menu-open .site-header {
     flex-direction: column;
     justify-content: flex-end;
     padding: 26px;
-    background: linear-gradient(to top, rgba(11, 47, 62, 0.88) 0%, rgba(11, 47, 62, 0.20) 55%, transparent 100%);
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.88) 0%, rgba(26, 26, 26, 0.20) 55%, transparent 100%);
     color: #fff;
     opacity: 0;
     transition: opacity var(--ab-transition);
@@ -1115,7 +1414,7 @@ body.ab-menu-open .site-header {
     position: relative;
     padding: clamp(48px, 6vw, 72px) clamp(28px, 5vw, 64px);
     border-radius: var(--ab-radius-lg);
-    background: linear-gradient(115deg, #0B2F3E 0%, #0E7490 100%);
+    background: linear-gradient(115deg, #1A1A1A 0%, #F5333F 100%);
     color: rgba(255, 255, 255, 0.85);
     overflow: hidden;
     display: flex;
@@ -1132,7 +1431,7 @@ body.ab-menu-open .site-header {
     width: 320px;
     height: 320px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(34, 184, 207, 0.45), transparent 70%);
+    background: radial-gradient(circle, rgba(255, 202, 16, 0.45), transparent 70%);
 }
 .ab-cta > * { position: relative; z-index: 1; }
 .ab-cta h2 { color: #fff; margin-bottom: 10px; }
@@ -1183,7 +1482,7 @@ select:focus,
 textarea:focus {
     outline: none;
     border-color: var(--ab-primary);
-    box-shadow: 0 0 0 4px rgba(14, 116, 144, 0.12);
+    box-shadow: 0 0 0 4px rgba(245, 51, 63, 0.12);
 }
 textarea { min-height: 140px; resize: vertical; }
 
@@ -1269,7 +1568,7 @@ label {
 .ab-post-card__thumb {
     aspect-ratio: 16 / 10;
     overflow: hidden;
-    background: linear-gradient(140deg, #0E7490, #22B8CF);
+    background: linear-gradient(140deg, #F5333F, #FFCA10);
 }
 .ab-post-card__thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
 .ab-post-card:hover .ab-post-card__thumb img { transform: scale(1.05); }
@@ -1655,19 +1954,18 @@ label {
     .main-header-menu .sub-menu.mega-menu .mega-menu__thumb { flex: 0 0 96px; aspect-ratio: 4 / 3; }
     .main-header-menu .sub-menu.mega-menu .mega-menu__label { font-size: 0.9375rem; }
 
-    /* On the home page, the top-level links are near-white to sit on the
-       transparent dark header — but the mobile panel is solid white on
-       every page including home, so that override left the labels
-       essentially invisible (white on white) once opened. The panel is
-       never transparent, so always use the normal dark heading color
-       inside it regardless of which page it's on. */
-    body.home .main-navigation .main-header-menu > li > a {
+    /* Top-level links are near-white everywhere to sit on the transparent
+       dark header — but the mobile panel itself is solid white, so that
+       would leave the labels essentially invisible (white on white) once
+       opened. The panel is never transparent, so always use the normal
+       dark heading color inside it regardless of scroll/page state. */
+    .main-navigation .main-header-menu > li > a {
         color: var(--ab-heading);
         background: none;
         -webkit-text-fill-color: currentColor;
     }
-    body.home .main-navigation .main-header-menu > li:hover > a,
-    body.home .main-navigation .main-header-menu > .current-menu-item > a {
+    .main-navigation .main-header-menu > li:hover > a,
+    .main-navigation .main-header-menu > .current-menu-item > a {
         color: var(--ab-primary);
         background: none;
         -webkit-text-fill-color: currentColor;
@@ -1911,7 +2209,7 @@ label {
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background: rgba(11, 47, 62, 0.55);
+    background: rgba(26, 26, 26, 0.55);
     border: 2px solid rgba(255, 255, 255, 0.85);
     display: flex;
     align-items: center;
@@ -2013,40 +2311,21 @@ ol.wp-block-list li::marker {
    between sections — only the sections with a photo of their own
    (Services, How We Work, From Our Blog) look different here, and even
    those lean on the same dark tone underneath their overlay. The header
-   itself still gets a matching dark/glass treatment on this page only;
-   every other page keeps the light header, since only the front page
-   carries ".home". --- */
-body.home .site-header { background: rgba(11, 47, 62, 0.75); }
-body.home .site-header.is-stuck { background: var(--ab-deep); box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25); }
-body.home .site-title a,
-body.home .site-description { color: #fff; }
-body.home .main-header-menu > li > a { color: rgba(255, 255, 255, 0.88); }
-body.home .main-header-menu > li:hover > a,
-body.home .main-header-menu > .current-menu-item > a {
-    color: var(--ab-aqua);
-    background: linear-gradient(90deg, var(--ab-aqua), #fff);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-body.home .menu-toggle { background: rgba(255, 255, 255, 0.14); color: #fff; }
-body.home .menu-toggle:hover { background: var(--ab-primary); color: #fff; }
+   itself is dark/transparent-overlay site-wide now (see section 6 above),
+   so nothing home-specific is needed for it here any more. --- */
 
-/* --- 1. Intro: badge + heading + copy on the left, video on the right ---
-   This WordPress install still saves Group blocks with the legacy
-   ".wp-block-group__inner-container" wrapper div — so ".ab-proto-intro"'s
-   only real child is that wrapper, not the two pieces of content directly.
-   "display:contents" removes the wrapper from the box model so its own
-   children (the left-column group and the video) become the grid's direct
-   items instead. --- */
+/* --- 1. Intro: single-column statement hero (no video sibling in the
+   current content, unlike the two-column version this rule used to
+   support) — capped width keeps the long headline/paragraph readable
+   instead of stretching edge to edge. --- */
 .home .ab-proto-intro {
-    display: grid !important;
-    grid-template-columns: 1.1fr 1fr !important;
-    gap: clamp(32px, 5vw, 64px);
-    align-items: center;
+    display: block !important;
 }
 .home .ab-proto-intro > .wp-block-group__inner-container {
     display: contents;
+}
+.home .ab-proto-intro-left {
+    max-width: 720px;
 }
 .home .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link {
     padding: 7px 20px !important;
@@ -2063,9 +2342,8 @@ body.home .menu-toggle:hover { background: var(--ab-primary); color: #fff; }
 .home .ab-proto-intro-left h2 { color: #fff; }
 .home .ab-proto-intro-left p { color: rgba(255, 255, 255, 0.75); }
 .home .ab-proto-intro-left p strong { color: #fff; }
-/* Solid teal reads close in value to the new dark navy backdrop — swap
-   the primary CTA to the sand/gold accent so it actually pops, the same
-   move Ciudad Maderas makes with gold buttons on navy sections. */
+/* Solid red reads close in value to the dark charcoal backdrop — swap
+   the primary CTA to the gold accent so it actually pops on dark sections. */
 .home .ab-proto-intro-left .wp-block-buttons:last-child .wp-block-button__link {
     background: var(--ab-accent) !important;
     border-color: var(--ab-accent) !important;
@@ -2097,22 +2375,23 @@ body.home .menu-toggle:hover { background: var(--ab-primary); color: #fff; }
     padding: 0 var(--ab-gutter);
 }
 
-/* --- 2. Our Services: photo background (Group block) + the site's default
-   card columns. Swap the URL below for a different photo any time. --- */
-.home .ab-proto-services {
-    padding: clamp(64px, 8vw, 100px) 0;
-    background-color: #000;
-    background-image:
-        linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.78) 100%),
-        url('https://adeptbuild.com/wp-content/uploads/2023/01/069A8156-1.jpg');
-    background-size: cover;
-    background-position: center;
-}
+/* --- 2. Our Services: heading + intro sit in the normal centered
+   container, then the full-bleed hover strips (.ab-service-strips,
+   defined with the other reusable components above) run edge to edge
+   below — each strip carries its own photo, so the section itself needs
+   no background image of its own beyond the page's dark base. --- */
+.home .ab-proto-services { padding: clamp(64px, 8vw, 100px) 0 0; }
+.home .ab-proto-services .ab-proto-inner { padding-bottom: clamp(32px, 4vw, 48px); }
+/* Same legacy inner-container wrapper as ".ab-proto-intro" above — needs
+   flattening here too so each strip becomes a direct flex child of
+   ".ab-service-strips" (and each strip's own image/content/link become
+   direct children of it) instead of every strip collapsing into one. */
+.ab-service-strips > .wp-block-group__inner-container,
+.ab-service-strip > .wp-block-group__inner-container { display: contents; }
 .home .ab-proto-services h2,
 .home .ab-proto-process h2,
 .home .ab-proto-blog h2 { color: #fff; }
 .home .ab-proto-services p { color: rgba(255, 255, 255, 0.72); max-width: 640px; }
-.home .ab-proto-services .wp-block-columns { margin-top: 40px; margin-bottom: 0; }
 
 /* --- 3. Our Philosophy: big heading left, divider + copy right — no photo
    of its own, so it just sits on the page's dark base like the rest of
@@ -2163,39 +2442,18 @@ body.home .menu-toggle:hover { background: var(--ab-primary); color: #fff; }
     border-color: var(--ab-accent-dark) !important;
 }
 
-/* --- 4. How We Work: photo background + four dark overlapping cards --- */
-.home .ab-proto-process {
-    padding: clamp(64px, 8vw, 100px) 0;
-    background-image:
-        linear-gradient(180deg, rgba(11,47,62,.15) 0%, rgba(11,47,62,.35) 100%),
-        url('https://adeptbuild.com/wp-content/uploads/2023/04/069A8168-scaled.jpg');
-    background-size: cover;
-    background-position: center;
-}
-.home .ab-proto-process .wp-block-columns { gap: 4px; margin: 40px 0 0; }
-.home .ab-proto-process .wp-block-column {
-    padding: 30px 24px;
-    background: rgba(11, 47, 62, 0.82);
-    border: 0;
-    border-top: 3px solid var(--ab-aqua);
-    border-radius: 0;
-    box-shadow: none;
-    color: rgba(255, 255, 255, 0.85);
-}
-.home .ab-proto-process .wp-block-column:hover { transform: none; }
-.home .ab-proto-process .wp-block-column h3 { color: #fff; }
-.home .ab-proto-process .wp-block-column p { color: rgba(255, 255, 255, 0.72); }
-.home .ab-proto-process .wp-block-image {
-    margin: 0 0 18px !important;
-    width: 52px;
-}
-.home .ab-proto-process .wp-block-image img {
-    width: 52px;
-    height: 52px;
-    aspect-ratio: auto;
-    object-fit: contain;
-    border-radius: 0;
-}
+/* --- 4. How We Work: full-bleed alternating rows (.ab-process-row,
+   defined with the other reusable components above) — the heading sits in
+   the normal centered ".ab-proto-inner" container, the rows themselves are
+   siblings of it so they can run edge to edge under it. --- */
+.home .ab-proto-process { padding: clamp(64px, 8vw, 100px) 0 0; }
+.home .ab-proto-process .ab-proto-inner { padding-bottom: clamp(32px, 4vw, 48px); }
+/* Same legacy inner-container flattening as the services strips above, so
+   each row becomes a direct flex child of ".ab-process-rows" and each
+   row's visual/body become direct grid children of ".ab-process-row". */
+.ab-process-rows > .wp-block-group__inner-container,
+.ab-process-row > .wp-block-group__inner-container,
+.ab-process-row__body > .wp-block-group__inner-container { display: contents; }
 
 /* --- 5. Trust bar: plain row of linked logos, no card chrome ---
    Built as a Group block (layout:flex, wrap) with the 7 images as direct
@@ -2234,28 +2492,16 @@ body.home .menu-toggle:hover { background: var(--ab-primary); color: #fff; }
     .home .ab-proto-trust .wp-block-image img { width: 44px; height: 44px; }
 }
 
-/* --- 6. Watch Our Videos: responsive grid, no card chrome around embeds.
-   className added directly on each of the two Columns blocks (3 videos,
-   then 2), no extra Group wrapper needed. --- */
-/* "Watch Our Videos" is a plain heading sitting between the trust bar and
-   the video rows — no wrapping section of its own to hang a color rule
-   on, so this reaches it as "the next heading after the trust bar". */
-.home .ab-proto-trust ~ h2 { color: #fff; }
-.home .wp-block-columns.ab-proto-videos { margin-bottom: 28px; }
-.home .ab-proto-videos .wp-block-column {
-    padding: 0;
-    background: none;
-    border: 0;
-    box-shadow: none;
-}
-.home .ab-proto-videos .wp-block-column:hover { transform: none; }
-.home .ab-proto-videos .wp-block-embed { margin-bottom: 0; }
+/* --- 6. Watch Our Videos: full-bleed slider (.ab-video-slider, defined
+   with the other reusable components above) — a plain heading with no
+   wrapping section of its own; ".ab-entry-content h2 { color: #fff }"
+   near the top of this file already covers its color. --- */
 
 /* --- 7. From Our Blog: photo background behind the default post cards --- */
 .home .ab-proto-blog {
     padding: clamp(64px, 8vw, 100px) 0;
     background-image:
-        linear-gradient(180deg, rgba(11,47,62,.55) 0%, rgba(11,47,62,.82) 100%),
+        linear-gradient(180deg, rgba(26,26,26,.55) 0%, rgba(26,26,26,.82) 100%),
         url('https://adeptbuild.com/wp-content/uploads/2022/09/gagrage.jpg');
     background-size: cover;
     background-position: center;
@@ -2263,13 +2509,6 @@ body.home .menu-toggle:hover { background: var(--ab-primary); color: #fff; }
 .home .ab-proto-blog .wp-block-latest-posts { margin-top: 40px; }
 
 @media (max-width: 900px) {
-    .home .ab-proto-intro { grid-template-columns: 1fr !important; }
     .home .ab-proto-philosophy .ab-proto-inner { grid-template-columns: 1fr !important; }
     .home .ab-proto-philosophy-copy { padding-left: 0; border-left: 0; padding-top: 24px; border-top: 1px solid var(--ab-border); }
-    .home .ab-proto-process .wp-block-columns { flex-wrap: wrap; }
-    .home .ab-proto-process .wp-block-column { flex-basis: calc(50% - 2px) !important; }
-}
-
-@media (max-width: 600px) {
-    .home .ab-proto-process .wp-block-column { flex-basis: 100% !important; }
 }

@@ -54,24 +54,24 @@ function adeptbuild_setup() {
 		'editor-color-palette',
 		array(
 			array(
-				'name'  => __( 'Pool Blue', 'adeptbuild' ),
+				'name'  => __( 'Signal Red', 'adeptbuild' ),
 				'slug'  => 'primary',
-				'color' => '#0E7490',
+				'color' => '#F5333F',
 			),
 			array(
-				'name'  => __( 'Aqua', 'adeptbuild' ),
+				'name'  => __( 'Gold', 'adeptbuild' ),
 				'slug'  => 'aqua',
-				'color' => '#22B8CF',
+				'color' => '#FFCA10',
 			),
 			array(
-				'name'  => __( 'Deep Blue', 'adeptbuild' ),
+				'name'  => __( 'Charcoal', 'adeptbuild' ),
 				'slug'  => 'deep',
-				'color' => '#0B2F3E',
+				'color' => '#1A1A1A',
 			),
 			array(
-				'name'  => __( 'Sand', 'adeptbuild' ),
+				'name'  => __( 'Gold Accent', 'adeptbuild' ),
 				'slug'  => 'accent',
-				'color' => '#D99A3E',
+				'color' => '#FFCA10',
 			),
 			array(
 				'name'  => __( 'Light Gray', 'adeptbuild' ),
@@ -101,10 +101,10 @@ add_action( 'after_setup_theme', 'adeptbuild_content_width', 0 );
  */
 function adeptbuild_scripts() {
 
-	// Outfit for headings, Inter for body text.
+	// Montserrat for headings/CTAs, Geist for body text.
 	wp_enqueue_style(
 		'adeptbuild-fonts',
-		'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap',
+		'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Geist:wght@300;400;500;600;700&display=swap',
 		array(),
 		null
 	);

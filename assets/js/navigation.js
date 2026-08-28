@@ -13,12 +13,134 @@
 	'use strict';
 
 	document.addEventListener( 'DOMContentLoaded', function () {
+		splitMenuAroundLogo();
 		setHeaderHeight();
 		initMobileMenu();
 		autoTagReveals();
 		initReveal();
 		initCounters();
+		initVideoSliders();
 	} );
+
+	/**
+	 * Prev/next buttons for ".ab-video-slider" — the track itself already
+	 * scrolls and snaps with no JS at all (CSS scroll-snap), so this only
+	 * adds the optional buttons on top: scroll by one card's width, and
+	 * disable whichever end is already fully scrolled to. The buttons stay
+	 * hidden (see the CSS) until ".ab-video-slider--js" is added here, so a
+	 * slider never shows controls that don't work.
+	 */
+	function initVideoSliders() {
+		var sliders = document.querySelectorAll( '.ab-video-slider' );
+
+		Array.prototype.forEach.call( sliders, function ( slider ) {
+			var track = slider.querySelector( '.ab-video-slider__track' );
+			var prev = slider.querySelector( '.ab-video-slider__prev' );
+			var next = slider.querySelector( '.ab-video-slider__next' );
+
+			if ( ! track || ! prev || ! next ) {
+				return;
+			}
+
+			var step = function () {
+				var item = track.querySelector( '.ab-video-slider__item' );
+				var gap = parseFloat( getComputedStyle( track ).columnGap || 20 );
+				return item ? item.getBoundingClientRect().width + gap : track.clientWidth;
+			};
+
+			var updateDisabled = function () {
+				var max = track.scrollWidth - track.clientWidth;
+				prev.disabled = track.scrollLeft <= 1;
+				next.disabled = track.scrollLeft >= max - 1;
+			};
+
+			prev.addEventListener( 'click', function () {
+				track.scrollBy( { left: -step(), behavior: 'smooth' } );
+			} );
+			next.addEventListener( 'click', function () {
+				track.scrollBy( { left: step(), behavior: 'smooth' } );
+			} );
+
+			track.addEventListener( 'scroll', debounce( updateDisabled, 100 ), { passive: true } );
+			window.addEventListener( 'resize', debounce( updateDisabled, 150 ) );
+
+			updateDisabled();
+			slider.classList.add( 'ab-video-slider--js' );
+		} );
+	}
+
+	/**
+	 * Splits the primary menu into two halves flanking the centered logo on
+	 * desktop, matching the template's [nav] [logo] [nav] header layout — a
+	 * single full-width menu list with the logo just overlaid on top of it
+	 * would otherwise run right through the logo instead of sitting beside
+	 * it. Reverts to the original single-list-plus-separate-logo markup
+	 * below the mobile breakpoint, where the logo has to stay visible in the
+	 * closed header bar instead of living inside the off-canvas panel.
+	 */
+	function splitMenuAroundLogo() {
+		var nav = document.getElementById( 'site-navigation' );
+		var menu = document.getElementById( 'primary-menu' );
+		var branding = document.querySelector( '.site-branding' );
+
+		if ( ! nav || ! menu || ! branding ) {
+			return;
+		}
+
+		var brandingHome = branding.parentNode;
+		var brandingNext = branding.nextSibling;
+		var items = Array.prototype.slice.call( menu.children );
+		var secondHalf = items.slice( Math.ceil( items.length / 2 ) );
+
+		if ( ! secondHalf.length ) {
+			return;
+		}
+
+		var rightMenu = document.createElement( 'ul' );
+		rightMenu.className = menu.className;
+
+		var isSplit = false;
+
+		var applySplit = function () {
+			if ( isSplit ) {
+				return;
+			}
+			secondHalf.forEach( function ( li ) {
+				rightMenu.appendChild( li );
+			} );
+			menu.classList.add( 'main-header-menu--left' );
+			rightMenu.classList.add( 'main-header-menu--right' );
+			nav.appendChild( branding );
+			nav.appendChild( rightMenu );
+			nav.classList.add( 'main-navigation--split' );
+			isSplit = true;
+		};
+
+		var undoSplit = function () {
+			if ( ! isSplit ) {
+				return;
+			}
+			secondHalf.forEach( function ( li ) {
+				menu.appendChild( li );
+			} );
+			menu.classList.remove( 'main-header-menu--left' );
+			nav.classList.remove( 'main-navigation--split' );
+			nav.removeChild( rightMenu );
+			brandingHome.insertBefore( branding, brandingNext );
+			isSplit = false;
+		};
+
+		var sync = function () {
+			if ( window.matchMedia( '(min-width: 922px)' ).matches ) {
+				applySplit();
+			} else {
+				undoSplit();
+			}
+		};
+
+		sync();
+		window.addEventListener( 'resize', debounce( sync, 150 ) );
+	}
 
 	/**
 	 * Tags content with .ab-reveal (and a directional variant where it
