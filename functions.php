@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADEPTBUILD_VERSION', '1.7.16' );
+define( 'ADEPTBUILD_VERSION', '1.7.18' );
 
 /**
  * Basic theme setup.

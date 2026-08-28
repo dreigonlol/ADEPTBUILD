@@ -2499,16 +2499,26 @@ h2.ab-services-showcase__title {
    down to a barely-there sliver. Set "--count" (inline style, on this
    same element) to however many photos are in this particular gallery —
    e.g. style="--count:12" — so each one keeps a comfortable resting
-   height (set by "--ab-item-h" below, 400px) regardless of how many
+   height (set by "--ab-item-h" below, 300px) regardless of how many
    photos are in the set; override "--ab-item-h" inline the same way for
-   a different resting size on a particular page. */
+   a different resting size on a particular page.
+
+   Unlike ".ab-content-band" on the service pages (deliberately full-bleed
+   edge-to-edge), this one stays inside the normal reading column — same
+   width and side gutter as ".ast-container" — matching the margins the
+   reference template's own image accordion keeps at both sides instead
+   of running to the browser edge. */
 .ab-photo-accordion {
-    --ab-item-h: 400px;
+    --ab-item-h: 300px;
     display: flex;
     flex-direction: column;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    width: 100%;
+    max-width: var(--ab-container);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--ab-gutter);
+    padding-right: var(--ab-gutter);
+    box-sizing: border-box;
     gap: 10px;
     height: calc(var(--count, 6) * var(--ab-item-h));
     overflow: hidden;
