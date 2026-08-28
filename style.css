@@ -1716,6 +1716,161 @@ label {
     margin-top: 10px;
 }
 
+/* ==========================================================================
+   Full-bleed content image band — drops a single wp:image straight from
+   page content (see the Full Home Renovation page) so it spans edge-to-edge
+   like the built-in hero, with its heading/description overlaid on top of
+   the photo instead of sitting in separate text around it. Hover/focus
+   reveals the copy on pointer devices; touch has no hover to trigger it,
+   so (hover: none) just keeps it visible there instead.
+   ========================================================================== */
+.ab-content-band {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+}
+.ab-content-band img {
+    display: block;
+    width: 100%;
+    height: clamp(300px, 42vw, 520px);
+    object-fit: cover;
+    transform: scale(1.01);
+    filter: brightness(0.92);
+    transition: transform 0.7s ease, filter 0.5s ease;
+    /* Hides the browser's fallback alt-text rendering during the brief
+       window before the photo finishes loading (or if it ever fails to)
+       so nothing but the plain photo ever shows before hover. */
+    color: transparent;
+}
+.ab-content-band:hover img,
+.ab-content-band:focus-within img {
+    transform: scale(1.06);
+    filter: brightness(0.6);
+}
+.ab-content-band__caption {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px;
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.85) 0%, rgba(26, 26, 26, 0.4) 50%, rgba(26, 26, 26, 0.08) 100%);
+    opacity: 0;
+    transition: opacity var(--ab-transition);
+}
+.ab-content-band:hover .ab-content-band__caption,
+.ab-content-band:focus-within .ab-content-band__caption {
+    opacity: 1;
+}
+.ab-content-band__caption h2,
+.ab-content-band__caption h3 {
+    color: #fff;
+    margin: 0 0 10px;
+}
+.ab-content-band__caption p {
+    max-width: 560px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--ab-fs-base);
+}
+.ab-content-band__caption p + p {
+    margin-top: 10px;
+    font-size: var(--ab-fs-sm);
+    color: rgba(255, 255, 255, 0.75);
+}
+/* Touch devices have no hover: show the caption outright, over the still
+   image, exactly as the desktop hover state looks. */
+@media (hover: none) {
+    .ab-content-band__caption { opacity: 1; }
+    .ab-content-band img { filter: brightness(0.6); }
+}
+@media (max-width: 600px) {
+    .ab-content-band img { height: clamp(240px, 78vw, 380px); }
+    .ab-content-band__caption { padding: 22px; }
+}
+
+/* ==========================================================================
+   "We Provide the Following Services" showcase — a big, bold headline over
+   a single-line ticker that loops through the service list, each one
+   dissolving as the next slides down to take its place. Pure CSS: every
+   item shares one keyframe animation, staggered by a per-item --i custom
+   property so exactly one is ever in its "visible" slot at a time.
+   ========================================================================== */
+.ab-services-showcase {
+    text-align: center;
+    padding: clamp(36px, 6vw, 64px) 0;
+}
+h2.ab-services-showcase__title {
+    font-family: var(--ab-font-heading);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    font-size: clamp(2.1rem, 6vw, 4.5rem);
+    margin: 0 0 clamp(18px, 3vw, 34px);
+    color: #fff;
+}
+/* Gradient fill, gated behind feature support so the title always shows
+   in plain white if the browser can't clip the gradient to the text. */
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+    h2.ab-services-showcase__title {
+        background: linear-gradient(120deg, #fff 0%, var(--ab-aqua) 55%, var(--ab-primary) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+}
+.ab-services-ticker {
+    position: relative;
+    height: clamp(2.2rem, 5vw, 3rem);
+    max-width: 760px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.ab-services-ticker__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.ab-services-ticker__list li {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--ab-font-heading);
+    font-weight: 600;
+    font-size: clamp(1.0625rem, 2.4vw, 1.5rem);
+    color: var(--ab-aqua);
+    opacity: 0;
+    transform: translateY(-100%);
+    animation: ab-services-rotate 24s infinite;
+    animation-delay: calc(var(--i) * 2.4s);
+}
+@keyframes ab-services-rotate {
+    0%   { opacity: 0; transform: translateY(-100%); }
+    1%   { opacity: 1; transform: translateY(0); }
+    8%   { opacity: 1; transform: translateY(0); }
+    10%  { opacity: 0; transform: translateY(100%); }
+    100% { opacity: 0; transform: translateY(100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ab-services-ticker { height: auto; overflow: visible; }
+    .ab-services-ticker__list li {
+        animation: none;
+        position: static;
+        display: block;
+        opacity: 1;
+        transform: none;
+        padding: 4px 0;
+    }
+}
+
 .alignleft { float: left; margin: 0 1.6em 1.2em 0; }
 .alignright { float: right; margin: 0 0 1.2em 1.6em; }
 .aligncenter { margin-left: auto; margin-right: auto; display: block; }
