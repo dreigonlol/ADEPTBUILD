@@ -254,6 +254,9 @@ hr {
 .ab-grid--2 { grid-template-columns: repeat(2, 1fr); }
 .ab-grid--3 { grid-template-columns: repeat(3, 1fr); }
 .ab-grid--4 { grid-template-columns: repeat(4, 1fr); }
+/* Legacy inner-container flattening, same reason as the other components
+   in this file — each card needs to be a direct grid child. */
+.ab-grid > .wp-block-group__inner-container { display: contents; }
 
 /* Section heading */
 .ab-section-head {
@@ -784,10 +787,70 @@ body.ab-menu-open .site-header {
     overflow: hidden;
 }
 
+/* Video variant — used for per-page custom heroes (individual pages
+   build their own hero directly into their content instead of getting
+   the theme's built-in one; see page.php) that want real footage instead
+   of the plain gradient. Same plain dark vignette as ".ab-page-hero__overlay"
+   (no brand-color wash over the footage), and a two-up grid so a form
+   card can sit beside the heading instead of only stacking under it.
+
+   Also full-bleed and pulled up under the transparent header, exactly
+   like ".ab-page-hero--video" above (this is what replaces that hero on
+   pages that opt out of it in page.php) — the section's own ".ast-container"
+   still centers its actual content to the normal 1200px column. */
+.ab-hero--video {
+    background: var(--ab-deep);
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    margin-top: calc(-1 * var(--ab-header-h));
+    min-height: calc(clamp(520px, 76vh, 760px) + var(--ab-header-h));
+    padding-top: calc(var(--ab-header-h) + clamp(80px, 10vw, 130px));
+}
+.ab-hero__video {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.ab-hero--video .ab-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.8) 0%, rgba(26, 26, 26, 0.3) 45%, rgba(26, 26, 26, 0.1) 100%);
+}
+.ab-hero--video .ast-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+.ab-hero__grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(24px, 4vw, 56px);
+    flex-wrap: wrap;
+}
+.ab-hero__form-card {
+    flex: 0 1 340px;
+    background: var(--ab-surface);
+    border-radius: var(--ab-radius-lg);
+    box-shadow: var(--ab-shadow-lg);
+    padding: clamp(24px, 3vw, 32px);
+}
+.ab-hero__form-card h3 {
+    margin: 0 0 16px;
+    text-align: center;
+    font-size: 1.125rem;
+}
+
 .ab-hero__content {
     position: relative;
     z-index: 2;
     max-width: 680px;
+    flex: 1 1 420px;
 }
 
 .ab-hero__badge {
@@ -1085,6 +1148,14 @@ body.ab-menu-open .site-header {
     align-items: center;
 }
 .ab-media--reverse .ab-media__visual { order: -1; }
+/* Same legacy inner-container flattening as the other components (see
+   ".ab-service-strips" etc. below) — the visual and text column need to
+   be direct grid children of ".ab-media", and the image needs to be a
+   direct child of ".ab-media__visual" for its height:100% to resolve
+   against that element's own aspect-ratio box instead of an intervening
+   auto-height wrapper. */
+.ab-media > .wp-block-group__inner-container,
+.ab-media__visual > .wp-block-group__inner-container { display: contents; }
 
 .ab-media__visual {
     position: relative;
@@ -1423,6 +1494,11 @@ body.ab-menu-open .site-header {
     gap: 36px;
     flex-wrap: wrap;
 }
+/* Legacy inner-container flattening, same reason as the other components
+   in this file — the text group and the buttons need to be direct flex
+   children so "justify-content: space-between" actually has two items to
+   split apart instead of one wrapper containing both. */
+.ab-cta > .wp-block-group__inner-container { display: contents; }
 .ab-cta::after {
     content: "";
     position: absolute;
