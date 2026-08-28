@@ -19,7 +19,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /test.adeptbuild.com/wp-content/themes/adeptbuild-theme/
+          server-dir: /public_html/wp-content/themes/adeptbuild-theme/
           # Opciones de estabilidad de conexión:
           protocol: ftp
           port: 21

@@ -92,6 +92,7 @@ $ab_social = adeptbuild_social_links();
 					'container'      => false,
 					'depth'          => 3,
 					'fallback_cb'    => 'adeptbuild_menu_fallback',
+					'walker'         => new Adeptbuild_Mega_Menu_Walker(),
 				)
 			);
 			?>
@@ -121,5 +122,26 @@ $ab_social = adeptbuild_social_links();
 
 	</div>
 </header>
+
+<?php
+$ab_whatsapp = adeptbuild_option( 'whatsapp_url' );
+?>
+<div class="ab-floating-ctas">
+	<?php if ( $ab_cta_text ) : ?>
+		<a class="ab-floating-cta" href="<?php echo esc_url( $ab_cta_url ); ?>">
+			<span><?php echo esc_html( $ab_cta_text ); ?></span>
+		</a>
+	<?php endif; ?>
+
+	<?php if ( $ab_whatsapp ) : ?>
+		<a class="ab-floating-whatsapp" href="<?php echo esc_url( $ab_whatsapp ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Chat on WhatsApp', 'adeptbuild' ); ?>">
+			<?php adeptbuild_icon( 'whatsapp', 26 ); ?>
+		</a>
+	<?php elseif ( $ab_phone ) : ?>
+		<a class="ab-floating-whatsapp" href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>" aria-label="<?php esc_attr_e( 'Call us', 'adeptbuild' ); ?>">
+			<?php adeptbuild_icon( 'phone', 24 ); ?>
+		</a>
+	<?php endif; ?>
+</div>
 
 <div id="content" class="site-content">

@@ -87,13 +87,82 @@ function adeptbuild_save_page_header_meta_box( $post_id ) {
 add_action( 'save_post_page', 'adeptbuild_save_page_header_meta_box' );
 
 /**
- * Returns the custom hero heading for a page, or the page title if none is set.
+ * Returns the custom hero heading for a page or post.
+ *
+ * Priority: the "Heading" meta box field, then a heading block sitting
+ * right at the start of the content — a lot of pages migrated from the old
+ * Elementor site never got a real WordPress Title, just a heading typed
+ * into the page itself — then the saved post title as a last resort.
+ *
+ * Only a heading that IS the first thing in the content counts: one
+ * further down is real body copy, not a stand-in title, and is left alone.
+ * Matches any level (H1–H6) since the block editor defaults to H2, not H1,
+ * so most of these pages won't actually be using H1.
  *
  * @param int|WP_Post $post Post ID or object. Defaults to the current post.
  * @return string
  */
 function adeptbuild_get_page_hero_title( $post = null ) {
 	$post_id = $post ? get_post( $post )->ID : get_the_ID();
+
 	$heading = get_post_meta( $post_id, '_adeptbuild_hero_title', true );
-	return $heading ? $heading : get_the_title( $post_id );
+	if ( $heading ) {
+		return $heading;
+	}
+
+	$leading = adeptbuild_get_leading_heading( get_post_field( 'post_content', $post_id ) );
+	if ( $leading ) {
+		return $leading;
+	}
+
+	return get_the_title( $post_id );
+}
+
+/**
+ * Finds a heading tag sitting at the very start of a block of HTML (past
+ * any leading whitespace or a single Gutenberg block comment) and returns
+ * its plain-text content, or an empty string if the content doesn't open
+ * with a heading.
+ *
+ * @param string $html Raw post content or already-rendered HTML.
+ * @return string
+ */
+function adeptbuild_get_leading_heading( $html ) {
+	$html = ltrim( (string) $html );
+
+	// Raw post_content leads with the block's HTML comment
+	// (e.g. "<!-- wp:heading {...} -->") before the actual tag; rendered
+	// `the_content` output won't have one, so this is a no-op there.
+	$html = preg_replace( '/^<!--.*?-->\s*/s', '', $html, 1 );
+
+	if ( ! preg_match( '/^<h[1-6]\b[^>]*>(.*?)<\/h[1-6]>/is', $html, $matches ) ) {
+		return '';
+	}
+
+	return trim( wp_strip_all_tags( $matches[1] ) );
+}
+
+/**
+ * Strips a leading heading from the rendered content when it was reused as
+ * the page hero heading, so the same title doesn't appear twice on the page.
+ *
+ * Hook this in right before a single `the_content()` call with:
+ *     add_filter( 'the_content', 'adeptbuild_hide_content_h1_in_hero' );
+ * It removes itself after running once.
+ *
+ * @param string $content Filtered post content.
+ * @return string
+ */
+function adeptbuild_hide_content_h1_in_hero( $content ) {
+	remove_filter( 'the_content', 'adeptbuild_hide_content_h1_in_hero' );
+
+	if ( get_post_meta( get_the_ID(), '_adeptbuild_hero_title', true ) ) {
+		return $content;
+	}
+
+	if ( ! adeptbuild_get_leading_heading( $content ) ) {
+		return $content;
+	}
+
+	return preg_replace( '/^\s*<h[1-6]\b[^>]*>.*?<\/h[1-6]>/is', '', ltrim( $content ), 1 );
 }

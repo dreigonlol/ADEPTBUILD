@@ -19,27 +19,28 @@ Text Domain: adeptbuild
    ========================================================================== */
 
 :root {
-    /* --- Palette: deep water + turquoise + sand --- */
-    --ab-primary: #0E7490;          /* Primary pool blue */
-    --ab-primary-dark: #0A5468;     /* Hover / text on light backgrounds */
-    --ab-primary-light: #E6F4F8;    /* Soft backgrounds */
-    --ab-aqua: #22B8CF;             /* Water accent */
-    --ab-accent: #D99A3E;           /* Sand / gold for CTAs */
-    --ab-accent-dark: #BC8130;
+    /* --- Palette: charcoal + signal red + gold, architectural design-build look --- */
+    --ab-primary: #F5333F;          /* Signal red - primary CTAs and links */
+    --ab-primary-dark: #C81E29;     /* Hover / pressed state for red */
+    --ab-primary-light: #FBEAEA;    /* Soft red-tinted backgrounds */
+    --ab-aqua: #FFCA10;             /* Gold accent - labels, underlines, links on dark */
+    --ab-accent: #FFCA10;           /* Gold - secondary CTAs */
+    --ab-accent-dark: #DBAF00;
 
-    --ab-deep: #0B2F3E;             /* Dark corporate background */
-    --ab-deep-soft: #123E51;
+    --ab-deep: #1A1A1A;             /* Near-black corporate background */
+    --ab-deep-soft: #262626;
 
-    --ab-heading: #0F2A35;
-    --ab-text: #4A5A63;
-    --ab-text-light: #7A8A93;
-    --ab-border: #E3E9EC;
+    --ab-heading: #1A1A1A;
+    --ab-text: #3D3D3D;
+    --ab-text-light: #6B6B6B;
+    --ab-border: #E5E5E5;
     --ab-surface: #FFFFFF;
-    --ab-surface-alt: #F6F9FA;
+    --ab-surface-alt: #F6F6F6;
+    --ab-slate: #1B2430;             /* Dark blue-slate — process-row text panels */
 
     /* --- Typography --- */
-    --ab-font-heading: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --ab-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --ab-font-heading: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --ab-font-body: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
     --ab-fs-base: 1.0625rem;   /* 17px */
     --ab-fs-sm: 0.9375rem;
@@ -57,14 +58,15 @@ Text Domain: adeptbuild
     --ab-gutter: 24px;
     --ab-section-y: clamp(64px, 8vw, 110px);
 
-    /* --- Shapes and shadows --- */
-    --ab-radius-sm: 8px;
-    --ab-radius: 14px;
-    --ab-radius-lg: 24px;
-    --ab-radius-pill: 999px;
-    --ab-shadow-sm: 0 2px 8px rgba(11, 47, 62, 0.06);
-    --ab-shadow: 0 12px 32px rgba(11, 47, 62, 0.10);
-    --ab-shadow-lg: 0 24px 60px rgba(11, 47, 62, 0.16);
+    /* --- Shapes and shadows: sharp, architectural corners, except buttons
+       which use the template's soft-square (not fully sharp, not pill) --- */
+    --ab-radius-sm: 0px;
+    --ab-radius: 0px;
+    --ab-radius-lg: 0px;
+    --ab-radius-pill: 6px;
+    --ab-shadow-sm: 0 2px 8px rgba(26, 26, 26, 0.06);
+    --ab-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
+    --ab-shadow-lg: 0 24px 60px rgba(26, 26, 26, 0.16);
 
     --ab-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -86,13 +88,21 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
+/* Site-wide dark-blue background (used to be body.home only) so every
+   page reads as one continuous surface between .ab-page-hero above and
+   .site-footer below, both already this color everywhere. Self-contained
+   "card" components (.ab-card, .ab-post-card, .ab-sidebar .widget, form
+   inputs) keep their own light background and default dark text, so they
+   stay legible floating on top of it unchanged — only bare text that
+   used to sit directly on the old white page background needs a
+   light-on-dark override, scoped to .ab-entry-content and .ab-404 below. */
 body {
     margin: 0;
     font-family: var(--ab-font-body);
     font-size: var(--ab-fs-base);
     line-height: var(--ab-lh-body);
     color: var(--ab-text);
-    background: var(--ab-surface);
+    background: var(--ab-deep);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -148,7 +158,7 @@ code, pre {
 }
 pre {
     background: var(--ab-deep);
-    color: #E6F4F8;
+    color: #FBEAEA;
     padding: 1.25em;
     border-radius: var(--ab-radius);
     overflow-x: auto;
@@ -244,6 +254,9 @@ hr {
 .ab-grid--2 { grid-template-columns: repeat(2, 1fr); }
 .ab-grid--3 { grid-template-columns: repeat(3, 1fr); }
 .ab-grid--4 { grid-template-columns: repeat(4, 1fr); }
+/* Legacy inner-container flattening, same reason as the other components
+   in this file — each card needs to be a direct grid child. */
+.ab-grid > .wp-block-group__inner-container { display: contents; }
 
 /* Section heading */
 .ab-section-head {
@@ -309,7 +322,7 @@ a.ab-btn {
     border: 2px solid var(--ab-primary);
     border-radius: var(--ab-radius-pill);
     background: var(--ab-primary);
-    color: #fff;
+    color: var(--ab-deep);
     cursor: pointer;
     text-align: center;
     transition: transform var(--ab-transition), box-shadow var(--ab-transition),
@@ -326,7 +339,7 @@ a.ab-btn:hover {
     border-color: var(--ab-primary-dark);
     color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(14, 116, 144, 0.28);
+    box-shadow: 0 12px 24px rgba(200, 30, 41, 0.32);
 }
 
 .ab-btn--accent {
@@ -338,7 +351,7 @@ a.ab-btn:hover {
     background: var(--ab-accent-dark);
     border-color: var(--ab-accent-dark);
     color: var(--ab-deep);
-    box-shadow: 0 12px 24px rgba(217, 154, 62, 0.32);
+    box-shadow: 0 12px 24px rgba(255, 202, 16, 0.32);
 }
 
 .ab-btn--outline {
@@ -429,16 +442,37 @@ a.ab-btn:hover {
 }
 .ab-social a:hover { background: var(--ab-primary); color: #fff; }
 
-/* Main bar */
+/* Main bar — fully transparent, overlaid on the page-hero image/video
+   underneath it (see ".ab-page-hero" margin-top below), like the template's
+   header; it only picks up a solid backdrop once scrolled past the hero. */
 .site-header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: #fff;
-    box-shadow: 0 1px 0 var(--ab-border);
-    transition: box-shadow var(--ab-transition);
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    transition: box-shadow var(--ab-transition), background-color var(--ab-transition), backdrop-filter var(--ab-transition);
 }
-.site-header.is-stuck { box-shadow: 0 6px 24px rgba(11, 47, 62, 0.10); }
+.site-header.is-stuck {
+    background: rgba(26, 26, 26, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 6px 24px rgba(26, 26, 26, 0.18);
+}
+
+/* backdrop-filter (like transform/filter) makes an element a new
+   "containing block" for any position:fixed descendant — which includes
+   .main-navigation's mobile panel, nested inside this header. That traps
+   the fixed panel's fixed inset against the ~84px-tall header box instead
+   of the real viewport, collapsing it to a sliver. Dropping the blur only
+   while the mobile menu is open removes that trap; the header is fully
+   covered by the white panel at that point anyway, so the blur isn't missed. */
+body.ab-menu-open .site-header {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
 
 .ast-primary-header-bar > .ast-container {
     display: flex;
@@ -452,6 +486,29 @@ a.ab-btn:hover {
 .site-branding img,
 .custom-logo { max-height: 56px; width: auto; }
 
+/* Logo centered between two menu halves, like the template — JS-driven:
+   splitMenuAroundLogo() in navigation.js moves the second half of the menu
+   items and the logo itself into this arrangement on desktop only (the
+   logo has to stay put in the closed mobile header bar instead, since the
+   split-open nav panel is hidden until tapped). Without JS, or below the
+   split's breakpoint, nothing here matches and the header just falls back
+   to the plain logo-then-nav row above — never overlapping either way. */
+.main-navigation--split {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: clamp(20px, 3vw, 48px);
+}
+.main-navigation--split .main-header-menu {
+    flex: 1 1 0;
+    min-width: 0;
+}
+.main-navigation--split .main-header-menu--left { justify-content: flex-end; }
+.main-navigation--split .main-header-menu--right { justify-content: flex-start; }
+.main-navigation--split .site-branding { flex: 0 0 auto; }
+
 .site-title {
     font-size: 1.5rem;
     font-weight: 800;
@@ -459,12 +516,12 @@ a.ab-btn:hover {
     margin: 0;
     line-height: 1.15;
 }
-.site-title a { color: var(--ab-heading); }
-.site-title a:hover { color: var(--ab-primary); }
+.site-title a { color: #fff; }
+.site-title a:hover { color: var(--ab-aqua); }
 .site-description {
     margin: 2px 0 0;
     font-size: var(--ab-fs-xs);
-    color: var(--ab-text-light);
+    color: rgba(255, 255, 255, 0.65);
     letter-spacing: 0.04em;
     text-transform: uppercase;
 }
@@ -492,7 +549,7 @@ a.ab-btn:hover {
     font-family: var(--ab-font-heading);
     font-size: 0.9375rem;
     font-weight: 500;
-    color: var(--ab-heading);
+    color: rgba(255, 255, 255, 0.92);
     border-radius: var(--ab-radius-sm);
     position: relative;
 }
@@ -515,7 +572,13 @@ a.ab-btn:hover {
 .main-header-menu > .current-menu-ancestor > a::after { transform: scaleX(1); }
 
 .main-header-menu > li:hover > a,
-.main-header-menu > .current-menu-item > a { color: var(--ab-primary); }
+.main-header-menu > .current-menu-item > a {
+    color: var(--ab-primary);
+    background: linear-gradient(90deg, var(--ab-primary), var(--ab-aqua));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 /* Submenus */
 .main-header-menu li { position: relative; }
@@ -558,6 +621,66 @@ a.ab-btn:hover {
     color: var(--ab-primary-dark);
 }
 
+/* Mega menu — "Services" / "Featured" dropdowns render as image cards
+   instead of a plain text list. A fixed 3-column grid (wrapping to a 2nd
+   row for Services' 6 items) at a capped width, rather than forcing every
+   item into one ever-widening row: a single-row panel for 6 items runs
+   ~1050px wide, which can't fit centered under a trigger sitting near the
+   edge of a merely-desktop-width (not ultra-wide) window. The panel's
+   horizontal position is clamped to the viewport by JS on open — see
+   positionMegaMenu() in navigation.js — since that requires knowing the
+   trigger's actual on-screen position, which pure CSS has no access to.
+   Mobile switches this to a single vertical column further down. */
+.main-header-menu .sub-menu.mega-menu {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(140px, 1fr));
+    width: min(560px, calc(100vw - 32px));
+    gap: 12px;
+    padding: 18px;
+}
+
+/* Scoped under .sub-menu.mega-menu (not just .mega-menu__link) so these
+   beat the generic ".main-header-menu .sub-menu a" rule above on
+   specificity — that rule would otherwise win and force display:block,
+   collapsing the card back into a plain text row. */
+.main-header-menu .sub-menu.mega-menu .mega-menu__link {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px;
+    border-radius: var(--ab-radius-sm);
+    color: var(--ab-heading);
+}
+.main-header-menu .sub-menu.mega-menu .mega-menu__link:hover,
+.main-header-menu .sub-menu.mega-menu .mega-menu__link:focus-visible {
+    background: var(--ab-primary-light);
+    color: var(--ab-primary-dark);
+}
+
+.main-header-menu .sub-menu.mega-menu .mega-menu__thumb {
+    display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--ab-radius-sm);
+    overflow: hidden;
+    background: var(--ab-surface-alt);
+}
+.main-header-menu .sub-menu.mega-menu .mega-menu__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--ab-transition);
+}
+.main-header-menu .sub-menu.mega-menu .mega-menu__link:hover .mega-menu__thumb img,
+.main-header-menu .sub-menu.mega-menu .mega-menu__link:focus-visible .mega-menu__thumb img { transform: scale(1.06); }
+
+.main-header-menu .sub-menu.mega-menu .mega-menu__label {
+    font-family: var(--ab-font-heading);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
 .menu-item-has-children > a > .ab-caret { margin-left: 6px; transition: transform var(--ab-transition); }
 .menu-item-has-children:hover > a > .ab-caret,
 .menu-item-has-children.is-expanded > a > .ab-caret,
@@ -571,10 +694,10 @@ a.ab-btn:hover {
     width: 46px;
     height: 46px;
     padding: 0;
-    background: var(--ab-primary-light);
+    background: rgba(255, 255, 255, 0.14);
     border: 0;
     border-radius: var(--ab-radius-sm);
-    color: var(--ab-primary-dark);
+    color: #fff;
     cursor: pointer;
 }
 .menu-toggle:hover { background: var(--ab-primary); color: #fff; }
@@ -597,6 +720,53 @@ a.ab-btn:hover {
 .menu-toggle[aria-expanded="true"] .menu-toggle__bars span:nth-child(2) { opacity: 0; }
 .menu-toggle[aria-expanded="true"] .menu-toggle__bars span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
+/* --- Floating contact tab + WhatsApp bubble, pinned to the right edge --- */
+.ab-floating-ctas {
+    position: fixed;
+    top: 42%;
+    right: 0;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+}
+
+.ab-floating-cta {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 11px;
+    background: var(--ab-primary);
+    color: #fff;
+    font-family: var(--ab-font-heading);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: var(--ab-radius-sm) 0 0 var(--ab-radius-sm);
+    box-shadow: var(--ab-shadow);
+    transition: background-color var(--ab-transition), padding var(--ab-transition);
+}
+.ab-floating-cta:hover { background: var(--ab-primary-dark); color: #fff; padding-inline-end: 15px; }
+
+.ab-floating-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin-right: 14px;
+    border-radius: 50%;
+    background: #25D366;
+    color: #fff;
+    box-shadow: var(--ab-shadow);
+    transition: transform var(--ab-transition);
+}
+.ab-floating-whatsapp:hover { transform: scale(1.08); color: #fff; }
+
 /* ==========================================================================
    7. HERO
    ========================================================================== */
@@ -608,19 +778,79 @@ a.ab-btn:hover {
     min-height: clamp(520px, 76vh, 760px);
     padding: clamp(80px, 10vw, 130px) 0 clamp(110px, 12vw, 160px);
     background:
-        linear-gradient(115deg, rgba(11, 47, 62, 0.90) 0%, rgba(14, 116, 144, 0.72) 55%, rgba(34, 184, 207, 0.42) 100%),
-        radial-gradient(circle at 78% 22%, #22B8CF 0%, transparent 55%),
-        linear-gradient(160deg, #0B2F3E 0%, #0E7490 100%);
+        linear-gradient(115deg, rgba(26, 26, 26, 0.90) 0%, rgba(245, 51, 63, 0.72) 55%, rgba(255, 202, 16, 0.42) 100%),
+        radial-gradient(circle at 78% 22%, #FFCA10 0%, transparent 55%),
+        linear-gradient(160deg, #1A1A1A 0%, #F5333F 100%);
     background-size: cover;
     background-position: center;
     color: rgba(255, 255, 255, 0.88);
     overflow: hidden;
 }
 
+/* Video variant — used for per-page custom heroes (individual pages
+   build their own hero directly into their content instead of getting
+   the theme's built-in one; see page.php) that want real footage instead
+   of the plain gradient. Same plain dark vignette as ".ab-page-hero__overlay"
+   (no brand-color wash over the footage), and a two-up grid so a form
+   card can sit beside the heading instead of only stacking under it.
+
+   Also full-bleed and pulled up under the transparent header, exactly
+   like ".ab-page-hero--video" above (this is what replaces that hero on
+   pages that opt out of it in page.php) — the section's own ".ast-container"
+   still centers its actual content to the normal 1200px column. */
+.ab-hero--video {
+    background: var(--ab-deep);
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    margin-top: calc(-1 * var(--ab-header-h));
+    min-height: calc(clamp(520px, 76vh, 760px) + var(--ab-header-h));
+    padding-top: calc(var(--ab-header-h) + clamp(80px, 10vw, 130px));
+}
+.ab-hero__video {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.ab-hero--video .ab-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.8) 0%, rgba(26, 26, 26, 0.3) 45%, rgba(26, 26, 26, 0.1) 100%);
+}
+.ab-hero--video .ast-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+.ab-hero__grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(24px, 4vw, 56px);
+    flex-wrap: wrap;
+}
+.ab-hero__form-card {
+    flex: 0 1 340px;
+    background: var(--ab-surface);
+    border-radius: var(--ab-radius-lg);
+    box-shadow: var(--ab-shadow-lg);
+    padding: clamp(24px, 3vw, 32px);
+}
+.ab-hero__form-card h3 {
+    margin: 0 0 16px;
+    text-align: center;
+    font-size: 1.125rem;
+}
+
 .ab-hero__content {
     position: relative;
     z-index: 2;
     max-width: 680px;
+    flex: 1 1 420px;
 }
 
 .ab-hero__badge {
@@ -644,7 +874,7 @@ a.ab-btn:hover {
 .ab-hero h1 {
     color: #fff;
     margin-bottom: 22px;
-    text-shadow: 0 2px 24px rgba(11, 47, 62, 0.35);
+    text-shadow: 0 2px 24px rgba(26, 26, 26, 0.35);
 }
 .ab-hero h1 em {
     font-style: normal;
@@ -681,7 +911,8 @@ a.ab-btn:hover {
     color: rgba(255, 255, 255, 0.68);
 }
 
-/* Decorative bottom wave */
+/* Decorative bottom wave — matches the page background it blends into,
+   which is now dark blue site-wide (see the body rule above). */
 .ab-wave {
     position: absolute;
     left: 0;
@@ -690,20 +921,61 @@ a.ab-btn:hover {
     z-index: 1;
     width: 100%;
     height: auto;
-    color: var(--ab-surface);
+    color: var(--ab-deep);
     pointer-events: none;
 }
 .ab-wave--alt { color: var(--ab-surface-alt); }
 
-/* Inner-page header */
+/* Inner-page header — pulled up by the header's own (transparent) height
+   and given that much extra top padding, so the background extends behind
+   the overlaid nav bar while the title itself still clears it. Bottom edge
+   stays put since the added padding cancels out the added negative margin. */
 .ab-page-hero {
     position: relative;
-    padding: clamp(56px, 7vw, 92px) 0 clamp(72px, 9vw, 110px);
-    background: linear-gradient(120deg, #0B2F3E 0%, #0E7490 100%);
+    margin-top: calc(-1 * var(--ab-header-h));
+    padding: calc(var(--ab-header-h) + clamp(56px, 7vw, 92px)) 0 clamp(72px, 9vw, 110px);
+    background: linear-gradient(120deg, #1A1A1A 0%, #F5333F 100%);
     color: rgba(255, 255, 255, 0.82);
     overflow: hidden;
 }
 .ab-page-hero h1 { color: #fff; margin: 0; }
+
+/* --- Video hero: front page only (adeptbuild_page_hero() only renders
+   the <video> when is_front_page() finds assets/img/videohome.mp4) —
+   taller than the plain gradient banner so the footage has room to read,
+   with a tint overlay so the title stays legible over moving footage.
+   min-height grows by the same header height its margin-top subtracts, so
+   the box extends upward under the header instead of shrinking. --- */
+.ab-page-hero--video {
+    display: flex;
+    align-items: flex-end;
+    min-height: calc(clamp(480px, 78vh, 820px) + var(--ab-header-h));
+    padding-top: var(--ab-header-h);
+    padding-bottom: clamp(48px, 6vw, 84px);
+    background: var(--ab-deep);
+}
+.ab-page-hero__video {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* Plain dark vignette, heaviest low where the title sits, fading to
+   nothing higher up — the footage reads in its own natural color instead
+   of through a brand-color wash. */
+.ab-page-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.85) 0%, rgba(26, 26, 26, 0.4) 40%, rgba(26, 26, 26, 0) 75%);
+}
+.ab-page-hero--video .ast-container { position: relative; z-index: 2; }
+.ab-page-hero--video h1 {
+    font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+    max-width: 640px;
+}
 
 /*
  * Opt-in utility: pulls a single block up so it overlaps the bottom of the
@@ -760,7 +1032,7 @@ a.ab-btn:hover {
     width: 60px;
     height: 60px;
     margin-bottom: 22px;
-    border-radius: 18px;
+    border-radius: 0;
     background: var(--ab-primary-light);
     color: var(--ab-primary);
     transition: background-color var(--ab-transition), color var(--ab-transition);
@@ -808,6 +1080,66 @@ a.ab-btn:hover {
     z-index: -1;
 }
 
+/* Full-bleed alternating process rows — photo fills one half edge to edge,
+   a solid dark slate panel with the step number fills the other, flipping
+   sides row to row. Which side the photo is on is set directly by markup
+   order (visual first vs. body first) rather than a reverse/order trick,
+   since these are hand-placed rows rather than a repeating loop.
+
+   Text colors here are pinned with the ".ab-proto-process" prefix (not
+   just the bare "__body h3"/"__body p" class) so they win outright over
+   ".ab-entry-content h3"/"p" (same 2-part specificity, but declared later
+   in the file) — that rule exists for blog-post copy sitting directly on
+   the page's dark base and would otherwise force white text here too,
+   which happened to go unnoticed back when this panel was still cream. */
+.ab-process-rows { display: flex; flex-direction: column; }
+.ab-process-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: clamp(360px, 42vw, 540px);
+}
+.ab-process-row__visual { position: relative; overflow: hidden; }
+.ab-process-row__visual img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.ab-process-row__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--ab-slate);
+    padding: clamp(32px, 5vw, 56px);
+}
+.ab-proto-process .ab-process-row__num {
+    font-family: var(--ab-font-heading);
+    font-size: 1.0625rem;
+    color: var(--ab-aqua);
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+}
+.ab-proto-process .ab-process-row__body h3 { font-size: clamp(1.5rem, 2.5vw, 2rem); margin-bottom: 16px; color: #fff; }
+.ab-proto-process .ab-process-row__body p { max-width: 420px; color: rgba(255, 255, 255, 0.75); margin: 0; }
+
+@media (max-width: 782px) {
+    .ab-process-row { grid-template-columns: 1fr; }
+    .ab-process-row__visual { min-height: 280px; }
+    /* Rows alternate photo-first/text-first for the desktop 2-column
+       layout, so every other row's markup has the text block before the
+       photo. Stacked to one column that reordering would otherwise put
+       two text blocks back to back at the seam between rows (and two
+       photos back to back at the next one) — pinning the visual first
+       and the body second keeps every row photo-then-caption regardless
+       of which way that particular row's markup was written. */
+    .ab-process-row__visual { order: 1; }
+    .ab-process-row__body { order: 2; }
+}
+
 /* Media: text + image */
 .ab-media {
     display: grid;
@@ -816,6 +1148,14 @@ a.ab-btn:hover {
     align-items: center;
 }
 .ab-media--reverse .ab-media__visual { order: -1; }
+/* Same legacy inner-container flattening as the other components (see
+   ".ab-service-strips" etc. below) — the visual and text column need to
+   be direct grid children of ".ab-media", and the image needs to be a
+   direct child of ".ab-media__visual" for its height:100% to resolve
+   against that element's own aspect-ratio box instead of an intervening
+   auto-height wrapper. */
+.ab-media > .wp-block-group__inner-container,
+.ab-media__visual > .wp-block-group__inner-container { display: contents; }
 
 .ab-media__visual {
     position: relative;
@@ -823,7 +1163,7 @@ a.ab-btn:hover {
     overflow: hidden;
     box-shadow: var(--ab-shadow);
     aspect-ratio: 4 / 3;
-    background: linear-gradient(140deg, #0E7490 0%, #22B8CF 100%);
+    background: linear-gradient(140deg, #F5333F 0%, #FFCA10 100%);
 }
 .ab-media__visual img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -858,9 +1198,208 @@ a.ab-btn:hover {
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: var(--ab-primary-light) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230E7490' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 13px no-repeat;
+    background: var(--ab-primary-light) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23F5333F' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 13px no-repeat;
 }
 .ab-section--deep .ab-checklist li { color: rgba(255, 255, 255, 0.82); }
+
+/* Full-bleed hover-expanding service strips — a full-width row of narrow
+   photo panels, each with a vertical label; hovering (or focusing, for
+   keyboard users) grows that one panel and reveals its description while
+   its neighbors yield space, via an animated flex-basis rather than JS. */
+.ab-service-strips {
+    display: flex;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    min-height: clamp(420px, 50vw, 600px);
+    overflow: hidden;
+}
+.ab-service-strip {
+    position: relative;
+    flex: 1 1 0%;
+    min-width: 0;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    color: #fff;
+    transition: flex-grow var(--ab-transition);
+}
+/* Covers the whole card so it's clickable everywhere, sitting above the
+   content visually (highest z-index) but with no fill of its own — the
+   real content underneath still shows through and drives :hover/:focus on
+   the card via the descendant-aware selectors below. It's a real button
+   block (className lands on this wrapping ".wp-block-button" div; link
+   text = the service name, so it stays a proper accessible name for
+   screen readers/keyboard users) — font-size:0 on the link itself just
+   hides that text visually since the card already shows the label. */
+.ab-service-strip__link {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+}
+.ab-service-strip__link .wp-block-button__link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-size: 0;
+    line-height: 0;
+}
+.ab-service-strip__link .wp-block-button__link:hover { background: transparent; box-shadow: none; transform: none; }
+.ab-service-strip::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.9) 0%, rgba(26, 26, 26, 0.45) 45%, rgba(26, 26, 26, 0.18) 100%);
+    transition: background-color var(--ab-transition);
+}
+.ab-service-strip img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.4) brightness(0.75);
+    transform: scale(1.04);
+    transition: filter 0.5s ease, transform 0.6s ease;
+}
+.ab-service-strip__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 26px 18px;
+}
+.ab-service-strip__num {
+    display: block;
+    font-family: var(--ab-font-heading);
+    font-size: var(--ab-fs-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ab-aqua);
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+.ab-service-strip__label {
+    display: block;
+    font-family: var(--ab-font-heading);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    line-height: 1.25;
+    color: #fff;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+}
+.ab-service-strip__desc {
+    display: block;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    font-size: var(--ab-fs-sm);
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 10px;
+    transition: max-height var(--ab-transition), opacity var(--ab-transition);
+}
+.ab-service-strip:hover,
+.ab-service-strip:focus-within {
+    flex-grow: 2.6;
+}
+.ab-service-strip:hover img,
+.ab-service-strip:focus-within img {
+    filter: grayscale(0) brightness(1);
+    transform: scale(1);
+}
+.ab-service-strip:hover::before,
+.ab-service-strip:focus-within::before {
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.85) 0%, rgba(26, 26, 26, 0.2) 60%, rgba(26, 26, 26, 0) 100%);
+}
+.ab-service-strip:hover .ab-service-strip__label,
+.ab-service-strip:focus-within .ab-service-strip__label {
+    writing-mode: horizontal-tb;
+    transform: none;
+}
+.ab-service-strip:hover .ab-service-strip__desc,
+.ab-service-strip:focus-within .ab-service-strip__desc {
+    max-height: 100px;
+    opacity: 1;
+}
+
+@media (max-width: 900px) {
+    .ab-service-strips { flex-direction: column; min-height: 0; }
+    .ab-service-strip { min-height: 130px; flex: none; }
+    .ab-service-strip__label { writing-mode: horizontal-tb; transform: none; }
+    .ab-service-strip__desc { max-height: 100px; opacity: 1; }
+    .ab-service-strip img { filter: grayscale(0) brightness(0.8); transform: none; }
+}
+
+/* Full-bleed horizontal video slider — native scroll-snap (works, and
+   feels smooth, with no JS at all), with prev/next buttons above the track
+   as a progressive enhancement: navigation.js adds ".ab-video-slider--js"
+   once it wires them up (and disables whichever end is already fully
+   scrolled to), so without JS they just never appear and the row is still
+   fully usable by touch/trackpad/scrollbar drag alone. Ghost-button styling
+   (transparent, light border) to sit on the dark page background these
+   normally appear on. */
+.ab-video-slider__nav {
+    display: none;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin: 0 0 14px;
+}
+.ab-video-slider--js .ab-video-slider__nav { display: flex; }
+.ab-video-slider__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--ab-radius-pill);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color var(--ab-transition), border-color var(--ab-transition), color var(--ab-transition);
+}
+.ab-video-slider__btn:hover { background: var(--ab-primary); border-color: var(--ab-primary); color: var(--ab-deep); }
+.ab-video-slider__btn:disabled { opacity: 0.35; cursor: default; }
+.ab-video-slider__btn:disabled:hover { background: transparent; border-color: rgba(255, 255, 255, 0.35); color: #fff; }
+.ab-video-slider__btn svg { width: 18px; height: 18px; }
+
+.ab-video-slider__track {
+    display: flex;
+    gap: 20px;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 4px clamp(20px, 5vw, calc((100vw - var(--ab-container)) / 2 + var(--ab-gutter))) 12px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-padding-left: clamp(20px, 5vw, calc((100vw - var(--ab-container)) / 2 + var(--ab-gutter)));
+    scrollbar-width: none;
+}
+.ab-video-slider__track::-webkit-scrollbar { display: none; }
+.ab-video-slider__item {
+    flex: 0 0 clamp(240px, 30vw, 360px);
+    scroll-snap-align: start;
+}
+.ab-video-slider__item .wp-block-embed { margin-bottom: 0; }
+.ab-video-slider__item .wp-block-embed__wrapper {
+    box-shadow: var(--ab-shadow);
+    transition: transform var(--ab-transition);
+}
+.ab-video-slider__item:hover .wp-block-embed__wrapper { transform: translateY(-4px); }
+
+/* Same legacy inner-container flattening as the other full-bleed
+   components above — each item needs to be a direct flex child of
+   ".ab-video-slider__track", not wrapped one level deeper. */
+.ab-video-slider__track > .wp-block-group__inner-container { display: contents; }
+
+@media (max-width: 600px) {
+    .ab-video-slider__nav { display: none !important; }
+}
 
 /* Project gallery */
 .ab-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -871,7 +1410,7 @@ a.ab-btn:hover {
     border-radius: var(--ab-radius-lg);
     overflow: hidden;
     aspect-ratio: 4 / 3;
-    background: linear-gradient(150deg, #0B2F3E, #0E7490 60%, #22B8CF);
+    background: linear-gradient(150deg, #1A1A1A, #F5333F 60%, #FFCA10);
     box-shadow: var(--ab-shadow-sm);
 }
 .ab-gallery__item--wide { grid-column: span 2; }
@@ -890,7 +1429,7 @@ a.ab-btn:hover {
     flex-direction: column;
     justify-content: flex-end;
     padding: 26px;
-    background: linear-gradient(to top, rgba(11, 47, 62, 0.88) 0%, rgba(11, 47, 62, 0.20) 55%, transparent 100%);
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.88) 0%, rgba(26, 26, 26, 0.20) 55%, transparent 100%);
     color: #fff;
     opacity: 0;
     transition: opacity var(--ab-transition);
@@ -946,7 +1485,7 @@ a.ab-btn:hover {
     position: relative;
     padding: clamp(48px, 6vw, 72px) clamp(28px, 5vw, 64px);
     border-radius: var(--ab-radius-lg);
-    background: linear-gradient(115deg, #0B2F3E 0%, #0E7490 100%);
+    background: linear-gradient(115deg, #1A1A1A 0%, #F5333F 100%);
     color: rgba(255, 255, 255, 0.85);
     overflow: hidden;
     display: flex;
@@ -955,6 +1494,11 @@ a.ab-btn:hover {
     gap: 36px;
     flex-wrap: wrap;
 }
+/* Legacy inner-container flattening, same reason as the other components
+   in this file — the text group and the buttons need to be direct flex
+   children so "justify-content: space-between" actually has two items to
+   split apart instead of one wrapper containing both. */
+.ab-cta > .wp-block-group__inner-container { display: contents; }
 .ab-cta::after {
     content: "";
     position: absolute;
@@ -963,7 +1507,7 @@ a.ab-btn:hover {
     width: 320px;
     height: 320px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(34, 184, 207, 0.45), transparent 70%);
+    background: radial-gradient(circle, rgba(255, 202, 16, 0.45), transparent 70%);
 }
 .ab-cta > * { position: relative; z-index: 1; }
 .ab-cta h2 { color: #fff; margin-bottom: 10px; }
@@ -1014,7 +1558,7 @@ select:focus,
 textarea:focus {
     outline: none;
     border-color: var(--ab-primary);
-    box-shadow: 0 0 0 4px rgba(14, 116, 144, 0.12);
+    box-shadow: 0 0 0 4px rgba(245, 51, 63, 0.12);
 }
 textarea { min-height: 140px; resize: vertical; }
 
@@ -1037,6 +1581,38 @@ label {
     box-shadow: var(--ab-shadow);
 }
 .ab-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+/* --- Underline form: minimal fields on a dark background, no boxes —
+   for a contact section sitting on a photo/dark backdrop. --- */
+.ab-form--underline {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    gap: 22px;
+}
+.ab-form--underline label {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: var(--ab-fs-xs);
+}
+.ab-form--underline input,
+.ab-form--underline textarea,
+.ab-form--underline select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 0;
+    padding: 10px 2px;
+    color: #fff;
+}
+.ab-form--underline input::placeholder,
+.ab-form--underline textarea::placeholder { color: rgba(255, 255, 255, 0.4); }
+.ab-form--underline input:focus,
+.ab-form--underline textarea:focus,
+.ab-form--underline select:focus {
+    box-shadow: none;
+    border-bottom-color: #fff;
+}
+.ab-form--underline textarea { min-height: 90px; resize: vertical; }
 
 /* ==========================================================================
    10. BLOG AND CONTENT
@@ -1068,7 +1644,7 @@ label {
 .ab-post-card__thumb {
     aspect-ratio: 16 / 10;
     overflow: hidden;
-    background: linear-gradient(140deg, #0E7490, #22B8CF);
+    background: linear-gradient(140deg, #F5333F, #FFCA10);
 }
 .ab-post-card__thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
 .ab-post-card:hover .ab-post-card__thumb img { transform: scale(1.05); }
@@ -1099,6 +1675,38 @@ label {
 .ab-entry-content h3 { margin-top: 1.5em; }
 .ab-entry-content img,
 .ab-entry-content .wp-block-image img { border-radius: var(--ab-radius); }
+
+/* Light-on-dark type for page/post body copy now that it sits directly
+   on the site's dark-blue background (see the body rule near the top of
+   this file) — .ab-entry-content is only ever the actual article/page
+   text (page.php, single.php), never mixed with the light "card"
+   components (.ab-card, .ab-post-card, .ab-sidebar .widget) elsewhere in
+   the theme, so this can't wash out text that already has its own light
+   background to sit on. */
+.ab-entry-content h1,
+.ab-entry-content h2,
+.ab-entry-content h3,
+.ab-entry-content h4,
+.ab-entry-content h5,
+.ab-entry-content h6 { color: #fff; }
+.ab-entry-content,
+.ab-entry-content p,
+.ab-entry-content li,
+.ab-entry-content strong { color: rgba(255, 255, 255, 0.8); }
+.ab-entry-content a:not(.wp-element-button) { color: var(--ab-aqua); }
+.ab-entry-content a:not(.wp-element-button):hover { color: #fff; }
+.ab-entry-content blockquote {
+    background: rgba(255, 255, 255, 0.06);
+    border-left-color: var(--ab-aqua);
+    color: rgba(255, 255, 255, 0.85);
+}
+.ab-entry-content hr { background: rgba(255, 255, 255, 0.18); }
+.ab-entry-content table { color: rgba(255, 255, 255, 0.8); }
+.ab-entry-content th,
+.ab-entry-content td { border-color: rgba(255, 255, 255, 0.18); }
+.ab-entry-content th { background: rgba(255, 255, 255, 0.06); color: #fff; }
+.ab-entry-content .wp-caption-text,
+.ab-entry-content .wp-block-image figcaption { color: rgba(255, 255, 255, 0.6); }
 
 .wp-caption-text,
 .wp-block-image figcaption {
@@ -1131,6 +1739,10 @@ label {
 .ab-sidebar li:last-child { border-bottom: 0; }
 
 /* Pagination */
+/* Not scoped under .ab-entry-content: also used unwrapped in index.php's
+   blog/archive pagination. A solid light chip (rather than a border-only
+   button in the page's own heading color) keeps it readable regardless
+   of which of those two contexts it's sitting on the dark page bg in. */
 .ab-pagination { margin-top: 48px; }
 .ab-pagination .page-numbers {
     display: inline-flex;
@@ -1140,7 +1752,8 @@ label {
     height: 44px;
     padding: 0 12px;
     margin: 0 4px;
-    border: 1px solid var(--ab-border);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid transparent;
     border-radius: var(--ab-radius-sm);
     font-family: var(--ab-font-heading);
     font-weight: 600;
@@ -1156,6 +1769,8 @@ label {
 
 /* 404 */
 .ab-404 { text-align: center; padding: clamp(70px, 12vw, 140px) 0; }
+.ab-404 h1 { color: #fff; }
+.ab-404 .ab-lead { color: rgba(255, 255, 255, 0.75); }
 .ab-404__code {
     font-family: var(--ab-font-heading);
     font-size: clamp(5rem, 18vw, 11rem);
@@ -1214,6 +1829,41 @@ label {
 }
 .ab-footer-contact svg { color: var(--ab-aqua); flex-shrink: 0; margin-top: 4px; }
 
+.ab-footer-contact__phone a {
+    font-family: var(--ab-font-heading);
+    font-size: 1.375rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    color: #fff;
+}
+.ab-footer-contact__phone a:hover { color: var(--ab-aqua); }
+
+/* --- "Follow us" + outlined social row (footer only) --- */
+.ab-footer-follow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+}
+.ab-footer-follow__label {
+    font-size: var(--ab-fs-sm);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+}
+.ab-social--outline a {
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: transparent;
+    transition: transform var(--ab-transition), border-color var(--ab-transition), background-color var(--ab-transition);
+}
+.ab-social--outline a:hover {
+    background: transparent;
+    border-color: #fff;
+    transform: scale(1.1);
+}
+
 .ab-footer-bottom {
     display: flex;
     align-items: center;
@@ -1234,10 +1884,21 @@ label {
 
 .ab-reveal {
     opacity: 0;
-    transform: translateY(26px);
-    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(32px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
 }
 .ab-reveal.is-visible { opacity: 1; transform: none; }
+
+/* Directional variants — same .is-visible toggle, different starting
+   transform. Add one of these alongside .ab-reveal (e.g.
+   class="ab-reveal ab-reveal--left"). */
+.ab-reveal--left { transform: translateX(-40px); }
+.ab-reveal--right { transform: translateX(40px); }
+.ab-reveal--scale { transform: scale(0.92); }
+.ab-reveal--scale.is-visible,
+.ab-reveal--left.is-visible,
+.ab-reveal--right.is-visible { transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -1247,7 +1908,44 @@ label {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
     }
-    .ab-reveal { opacity: 1; transform: none; }
+    .ab-reveal,
+    .ab-reveal--left,
+    .ab-reveal--right,
+    .ab-reveal--scale { opacity: 1; transform: none; }
+}
+
+/* --- Giant gradient headline — for a hero-scale statement heading --- */
+.ab-gradient-heading {
+    font-family: var(--ab-font-heading);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-size: clamp(2.75rem, 7vw, 6rem);
+    margin: 0 0 0.4em;
+    background: linear-gradient(180deg, var(--ab-aqua) 0%, var(--ab-primary) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--ab-primary);
+}
+.ab-gradient-heading--light {
+    background: linear-gradient(180deg, #fff 0%, var(--ab-primary-light) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- Animated stat counter number ---
+   Add this class to any heading via the block editor's Additional CSS
+   Class(es) field. assets/js/navigation.js's initCounters() reads the
+   number already in the text (e.g. "250+") and counts up to it from 0
+   once it scrolls into view; without the script it just displays as-is. */
+.ab-counter-value {
+    background: linear-gradient(180deg, var(--ab-aqua), var(--ab-primary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--ab-primary);
 }
 
 /* ==========================================================================
@@ -1265,21 +1963,24 @@ label {
     /* Mobile menu breakpoint (same one Astra uses) */
     .menu-toggle { display: inline-flex; }
 
+    /* Full-width overlay under the header (not a narrow right-side
+       drawer) — it drops/fades in rather than sliding in from the side,
+       since there's no off-screen edge to slide from once it spans the
+       whole viewport. */
     .main-navigation {
         position: fixed;
-        inset: var(--ab-header-h) 0 0 auto;
-        width: min(380px, 88vw);
-        padding: 26px 24px 40px;
+        inset: var(--ab-header-h) 0 0 0;
+        padding: 12px 20px 40px;
         background: #fff;
-        border-left: 1px solid var(--ab-border);
         box-shadow: var(--ab-shadow-lg);
         overflow-y: auto;
-        transform: translateX(105%);
+        transform: translateY(-8px);
+        opacity: 0;
         visibility: hidden;
-        transition: transform var(--ab-transition), visibility var(--ab-transition);
-        z-index: 99;
+        transition: transform var(--ab-transition), opacity var(--ab-transition), visibility var(--ab-transition);
+        z-index: 999;
     }
-    .main-navigation.is-open { transform: translateX(0); visibility: visible; }
+    .main-navigation.is-open { transform: translateY(0); opacity: 1; visibility: visible; }
 
     .main-navigation ul { flex-direction: column; align-items: stretch; gap: 0; }
 
@@ -1304,6 +2005,47 @@ label {
         display: none;
     }
     .main-header-menu li.is-expanded > .sub-menu { display: block; }
+
+    /* Mega menu on mobile: a single full-width column of image cards,
+       stacked top to bottom, rather than the desktop's horizontal row
+       (reset from grid-auto-flow:column back to a plain vertical stack). */
+    .main-header-menu .sub-menu.mega-menu {
+        display: none;
+        grid-auto-flow: row;
+        grid-auto-columns: unset;
+        width: auto;
+        max-width: none;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 12px 4px 20px;
+    }
+    .main-header-menu li.is-expanded > .sub-menu.mega-menu { display: grid; }
+
+    .main-header-menu .sub-menu.mega-menu .mega-menu__link {
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
+        padding: 6px;
+    }
+    .main-header-menu .sub-menu.mega-menu .mega-menu__thumb { flex: 0 0 96px; aspect-ratio: 4 / 3; }
+    .main-header-menu .sub-menu.mega-menu .mega-menu__label { font-size: 0.9375rem; }
+
+    /* Top-level links are near-white everywhere to sit on the transparent
+       dark header — but the mobile panel itself is solid white, so that
+       would leave the labels essentially invisible (white on white) once
+       opened. The panel is never transparent, so always use the normal
+       dark heading color inside it regardless of scroll/page state. */
+    .main-navigation .main-header-menu > li > a {
+        color: var(--ab-heading);
+        background: none;
+        -webkit-text-fill-color: currentColor;
+    }
+    .main-navigation .main-header-menu > li:hover > a,
+    .main-navigation .main-header-menu > .current-menu-item > a {
+        color: var(--ab-primary);
+        background: none;
+        -webkit-text-fill-color: currentColor;
+    }
 
     .ab-header-actions .ast-button { display: none; }
 
@@ -1343,6 +2085,9 @@ label {
 
     .ab-btn-group { width: 100%; }
     .ab-btn-group > .ast-button { width: 100%; }
+
+    .ab-floating-cta { padding: 14px 8px; font-size: 0.6875rem; }
+    .ab-floating-whatsapp { width: 46px; height: 46px; margin-right: 10px; }
 }
 
 /* ==========================================================================
@@ -1419,14 +2164,23 @@ label {
 }
 .wp-block-gallery.has-nested-images > .wp-block-image:hover img { transform: scale(1.05); }
 
-/* --- Latest Posts: "More From Our Blog", 3-column grid --- */
+/* --- Latest Posts: "More From Our Blog", 3-column grid ---
+   !important + explicit li reset: WordPress's own ".is-grid"/".columns-3"
+   core CSS is flex-based and puts a fixed calc() width + right-margin on
+   each <li> for that layout. Left alone, that width fights the grid cell
+   width below and squeezes every card down to roughly its image's
+   intrinsic size — tall, narrow, word-wrapped columns instead of cards. --- */
 .wp-block-latest-posts.is-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 30px;
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 !important;
+}
+.wp-block-latest-posts.is-grid li {
+    width: auto !important;
+    margin: 0 !important;
 }
 
 .wp-block-latest-posts li {
@@ -1500,6 +2254,48 @@ label {
 }
 .wp-block-embed__wrapper iframe { width: 100%; }
 
+/* --- Lite-embed: click-to-play thumbnail that assets/js/lite-embed.js
+   swaps in for every YouTube embed on the site, so the real iframe only
+   loads once a visitor actually presses play. --- */
+.lite-video {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    touch-action: manipulation;
+}
+/* Fills the same aspect-ratio box WordPress gives the iframe it replaces. */
+.wp-embed-responsive .wp-has-aspect-ratio .lite-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.lite-video__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(26, 26, 26, 0.55);
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+    transition: transform var(--ab-transition), background-color var(--ab-transition);
+}
+.lite-video:hover .lite-video__play { transform: translate(-50%, -50%) scale(1.08); background: var(--ab-primary); }
+.lite-video__play svg { margin-left: 3px; color: #fff; }
+
 .wp-block-video figcaption,
 .wp-block-embed figcaption {
     font-size: var(--ab-fs-xs);
@@ -1547,14 +2343,14 @@ ol.wp-block-list li::marker {
 }
 
 @media (max-width: 1024px) {
-    .wp-block-latest-posts.is-grid { grid-template-columns: repeat(2, 1fr); }
+    .wp-block-latest-posts.is-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
 @media (max-width: 782px) {
     .wp-block-columns { flex-direction: column; }
     .wp-block-column { flex-basis: 100% !important; width: 100% !important; }
 
-    .wp-block-latest-posts.is-grid { grid-template-columns: 1fr; }
+    .wp-block-latest-posts.is-grid { grid-template-columns: 1fr !important; }
 }
 
 @media (max-width: 600px) {
@@ -1574,3 +2370,221 @@ ol.wp-block-list li::marker {
 .ab-mt-lg { margin-top: clamp(32px, 5vw, 56px); }
 .ab-lead { font-size: 1.125rem; }
 .ab-muted { color: var(--ab-text-light); }
+
+/* ==========================================================================
+   16. PAGE — "A full-service Construction & Design Company" (the site's
+   front page)
+   Scoped with ".home" instead of a page ID: WordPress adds that class to
+   <body> automatically whenever a page is set as the site's homepage in
+   Settings → Reading, and it stays correct even if the page gets
+   duplicated/recreated and swapped in later — unlike a page ID, which
+   changes every time. Nothing here leaks onto any other page built from
+   the same Gutenberg blocks, since only the homepage carries ".home".
+   ========================================================================== */
+
+/* --- 0. Immersive dark base: the whole SITE shares one background color
+   (see the body rule near the top of this file) instead of white gaps
+   between sections — only the sections with a photo of their own
+   (Services, How We Work, From Our Blog) look different here, and even
+   those lean on the same dark tone underneath their overlay. The header
+   itself is dark/transparent-overlay site-wide now (see section 6 above),
+   so nothing home-specific is needed for it here any more. --- */
+
+/* --- 1. Intro: single-column statement hero (no video sibling in the
+   current content, unlike the two-column version this rule used to
+   support) — capped width keeps the long headline/paragraph readable
+   instead of stretching edge to edge. --- */
+.home .ab-proto-intro {
+    display: block !important;
+}
+.home .ab-proto-intro > .wp-block-group__inner-container {
+    display: contents;
+}
+.home .ab-proto-intro-left {
+    max-width: 720px;
+}
+.home .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link {
+    padding: 7px 20px !important;
+    background: var(--ab-primary-light) !important;
+    color: var(--ab-primary-dark) !important;
+    font-size: var(--ab-fs-xs) !important;
+    letter-spacing: 0.04em;
+}
+.home .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link:hover {
+    background: var(--ab-primary) !important;
+    color: #fff !important;
+}
+.home .ab-proto-intro .wp-block-embed { margin-bottom: 0; }
+.home .ab-proto-intro-left h2 { color: #fff; }
+.home .ab-proto-intro-left p { color: rgba(255, 255, 255, 0.75); }
+.home .ab-proto-intro-left p strong { color: #fff; }
+/* Solid red reads close in value to the dark charcoal backdrop — swap
+   the primary CTA to the gold accent so it actually pops on dark sections. */
+.home .ab-proto-intro-left .wp-block-buttons:last-child .wp-block-button__link {
+    background: var(--ab-accent) !important;
+    border-color: var(--ab-accent) !important;
+    color: var(--ab-deep) !important;
+}
+.home .ab-proto-intro-left .wp-block-buttons:last-child .wp-block-button__link:hover {
+    background: var(--ab-accent-dark) !important;
+    border-color: var(--ab-accent-dark) !important;
+    color: var(--ab-deep) !important;
+}
+
+/* --- Full-bleed helper: breaks a Group block out of the theme's 1200px
+   content column so its background reaches the edges of the screen, while
+   ".ab-proto-inner" (nested one level in) keeps the actual content lined
+   up with the rest of the page. Page.php wraps everything in a centered
+   ".ast-container", so this is done with a CSS breakout instead of a
+   template change — keeps the fix scoped to this one page. --- */
+.home .ab-proto-services,
+.home .ab-proto-process,
+.home .ab-proto-philosophy,
+.home .ab-proto-blog {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+.home .ab-proto-inner {
+    max-width: var(--ab-container);
+    margin: 0 auto;
+    padding: 0 var(--ab-gutter);
+}
+
+/* --- 2. Our Services: heading + intro sit in the normal centered
+   container, then the full-bleed hover strips (.ab-service-strips,
+   defined with the other reusable components above) run edge to edge
+   below — each strip carries its own photo, so the section itself needs
+   no background image of its own beyond the page's dark base. --- */
+.home .ab-proto-services { padding: clamp(64px, 8vw, 100px) 0 0; }
+.home .ab-proto-services .ab-proto-inner { padding-bottom: clamp(32px, 4vw, 48px); }
+/* Same legacy inner-container wrapper as ".ab-proto-intro" above — needs
+   flattening here too so each strip becomes a direct flex child of
+   ".ab-service-strips" (and each strip's own image/content/link become
+   direct children of it) instead of every strip collapsing into one. */
+.ab-service-strips > .wp-block-group__inner-container,
+.ab-service-strip > .wp-block-group__inner-container { display: contents; }
+.home .ab-proto-services h2,
+.home .ab-proto-process h2,
+.home .ab-proto-blog h2 { color: #fff; }
+.home .ab-proto-services p { color: rgba(255, 255, 255, 0.72); max-width: 640px; }
+
+/* --- 3. Our Philosophy: big heading left, divider + copy right — no photo
+   of its own, so it just sits on the page's dark base like the rest of
+   the immersive sections instead of breaking it up with a light band. --- */
+.home .ab-proto-philosophy {
+    padding: clamp(56px, 7vw, 90px) 0;
+}
+.home .ab-proto-philosophy .ab-proto-inner {
+    display: grid !important;
+    grid-template-columns: 1fr 1.3fr !important;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+}
+.home .ab-proto-philosophy .ab-proto-inner > .wp-block-group__inner-container {
+    display: contents;
+}
+.home .ab-proto-philosophy h2 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    margin: 0;
+    background: linear-gradient(180deg, #fff 0%, var(--ab-aqua) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--ab-aqua);
+}
+.home .ab-proto-philosophy-copy {
+    padding-left: clamp(28px, 4vw, 56px);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+.home .ab-proto-philosophy-copy p {
+    font-size: 1.0625rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+.home .ab-proto-philosophy-copy a:not(.wp-element-button) {
+    display: inline-block;
+    margin-bottom: 22px;
+    font-weight: 600;
+    color: var(--ab-accent);
+}
+.home .ab-proto-philosophy-copy a:not(.wp-element-button):hover { color: var(--ab-accent-dark); }
+.home .ab-proto-philosophy-copy .wp-block-button__link {
+    background: var(--ab-accent) !important;
+    border-color: var(--ab-accent) !important;
+    color: var(--ab-deep) !important;
+}
+.home .ab-proto-philosophy-copy .wp-block-button__link:hover {
+    background: var(--ab-accent-dark) !important;
+    border-color: var(--ab-accent-dark) !important;
+}
+
+/* --- 4. How We Work: full-bleed alternating rows (.ab-process-row,
+   defined with the other reusable components above) — the heading sits in
+   the normal centered ".ab-proto-inner" container, the rows themselves are
+   siblings of it so they can run edge to edge under it. --- */
+.home .ab-proto-process { padding: clamp(64px, 8vw, 100px) 0 0; }
+.home .ab-proto-process .ab-proto-inner { padding-bottom: clamp(32px, 4vw, 48px); }
+/* Same legacy inner-container flattening as the services strips above, so
+   each row becomes a direct flex child of ".ab-process-rows" and each
+   row's visual/body become direct grid children of ".ab-process-row". */
+.ab-process-rows > .wp-block-group__inner-container,
+.ab-process-row > .wp-block-group__inner-container,
+.ab-process-row__body > .wp-block-group__inner-container { display: contents; }
+
+/* --- 5. Trust bar: plain row of linked logos, no card chrome ---
+   Built as a Group block (layout:flex, wrap) with the 7 images as direct
+   children — not a Columns block. Columns exist to hold distinct content
+   columns, so WordPress core forces every ".wp-block-column" to
+   "flex-basis:100% !important" below 782px to stack them for readability
+   on mobile; that rule (plus, apparently, extra !important layout CSS
+   Gutenberg can print per-block instance) kept winning the specificity
+   fight no matter how this was reinforced, because it's simply the wrong
+   tool for "one row of small logos that should just wrap." A Group in
+   flex layout has no such forced-stacking rule to fight, so this needs
+   far less CSS to behave. */
+.home .ab-proto-trust {
+    padding: clamp(36px, 5vw, 56px) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(24px, 5vw, 56px) !important;
+}
+.home .ab-proto-trust .wp-block-image { margin: 0; }
+.home .ab-proto-trust .wp-block-image img {
+    width: 64px;
+    height: 64px;
+    aspect-ratio: auto;
+    object-fit: contain;
+    border-radius: 0;
+    transition: transform var(--ab-transition);
+}
+.home .ab-proto-trust .wp-block-image a:hover img { transform: scale(1.18); }
+
+@media (max-width: 600px) {
+    .home .ab-proto-trust { gap: 20px !important; }
+    .home .ab-proto-trust .wp-block-image img { width: 44px; height: 44px; }
+}
+
+/* --- 6. Watch Our Videos: full-bleed slider (.ab-video-slider, defined
+   with the other reusable components above) — a plain heading with no
+   wrapping section of its own; ".ab-entry-content h2 { color: #fff }"
+   near the top of this file already covers its color. --- */
+
+/* --- 7. From Our Blog: photo background behind the default post cards --- */
+.home .ab-proto-blog {
+    padding: clamp(64px, 8vw, 100px) 0;
+    background-image:
+        linear-gradient(180deg, rgba(26,26,26,.55) 0%, rgba(26,26,26,.82) 100%),
+        url('https://adeptbuild.com/wp-content/uploads/2022/09/gagrage.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.home .ab-proto-blog .wp-block-latest-posts { margin-top: 40px; }
+
+@media (max-width: 900px) {
+    .home .ab-proto-philosophy .ab-proto-inner { grid-template-columns: 1fr !important; }
+    .home .ab-proto-philosophy-copy { padding-left: 0; border-left: 0; padding-top: 24px; border-top: 1px solid var(--ab-border); }
+}

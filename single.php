@@ -9,7 +9,7 @@ get_header();
 
 while ( have_posts() ) :
 	the_post();
-	adeptbuild_page_hero( get_the_title() );
+	adeptbuild_page_hero( adeptbuild_get_page_hero_title() );
 	?>
 
 	<main id="primary" class="site-main ab-content-area">
@@ -28,6 +28,7 @@ while ( have_posts() ) :
 
 					<div class="ab-entry-content">
 						<?php
+						add_filter( 'the_content', 'adeptbuild_hide_content_h1_in_hero' );
 						the_content();
 
 						wp_link_pages(
