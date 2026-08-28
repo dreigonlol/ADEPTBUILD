@@ -2417,15 +2417,26 @@ h2.ab-services-showcase__title {
 
 .wp-block-column .wp-block-button { margin-top: auto; padding-top: 8px; }
 
-/* --- Gallery: portfolio pages, 18-37 photos in a responsive grid --- */
+/* --- Gallery: portfolio pages, 18-37 photos in a responsive grid ---
+   Photo evidence pages (Agnew Project, Ensley Project, etc.) rarely start
+   with a caption per photo, but should be ready for one the moment an
+   editor types one into a WP image block's built-in "Add caption" field —
+   no markup changes needed later. The figcaption that produces shows as a
+   hover-reveal overlay, same dark-gradient-plus-white-text language as
+   ".ab-content-band__caption" / ".ab-gallery__overlay" elsewhere in the
+   theme; with no caption typed in yet, it's just an empty (invisible)
+   overlay and the photo shows exactly as it does today. */
 .wp-block-gallery.has-nested-images {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
 }
 .wp-block-gallery.has-nested-images > .wp-block-image {
+    position: relative;
     margin: 0;
     width: auto !important;
+    overflow: hidden;
+    border-radius: var(--ab-radius);
 }
 .wp-block-gallery.has-nested-images > .wp-block-image img {
     width: 100%;
@@ -2433,9 +2444,177 @@ h2.ab-services-showcase__title {
     aspect-ratio: 4 / 3;
     object-fit: cover;
     border-radius: var(--ab-radius);
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s ease;
 }
-.wp-block-gallery.has-nested-images > .wp-block-image:hover img { transform: scale(1.05); }
+.wp-block-gallery.has-nested-images > .wp-block-image:hover img { transform: scale(1.05); filter: brightness(0.75); }
+
+.wp-block-gallery.has-nested-images > .wp-block-image figcaption {
+    position: absolute;
+    inset: auto 0 0 0;
+    margin: 0;
+    padding: 18px 16px;
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.9) 0%, rgba(26, 26, 26, 0.25) 65%, transparent 100%);
+    color: #fff;
+    font-size: var(--ab-fs-sm);
+    line-height: 1.4;
+    text-align: left;
+    text-shadow: none;
+    opacity: 0;
+    transition: opacity var(--ab-transition);
+}
+.wp-block-gallery.has-nested-images > .wp-block-image:hover figcaption,
+.wp-block-gallery.has-nested-images > .wp-block-image:focus-within figcaption {
+    opacity: 1;
+}
+/* Touch devices have no hover: any caption an editor adds later should
+   just be visible outright there, same rule the rest of the theme's
+   hover-reveal photos follow. */
+@media (hover: none) {
+    .wp-block-gallery.has-nested-images > .wp-block-image figcaption { opacity: 1; }
+}
+
+/* --- Full-bleed vertical photo accordion (".ab-photo-accordion") — used
+   on portfolio/evidence pages (Agnew Project, etc.): the whole photo set
+   stacked edge-to-edge, one under another, each a thin strip until
+   hovered. Same grow-on-hover idea as the home page's ".ab-service-strips"
+   (a hovered strip claims more of the shared space via flex-grow while
+   its neighbors give way), just turned 90° — height grows instead of
+   width, since every strip already spans the full page width instead of
+   sitting side-by-side with the others.
+
+   Hand-written markup (a "Custom HTML" block), not a wp:gallery block:
+   WordPress's own gallery block ships a large stylesheet for
+   ".wp-block-gallery"/".wp-block-image" (crop modes, caption backdrop,
+   the "not(.has-nested-images)" legacy format, etc.) that kept fighting
+   this layout for control of flex-grow/height/position no matter how the
+   selectors here were tuned — a losing battle against a moving target.
+   Plain classes with no WordPress meaning sidestep all of it. Each
+   photo's caption is an empty <figcaption> — type text into it directly
+   in the code editor whenever there's copy for a given photo; the reveal
+   styling below is already wired up either way.
+
+   Height scales with photo count instead of a fixed viewport-relative
+   number: with only a handful of photos a fixed height reads fine, but
+   the same box divided across a dozen photos crushed each resting strip
+   down to a barely-there sliver. Set "--count" (inline style, on this
+   same element) to however many photos are in this particular gallery —
+   e.g. style="--count:12" — so each one keeps a comfortable resting
+   height (set by "--ab-item-h" below, 400px) regardless of how many
+   photos are in the set; override "--ab-item-h" inline the same way for
+   a different resting size on a particular page. */
+.ab-photo-accordion {
+    --ab-item-h: 400px;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    gap: 10px;
+    height: calc(var(--count, 6) * var(--ab-item-h));
+    overflow: hidden;
+}
+.ab-photo-accordion__item {
+    position: relative;
+    display: block;
+    flex: 1 1 0%;
+    min-height: 90px;
+    overflow: hidden;
+    color: inherit;
+    text-decoration: none;
+    transition: flex-grow var(--ab-transition);
+}
+.ab-photo-accordion__item img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.82);
+    transform: scale(1.04);
+    transition: filter 0.5s ease, transform 0.6s ease;
+}
+.ab-photo-accordion__item:hover,
+.ab-photo-accordion__item:focus-within {
+    flex-grow: 5;
+}
+.ab-photo-accordion__item:hover img,
+.ab-photo-accordion__item:focus-within img {
+    filter: brightness(1);
+    transform: scale(1);
+}
+.ab-photo-accordion__item figcaption {
+    position: absolute;
+    inset: auto 0 0 0;
+    margin: 0;
+    padding: 20px 24px;
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.85) 0%, rgba(26, 26, 26, 0.2) 60%, transparent 100%);
+    color: #fff;
+    font-size: var(--ab-fs-sm);
+    text-align: left;
+    opacity: 0;
+    transition: opacity var(--ab-transition);
+}
+.ab-photo-accordion__item:hover figcaption,
+.ab-photo-accordion__item:focus-within figcaption {
+    opacity: 1;
+}
+
+/* Touch devices: no hover to grow strips, so give every photo a normal,
+   comfortable fixed height in a plain scrolling stack instead. Tapping
+   still opens the lightbox below rather than trying to simulate the
+   desktop grow effect. */
+@media (hover: none) {
+    .ab-photo-accordion { height: auto; }
+    .ab-photo-accordion__item { flex: none; height: clamp(220px, 60vw, 380px); }
+    .ab-photo-accordion__item img { filter: brightness(0.9); transform: none; }
+    .ab-photo-accordion__item figcaption { opacity: 1; }
+}
+
+/* --- Lightbox: tapping/clicking a photo in ".ab-photo-accordion" (or any
+   future gallery) opens it here, maximized, without leaving the page —
+   pure CSS via the ":target" trick (the item links to "#photo-id", the
+   overlay below has that id, and only the currently-targeted one gets
+   shown), so it needs no JavaScript and works identically with a tap or
+   a click. The overlay is itself a link back to "#" (an id nothing
+   matches), so clicking anywhere on it — backdrop or photo — closes it;
+   the "×" glyph is just a visual affordance inside that same link, not a
+   second, separate control. */
+.ab-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(20px, 5vw, 60px);
+    background: rgba(11, 11, 11, 0.94);
+    cursor: zoom-out;
+}
+.ab-lightbox:target { display: flex; }
+.ab-lightbox img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    box-shadow: var(--ab-shadow-lg);
+}
+.ab-lightbox__close {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
 
 /* --- Latest Posts: "More From Our Blog", 3-column grid ---
    !important + explicit li reset: WordPress's own ".is-grid"/".columns-3"

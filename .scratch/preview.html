@@ -1,178 +1,90 @@
-<title>About Us Page — Preview</title>
+<title>Agnew Project Page — Preview</title>
 <style>
 :root {
-    --ab-primary: #F5333F;
-    --ab-primary-dark: #C81E29;
-    --ab-aqua: #FFCA10;
-    --ab-accent: #FFCA10;
     --ab-deep: #1A1A1A;
-    --ab-brand-blue: #0E7490;
     --ab-brand-blue-light: #7FD8E8;
     --ab-font-heading: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --ab-font-body: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --ab-fs-base: 1.0625rem;
     --ab-fs-sm: 0.9375rem;
-    --ab-fs-xs: 0.8125rem;
-    --ab-fs-h1: clamp(2.25rem, 5vw, 3.75rem);
     --ab-fs-h2: clamp(1.875rem, 3.5vw, 2.75rem);
     --ab-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    --ab-radius: 0px;
-    --ab-radius-lg: 0px;
-    --ab-shadow-lg: 0 24px 60px rgba(26, 26, 26, 0.16);
+    --ab-shadow-lg: 0 24px 60px rgba(26, 26, 26, 0.4);
 }
 * { box-sizing: border-box; }
-body {
-    margin: 0;
-    font-family: var(--ab-font-body);
-    font-size: var(--ab-fs-base);
-    line-height: 1.75;
-    color: rgba(255,255,255,.8);
-    background: var(--ab-deep);
-}
-.ast-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.ab-entry-content { padding: 0 0 40px; }
-.ab-entry-content > * { margin-bottom: 1.4em; }
-.ab-entry-content h1, .ab-entry-content h2, .ab-entry-content h3 { color: #fff; font-family: var(--ab-font-heading); }
-.ab-entry-content h2 { margin-top: 1.2em; font-size: var(--ab-fs-h2); }
-.ab-entry-content p { color: rgba(255,255,255,.8); }
-.ab-entry-content a:not(.wp-element-button) { color: var(--ab-aqua); }
-.ab-entry-content a:not(.wp-element-button):hover { color: #fff; }
+body { margin: 0; font-family: var(--ab-font-body); color: rgba(255,255,255,.8); background: var(--ab-deep); }
+.ast-container { max-width: 1200px; margin: 0 auto; padding: 40px 24px 0; }
+.ab-entry-content h1, .ab-entry-content h2 { color: #fff; font-family: var(--ab-font-heading); margin: 0 0 .5em; }
+.ab-entry-content h2 { font-size: var(--ab-fs-h2); margin-bottom: 24px; }
 .demo-note { font-family: var(--ab-font-heading); color: var(--ab-brand-blue-light); font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; text-align: center; padding: 14px 0; border-bottom: 1px dashed rgba(255,255,255,.2); }
 
-/* ---- section head / eyebrow ---- */
-.ab-section-head { max-width: 720px; margin: 0 auto clamp(40px, 5vw, 64px); text-align: center; }
-.ab-eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--ab-font-heading); font-size: var(--ab-fs-xs); font-weight: 600;
-    letter-spacing: .14em; text-transform: uppercase; color: var(--ab-primary);
-    margin-bottom: 14px;
-}
-.ab-eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--ab-aqua); border-radius: 2px; }
-.ab-section-head--center .ab-eyebrow::after { content: ""; width: 26px; height: 2px; background: var(--ab-aqua); border-radius: 2px; }
-
-/* ---- founder media-text ---- */
-.ab-entry-content .wp-block-media-text {
-    display: grid;
-    grid-template-columns: minmax(220px, 320px) 1fr;
-    gap: clamp(28px, 4vw, 56px);
-    align-items: center;
-}
-.ab-entry-content .wp-block-media-text__media { margin: 0; }
-.ab-entry-content .wp-block-media-text__media img { display: block; width: 100%; height: auto; border-radius: var(--ab-radius); box-shadow: var(--ab-shadow-lg); }
-.ab-entry-content .wp-block-media-text__content > * { margin-bottom: 1.1em; }
-.ab-entry-content .wp-block-media-text__content > *:last-child { margin-bottom: 0; }
-@media (max-width: 700px) { .ab-entry-content .wp-block-media-text { grid-template-columns: 1fr; } }
-
-/* ---- content band (now can be a link too) ---- */
-.ab-content-band {
-    position: relative; display: block; width: 100vw;
+/* ---- accordion (real theme CSS, unchanged, now hand-written markup) ---- */
+.ab-photo-accordion {
+    --ab-item-h: 400px;
+    display: flex; flex-direction: column; width: 100vw;
     margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
-    overflow: hidden; color: inherit; text-decoration: none;
+    gap: 10px;
+    height: calc(var(--count, 6) * var(--ab-item-h)); overflow: hidden;
 }
-.ab-content-band img {
-    display: block; width: 100%; height: clamp(300px, 42vw, 520px);
-    object-fit: cover; transform: scale(1.01); filter: brightness(0.92);
-    transition: transform 0.7s ease, filter 0.5s ease; color: transparent;
+.ab-photo-accordion__item {
+    position: relative; display: block; flex: 1 1 0%; min-height: 90px; overflow: hidden;
+    color: inherit; text-decoration: none;
+    transition: flex-grow var(--ab-transition);
 }
-.ab-content-band:hover img { transform: scale(1.06); filter: brightness(0.6); }
-.ab-content-band__caption {
-    position: absolute; inset: 0; z-index: 1;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; padding: 32px;
-    background: linear-gradient(to top, rgba(26, 26, 26, 0.85) 0%, rgba(26, 26, 26, 0.4) 50%, rgba(26, 26, 26, 0.08) 100%);
+.ab-photo-accordion__item img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.82); transform: scale(1.04);
+    transition: filter 0.5s ease, transform 0.6s ease;
+}
+.ab-photo-accordion__item:hover,
+.ab-photo-accordion__item:focus-within { flex-grow: 5; }
+.ab-photo-accordion__item:hover img,
+.ab-photo-accordion__item:focus-within img { filter: brightness(1); transform: scale(1); }
+.ab-photo-accordion__item figcaption {
+    position: absolute; inset: auto 0 0 0; margin: 0; padding: 20px 24px;
+    background: linear-gradient(to top, rgba(26,26,26,.85) 0%, rgba(26,26,26,.2) 60%, transparent 100%);
+    color: #fff; font-size: var(--ab-fs-sm); text-align: left;
     opacity: 0; transition: opacity var(--ab-transition);
 }
-.ab-content-band:hover .ab-content-band__caption { opacity: 1; }
-.ab-content-band__caption h2, .ab-content-band__caption h3 { color: #fff; margin: 0 0 10px; }
-.ab-content-band__caption p { max-width: 560px; margin: 0; color: rgba(255,255,255,.9); font-size: var(--ab-fs-base); }
+.ab-photo-accordion__item:hover figcaption,
+.ab-photo-accordion__item:focus-within figcaption { opacity: 1; }
 
-/* ---- new hero: photo/video-ready instead of the flat red gradient ---- */
-.about-hero {
-    position: relative; width: 100vw;
-    margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
-    height: clamp(320px, 34vw, 420px); overflow: hidden; margin-bottom: 24px;
+/* ---- lightbox (real theme CSS, unchanged) ---- */
+.ab-lightbox {
+    display: none; position: fixed; inset: 0; z-index: 9998;
+    align-items: center; justify-content: center; padding: clamp(20px, 5vw, 60px);
+    background: rgba(11,11,11,.94); cursor: zoom-out;
 }
-.about-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-.about-hero__tint { position: absolute; inset: 0; background: rgba(11,47,62,0.35); z-index: 2; }
-.about-hero__row { position: relative; z-index: 3; display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; height: 100%; padding: 2vw 4vw; box-sizing: border-box; }
-.about-hero h1 { color: #fff; font-size: clamp(1.1rem, 3.2vw, 2rem); margin: 0 0 12px; text-shadow: 0 2px 8px rgba(0,0,0,.45); }
-.about-hero .phone { display: inline-block; background: #0E7490; color: #fff; font-weight: 600; font-size: clamp(.75rem, 1.6vw, .95rem); padding: clamp(8px,1vw,12px) clamp(14px,2vw,22px); border-radius: 999px; text-decoration: none; white-space: nowrap; }
-.about-hero .contact-btn { flex: 0 0 auto; background: #D99A3E; color: #fff; font-weight: 600; font-size: clamp(.8rem,1.6vw,1rem); padding: clamp(12px,1.6vw,18px) clamp(20px,3vw,32px); border-radius: 999px; border: none; cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,.25); white-space: nowrap; }
+.ab-lightbox:target { display: flex; }
+.ab-lightbox img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; box-shadow: var(--ab-shadow-lg); }
+.ab-lightbox__close {
+    position: absolute; top: 18px; right: 24px; width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.75rem; line-height: 1; color: #fff;
+    border: 1px solid rgba(255,255,255,.3); border-radius: 50%;
+}
 </style>
 
-<div class="demo-note">Preview con fotos de relleno (SVG) — layout real de style.css / home-content.html (página About Us). Hero ahora es foto/video-ready (ya no franja roja), y "What We Do" son las 6 páginas de servicio con enlace.</div>
-
-<article class="ab-entry-content">
-
-<div class="about-hero">
-  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzJhM2EzYSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzExMzAzMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iNDYiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xOCkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPlBIT1RPIC8gVklERU8gU0xPVDwvdGV4dD48L3N2Zz4=" alt="">
-  <div class="about-hero__tint"></div>
-  <div class="about-hero__row">
-    <div style="min-width:0;">
-      <h1>About Us</h1>
-      <a href="#" class="phone">800-611-1776</a>
-    </div>
-    <button class="contact-btn">Contact Us</button>
-  </div>
-</div>
+<div class="demo-note">Preview con fotos de relleno (SVG) — layout real de style.css (página Agnew Project). Prueba: pasa el cursor por una foto (crece), y haz clic (abre el lightbox maximizado sobre la misma página, sin navegar).</div>
 
 <div class="ast-container">
-<h2>Adept Builders &amp; Design</h2>
-<p>We are a Los Angeles based construction company that specializes in <a href="#">Home Additions</a>, <a href="#">Full Home Renovation</a>, <a href="#">Kitchen Remodeling</a>, <a href="#">Roofing</a>, <a href="#">Bathroom Remodeling</a>, <a href="#">Pergolas</a>, &amp; <a href="#">Decks</a>.</p>
-<p>Adept Builders &amp; Design is a fully licensed, bonded and insured contractor with more than a decade of experience in construction. We will meet objectives and create a clear plan to bring your vision to life, on time and within budget!</p>
-<p>Using our industry knowledge, attention to detail and quality, we keep our clients coming back time and time again. We are here for you and take great pride in providing superb customer service!</p>
-<p>Whether it is an upgrade to your home's interior or exterior, Adept Builders &amp; Design has got you covered.</p>
-
-<div class="ab-section-head ab-section-head--center">
-  <p class="ab-eyebrow">Meet The Founder</p>
-  <h2>A Message From The Owner</h2>
-</div>
-
-<div class="wp-block-media-text">
-  <figure class="wp-block-media-text__media"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OTYiIGhlaWdodD0iMTAyNCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzNhMmIyOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzQxMjMxYSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI3OTYiIGhlaWdodD0iMTAyNCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==" alt="Founder"></figure>
-  <div class="wp-block-media-text__content">
-    <p>As a young man, I was fortunate to travel the world and experience many cultures and lifestyles. This experience influenced my decision to form my company, Adept Builders &amp; Design.</p>
-    <p>By doing construction work, it allows me to combine my passion for helping people, problem solving, craftsmanship and design.</p>
-    <p>My goal is to assist my customers in designing and building the home of their dreams. I want to see my customers smile and it is important to me that my customers are satisfied.</p>
-    <p>Please feel free to contact me directly. I look forward to working with you!</p>
-  </div>
-</div>
-
-<div class="ab-section-head ab-section-head--center" style="margin-top:2.5em;">
-  <p class="ab-eyebrow">Explore</p>
-  <h2>What We Do</h2>
-  <p>Adept Builders &amp; Design specializes in making the home you have been dreaming of a reality. We are capable of any project your home needs. Let our expertise and the experience of our team guide you through your project from start to finish.</p>
-</div>
-</div>
-
-<a class="ab-content-band" href="#">
-  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzJiM2E0MiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzEyMzI0MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==" alt="Full Home Renovation" loading="lazy">
-  <div class="ab-content-band__caption"><h2>Full Home Renovation</h2><p>A home renewed, top to bottom.</p></div>
-</a>
-
-<a class="ab-content-band" href="#">
-  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzNhMmIyOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzQxMjMxYSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==" alt="ADUs" loading="lazy">
-  <div class="ab-content-band__caption"><h2>ADUs</h2><p>Extra space, seamlessly added.</p></div>
-</a>
-
-<a class="ab-content-band" href="#">
-  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzIzM2EyYiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFhNDEyMyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==" alt="Decking" loading="lazy">
-  <div class="ab-content-band__caption"><h2>Decking</h2><p>Outdoor living, built to last.</p></div>
-</a>
-
-<a class="ab-content-band" href="#">
-  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzJhM2EzYSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzExMzAzMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==" alt="Pools" loading="lazy">
-  <div class="ab-content-band__caption"><h2>Pools</h2><p>Your own backyard escape.</p></div>
-</a>
-
-<a class="ab-content-band" href="#">
-  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzNhMmIyOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzQxMjMxYSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==" alt="Pergolas" loading="lazy">
-  <div class="ab-content-band__caption"><h2>Pergolas</h2><p>Shade and style, custom-built.</p></div>
-</a>
-
-<a class="ab-content-band" href="#">
-  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzIzM2EyYiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFhNDEyMyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==" alt="Landscaping" loading="lazy">
-  <div class="ab-content-band__caption"><h2>Landscaping</h2><p>Grounds as beautiful as your home.</p></div>
-</a>
-
+<article class="ab-entry-content">
+<h1>Agnew Project</h1>
+<h2>Our Favorite Photos</h2>
 </article>
+</div>
+
+<figure class="ab-photo-accordion" style="--count:6">
+<a class="ab-photo-accordion__item" href="#p1"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzJiM2E0MiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzEyMzI0MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==" alt=""><figcaption></figcaption></a>
+<a class="ab-photo-accordion__item" href="#p2"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzNhMmIyOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzQxMjMxYSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==" alt=""><figcaption></figcaption></a>
+<a class="ab-photo-accordion__item" href="#p3"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzIzM2EyYiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFhNDEyMyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==" alt=""><figcaption></figcaption></a>
+<a class="ab-photo-accordion__item" href="#p4"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzJhM2EzYSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzExMzAzMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==" alt=""><figcaption></figcaption></a>
+<a class="ab-photo-accordion__item" href="#p5"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzNhMmIzYSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzIzMWE0MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==" alt=""><figcaption></figcaption></a>
+<a class="ab-photo-accordion__item" href="#p6"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzNhM2EyYiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzQxNDEyMyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==" alt=""><figcaption></figcaption></a>
+</figure>
+
+<a href="#" class="ab-lightbox" id="p1"><span class="ab-lightbox__close">&times;</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEyMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyYjNhNDIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxMjMyNDEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMjAwIiBmaWxsPSJ1cmwoI2cpIi8+PC9zdmc+" alt=""></a>
+<a href="#" class="ab-lightbox" id="p2"><span class="ab-lightbox__close">&times;</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEyMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzYTJiMjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0MTIzMWEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMjAwIiBmaWxsPSJ1cmwoI2cpIi8+PC9zdmc+" alt=""></a>
+<a href="#" class="ab-lightbox" id="p3"><span class="ab-lightbox__close">&times;</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEyMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyMzNhMmIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTQxMjMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMjAwIiBmaWxsPSJ1cmwoI2cpIi8+PC9zdmc+" alt=""></a>
+<a href="#" class="ab-lightbox" id="p4"><span class="ab-lightbox__close">&times;</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEyMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyYTNhM2EiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxMTMwMzAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMjAwIiBmaWxsPSJ1cmwoI2cpIi8+PC9zdmc+" alt=""></a>
+<a href="#" class="ab-lightbox" id="p5"><span class="ab-lightbox__close">&times;</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEyMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzYTJiM2EiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyMzFhNDEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMjAwIiBmaWxsPSJ1cmwoI2cpIi8+PC9zdmc+" alt=""></a>
+<a href="#" class="ab-lightbox" id="p6"><span class="ab-lightbox__close">&times;</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEyMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzYTNhMmIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0MTQxMjMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMjAwIiBmaWxsPSJ1cmwoI2cpIi8+PC9zdmc+" alt=""></a>
