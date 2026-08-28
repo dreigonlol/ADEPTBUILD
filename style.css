@@ -34,6 +34,7 @@ Text Domain: adeptbuild
        red/gold CTA palette above, which read too warm for that spot. */
     --ab-brand-blue: #0E7490;
     --ab-brand-blue-light: #7FD8E8;
+    --ab-brand-blue-pale: #E3F5FA;   /* Pale blue tint — hover backgrounds on light/white dropdowns */
 
     --ab-deep: #1A1A1A;             /* Near-black corporate background */
     --ab-deep-soft: #262626;
@@ -581,8 +582,8 @@ body.ab-menu-open .site-header {
 
 .main-header-menu > li:hover > a,
 .main-header-menu > .current-menu-item > a {
-    color: var(--ab-primary);
-    background: linear-gradient(90deg, var(--ab-primary), var(--ab-aqua));
+    color: var(--ab-brand-blue);
+    background: linear-gradient(90deg, var(--ab-brand-blue), var(--ab-brand-blue-light));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -625,8 +626,8 @@ body.ab-menu-open .site-header {
     border-radius: var(--ab-radius-sm);
 }
 .main-header-menu .sub-menu a:hover {
-    background: var(--ab-primary-light);
-    color: var(--ab-primary-dark);
+    background: var(--ab-brand-blue-pale);
+    color: var(--ab-brand-blue);
 }
 
 /* Mega menu — "Services" / "Featured" dropdowns render as image cards
@@ -661,8 +662,8 @@ body.ab-menu-open .site-header {
 }
 .main-header-menu .sub-menu.mega-menu .mega-menu__link:hover,
 .main-header-menu .sub-menu.mega-menu .mega-menu__link:focus-visible {
-    background: var(--ab-primary-light);
-    color: var(--ab-primary-dark);
+    background: var(--ab-brand-blue-pale);
+    color: var(--ab-brand-blue);
 }
 
 .main-header-menu .sub-menu.mega-menu .mega-menu__thumb {
@@ -2315,7 +2316,7 @@ h2.ab-services-showcase__title {
     }
     .main-navigation .main-header-menu > li:hover > a,
     .main-navigation .main-header-menu > .current-menu-item > a {
-        color: var(--ab-primary);
+        color: var(--ab-brand-blue);
         background: none;
         -webkit-text-fill-color: currentColor;
     }
