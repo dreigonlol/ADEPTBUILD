@@ -1783,6 +1783,64 @@ label {
     font-size: var(--ab-fs-sm);
     color: rgba(255, 255, 255, 0.75);
 }
+
+/* Mini rotating ticker embedded inside a content-band caption (see the
+   "Garage Conversions" band on the ADUs page) — same replace-and-slide
+   idea as ".ab-services-ticker" below, but for richer title+description
+   pairs instead of single words, so it needs more room and a longer hold.
+   Works for any item count: give each <li> a "--i" of 0, 1, 2… and set
+   --n to that count so the animation duration/delay divide evenly. */
+.ab-content-band__ticker {
+    position: relative;
+    width: 100%;
+    max-width: 620px;
+    min-height: 5.5rem;
+    margin-top: 16px;
+    overflow: hidden;
+}
+.ab-content-band__ticker ul { list-style: none; margin: 0; padding: 0; }
+.ab-content-band__ticker li {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(-100%);
+    animation: ab-content-ticker-rotate 12s infinite;
+    animation-delay: calc(var(--i) * 4s);
+}
+.ab-content-band__ticker strong {
+    display: block;
+    font-family: var(--ab-font-heading);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    color: var(--ab-aqua);
+    margin-bottom: 4px;
+}
+.ab-content-band__ticker span {
+    display: block;
+    font-size: var(--ab-fs-sm);
+    color: rgba(255, 255, 255, 0.85);
+}
+@keyframes ab-content-ticker-rotate {
+    0%     { opacity: 0; transform: translateY(-100%); }
+    2%     { opacity: 1; transform: translateY(0); }
+    30%    { opacity: 1; transform: translateY(0); }
+    33.34% { opacity: 0; transform: translateY(100%); }
+    100%   { opacity: 0; transform: translateY(100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ab-content-band__ticker { min-height: 0; overflow: visible; }
+    .ab-content-band__ticker li {
+        animation: none;
+        position: static;
+        opacity: 1;
+        transform: none;
+        padding: 6px 0;
+    }
+}
 /* Touch devices have no hover: show the caption outright, over the still
    image, exactly as the desktop hover state looks. */
 @media (hover: none) {
