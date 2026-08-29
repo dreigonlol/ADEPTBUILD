@@ -632,21 +632,35 @@ body.ab-menu-open .site-header {
 }
 
 /* Mega menu — "Services" / "Featured" dropdowns render as image cards
-   instead of a plain text list. A fixed 3-column grid (wrapping to a 2nd
-   row for Services' 6 items) at a capped width, rather than forcing every
-   item into one ever-widening row: a single-row panel for 6 items runs
-   ~1050px wide, which can't fit centered under a trigger sitting near the
-   edge of a merely-desktop-width (not ultra-wide) window. The panel's
-   horizontal position is clamped to the viewport by JS on open — see
-   positionMegaMenu() in navigation.js — since that requires knowing the
-   trigger's actual on-screen position, which pure CSS has no access to.
-   Mobile switches this to a single vertical column further down. */
+   instead of a plain text list, always as ONE row that fills a viewport-
+   capped width rather than a fixed-column grid that wraps to a 2nd row:
+   "grid-auto-flow: column" with "grid-auto-columns: minmax(0, 1fr)" splits
+   that width evenly across however many <li> items the menu actually has
+   (6 for Services, fewer for "Featured"), so cards just scale down together
+   as the panel narrows — no wrapping, no overflow, no per-item minimum
+   width to fight with the viewport clamp. The panel's horizontal position
+   is clamped to the viewport by JS on open — see positionMegaMenu() in
+   navigation.js — since that requires knowing the trigger's actual
+   on-screen position, which pure CSS has no access to. Mobile switches
+   this to a single vertical column further down.
+
+   Dark glass panel — same idea as the reference site's dropdown floater
+   (a near-black backdrop the page shows through, "--dropdown-background-
+   color: #252525e6" there) instead of the plain white card the rest of
+   the submenus use. backdrop-filter matches the same blur already used on
+   ".site-header.is-stuck" elsewhere in this file, so the glass look reads
+   as one consistent idiom across the site. */
 .main-header-menu .sub-menu.mega-menu {
     display: grid;
-    grid-template-columns: repeat(3, minmax(140px, 1fr));
-    width: min(560px, calc(100vw - 32px));
-    gap: 12px;
-    padding: 18px;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    width: min(880px, calc(100vw - 32px));
+    gap: 10px;
+    padding: 16px;
+    background: rgba(26, 26, 26, 0.72);
+    border-color: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 /* Scoped under .sub-menu.mega-menu (not just .mega-menu__link) so these
@@ -659,12 +673,12 @@ body.ab-menu-open .site-header {
     gap: 10px;
     padding: 8px;
     border-radius: var(--ab-radius-sm);
-    color: #1A1A1A;
+    color: #fff;
 }
 .main-header-menu .sub-menu.mega-menu .mega-menu__link:hover,
 .main-header-menu .sub-menu.mega-menu .mega-menu__link:focus-visible {
-    background: #E3F5FA;
-    color: #0E7490;
+    background: rgba(255, 255, 255, 0.08);
+    color: #57e1f3;
 }
 
 .main-header-menu .sub-menu.mega-menu .mega-menu__thumb {
@@ -672,17 +686,21 @@ body.ab-menu-open .site-header {
     aspect-ratio: 4 / 3;
     border-radius: var(--ab-radius-sm);
     overflow: hidden;
-    background: #F6F6F6;
+    background: rgba(255, 255, 255, 0.06);
 }
 .main-header-menu .sub-menu.mega-menu .mega-menu__thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform var(--ab-transition);
+    opacity: 0.8;
+    transition: transform var(--ab-transition), opacity var(--ab-transition);
 }
 .main-header-menu .sub-menu.mega-menu .mega-menu__link:hover .mega-menu__thumb img,
-.main-header-menu .sub-menu.mega-menu .mega-menu__link:focus-visible .mega-menu__thumb img { transform: scale(1.06); }
+.main-header-menu .sub-menu.mega-menu .mega-menu__link:focus-visible .mega-menu__thumb img {
+    transform: scale(1.06);
+    opacity: 1;
+}
 
 .main-header-menu .sub-menu.mega-menu .mega-menu__label {
     font-family: var(--ab-font-nav);
