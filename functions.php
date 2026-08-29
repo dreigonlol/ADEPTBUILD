@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADEPTBUILD_VERSION', '1.7.21' );
+define( 'ADEPTBUILD_VERSION', '1.7.28' );
 
 /**
  * Basic theme setup.
@@ -54,14 +54,14 @@ function adeptbuild_setup() {
 		'editor-color-palette',
 		array(
 			array(
-				'name'  => __( 'Signal Red', 'adeptbuild' ),
+				'name'  => __( 'Signal Blue', 'adeptbuild' ),
 				'slug'  => 'primary',
-				'color' => '#F5333F',
+				'color' => '#1046BB',
 			),
 			array(
-				'name'  => __( 'Gold', 'adeptbuild' ),
+				'name'  => __( 'Cyan', 'adeptbuild' ),
 				'slug'  => 'aqua',
-				'color' => '#FFCA10',
+				'color' => '#57E1F3',
 			),
 			array(
 				'name'  => __( 'Charcoal', 'adeptbuild' ),
@@ -69,9 +69,9 @@ function adeptbuild_setup() {
 				'color' => '#1A1A1A',
 			),
 			array(
-				'name'  => __( 'Gold Accent', 'adeptbuild' ),
+				'name'  => __( 'Cyan Accent', 'adeptbuild' ),
 				'slug'  => 'accent',
-				'color' => '#FFCA10',
+				'color' => '#57E1F3',
 			),
 			array(
 				'name'  => __( 'Light Gray', 'adeptbuild' ),

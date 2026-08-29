@@ -13,39 +13,33 @@ Text Domain: adeptbuild
 
 /* ==========================================================================
    1. DESIGN TOKENS
-   Astra-inspired architecture: global color, typography and spacing
-   variables consumed by the rest of the theme. Editing this block changes
-   the whole site.
+   Astra-inspired architecture: typography and spacing variables consumed
+   by the rest of the theme. Editing this block changes the whole site.
+   Color is intentionally NOT tokenized here — every rule below hardcodes
+   its own hex value; the palette comment above is a reference only.
    ========================================================================== */
 
 :root {
-    /* --- Palette: charcoal + signal red + gold, architectural design-build look --- */
-    --ab-primary: #F5333F;          /* Signal red - primary CTAs and links */
-    --ab-primary-dark: #C81E29;     /* Hover / pressed state for red */
-    --ab-primary-light: #FBEAEA;    /* Soft red-tinted backgrounds */
-    --ab-aqua: #FFCA10;             /* Gold accent - labels, underlines, links on dark */
-    --ab-accent: #FFCA10;           /* Gold - secondary CTAs */
-    --ab-accent-dark: #DBAF00;
-
-    /* Logo blue — the teal-blue already used for the phone-pill button and
-       hero video tint in every page's custom hero block. Used for the
-       animated services titles/tickers (".ab-services-showcase",
-       ".ab-services-ticker", ".ab-content-band__ticker") instead of the
-       red/gold CTA palette above, which read too warm for that spot. */
-    --ab-brand-blue: #0E7490;
-    --ab-brand-blue-light: #7FD8E8;
-    --ab-brand-blue-pale: #E3F5FA;   /* Pale blue tint — hover backgrounds on light/white dropdowns */
-
-    --ab-deep: #1A1A1A;             /* Near-black corporate background */
-    --ab-deep-soft: #262626;
-
-    --ab-heading: #1A1A1A;
-    --ab-text: #3D3D3D;
-    --ab-text-light: #6B6B6B;
-    --ab-border: #E5E5E5;
-    --ab-surface: #FFFFFF;
-    --ab-surface-alt: #F6F6F6;
-    --ab-slate: #1B2430;             /* Dark blue-slate — process-row text panels */
+    /* --- Palette: charcoal + signal blue + cyan, architectural design-build
+       look. Colors below are hardcoded at each usage site rather than read
+       from custom properties — kept here as the canonical color reference
+       only:
+       primary / primary-dark: #1046bb   (signal blue — CTAs and links)
+       primary-light:          #E8ECFB   (soft blue-tinted backgrounds)
+       aqua / accent:          #57e1f3   (cyan — labels, underlines, secondary CTAs)
+       accent-dark:            #26d8c9
+       brand-blue:              #0E7490  (logo teal-blue — services tickers, phone pill)
+       brand-blue-dark:         #0B5A70
+       brand-blue-light:        #7FD8E8
+       brand-blue-pale:         #E3F5FA  (hover backgrounds on light/white dropdowns)
+       deep / heading:          #1A1A1A  (near-black corporate background / heading text)
+       deep-soft:               #262626
+       text:                    #3D3D3D
+       text-light:              #6B6B6B
+       border:                  #E5E5E5
+       surface:                 #FFFFFF
+       surface-alt:             #F6F6F6
+       slate:                   #1B2430  (dark blue-slate — process-row text panels) --- */
 
     /* --- Typography --- */
     --ab-font-heading: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -74,9 +68,11 @@ Text Domain: adeptbuild
     --ab-radius: 0px;
     --ab-radius-lg: 0px;
     --ab-radius-pill: 6px;
-    --ab-shadow-sm: 0 2px 8px rgba(26, 26, 26, 0.06);
-    --ab-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
-    --ab-shadow-lg: 0 24px 60px rgba(26, 26, 26, 0.16);
+    /* Shadow values are hardcoded at each usage site (not read from custom
+       properties) since they embed a color (neutral charcoal rgba(26,26,26,x)):
+       shadow-sm: 0 2px 8px rgba(26, 26, 26, 0.06)
+       shadow:    0 12px 32px rgba(26, 26, 26, 0.10)
+       shadow-lg: 0 24px 60px rgba(26, 26, 26, 0.16) */
 
     --ab-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -111,8 +107,8 @@ body {
     font-family: var(--ab-font-body);
     font-size: var(--ab-fs-base);
     line-height: var(--ab-lh-body);
-    color: var(--ab-text);
-    background: var(--ab-deep);
+    color: #3D3D3D;
+    background: #1A1A1A;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -127,7 +123,7 @@ iframe { max-width: 100%; height: auto; display: block; }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--ab-font-heading);
-    color: var(--ab-heading);
+    color: #1A1A1A;
     line-height: var(--ab-lh-heading);
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -143,23 +139,23 @@ p { margin: 0 0 1.2em; }
 p:last-child { margin-bottom: 0; }
 
 a {
-    color: var(--ab-primary);
+    color: #1046bb;
     text-decoration: none;
     transition: color var(--ab-transition);
 }
-a:hover { color: var(--ab-primary-dark); }
+a:hover { color: #1046bb; }
 
 ul, ol { padding-left: 1.25em; }
 
 blockquote {
     margin: 2em 0;
     padding: 1.25em 1.75em;
-    border-left: 4px solid var(--ab-aqua);
-    background: var(--ab-surface-alt);
+    border-left: 4px solid #57e1f3;
+    background: #F6F6F6;
     border-radius: 0 var(--ab-radius) var(--ab-radius) 0;
     font-size: 1.125rem;
     font-style: italic;
-    color: var(--ab-heading);
+    color: #1A1A1A;
 }
 
 code, pre {
@@ -167,8 +163,8 @@ code, pre {
     font-size: 0.9em;
 }
 pre {
-    background: var(--ab-deep);
-    color: #FBEAEA;
+    background: #1A1A1A;
+    color: #E8ECFB;
     padding: 1.25em;
     border-radius: var(--ab-radius);
     overflow-x: auto;
@@ -181,25 +177,25 @@ table {
 }
 th, td {
     padding: 12px 16px;
-    border: 1px solid var(--ab-border);
+    border: 1px solid #E5E5E5;
     text-align: left;
 }
-th { background: var(--ab-surface-alt); color: var(--ab-heading); font-weight: 600; }
+th { background: #F6F6F6; color: #1A1A1A; font-weight: 600; }
 
 hr {
     border: 0;
     height: 1px;
-    background: var(--ab-border);
+    background: #E5E5E5;
     margin: 2.5em 0;
 }
 
 :focus-visible {
-    outline: 3px solid var(--ab-aqua);
+    outline: 3px solid #57e1f3;
     outline-offset: 3px;
     border-radius: 4px;
 }
 
-::selection { background: var(--ab-aqua); color: #fff; }
+::selection { background: #57e1f3; color: #fff; }
 
 /* ==========================================================================
    3. ACCESSIBILITY
@@ -227,7 +223,7 @@ hr {
     top: 12px;
     left: 12px;
     padding: 12px 22px;
-    background: var(--ab-primary);
+    background: #1046bb;
     color: #fff;
     border-radius: var(--ab-radius-sm);
     font-weight: 600;
@@ -248,11 +244,11 @@ hr {
 .ast-container--narrow { max-width: var(--ab-container-narrow); }
 
 .ab-section { padding: var(--ab-section-y) 0; }
-.ab-section--alt { background: var(--ab-surface-alt); }
+.ab-section--alt { background: #F6F6F6; }
 .ab-section--tight { padding: clamp(40px, 5vw, 64px) 0; }
 
 .ab-section--deep {
-    background: var(--ab-deep);
+    background: #1A1A1A;
     color: rgba(255, 255, 255, 0.78);
 }
 .ab-section--deep h1,
@@ -285,30 +281,30 @@ hr {
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--ab-primary);
+    color: #1046bb;
     margin-bottom: 14px;
 }
 .ab-eyebrow::before {
     content: "";
     width: 26px;
     height: 2px;
-    background: var(--ab-aqua);
+    background: #57e1f3;
     border-radius: 2px;
 }
 .ab-section-head--center .ab-eyebrow::after {
     content: "";
     width: 26px;
     height: 2px;
-    background: var(--ab-aqua);
+    background: #57e1f3;
     border-radius: 2px;
 }
 
 .ab-section-head p {
     font-size: 1.0625rem;
-    color: var(--ab-text);
+    color: #3D3D3D;
 }
 
-.ab-section--deep .ab-eyebrow { color: var(--ab-aqua); }
+.ab-section--deep .ab-eyebrow { color: #57e1f3; }
 
 /* ==========================================================================
    5. BUTTONS
@@ -329,10 +325,10 @@ a.ab-btn {
     letter-spacing: 0.01em;
     line-height: 1;
     padding: 16px 32px;
-    border: 2px solid var(--ab-primary);
+    border: 2px solid #1046bb;
     border-radius: var(--ab-radius-pill);
-    background: var(--ab-primary);
-    color: var(--ab-deep);
+    background: #1046bb;
+    color: #1A1A1A;
     cursor: pointer;
     text-align: center;
     transition: transform var(--ab-transition), box-shadow var(--ab-transition),
@@ -345,31 +341,31 @@ a.ab-btn {
 input[type="submit"]:hover,
 button.ab-btn:hover,
 a.ab-btn:hover {
-    background: var(--ab-primary-dark);
-    border-color: var(--ab-primary-dark);
+    background: #1046bb;
+    border-color: #1046bb;
     color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(200, 30, 41, 0.32);
+    box-shadow: 0 12px 24px rgba(16, 70, 187, 0.32);
 }
 
 .ab-btn--accent {
-    background: var(--ab-accent);
-    border-color: var(--ab-accent);
-    color: var(--ab-deep);
+    background: #57e1f3;
+    border-color: #57e1f3;
+    color: #1A1A1A;
 }
 .ab-btn--accent:hover {
-    background: var(--ab-accent-dark);
-    border-color: var(--ab-accent-dark);
-    color: var(--ab-deep);
-    box-shadow: 0 12px 24px rgba(255, 202, 16, 0.32);
+    background: #26d8c9;
+    border-color: #26d8c9;
+    color: #1A1A1A;
+    box-shadow: 0 12px 24px rgba(5, 8, 151, 0.32);
 }
 
 .ab-btn--outline {
     background: transparent;
-    color: var(--ab-primary);
+    color: #1046bb;
 }
 .ab-btn--outline:hover {
-    background: var(--ab-primary);
+    background: #1046bb;
     color: #fff;
 }
 
@@ -381,7 +377,7 @@ a.ab-btn:hover {
 .ab-btn--ghost:hover {
     background: #fff;
     border-color: #fff;
-    color: var(--ab-deep);
+    color: #1A1A1A;
 }
 
 .ab-btn--sm { padding: 11px 22px; font-size: 0.875rem; }
@@ -412,7 +408,7 @@ a.ab-btn:hover {
 
 /* Top contact bar */
 .ab-topbar {
-    background: var(--ab-deep);
+    background: #1A1A1A;
     color: rgba(255, 255, 255, 0.82);
     font-size: var(--ab-fs-xs);
 }
@@ -437,7 +433,7 @@ a.ab-btn:hover {
     color: rgba(255, 255, 255, 0.82);
 }
 .ab-topbar__item:hover { color: #fff; }
-.ab-topbar__item svg { color: var(--ab-aqua); flex-shrink: 0; }
+.ab-topbar__item svg { color: #57e1f3; flex-shrink: 0; }
 
 .ab-social { display: flex; align-items: center; gap: 6px; }
 .ab-social a {
@@ -450,7 +446,7 @@ a.ab-btn:hover {
     color: rgba(255, 255, 255, 0.75);
     transition: background-color var(--ab-transition), color var(--ab-transition);
 }
-.ab-social a:hover { background: var(--ab-primary); color: #fff; }
+.ab-social a:hover { background: #1046bb; color: #fff; }
 
 /* Main bar — fully transparent, overlaid on the page-hero image/video
    underneath it (see ".ab-page-hero" margin-top below), like the template's
@@ -527,7 +523,7 @@ body.ab-menu-open .site-header {
     line-height: 1.15;
 }
 .site-title a { color: #fff; }
-.site-title a:hover { color: var(--ab-aqua); }
+.site-title a:hover { color: #57e1f3; }
 .site-description {
     margin: 2px 0 0;
     font-size: var(--ab-fs-xs);
@@ -590,7 +586,7 @@ body.ab-menu-open .site-header {
 .main-header-menu > li:hover > a,
 .main-header-menu > .current-menu-item > a,
 .main-header-menu > .current-menu-ancestor > a {
-    color: var(--ab-brand-blue);
+    color: #0E7490;
 }
 
 /* Submenus */
@@ -606,9 +602,9 @@ body.ab-menu-open .site-header {
     gap: 0;
     padding: 10px;
     background: #fff;
-    border: 1px solid var(--ab-border);
+    border: 1px solid #E5E5E5;
     border-radius: var(--ab-radius);
-    box-shadow: var(--ab-shadow);
+    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
@@ -627,12 +623,12 @@ body.ab-menu-open .site-header {
     padding: 10px 14px;
     font-family: var(--ab-font-nav);
     font-size: 0.9375rem;
-    color: var(--ab-text);
+    color: #3D3D3D;
     border-radius: var(--ab-radius-sm);
 }
 .main-header-menu .sub-menu a:hover {
-    background: var(--ab-brand-blue-pale);
-    color: var(--ab-brand-blue);
+    background: #E3F5FA;
+    color: #0E7490;
 }
 
 /* Mega menu — "Services" / "Featured" dropdowns render as image cards
@@ -663,12 +659,12 @@ body.ab-menu-open .site-header {
     gap: 10px;
     padding: 8px;
     border-radius: var(--ab-radius-sm);
-    color: var(--ab-heading);
+    color: #1A1A1A;
 }
 .main-header-menu .sub-menu.mega-menu .mega-menu__link:hover,
 .main-header-menu .sub-menu.mega-menu .mega-menu__link:focus-visible {
-    background: var(--ab-brand-blue-pale);
-    color: var(--ab-brand-blue);
+    background: #E3F5FA;
+    color: #0E7490;
 }
 
 .main-header-menu .sub-menu.mega-menu .mega-menu__thumb {
@@ -676,7 +672,7 @@ body.ab-menu-open .site-header {
     aspect-ratio: 4 / 3;
     border-radius: var(--ab-radius-sm);
     overflow: hidden;
-    background: var(--ab-surface-alt);
+    background: #F6F6F6;
 }
 .main-header-menu .sub-menu.mega-menu .mega-menu__thumb img {
     width: 100%;
@@ -714,7 +710,7 @@ body.ab-menu-open .site-header {
     color: #fff;
     cursor: pointer;
 }
-.menu-toggle:hover { background: var(--ab-primary); color: #fff; }
+.menu-toggle:hover { background: #1046bb; color: #fff; }
 
 .menu-toggle__bars { position: relative; width: 20px; height: 14px; }
 .menu-toggle__bars span {
@@ -753,7 +749,7 @@ body.ab-menu-open .site-header {
     align-items: center;
     justify-content: center;
     padding: 18px 11px;
-    background: var(--ab-primary);
+    background: #1046bb;
     color: #fff;
     font-family: var(--ab-font-heading);
     font-size: 0.8125rem;
@@ -761,10 +757,10 @@ body.ab-menu-open .site-header {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     border-radius: var(--ab-radius-sm) 0 0 var(--ab-radius-sm);
-    box-shadow: var(--ab-shadow);
+    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
     transition: background-color var(--ab-transition), padding var(--ab-transition);
 }
-.ab-floating-cta:hover { background: var(--ab-primary-dark); color: #fff; padding-inline-end: 15px; }
+.ab-floating-cta:hover { background: #1046bb; color: #fff; padding-inline-end: 15px; }
 
 .ab-floating-whatsapp {
     display: flex;
@@ -776,7 +772,7 @@ body.ab-menu-open .site-header {
     border-radius: 50%;
     background: #25D366;
     color: #fff;
-    box-shadow: var(--ab-shadow);
+    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
     transition: transform var(--ab-transition);
 }
 .ab-floating-whatsapp:hover { transform: scale(1.08); color: #fff; }
@@ -792,9 +788,9 @@ body.ab-menu-open .site-header {
     min-height: clamp(520px, 76vh, 760px);
     padding: clamp(80px, 10vw, 130px) 0 clamp(110px, 12vw, 160px);
     background:
-        linear-gradient(115deg, rgba(26, 26, 26, 0.90) 0%, rgba(245, 51, 63, 0.72) 55%, rgba(255, 202, 16, 0.42) 100%),
-        radial-gradient(circle at 78% 22%, #FFCA10 0%, transparent 55%),
-        linear-gradient(160deg, #1A1A1A 0%, #F5333F 100%);
+        linear-gradient(115deg, rgba(26, 26, 26, 0.90) 0%, rgba(56, 42, 245, 0.72) 55%, rgba(87, 225, 243, 0.42) 100%),
+        radial-gradient(circle at 78% 22%, #57e1f3 0%, transparent 55%),
+        linear-gradient(160deg, #1A1A1A 0%, #2971f7 100%);
     background-size: cover;
     background-position: center;
     color: rgba(255, 255, 255, 0.88);
@@ -813,7 +809,7 @@ body.ab-menu-open .site-header {
    pages that opt out of it in page.php) — the section's own ".ast-container"
    still centers its actual content to the normal 1200px column. */
 .ab-hero--video {
-    background: var(--ab-deep);
+    background: #1A1A1A;
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
@@ -849,9 +845,9 @@ body.ab-menu-open .site-header {
 }
 .ab-hero__form-card {
     flex: 0 1 340px;
-    background: var(--ab-surface);
+    background: #FFFFFF;
     border-radius: var(--ab-radius-lg);
-    box-shadow: var(--ab-shadow-lg);
+    box-shadow: 0 24px 60px rgba(26, 26, 26, 0.16);
     padding: clamp(24px, 3vw, 32px);
 }
 .ab-hero__form-card h3 {
@@ -883,7 +879,7 @@ body.ab-menu-open .site-header {
     text-transform: uppercase;
     color: #fff;
 }
-.ab-hero__badge svg { color: var(--ab-accent); }
+.ab-hero__badge svg { color: #57e1f3; }
 
 .ab-hero h1 {
     color: #fff;
@@ -892,7 +888,7 @@ body.ab-menu-open .site-header {
 }
 .ab-hero h1 em {
     font-style: normal;
-    color: var(--ab-aqua);
+    color: #57e1f3;
 }
 
 .ab-hero__text {
@@ -935,10 +931,10 @@ body.ab-menu-open .site-header {
     z-index: 1;
     width: 100%;
     height: auto;
-    color: var(--ab-deep);
+    color: #1A1A1A;
     pointer-events: none;
 }
-.ab-wave--alt { color: var(--ab-surface-alt); }
+.ab-wave--alt { color: #F6F6F6; }
 
 /* Inner-page header — pulled up by the header's own (transparent) height
    and given that much extra top padding, so the background extends behind
@@ -948,25 +944,31 @@ body.ab-menu-open .site-header {
     position: relative;
     margin-top: calc(-1 * var(--ab-header-h));
     padding: calc(var(--ab-header-h) + clamp(56px, 7vw, 92px)) 0 clamp(72px, 9vw, 110px);
-    background: linear-gradient(120deg, #1A1A1A 0%, #F5333F 100%);
+    background: linear-gradient(120deg, #1A1A1A 0%, #2971f7 100%);
     color: rgba(255, 255, 255, 0.82);
     overflow: hidden;
 }
 .ab-page-hero h1 { color: #fff; margin: 0; }
 
 /* --- Video hero: front page only (adeptbuild_page_hero() only renders
-   the <video> when is_front_page() finds assets/img/videohome.mp4) —
-   taller than the plain gradient banner so the footage has room to read,
-   with a tint overlay so the title stays legible over moving footage.
-   min-height grows by the same header height its margin-top subtracts, so
-   the box extends upward under the header instead of shrinking. --- */
+   the <video> when is_front_page() finds assets/img/videohome.mp4) — a
+   true full-viewport-height opening screen (exactly 100vh, not a clamped
+   fraction of it) so the footage always fills the whole first screen
+   regardless of device, and nothing of the next section is visible until
+   the visitor actually scrolls. height (not min-height) grows by the
+   same header height its margin-top subtracts, so the box extends
+   upward under the header instead of shrinking, while still landing on
+   exactly 100vh of VISIBLE video. See ".home .ab-proto-intro" further
+   down — it's pulled up to sit inside the tail of this same video
+   instead of starting fresh in its own section below it. --- */
 .ab-page-hero--video {
     display: flex;
-    align-items: flex-end;
-    min-height: calc(clamp(480px, 78vh, 820px) + var(--ab-header-h));
+    align-items: center;
+    height: calc(100vh + var(--ab-header-h));
     padding-top: var(--ab-header-h);
     padding-bottom: clamp(48px, 6vw, 84px);
-    background: var(--ab-deep);
+    background: #1A1A1A;
+    overflow: hidden;
 }
 .ab-page-hero__video {
     position: absolute;
@@ -985,7 +987,17 @@ body.ab-menu-open .site-header {
     z-index: 1;
     background: linear-gradient(to top, rgba(26, 26, 26, 0.85) 0%, rgba(26, 26, 26, 0.4) 40%, rgba(26, 26, 26, 0) 75%);
 }
-.ab-page-hero--video .ast-container { position: relative; z-index: 2; }
+/* Nudged up from dead-center: a bottom margin on the (vertically
+   centered, via ".ab-page-hero--video { align-items:center }") container
+   shifts its centered position higher, leaving more of the hero's own
+   100vh free below the title for setHeroIntroOverlap() (navigation.js)
+   to fit ".home .ab-proto-intro" into without needing to pad it out to
+   reach the hero's bottom edge. */
+.ab-page-hero--video .ast-container {
+    position: relative;
+    z-index: 2;
+    margin-bottom: clamp(80px, 16vh, 200px);
+}
 .ab-page-hero--video h1 {
     font-size: clamp(1.75rem, 3.4vw, 2.75rem);
     max-width: 640px;
@@ -1013,10 +1025,10 @@ body.ab-menu-open .site-header {
     display: flex;
     flex-direction: column;
     padding: 34px 30px;
-    background: var(--ab-surface);
-    border: 1px solid var(--ab-border);
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
     border-radius: var(--ab-radius-lg);
-    box-shadow: var(--ab-shadow-sm);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
     transition: transform var(--ab-transition), box-shadow var(--ab-transition), border-color var(--ab-transition);
     overflow: hidden;
 }
@@ -1027,14 +1039,14 @@ body.ab-menu-open .site-header {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--ab-primary), var(--ab-aqua));
+    background: linear-gradient(90deg, #1046bb, #57e1f3);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform var(--ab-transition);
 }
 .ab-card:hover {
     transform: translateY(-6px);
-    box-shadow: var(--ab-shadow);
+    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
     border-color: transparent;
 }
 .ab-card:hover::before { transform: scaleX(1); }
@@ -1047,11 +1059,11 @@ body.ab-menu-open .site-header {
     height: 60px;
     margin-bottom: 22px;
     border-radius: 0;
-    background: var(--ab-primary-light);
-    color: var(--ab-primary);
+    background: #E8ECFB;
+    color: #1046bb;
     transition: background-color var(--ab-transition), color var(--ab-transition);
 }
-.ab-card:hover .ab-card__icon { background: var(--ab-primary); color: #fff; }
+.ab-card:hover .ab-card__icon { background: #1046bb; color: #fff; }
 
 .ab-card h3 { font-size: 1.25rem; margin-bottom: 12px; }
 .ab-card p { font-size: var(--ab-fs-sm); margin-bottom: 18px; }
@@ -1061,9 +1073,9 @@ body.ab-menu-open .site-header {
 .ab-step {
     position: relative;
     padding: 32px 28px;
-    background: var(--ab-surface);
+    background: #FFFFFF;
     border-radius: var(--ab-radius-lg);
-    border: 1px solid var(--ab-border);
+    border: 1px solid #E5E5E5;
 }
 .ab-step__num {
     display: inline-flex;
@@ -1073,7 +1085,7 @@ body.ab-menu-open .site-header {
     height: 48px;
     margin-bottom: 18px;
     border-radius: 50%;
-    background: var(--ab-deep);
+    background: #1A1A1A;
     color: #fff;
     font-family: var(--ab-font-heading);
     font-weight: 700;
@@ -1090,7 +1102,7 @@ body.ab-menu-open .site-header {
     left: 10%;
     right: 10%;
     height: 2px;
-    background: repeating-linear-gradient(90deg, var(--ab-border) 0 10px, transparent 10px 20px);
+    background: repeating-linear-gradient(90deg, #E5E5E5 0 10px, transparent 10px 20px);
     z-index: -1;
 }
 
@@ -1127,13 +1139,13 @@ body.ab-menu-open .site-header {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: var(--ab-slate);
+    background: #1B2430;
     padding: clamp(32px, 5vw, 56px);
 }
 .ab-proto-process .ab-process-row__num {
     font-family: var(--ab-font-heading);
     font-size: 1.0625rem;
-    color: var(--ab-aqua);
+    color: #57e1f3;
     letter-spacing: 0.04em;
     margin-bottom: 10px;
 }
@@ -1175,9 +1187,9 @@ body.ab-menu-open .site-header {
     position: relative;
     border-radius: var(--ab-radius-lg);
     overflow: hidden;
-    box-shadow: var(--ab-shadow);
+    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
     aspect-ratio: 4 / 3;
-    background: linear-gradient(140deg, #F5333F 0%, #FFCA10 100%);
+    background: linear-gradient(140deg, #2971f7 0%, #57e1f3 100%);
 }
 .ab-media__visual img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -1186,10 +1198,10 @@ body.ab-menu-open .site-header {
     right: -12px;
     bottom: 28px;
     padding: 20px 26px;
-    background: var(--ab-accent);
-    color: var(--ab-deep);
+    background: #57e1f3;
+    color: #1A1A1A;
     border-radius: var(--ab-radius);
-    box-shadow: var(--ab-shadow);
+    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
     font-family: var(--ab-font-heading);
     text-align: center;
 }
@@ -1212,7 +1224,7 @@ body.ab-menu-open .site-header {
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: var(--ab-primary-light) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23F5333F' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 13px no-repeat;
+    background: #E8ECFB url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%232971f7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 13px no-repeat;
 }
 .ab-section--deep .ab-checklist li { color: rgba(255, 255, 255, 0.82); }
 
@@ -1297,7 +1309,7 @@ body.ab-menu-open .site-header {
     font-size: var(--ab-fs-xs);
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--ab-aqua);
+    color: #57e1f3;
     margin-bottom: 10px;
     opacity: 0.9;
 }
@@ -1382,7 +1394,7 @@ body.ab-menu-open .site-header {
     cursor: pointer;
     transition: background-color var(--ab-transition), border-color var(--ab-transition), color var(--ab-transition);
 }
-.ab-video-slider__btn:hover { background: var(--ab-primary); border-color: var(--ab-primary); color: var(--ab-deep); }
+.ab-video-slider__btn:hover { background: #1046bb; border-color: #1046bb; color: #1A1A1A; }
 .ab-video-slider__btn:disabled { opacity: 0.35; cursor: default; }
 .ab-video-slider__btn:disabled:hover { background: transparent; border-color: rgba(255, 255, 255, 0.35); color: #fff; }
 .ab-video-slider__btn svg { width: 18px; height: 18px; }
@@ -1405,7 +1417,7 @@ body.ab-menu-open .site-header {
 }
 .ab-video-slider__item .wp-block-embed { margin-bottom: 0; }
 .ab-video-slider__item .wp-block-embed__wrapper {
-    box-shadow: var(--ab-shadow);
+    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
     transition: transform var(--ab-transition);
 }
 .ab-video-slider__item:hover .wp-block-embed__wrapper { transform: translateY(-4px); }
@@ -1428,8 +1440,8 @@ body.ab-menu-open .site-header {
     border-radius: var(--ab-radius-lg);
     overflow: hidden;
     aspect-ratio: 4 / 3;
-    background: linear-gradient(150deg, #1A1A1A, #F5333F 60%, #FFCA10);
-    box-shadow: var(--ab-shadow-sm);
+    background: linear-gradient(150deg, #1A1A1A, #2971f7 60%, #57e1f3);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
 }
 .ab-gallery__item--wide { grid-column: span 2; }
 .ab-gallery__item img {
@@ -1464,7 +1476,7 @@ body.ab-menu-open .site-header {
     font-size: var(--ab-fs-xs);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--ab-aqua);
+    color: #57e1f3;
 }
 
 /* 2-column variant — e.g. the "What We Do" service grid on the About page,
@@ -1490,7 +1502,7 @@ body.ab-menu-open .site-header {
     width: 100%;
     height: auto;
     border-radius: var(--ab-radius);
-    box-shadow: var(--ab-shadow-lg);
+    box-shadow: 0 24px 60px rgba(26, 26, 26, 0.16);
 }
 .ab-entry-content .wp-block-media-text__content > * { margin-bottom: 1.1em; }
 .ab-entry-content .wp-block-media-text__content > *:last-child { margin-bottom: 0; }
@@ -1501,15 +1513,15 @@ body.ab-menu-open .site-header {
 /* Testimonials */
 .ab-quote {
     padding: 34px 30px;
-    background: var(--ab-surface);
+    background: #FFFFFF;
     border-radius: var(--ab-radius-lg);
-    border: 1px solid var(--ab-border);
-    box-shadow: var(--ab-shadow-sm);
+    border: 1px solid #E5E5E5;
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
 }
-.ab-quote__stars { color: var(--ab-accent); margin-bottom: 16px; letter-spacing: 2px; }
+.ab-quote__stars { color: #57e1f3; margin-bottom: 16px; letter-spacing: 2px; }
 .ab-quote p {
     font-size: var(--ab-fs-sm);
-    color: var(--ab-heading);
+    color: #1A1A1A;
     margin-bottom: 22px;
 }
 .ab-quote__author { display: flex; align-items: center; gap: 14px; }
@@ -1517,7 +1529,7 @@ body.ab-menu-open .site-header {
     width: 46px;
     height: 46px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--ab-primary), var(--ab-aqua));
+    background: linear-gradient(135deg, #1046bb, #57e1f3);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1526,15 +1538,15 @@ body.ab-menu-open .site-header {
     font-weight: 700;
     flex-shrink: 0;
 }
-.ab-quote__author strong { display: block; color: var(--ab-heading); font-size: 0.9375rem; }
-.ab-quote__author span { font-size: var(--ab-fs-xs); color: var(--ab-text-light); }
+.ab-quote__author strong { display: block; color: #1A1A1A; font-size: 0.9375rem; }
+.ab-quote__author span { font-size: var(--ab-fs-xs); color: #6B6B6B; }
 
 /* CTA banner */
 .ab-cta {
     position: relative;
     padding: clamp(48px, 6vw, 72px) clamp(28px, 5vw, 64px);
     border-radius: var(--ab-radius-lg);
-    background: linear-gradient(115deg, #1A1A1A 0%, #F5333F 100%);
+    background: linear-gradient(115deg, #1A1A1A 0%, #0E7490 100%);
     color: rgba(255, 255, 255, 0.85);
     overflow: hidden;
     display: flex;
@@ -1556,11 +1568,22 @@ body.ab-menu-open .site-header {
     width: 320px;
     height: 320px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 202, 16, 0.45), transparent 70%);
+    background: radial-gradient(circle, rgba(127, 216, 232, 0.45), transparent 70%);
 }
 .ab-cta > * { position: relative; z-index: 1; }
 .ab-cta h2 { color: #fff; margin-bottom: 10px; }
 .ab-cta p { max-width: 520px; margin: 0; }
+/* The "Contact Us" button carries WP's own gold ".has-accent-background-
+   color" utility class (rende with "!important" by WordPress's global
+   styles) — needs equal-or-higher specificity, not just "!important", to
+   win. */
+.ab-cta .wp-block-button__link.has-accent-background-color {
+    background-color: #0E7490 !important;
+    color: #fff !important;
+}
+.ab-cta .wp-block-button__link.has-accent-background-color:hover {
+    background-color: #0B5A70 !important;
+}
 
 /* Logos / trust bar */
 .ab-logos {
@@ -1576,7 +1599,7 @@ body.ab-menu-open .site-header {
     font-weight: 700;
     font-size: 1.125rem;
     letter-spacing: 0.02em;
-    color: var(--ab-text-light);
+    color: #6B6B6B;
 }
 
 /* ==========================================================================
@@ -1596,9 +1619,9 @@ textarea {
     padding: 14px 18px;
     font-family: inherit;
     font-size: var(--ab-fs-sm);
-    color: var(--ab-heading);
-    background: var(--ab-surface);
-    border: 1px solid var(--ab-border);
+    color: #1A1A1A;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
     border-radius: var(--ab-radius-sm);
     transition: border-color var(--ab-transition), box-shadow var(--ab-transition);
 }
@@ -1606,8 +1629,8 @@ input:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    border-color: var(--ab-primary);
-    box-shadow: 0 0 0 4px rgba(245, 51, 63, 0.12);
+    border-color: #1046bb;
+    box-shadow: 0 0 0 4px rgba(16, 70, 187, 0.12);
 }
 textarea { min-height: 140px; resize: vertical; }
 
@@ -1618,16 +1641,16 @@ label {
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--ab-heading);
+    color: #1A1A1A;
 }
 
 .ab-form {
     display: grid;
     gap: 18px;
     padding: clamp(28px, 4vw, 40px);
-    background: var(--ab-surface);
+    background: #FFFFFF;
     border-radius: var(--ab-radius-lg);
-    box-shadow: var(--ab-shadow);
+    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
 }
 .ab-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 
@@ -1682,18 +1705,18 @@ label {
 .ab-post-card {
     display: flex;
     flex-direction: column;
-    background: var(--ab-surface);
-    border: 1px solid var(--ab-border);
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
     border-radius: var(--ab-radius-lg);
     overflow: hidden;
     transition: transform var(--ab-transition), box-shadow var(--ab-transition);
 }
-.ab-post-card:hover { transform: translateY(-5px); box-shadow: var(--ab-shadow); }
+.ab-post-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10); }
 
 .ab-post-card__thumb {
     aspect-ratio: 16 / 10;
     overflow: hidden;
-    background: linear-gradient(140deg, #F5333F, #FFCA10);
+    background: linear-gradient(140deg, #2971f7, #57e1f3);
 }
 .ab-post-card__thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
 .ab-post-card:hover .ab-post-card__thumb img { transform: scale(1.05); }
@@ -1702,9 +1725,9 @@ label {
 .ab-post-card h2,
 .ab-post-card h3 { font-size: 1.25rem; margin-bottom: 10px; }
 .ab-post-card h2 a,
-.ab-post-card h3 a { color: var(--ab-heading); }
+.ab-post-card h3 a { color: #1A1A1A; }
 .ab-post-card h2 a:hover,
-.ab-post-card h3 a:hover { color: var(--ab-primary); }
+.ab-post-card h3 a:hover { color: #1046bb; }
 .ab-post-card p { font-size: var(--ab-fs-sm); }
 .ab-post-card .ab-link-arrow { margin-top: auto; }
 
@@ -1715,7 +1738,7 @@ label {
     gap: 16px;
     margin-bottom: 12px;
     font-size: var(--ab-fs-xs);
-    color: var(--ab-text-light);
+    color: #6B6B6B;
 }
 .ab-meta span { display: inline-flex; align-items: center; gap: 6px; }
 
@@ -1742,11 +1765,11 @@ label {
 .ab-entry-content p,
 .ab-entry-content li,
 .ab-entry-content strong { color: rgba(255, 255, 255, 0.8); }
-.ab-entry-content a:not(.wp-element-button) { color: var(--ab-aqua); }
+.ab-entry-content a:not(.wp-element-button) { color: #57e1f3; }
 .ab-entry-content a:not(.wp-element-button):hover { color: #fff; }
 .ab-entry-content blockquote {
     background: rgba(255, 255, 255, 0.06);
-    border-left-color: var(--ab-aqua);
+    border-left-color: #57e1f3;
     color: rgba(255, 255, 255, 0.85);
 }
 .ab-entry-content hr { background: rgba(255, 255, 255, 0.18); }
@@ -1760,7 +1783,7 @@ label {
 .wp-caption-text,
 .wp-block-image figcaption {
     font-size: var(--ab-fs-xs);
-    color: var(--ab-text-light);
+    color: #6B6B6B;
     text-align: center;
     margin-top: 10px;
 }
@@ -1868,7 +1891,7 @@ label {
     font-family: var(--ab-font-heading);
     font-weight: 700;
     font-size: 1.0625rem;
-    color: var(--ab-brand-blue-light);
+    color: #7FD8E8;
     margin-bottom: 4px;
 }
 .ab-content-band__ticker span {
@@ -1883,7 +1906,7 @@ label {
     33.34% { opacity: 0; transform: translateY(100%); }
     100%   { opacity: 0; transform: translateY(100%); }
 }
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-uced-motion: reduce) {
     .ab-content-band__ticker { min-height: 0; overflow: visible; }
     .ab-content-band__ticker li {
         animation: none;
@@ -1929,7 +1952,7 @@ h2.ab-services-showcase__title {
    in plain white if the browser can't clip the gradient to the text. */
 @supports (background-clip: text) or (-webkit-background-clip: text) {
     h2.ab-services-showcase__title {
-        background: linear-gradient(120deg, #fff 0%, var(--ab-brand-blue-light) 55%, var(--ab-brand-blue) 100%);
+        background: linear-gradient(120deg, #fff 0%, #7FD8E8 55%, #0E7490 100%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -1957,7 +1980,7 @@ h2.ab-services-showcase__title {
     font-family: var(--ab-font-heading);
     font-weight: 600;
     font-size: clamp(1.0625rem, 2.4vw, 1.5rem);
-    color: var(--ab-brand-blue-light);
+    color: #7FD8E8;
     opacity: 0;
     transform: translateY(-100%);
     animation: ab-services-rotate 24s infinite;
@@ -2007,18 +2030,18 @@ h2.ab-services-showcase__title {
 .ab-sidebar .widget {
     padding: 28px 26px;
     margin-bottom: 26px;
-    background: var(--ab-surface-alt);
+    background: #F6F6F6;
     border-radius: var(--ab-radius);
 }
 .ab-sidebar .widget-title {
     font-size: 1.0625rem;
     margin-bottom: 16px;
     padding-bottom: 12px;
-    border-bottom: 2px solid var(--ab-aqua);
+    border-bottom: 2px solid #57e1f3;
     display: inline-block;
 }
 .ab-sidebar ul { list-style: none; padding: 0; margin: 0; }
-.ab-sidebar li { padding: 9px 0; border-bottom: 1px solid var(--ab-border); font-size: var(--ab-fs-sm); }
+.ab-sidebar li { padding: 9px 0; border-bottom: 1px solid #E5E5E5; font-size: var(--ab-fs-sm); }
 .ab-sidebar li:last-child { border-bottom: 0; }
 
 /* Pagination */
@@ -2041,12 +2064,12 @@ h2.ab-services-showcase__title {
     font-family: var(--ab-font-heading);
     font-weight: 600;
     font-size: 0.9375rem;
-    color: var(--ab-heading);
+    color: #1A1A1A;
 }
 .ab-pagination .page-numbers:hover,
 .ab-pagination .page-numbers.current {
-    background: var(--ab-primary);
-    border-color: var(--ab-primary);
+    background: #1046bb;
+    border-color: #1046bb;
     color: #fff;
 }
 
@@ -2059,7 +2082,7 @@ h2.ab-services-showcase__title {
     font-size: clamp(5rem, 18vw, 11rem);
     font-weight: 800;
     line-height: 0.9;
-    background: linear-gradient(120deg, var(--ab-primary), var(--ab-aqua));
+    background: linear-gradient(120deg, #1046bb, #57e1f3);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -2071,7 +2094,7 @@ h2.ab-services-showcase__title {
    ========================================================================== */
 
 .site-footer {
-    background: var(--ab-deep);
+    background: #1A1A1A;
     color: rgba(255, 255, 255, 0.68);
     font-size: var(--ab-fs-sm);
 }
@@ -2093,7 +2116,7 @@ h2.ab-services-showcase__title {
 .site-footer ul { list-style: none; padding: 0; margin: 0; }
 .site-footer li { margin-bottom: 11px; }
 .site-footer a { color: rgba(255, 255, 255, 0.68); }
-.site-footer a:hover { color: var(--ab-aqua); }
+.site-footer a:hover { color: #57e1f3; }
 
 .ab-footer-brand .site-title a,
 .ab-footer-brand strong {
@@ -2110,7 +2133,7 @@ h2.ab-services-showcase__title {
     align-items: flex-start;
     gap: 12px;
 }
-.ab-footer-contact svg { color: var(--ab-aqua); flex-shrink: 0; margin-top: 4px; }
+.ab-footer-contact svg { color: #57e1f3; flex-shrink: 0; margin-top: 4px; }
 
 .ab-footer-contact__phone a {
     font-family: var(--ab-font-heading);
@@ -2119,7 +2142,7 @@ h2.ab-services-showcase__title {
     letter-spacing: 0.02em;
     color: #fff;
 }
-.ab-footer-contact__phone a:hover { color: var(--ab-aqua); }
+.ab-footer-contact__phone a:hover { color: #57e1f3; }
 
 /* --- "Follow us" + outlined social row (footer only) --- */
 .ab-footer-follow {
@@ -2205,14 +2228,14 @@ h2.ab-services-showcase__title {
     letter-spacing: -0.02em;
     font-size: clamp(2.75rem, 7vw, 6rem);
     margin: 0 0 0.4em;
-    background: linear-gradient(180deg, var(--ab-aqua) 0%, var(--ab-primary) 100%);
+    background: linear-gradient(180deg, #57e1f3 0%, #1046bb 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: var(--ab-primary);
+    color: #1046bb;
 }
 .ab-gradient-heading--light {
-    background: linear-gradient(180deg, #fff 0%, var(--ab-primary-light) 100%);
+    background: linear-gradient(180deg, #fff 0%, #E8ECFB 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -2224,11 +2247,11 @@ h2.ab-services-showcase__title {
    number already in the text (e.g. "250+") and counts up to it from 0
    once it scrolls into view; without the script it just displays as-is. */
 .ab-counter-value {
-    background: linear-gradient(180deg, var(--ab-aqua), var(--ab-primary));
+    background: linear-gradient(180deg, #57e1f3, #1046bb);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: var(--ab-primary);
+    color: #1046bb;
 }
 
 /* ==========================================================================
@@ -2255,7 +2278,7 @@ h2.ab-services-showcase__title {
         inset: var(--ab-header-h) 0 0 0;
         padding: 12px 20px 40px;
         background: #fff;
-        box-shadow: var(--ab-shadow-lg);
+        box-shadow: 0 24px 60px rgba(26, 26, 26, 0.16);
         overflow-y: auto;
         transform: translateY(-8px);
         opacity: 0;
@@ -2270,7 +2293,7 @@ h2.ab-services-showcase__title {
     .main-header-menu > li > a {
         padding: 15px 4px;
         font-size: 1.0625rem;
-        border-bottom: 1px solid var(--ab-border);
+        border-bottom: 1px solid #E5E5E5;
         border-radius: 0;
     }
     .main-header-menu .sub-menu {
@@ -2280,7 +2303,7 @@ h2.ab-services-showcase__title {
         transform: none;
         box-shadow: none;
         border: 0;
-        border-bottom: 1px solid var(--ab-border);
+        border-bottom: 1px solid #E5E5E5;
         border-radius: 0;
         padding: 4px 0 12px 16px;
         display: none;
@@ -2317,13 +2340,13 @@ h2.ab-services-showcase__title {
        opened. The panel is never transparent, so always use the normal
        dark heading color inside it regardless of scroll/page state. */
     .main-navigation .main-header-menu > li > a {
-        color: var(--ab-heading);
+        color: #1A1A1A;
         background: none;
         -webkit-text-fill-color: currentColor;
     }
     .main-navigation .main-header-menu > li:hover > a,
     .main-navigation .main-header-menu > .current-menu-item > a {
-        color: var(--ab-brand-blue);
+        color: #0E7490;
         background: none;
         -webkit-text-fill-color: currentColor;
     }
@@ -2392,15 +2415,15 @@ h2.ab-services-showcase__title {
     display: flex;
     flex-direction: column;
     padding: 34px 30px;
-    background: var(--ab-surface);
-    border: 1px solid var(--ab-border);
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
     border-radius: var(--ab-radius-lg);
-    box-shadow: var(--ab-shadow-sm);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
     transition: transform var(--ab-transition), box-shadow var(--ab-transition), border-color var(--ab-transition);
 }
 .wp-block-column:hover {
     transform: translateY(-6px);
-    box-shadow: var(--ab-shadow);
+    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
     border-color: transparent;
 }
 
@@ -2616,7 +2639,7 @@ h2.ab-services-showcase__title {
     width: auto;
     height: auto;
     object-fit: contain;
-    box-shadow: var(--ab-shadow-lg);
+    box-shadow: 0 24px 60px rgba(26, 26, 26, 0.16);
 }
 .ab-lightbox__close {
     position: absolute;
@@ -2656,22 +2679,22 @@ h2.ab-services-showcase__title {
 .wp-block-latest-posts li {
     display: flex;
     flex-direction: column;
-    background: var(--ab-surface);
-    border: 1px solid var(--ab-border);
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
     border-radius: var(--ab-radius-lg);
     overflow: hidden;
     transition: transform var(--ab-transition), box-shadow var(--ab-transition);
 }
 .wp-block-latest-posts li:hover {
     transform: translateY(-5px);
-    box-shadow: var(--ab-shadow);
+    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
 }
 
 .wp-block-latest-posts__featured-image {
     margin: 0;
     aspect-ratio: 16 / 10;
     overflow: hidden;
-    background: linear-gradient(140deg, var(--ab-primary), var(--ab-aqua));
+    background: linear-gradient(140deg, #1046bb, #57e1f3);
 }
 .wp-block-latest-posts__featured-image img {
     width: 100%;
@@ -2686,24 +2709,24 @@ h2.ab-services-showcase__title {
     font-family: var(--ab-font-heading);
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--ab-heading);
+    color: #1A1A1A;
     padding: 26px 26px 0;
     margin-bottom: 10px;
 }
-.wp-block-latest-posts__post-title:hover { color: var(--ab-primary); }
+.wp-block-latest-posts__post-title:hover { color: #1046bb; }
 
 .wp-block-latest-posts__post-date {
     display: block;
     padding: 0 26px;
     font-size: var(--ab-fs-xs);
-    color: var(--ab-text-light);
+    color: #6B6B6B;
     margin-bottom: 10px;
 }
 
 .wp-block-latest-posts__post-excerpt {
     padding: 0 26px 26px;
     font-size: var(--ab-fs-sm);
-    color: var(--ab-text);
+    color: #3D3D3D;
     margin: 0;
 }
 
@@ -2714,13 +2737,13 @@ h2.ab-services-showcase__title {
 .wp-block-video video {
     width: 100%;
     border-radius: var(--ab-radius);
-    box-shadow: var(--ab-shadow-sm);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
 }
 
 .wp-block-embed__wrapper {
     border-radius: var(--ab-radius);
     overflow: hidden;
-    box-shadow: var(--ab-shadow-sm);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
 }
 .wp-block-embed__wrapper iframe { width: 100%; }
 
@@ -2763,13 +2786,13 @@ h2.ab-services-showcase__title {
     backdrop-filter: blur(2px);
     transition: transform var(--ab-transition), background-color var(--ab-transition);
 }
-.lite-video:hover .lite-video__play { transform: translate(-50%, -50%) scale(1.08); background: var(--ab-primary); }
+.lite-video:hover .lite-video__play { transform: translate(-50%, -50%) scale(1.08); background: #1046bb; }
 .lite-video__play svg { margin-left: 3px; color: #fff; }
 
 .wp-block-video figcaption,
 .wp-block-embed figcaption {
     font-size: var(--ab-fs-xs);
-    color: var(--ab-text-light);
+    color: #6B6B6B;
     text-align: center;
     margin-top: 10px;
 }
@@ -2794,7 +2817,7 @@ ul.wp-block-list li::before {
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: var(--ab-accent);
+    background: #57e1f3;
 }
 
 ol.wp-block-list {
@@ -2809,7 +2832,7 @@ ol.wp-block-list li:last-child { margin-bottom: 0; }
 ol.wp-block-list li::marker {
     font-family: var(--ab-font-heading);
     font-weight: 700;
-    color: var(--ab-primary);
+    color: #1046bb;
 }
 
 @media (max-width: 1024px) {
@@ -2839,7 +2862,7 @@ ol.wp-block-list li::marker {
 .ab-mb-0 { margin-bottom: 0; }
 .ab-mt-lg { margin-top: clamp(32px, 5vw, 56px); }
 .ab-lead { font-size: 1.125rem; }
-.ab-muted { color: var(--ab-text-light); }
+.ab-muted { color: #6B6B6B; }
 
 /* ==========================================================================
    16. PAGE — "A full-service Construction & Design Company" (the site's
@@ -2860,12 +2883,28 @@ ol.wp-block-list li::marker {
    itself is dark/transparent-overlay site-wide now (see section 6 above),
    so nothing home-specific is needed for it here any more. --- */
 
-/* --- 1. Intro: single-column statement hero (no video sibling in the
-   current content, unlike the two-column version this rule used to
-   support) — capped width keeps the long headline/paragraph readable
-   instead of stretching edge to edge. --- */
+/* --- 1. Intro: pulled up to sit right under the front-page hero's
+   title — as close as a single line break — instead of starting fresh
+   in its own section below the 100vh video, so the headline and this
+   supporting copy read as one continuous opener, matching the
+   reference template's home page, with the next section only revealed
+   on scroll.
+
+   The negative margin is applied by JS (setHeroIntroOverlap() in
+   navigation.js as an inline "style.marginTop"), which measures the
+   title's real bottom edge and this block's real natural position and
+   sets the exact pixel gap between them — a calc() built on 100vh kept
+   drifting from the truth (scrollbar width, mobile browser chrome
+   collapsing, etc. all make "100vh" an unreliable stand-in for the
+   hero's real rendered height). The 0px here is only what shows before
+   that JS runs, or with JS disabled — a plain stack, safe either way.
+   No background of its own is needed here — the copy just sits on the
+   same video + dark vignette the hero above it already provides. --- */
 .home .ab-proto-intro {
     display: block !important;
+    position: relative;
+    z-index: 2;
+    margin-top: 0;
 }
 .home .ab-proto-intro > .wp-block-group__inner-container {
     display: contents;
@@ -2873,32 +2912,51 @@ ol.wp-block-list li::marker {
 .home .ab-proto-intro-left {
     max-width: 720px;
 }
+.home .ab-proto-intro-left .wp-block-buttons:first-child {
+    margin-bottom: 16px;
+}
 .home .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link {
     padding: 7px 20px !important;
-    background: var(--ab-primary-light) !important;
-    color: var(--ab-primary-dark) !important;
+    background: #E3F5FA !important;
+    border-color: #E3F5FA !important;
+    color: #0E7490 !important;
     font-size: var(--ab-fs-xs) !important;
     letter-spacing: 0.04em;
 }
 .home .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link:hover {
-    background: var(--ab-primary) !important;
+    background: #0E7490 !important;
+    border-color: #0E7490 !important;
     color: #fff !important;
 }
 .home .ab-proto-intro .wp-block-embed { margin-bottom: 0; }
 .home .ab-proto-intro-left h2 { color: #fff; }
 .home .ab-proto-intro-left p { color: rgba(255, 255, 255, 0.75); }
 .home .ab-proto-intro-left p strong { color: #fff; }
-/* Solid red reads close in value to the dark charcoal backdrop — swap
-   the primary CTA to the gold accent so it actually pops on dark sections. */
+/* Same pale-blue treatment (and same padding/font-size/letter-spacing) as
+   the "GET STARTED HERE" button above, so both CTAs in this intro block
+   read as one consistent pair. */
 .home .ab-proto-intro-left .wp-block-buttons:last-child .wp-block-button__link {
-    background: var(--ab-accent) !important;
-    border-color: var(--ab-accent) !important;
-    color: var(--ab-deep) !important;
+    padding: 7px 20px !important;
+    background: #E3F5FA !important;
+    border-color: #E3F5FA !important;
+    color: #0E7490 !important;
+    font-size: var(--ab-fs-xs) !important;
+    letter-spacing: 0.04em;
 }
 .home .ab-proto-intro-left .wp-block-buttons:last-child .wp-block-button__link:hover {
-    background: var(--ab-accent-dark) !important;
-    border-color: var(--ab-accent-dark) !important;
-    color: var(--ab-deep) !important;
+    background: #0E7490 !important;
+    border-color: #0E7490 !important;
+    color: #fff !important;
+}
+/* ".ab-entry-content strong" (below) paints every <strong> near-white for
+   body copy on the dark page background — this button's label happens to
+   be wrapped in <strong> too, so it needs its own override to actually
+   show the blue set above instead. */
+.home .ab-proto-intro-left .wp-block-buttons:last-child .wp-block-button__link strong {
+    color: #0E7490 !important;
+}
+.home .ab-proto-intro-left .wp-block-buttons:last-child .wp-block-button__link:hover strong {
+    color: #fff !important;
 }
 
 /* --- Full-bleed helper: breaks a Group block out of the theme's 1200px
@@ -2938,6 +2996,9 @@ ol.wp-block-list li::marker {
 .home .ab-proto-process h2,
 .home .ab-proto-blog h2 { color: #fff; }
 .home .ab-proto-services p { color: rgba(255, 255, 255, 0.72); max-width: 640px; }
+/* "What We Do" eyebrow carries an inline gold "color:#57e1f3" straight
+   from the block editor — only "!important" beats an inline style. */
+.home .ab-proto-services .ab-eyebrow { color: #7FD8E8 !important; }
 
 /* --- 3. Our Philosophy: big heading left, divider + copy right — no photo
    of its own, so it just sits on the page's dark base like the rest of
@@ -2957,11 +3018,11 @@ ol.wp-block-list li::marker {
 .home .ab-proto-philosophy h2 {
     font-size: clamp(2rem, 4vw, 2.75rem);
     margin: 0;
-    background: linear-gradient(180deg, #fff 0%, var(--ab-aqua) 100%);
+    background: linear-gradient(180deg, #fff 0%, #7FD8E8 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: var(--ab-aqua);
+    color: #7FD8E8;
 }
 .home .ab-proto-philosophy-copy {
     padding-left: clamp(28px, 4vw, 56px);
@@ -2971,21 +3032,24 @@ ol.wp-block-list li::marker {
     font-size: 1.0625rem;
     color: rgba(255, 255, 255, 0.75);
 }
+/* The "Click here" link carries an inline "style=color:#ff9900" (orange)
+   straight from the block editor — "!important" is the only way to beat
+   an inline style from a plain class selector. */
 .home .ab-proto-philosophy-copy a:not(.wp-element-button) {
     display: inline-block;
     margin-bottom: 22px;
     font-weight: 600;
-    color: var(--ab-accent);
+    color: #7FD8E8 !important;
 }
-.home .ab-proto-philosophy-copy a:not(.wp-element-button):hover { color: var(--ab-accent-dark); }
+.home .ab-proto-philosophy-copy a:not(.wp-element-button):hover { color: #fff !important; }
 .home .ab-proto-philosophy-copy .wp-block-button__link {
-    background: var(--ab-accent) !important;
-    border-color: var(--ab-accent) !important;
-    color: var(--ab-deep) !important;
+    background: #0E7490 !important;
+    border-color: #0E7490 !important;
+    color: #fff !important;
 }
 .home .ab-proto-philosophy-copy .wp-block-button__link:hover {
-    background: var(--ab-accent-dark) !important;
-    border-color: var(--ab-accent-dark) !important;
+    background: #0B5A70 !important;
+    border-color: #0B5A70 !important;
 }
 
 /* --- 4. How We Work: full-bleed alternating rows (.ab-process-row,
@@ -3056,5 +3120,5 @@ ol.wp-block-list li::marker {
 
 @media (max-width: 900px) {
     .home .ab-proto-philosophy .ab-proto-inner { grid-template-columns: 1fr !important; }
-    .home .ab-proto-philosophy-copy { padding-left: 0; border-left: 0; padding-top: 24px; border-top: 1px solid var(--ab-border); }
+    .home .ab-proto-philosophy-copy { padding-left: 0; border-left: 0; padding-top: 24px; border-top: 1px solid #E5E5E5; }
 }

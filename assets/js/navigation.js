@@ -15,6 +15,7 @@
 	document.addEventListener( 'DOMContentLoaded', function () {
 		splitMenuAroundLogo();
 		setHeaderHeight();
+		setHeroIntroOverlap();
 		initMobileMenu();
 		autoTagReveals();
 		initReveal();
@@ -242,6 +243,61 @@
 		apply();
 		window.addEventListener( 'resize', debounce( apply, 150 ) );
 		window.addEventListener( 'scroll', apply, { passive: true } );
+	}
+
+	/**
+	 * Pulls ".home .ab-proto-intro" up to sit right under the front-page
+	 * video hero's title — close enough to read as one continuous block
+	 * (like a single line break between them), not a fixed vh-based
+	 * guess or a calc() built on 100vh, both of which drift out of sync
+	 * with what's actually on screen (scrollbar width, mobile browser
+	 * chrome collapsing/expanding, etc. all make "100vh" an unreliable
+	 * stand-in for the hero's real rendered height).
+	 *
+	 * Measures both ends directly instead: temporarily zero the intro's
+	 * margin to find where it would naturally land, compare that to
+	 * where the title's own bottom edge actually is, and the difference
+	 * is exactly the (negative) margin needed — no assumptions, no unit
+	 * mixing, just two real measurements.
+	 *
+	 * Also guarantees whatever comes after the intro (".ab-proto-services")
+	 * never starts before the hero's own video box actually ends: on a
+	 * screen/zoom combination where the intro's own text is short, pulling
+	 * it up to sit under the title could otherwise leave its bottom edge
+	 * short of the hero's bottom edge — meaning the next section would
+	 * start while the hero's video is technically still going, instead of
+	 * cleanly after it. Padding the intro out (never trimming — only ever
+	 * adding) to reach that point keeps the boundary exactly at the
+	 * video's real end on every screen, regardless of how tall the
+	 * intro's own content happens to be there.
+	 */
+	function setHeroIntroOverlap() {
+		var intro = document.querySelector( '.home .ab-proto-intro' );
+		var title = document.querySelector( '.ab-page-hero--video h1' );
+		var hero = document.querySelector( '.ab-page-hero--video' );
+		if ( ! intro || ! title || ! hero ) {
+			return;
+		}
+
+		var GAP = 4; // Breathing room below the title, roughly one line break.
+
+		var apply = function () {
+			intro.style.marginTop = '0px';
+			intro.style.paddingBottom = '0px';
+
+			var naturalTop = intro.getBoundingClientRect().top + window.scrollY;
+			var titleBottom = title.getBoundingClientRect().bottom + window.scrollY;
+			intro.style.marginTop = ( titleBottom + GAP - naturalTop ) + 'px';
+
+			var heroBottom = hero.getBoundingClientRect().bottom + window.scrollY;
+			var introBottom = intro.getBoundingClientRect().bottom + window.scrollY;
+			if ( introBottom < heroBottom ) {
+				intro.style.paddingBottom = ( heroBottom - introBottom ) + 'px';
+			}
+		};
+
+		apply();
+		window.addEventListener( 'resize', debounce( apply, 150 ) );
 	}
 
 	/**

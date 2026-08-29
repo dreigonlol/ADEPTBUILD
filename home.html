@@ -139,7 +139,117 @@ h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-backg
     padding-right: var(--ab-gutter) !important;
     box-sizing: border-box !important;
 }
+
+/* Same idea, for the newest round of changes: full-viewport hero video
+   (title now vertically centered instead of pinned near the top, so
+   there's less dead space before the pulled-up intro copy), the intro
+   copy pulled up further to close that gap, and every red/gold accent
+   flagged on this page swapped to blue. Hex values are hardcoded here
+   (rather than var(--ab-brand-blue) etc.) so this preview looks right
+   even against an older deployed style.css that predates those tokens. */
+.ab-page-hero--video {
+    display: flex !important;
+    align-items: center !important;
+    height: calc(100vh + var(--ab-header-h)) !important;
+    padding-top: var(--ab-header-h) !important;
+    overflow: hidden !important;
+}
+.ab-page-hero--video .ast-container {
+    margin-bottom: clamp(80px, 16vh, 200px) !important;
+}
+.home .ab-proto-intro {
+    position: relative !important;
+    z-index: 2 !important;
+    /* margin-top is no longer set here — the script at the bottom of this
+       override block measures and applies it directly as an inline style,
+       matching setHeroIntroOverlap() in navigation.js. Leaving a
+       "!important" margin-top in this stylesheet would beat that inline
+       style outright, regardless of the measurement. */
+}
+.home .ab-proto-intro-left .wp-block-buttons:first-child {
+    margin-bottom: 16px !important;
+}
+.home .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link {
+    background: #E3F5FA !important;
+    border-color: #E3F5FA !important;
+    color: #0E7490 !important;
+}
+.home .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link:hover {
+    background: #0E7490 !important;
+    border-color: #0E7490 !important;
+    color: #fff !important;
+}
+.home .ab-proto-services .ab-eyebrow { color: #7FD8E8 !important; }
+.home .ab-proto-philosophy h2 {
+    background: linear-gradient(180deg, #fff 0%, #7FD8E8 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: #7FD8E8 !important;
+}
+.home .ab-proto-philosophy-copy a:not(.wp-element-button) { color: #7FD8E8 !important; }
+.home .ab-proto-philosophy-copy a:not(.wp-element-button):hover { color: #fff !important; }
+.home .ab-proto-philosophy-copy .wp-block-button__link {
+    background: #0E7490 !important;
+    border-color: #0E7490 !important;
+    color: #fff !important;
+}
+.home .ab-proto-philosophy-copy .wp-block-button__link:hover {
+    background: #0B5A70 !important;
+    border-color: #0B5A70 !important;
+}
+.ab-cta {
+    background: linear-gradient(115deg, #1A1A1A 0%, #0E7490 100%) !important;
+}
+.ab-cta::after {
+    background: radial-gradient(circle, rgba(127, 216, 232, 0.45), transparent 70%) !important;
+}
+.ab-cta .wp-block-button__link.has-accent-background-color {
+    background-color: #0E7490 !important;
+    color: #fff !important;
+}
+.ab-cta .wp-block-button__link.has-accent-background-color:hover {
+    background-color: #0B5A70 !important;
+}
 </style>
+<script>
+/* Local-preview-only: the live navigation.js this page loads doesn't have
+   setHeroIntroOverlap() yet (not deployed), so this does the exact same
+   thing — measure the title's real bottom edge and the intro's real
+   natural position, and set the intro's inline margin-top to the exact
+   pixel gap between them (roughly one line break) — purely so this saved
+   copy previews the real, JS-measured positioning. Once the real
+   navigation.js is deployed, this block is redundant (safe to delete).*/
+(function () {
+  function apply() {
+    var intro = document.querySelector('.home .ab-proto-intro');
+    var title = document.querySelector('.ab-page-hero--video h1');
+    var hero = document.querySelector('.ab-page-hero--video');
+    if (!intro || !title || !hero) { return; }
+    var GAP = 4;
+    intro.style.marginTop = '0px';
+    intro.style.paddingBottom = '0px';
+
+    var naturalTop = intro.getBoundingClientRect().top + window.scrollY;
+    var titleBottom = title.getBoundingClientRect().bottom + window.scrollY;
+    intro.style.marginTop = (titleBottom + GAP - naturalTop) + 'px';
+
+    // Guarantee "Our Services" (right after the intro) never starts
+    // before the hero's own video box actually ends underneath it.
+    var heroBottom = hero.getBoundingClientRect().bottom + window.scrollY;
+    var introBottom = intro.getBoundingClientRect().bottom + window.scrollY;
+    if (introBottom < heroBottom) {
+      intro.style.paddingBottom = (heroBottom - introBottom) + 'px';
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', apply);
+  } else {
+    apply();
+  }
+  window.addEventListener('resize', apply);
+})();
+</script>
 <link rel="stylesheet" id="wpzoom-social-icons-socicon-css" href="https://adeptbuild.com/wp-content/plugins/social-icons-widget-by-wpzoom/assets/css/wpzoom-socicon.css?ver=1787008456" media="all">
 <link rel="stylesheet" id="wpzoom-social-icons-genericons-css" href="https://adeptbuild.com/wp-content/plugins/social-icons-widget-by-wpzoom/assets/css/genericons.css?ver=1787008456" media="all">
 <link rel="stylesheet" id="wpzoom-social-icons-academicons-css" href="https://adeptbuild.com/wp-content/plugins/social-icons-widget-by-wpzoom/assets/css/academicons.min.css?ver=1787008456" media="all">
