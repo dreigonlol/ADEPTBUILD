@@ -921,6 +921,122 @@ body.ab-menu-open .site-header {
     color: rgba(255, 255, 255, 0.68);
 }
 
+/* "We build [rotating word]" statement section — matches the template's
+   "Our Story" section: a real photo (an actual Image block, ".ab-story__bg",
+   so an editor can swap it from wp-admin by clicking it — not a CSS
+   background baked into this stylesheet) filling the section behind a dark
+   scrim, with a left-aligned column of copy over it, instead of centered
+   text on a CSS-only background. The template's equivalent animates its
+   second word with a Breakdance element; ".ab-word-rotate" below is this
+   theme's version of the same effect (see initWordRotators() in
+   navigation.js) — CSS-only positioning/transition, JS just toggles which
+   item carries ".is-active"/".is-leaving" on an interval.
+
+   ".ab-story__bg" is positioned absolute, so it finds its containing block
+   (".ab-story", position:relative) straight through the legacy Group
+   inner-container wrapper between them — no display:contents fix needed
+   here the way the flex/grid components above need it. */
+.ab-story {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    min-height: clamp(460px, 52vw, 600px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.82);
+}
+/* Same legacy inner-container flattening as the other flex/grid components
+   above — ".ab-story__body" needs to be a direct flex child of ".ab-story"
+   for "align-items: center" to actually center it vertically (the bg image
+   is position:absolute, so it's excluded from flex layout regardless). */
+.ab-story > .wp-block-group__inner-container { display: contents; }
+.ab-story__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    margin: 0;
+}
+.ab-story__bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ab-story__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(26, 26, 26, 0.88) 0%, rgba(26, 26, 26, 0.55) 55%, rgba(26, 26, 26, 0.3) 100%);
+}
+/* Full 1200px-wide, centered exactly like ".ast-container"/".ab-proto-inner"
+   elsewhere — the text itself still only takes up the left part of that
+   (see ".ab-story__text" below), but this way its left edge lines up with
+   every other section's content instead of sitting flush against the true
+   viewport edge, which is where the 100vw-wide ".ab-story" would otherwise
+   place a flex-start-aligned child. */
+.ab-story__body {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: var(--ab-container);
+    margin: 0 auto;
+    padding: clamp(48px, 8vw, 90px) var(--ab-gutter);
+}
+.ab-story__heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: var(--ab-font-heading);
+    font-size: clamp(2.25rem, 5.5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: #fff;
+    margin: 0 0 26px;
+}
+.ab-story__text {
+    max-width: 480px;
+    margin: 0 0 28px;
+    font-size: 1.0625rem;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.ab-word-rotate {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 1.15em;
+    overflow: hidden;
+}
+.ab-word-rotate__item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateY(100%);
+    opacity: 0;
+    white-space: nowrap;
+    color: var(--ab-aqua);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+}
+/* Shows the first word by default with no JS/class involved at all, so the
+   line never sits blank if navigation.js hasn't loaded (or hasn't been
+   deployed yet — this is CSS/JS split across two files, and only style.css
+   changing on a live site without assets/js/navigation.js following it is
+   an easy way to end up here). Scoped to exclude once JS actually takes
+   over (initWordRotators() adds ".ab-word-rotate--js" to the wrapper), so
+   it doesn't fight the real cycle by keeping word 1 forced-visible forever. */
+.ab-word-rotate:not(.ab-word-rotate--js) .ab-word-rotate__item:first-child {
+    transform: translateY(0);
+    opacity: 1;
+}
+.ab-word-rotate__item.is-active { transform: translateY(0); opacity: 1; }
+.ab-word-rotate__item.is-leaving { transform: translateY(-100%); opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-word-rotate__item { transition: none; }
+}
+
+@media (max-width: 600px) {
+    .ab-story__body { max-width: none; }
+}
+
 /* Decorative bottom wave — matches the page background it blends into,
    which is now dark blue site-wide (see the body rule above). */
 .ab-wave {
@@ -1365,23 +1481,26 @@ body.ab-menu-open .site-header {
     .ab-service-strip img { filter: grayscale(0) brightness(0.8); transform: none; }
 }
 
-/* Full-bleed horizontal video slider — native scroll-snap (works, and
-   feels smooth, with no JS at all), with prev/next buttons above the track
-   as a progressive enhancement: navigation.js adds ".ab-video-slider--js"
-   once it wires them up (and disables whichever end is already fully
-   scrolled to), so without JS they just never appear and the row is still
-   fully usable by touch/trackpad/scrollbar drag alone. Ghost-button styling
-   (transparent, light border) to sit on the dark page background these
-   normally appear on. */
-.ab-video-slider__nav {
+/* Full-bleed horizontal carousel — generic base for any row of cards that
+   should scroll/snap (the video carousel, the portfolio carousel below,
+   any future one): native scroll-snap (works, and feels smooth, with no
+   JS at all), with prev/next buttons above the track as a progressive
+   enhancement — navigation.js adds ".ab-slider--js" once it wires them up
+   (and disables whichever end is already fully scrolled to), so without
+   JS they just never appear and the row is still fully usable by
+   touch/trackpad/scrollbar drag alone. What actually fills ".ab-slider__item"
+   (a video embed, a ".ab-portfolio-item", ...) is up to whoever uses it.
+   Ghost-button styling (transparent, light border) to sit on the dark page
+   background these normally appear on. */
+.ab-slider__nav {
     display: none;
     align-items: center;
     justify-content: flex-end;
     gap: 10px;
     margin: 0 0 14px;
 }
-.ab-video-slider--js .ab-video-slider__nav { display: flex; }
-.ab-video-slider__btn {
+.ab-slider--js .ab-slider__nav { display: flex; }
+.ab-slider__btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1394,12 +1513,12 @@ body.ab-menu-open .site-header {
     cursor: pointer;
     transition: background-color var(--ab-transition), border-color var(--ab-transition), color var(--ab-transition);
 }
-.ab-video-slider__btn:hover { background: #1046bb; border-color: #1046bb; color: #1A1A1A; }
-.ab-video-slider__btn:disabled { opacity: 0.35; cursor: default; }
-.ab-video-slider__btn:disabled:hover { background: transparent; border-color: rgba(255, 255, 255, 0.35); color: #fff; }
-.ab-video-slider__btn svg { width: 18px; height: 18px; }
+.ab-slider__btn:hover { background: #1046bb; border-color: #1046bb; color: #1A1A1A; }
+.ab-slider__btn:disabled { opacity: 0.35; cursor: default; }
+.ab-slider__btn:disabled:hover { background: transparent; border-color: rgba(255, 255, 255, 0.35); color: #fff; }
+.ab-slider__btn svg { width: 18px; height: 18px; }
 
-.ab-video-slider__track {
+.ab-slider__track {
     display: flex;
     gap: 20px;
     width: 100vw;
@@ -1410,25 +1529,171 @@ body.ab-menu-open .site-header {
     scroll-padding-left: clamp(20px, 5vw, calc((100vw - var(--ab-container)) / 2 + var(--ab-gutter)));
     scrollbar-width: none;
 }
-.ab-video-slider__track::-webkit-scrollbar { display: none; }
-.ab-video-slider__item {
+.ab-slider__track::-webkit-scrollbar { display: none; }
+.ab-slider__item {
     flex: 0 0 clamp(240px, 30vw, 360px);
     scroll-snap-align: start;
 }
-.ab-video-slider__item .wp-block-embed { margin-bottom: 0; }
-.ab-video-slider__item .wp-block-embed__wrapper {
+.ab-slider__item .wp-block-embed { margin-bottom: 0; }
+.ab-slider__item .wp-block-embed__wrapper {
     box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
     transition: transform var(--ab-transition);
 }
-.ab-video-slider__item:hover .wp-block-embed__wrapper { transform: translateY(-4px); }
+.ab-slider__item:hover .wp-block-embed__wrapper { transform: translateY(-4px); }
 
 /* Same legacy inner-container flattening as the other full-bleed
    components above — each item needs to be a direct flex child of
-   ".ab-video-slider__track", not wrapped one level deeper. */
-.ab-video-slider__track > .wp-block-group__inner-container { display: contents; }
+   ".ab-slider__track", not wrapped one level deeper. */
+.ab-slider__track > .wp-block-group__inner-container,
+.ab-carousel__track > .wp-block-group__inner-container { display: contents; }
 
 @media (max-width: 600px) {
-    .ab-video-slider__nav { display: none !important; }
+    .ab-slider__nav { display: none !important; }
+}
+
+/* "Our Portfolio" section — eyebrow/heading/copy in the normal centered
+   container, then a ".ab-carousel" below it: one project photo at a time,
+   sized to that same content column (not full-bleed, not a row of small
+   cards like ".ab-slider"), advancing on its own or via the prev/next
+   arrows — see initCarousels() in navigation.js. Each slide is a real
+   Image block (so it can be swapped from wp-admin) with a caption and a
+   full-tile invisible link button layered over it, same "cover link"
+   trick as ".ab-service-strip__link" above — img/caption/link are all
+   position:absolute, so none of them need to be a *direct* child of
+   ".ab-portfolio-item" and the legacy Group inner-container wrapper
+   between them is a non-issue here. */
+.ab-portfolio { padding: clamp(64px, 8vw, 100px) 0; }
+
+.ab-portfolio-item {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--ab-radius-lg);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    box-shadow: var(--ab-shadow);
+}
+.ab-portfolio-item img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+.ab-portfolio-item:hover img { transform: scale(1.06); }
+.ab-portfolio-item__caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.85) 0%, transparent 70%);
+    color: #fff;
+    font-family: var(--ab-font-heading);
+    font-weight: 700;
+    font-size: 1.0625rem;
+}
+.ab-portfolio-item__link {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+.ab-portfolio-item__link .wp-block-button__link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-size: 0;
+    line-height: 0;
+}
+.ab-portfolio-item__link .wp-block-button__link:hover { background: transparent; box-shadow: none; transform: none; }
+
+/* Single-slide "window" carousel — one image fills the whole content-width
+   frame; the track holds every slide side by side and JS translates it by
+   whole slide-widths (see initCarousels()) rather than free-scrolling like
+   ".ab-slider" above, since only ever one slide should be visible/active
+   at a time here, whether it changed by the arrows or on its own. */
+.ab-carousel {
+    position: relative;
+    max-width: var(--ab-container);
+    margin: 0 auto;
+    border-radius: var(--ab-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--ab-shadow-lg);
+}
+.ab-carousel__viewport { overflow: hidden; }
+.ab-carousel__track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ab-carousel__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    aspect-ratio: 16 / 9;
+}
+.ab-carousel__slide .ab-portfolio-item {
+    aspect-ratio: auto;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.ab-carousel__btn {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(26, 26, 26, 0.55);
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(2px);
+    transition: background-color var(--ab-transition), border-color var(--ab-transition);
+}
+.ab-carousel__btn:hover { background: var(--ab-primary); border-color: var(--ab-primary); }
+.ab-carousel__prev { left: 16px; }
+.ab-carousel__next { right: 16px; }
+
+.ab-carousel__dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 16px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+.ab-carousel__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color var(--ab-transition), transform var(--ab-transition);
+}
+.ab-carousel__dot:hover { background: rgba(255, 255, 255, 0.75); }
+.ab-carousel__dot.is-active { background: var(--ab-primary); transform: scale(1.2); }
+
+@media (max-width: 600px) {
+    .ab-carousel { border-radius: 0; }
+    .ab-carousel__slide { aspect-ratio: 4 / 3; }
+    .ab-carousel__btn { width: 40px; height: 40px; }
 }
 
 /* Project gallery */
@@ -3102,7 +3367,7 @@ ol.wp-block-list li::marker {
     .home .ab-proto-trust .wp-block-image img { width: 44px; height: 44px; }
 }
 
-/* --- 6. Watch Our Videos: full-bleed slider (.ab-video-slider, defined
+/* --- 6. Watch Our Videos: full-bleed slider (.ab-slider, defined
    with the other reusable components above) — a plain heading with no
    wrapping section of its own; ".ab-entry-content h2 { color: #fff }"
    near the top of this file already covers its color. --- */

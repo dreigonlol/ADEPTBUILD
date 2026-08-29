@@ -20,31 +20,37 @@
 		autoTagReveals();
 		initReveal();
 		initCounters();
-		initVideoSliders();
+		initSliders();
+		initWordRotators();
+		initCarousels();
 	} );
 
 	/**
-	 * Prev/next buttons for ".ab-video-slider" — the track itself already
-	 * scrolls and snaps with no JS at all (CSS scroll-snap), so this only
-	 * adds the optional buttons on top: scroll by one card's width, and
-	 * disable whichever end is already fully scrolled to. The buttons stay
-	 * hidden (see the CSS) until ".ab-video-slider--js" is added here, so a
-	 * slider never shows controls that don't work.
+	 * Prev/next buttons for any ".ab-slider" (a row of video cards, ...) —
+	 * the track itself already scrolls and snaps with no JS at all (CSS
+	 * scroll-snap), so this only adds the optional buttons on top: scroll
+	 * by one card's width, and disable whichever end is already fully
+	 * scrolled to. The buttons stay hidden (see the CSS) until
+	 * ".ab-slider--js" is added here, so a slider never shows controls
+	 * that don't work. For a single-slide-at-a-time carousel (the
+	 * portfolio one), see ".ab-carousel"/initCarousels() below instead —
+	 * different enough (auto-advance, always exactly one active slide)
+	 * that it isn't just another ".ab-slider".
 	 */
-	function initVideoSliders() {
-		var sliders = document.querySelectorAll( '.ab-video-slider' );
+	function initSliders() {
+		var sliders = document.querySelectorAll( '.ab-slider' );
 
 		Array.prototype.forEach.call( sliders, function ( slider ) {
-			var track = slider.querySelector( '.ab-video-slider__track' );
-			var prev = slider.querySelector( '.ab-video-slider__prev' );
-			var next = slider.querySelector( '.ab-video-slider__next' );
+			var track = slider.querySelector( '.ab-slider__track' );
+			var prev = slider.querySelector( '.ab-slider__prev' );
+			var next = slider.querySelector( '.ab-slider__next' );
 
 			if ( ! track || ! prev || ! next ) {
 				return;
 			}
 
 			var step = function () {
-				var item = track.querySelector( '.ab-video-slider__item' );
+				var item = track.querySelector( '.ab-slider__item' );
 				var gap = parseFloat( getComputedStyle( track ).columnGap || 20 );
 				return item ? item.getBoundingClientRect().width + gap : track.clientWidth;
 			};
@@ -66,7 +72,152 @@
 			window.addEventListener( 'resize', debounce( updateDisabled, 150 ) );
 
 			updateDisabled();
-			slider.classList.add( 'ab-video-slider--js' );
+			slider.classList.add( 'ab-slider--js' );
+		} );
+	}
+
+	/**
+	 * ".ab-word-rotate" — the single word under a heading like "WE BUILD"
+	 * that cycles through a list on an interval. All items are stacked via
+	 * CSS (each absolutely positioned, centered); this just walks the
+	 * cycle, toggling which one carries ".is-active" (visible, in place)
+	 * and, briefly, ".is-leaving" (sliding out) on the item stepping aside
+	 * for it — see ".ab-word-rotate__item" in style.css for the actual
+	 * slide/fade transition. Respects reduced-motion by just leaving the
+	 * first word showing instead of cycling.
+	 */
+	function initWordRotators() {
+		var rotators = document.querySelectorAll( '.ab-word-rotate' );
+
+		Array.prototype.forEach.call( rotators, function ( rotator ) {
+			var items = rotator.querySelectorAll( '.ab-word-rotate__item' );
+
+			if ( items.length < 2 ) {
+				return;
+			}
+
+			rotator.classList.add( 'ab-word-rotate--js' );
+			items[ 0 ].classList.add( 'is-active' );
+
+			if ( window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) {
+				return;
+			}
+
+			var index = 0;
+
+			setInterval( function () {
+				var current = items[ index ];
+				index = ( index + 1 ) % items.length;
+				var next = items[ index ];
+
+				current.classList.remove( 'is-active' );
+				current.classList.add( 'is-leaving' );
+				next.classList.add( 'is-active' );
+
+				setTimeout( function () {
+					current.classList.remove( 'is-leaving' );
+				}, 650 );
+			}, 2400 );
+		} );
+	}
+
+	/**
+	 * Single-slide-at-a-time carousel (".ab-carousel", currently the
+	 * portfolio one) — advances on its own every few seconds and via the
+	 * prev/next arrows, pausing the auto-advance while a visitor's pointer
+	 * or keyboard focus is on it and skipping it entirely under
+	 * reduced-motion (the arrows/dots still work either way). The track is
+	 * translated by whole slide-widths — see ".ab-carousel__track" in
+	 * style.css. Dots are built here, one per slide, so the markup only
+	 * has to list the slides themselves.
+	 */
+	function initCarousels() {
+		var carousels = document.querySelectorAll( '.ab-carousel' );
+
+		Array.prototype.forEach.call( carousels, function ( carousel ) {
+			var track = carousel.querySelector( '.ab-carousel__track' );
+			var slides = track ? track.querySelectorAll( '.ab-carousel__slide' ) : [];
+			var prev = carousel.querySelector( '.ab-carousel__prev' );
+			var next = carousel.querySelector( '.ab-carousel__next' );
+			var dotsWrap = carousel.querySelector( '.ab-carousel__dots' );
+
+			if ( ! track || slides.length < 2 ) {
+				return;
+			}
+
+			var index = 0;
+			var timer = null;
+			var dots = [];
+
+			var goTo = function ( i ) {
+				index = ( i + slides.length ) % slides.length;
+				track.style.transform = 'translateX(-' + ( index * 100 ) + '%)';
+				dots.forEach( function ( dot, dotIndex ) {
+					dot.classList.toggle( 'is-active', dotIndex === index );
+				} );
+			};
+
+			if ( dotsWrap ) {
+				Array.prototype.forEach.call( slides, function ( slide, i ) {
+					var dot = document.createElement( 'button' );
+					dot.type = 'button';
+					dot.className = 'ab-carousel__dot';
+					dot.setAttribute( 'aria-label', 'Go to slide ' + ( i + 1 ) );
+					dot.addEventListener( 'click', function () {
+						goTo( i );
+						restart();
+					} );
+					dotsWrap.appendChild( dot );
+					dots.push( dot );
+				} );
+			}
+
+			var stop = function () {
+				if ( timer ) {
+					clearInterval( timer );
+					timer = null;
+				}
+			};
+
+			var start = function () {
+				if ( window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) {
+					return;
+				}
+				stop();
+				timer = setInterval( function () {
+					goTo( index + 1 );
+				}, 5000 );
+			};
+
+			var restart = function () {
+				stop();
+				start();
+			};
+
+			if ( prev ) {
+				prev.addEventListener( 'click', function () {
+					goTo( index - 1 );
+					restart();
+				} );
+			}
+			if ( next ) {
+				next.addEventListener( 'click', function () {
+					goTo( index + 1 );
+					restart();
+				} );
+			}
+
+			carousel.addEventListener( 'mouseenter', stop );
+			carousel.addEventListener( 'mouseleave', start );
+			carousel.addEventListener( 'focusin', stop );
+			carousel.addEventListener( 'focusout', function ( event ) {
+				if ( ! carousel.contains( event.relatedTarget ) ) {
+					start();
+				}
+			} );
+
+			goTo( 0 );
+			start();
 		} );
 	}
 
