@@ -1806,7 +1806,12 @@ body.ab-menu-open .site-header {
 .ab-quote__author strong { display: block; color: #1A1A1A; font-size: 0.9375rem; }
 .ab-quote__author span { font-size: var(--ab-fs-xs); color: #6B6B6B; }
 
-/* CTA banner */
+/* CTA banner — deliberately NOT full-bleed: it's meant to sit inside the
+   page's normal 1200px ".ast-container" like any other block. Guards
+   against ".alignfull"/".alignwide" here too, in case the block picks up
+   that alignment (WordPress core then forces width:100vw with negative
+   margins, which would blow it out to the full viewport on any page that
+   doesn't otherwise constrain it). */
 .ab-cta {
     position: relative;
     padding: clamp(48px, 6vw, 72px) clamp(28px, 5vw, 64px);
@@ -1819,6 +1824,13 @@ body.ab-menu-open .site-header {
     justify-content: space-between;
     gap: 36px;
     flex-wrap: wrap;
+}
+.ab-cta.alignfull,
+.ab-cta.alignwide {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
 }
 /* Legacy inner-container flattening, same reason as the other components
    in this file — the text group and the buttons need to be direct flex
@@ -1838,8 +1850,8 @@ body.ab-menu-open .site-header {
 .ab-cta > * { position: relative; z-index: 1; }
 .ab-cta h2 { color: #fff; margin-bottom: 10px; }
 .ab-cta p { max-width: 520px; margin: 0; }
-/* The "Contact Us" button carries WP's own gold ".has-accent-background-
-   color" utility class (rende with "!important" by WordPress's global
+/* The "Contact Us" button carries WP's own accent ".has-accent-background-
+   color" utility class (rendered with "!important" by WordPress's global
    styles) — needs equal-or-higher specificity, not just "!important", to
    win. */
 .ab-cta .wp-block-button__link.has-accent-background-color {
@@ -3386,4 +3398,269 @@ ol.wp-block-list li::marker {
 @media (max-width: 900px) {
     .home .ab-proto-philosophy .ab-proto-inner { grid-template-columns: 1fr !important; }
     .home .ab-proto-philosophy-copy { padding-left: 0; border-left: 0; padding-top: 24px; border-top: 1px solid #E5E5E5; }
+}
+
+/* ==========================================================================
+   PORTFOLIO SLIDER (.ab-pfslider) — minimal fade carousel
+
+   Idea visual: una sola ventana 16:9 al ancho de la columna de contenido,
+   sin sombras ni bordes redondeados (el tema es de esquinas rectas). Toda
+   la superficie es el enlace; el texto vive sobre la imagen apoyado en un
+   degradado oscuro de abajo hacia arriba (nada de cajas ni cintillos), y
+   las flechas van sobre la foto, centradas en cada costado, y la imagen
+   se puede arrastrar a izquierda/derecha (pointer + touch) para cambiar de
+   proyecto; debajo queda una fila fina con contador e indicadores. La
+   transición es un cross-fade con un zoom-out muy leve de la imagen
+   entrante, más un desplazamiento elástico mientras se arrastra.
+   ========================================================================== */
+
+.ab-pfslider {
+	position: relative;
+	max-width: var(--ab-container);
+	margin: 0 auto;
+}
+
+/* Aplanado de los inner-container heredados de Gutenberg, igual que el
+   resto de componentes del tema: cada slide debe ser hijo directo del
+   viewport para que su position:absolute mida contra él. */
+.ab-pfslider > .wp-block-group__inner-container,
+.ab-pfslider__viewport > .wp-block-group__inner-container,
+.ab-pfslider__slide > .wp-block-group__inner-container,
+.ab-pfslider__caption > .wp-block-group__inner-container { display: contents; }
+
+.ab-pfslider__viewport {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: #111111;
+	cursor: grab;
+	/* Deja pasar el scroll vertical de la página y reserva el eje X para
+	   el arrastre entre slides. */
+	touch-action: pan-y;
+}
+.ab-pfslider__viewport.is-dragging { cursor: grabbing; }
+
+/* --- Slides: apilados, sólo uno visible. Sin JS queda visible el primero
+       (regla :first-child abajo), así que el bloque nunca aparece vacío. --- */
+.ab-pfslider__slide {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	z-index: 1;
+	pointer-events: none;
+	transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ab-pfslider:not(.ab-pfslider--js) .ab-pfslider__slide:first-child,
+.ab-pfslider__slide.is-active {
+	opacity: 1;
+	z-index: 2;
+	pointer-events: auto;
+}
+
+.ab-pfslider__media { margin: 0; }
+.ab-pfslider__media img {
+	position: absolute;
+	inset: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transform: scale(1.03);
+	transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ab-pfslider__slide:hover .ab-pfslider__media img { transform: scale(1.07); }
+
+/* Velo: pesado abajo donde va el texto, inexistente arriba — la foto se
+   lee en su color real en los dos tercios superiores. */
+.ab-pfslider__slide::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	background: linear-gradient(to top, rgba(26, 26, 26, 0.86) 0%, rgba(26, 26, 26, 0.28) 42%, rgba(26, 26, 26, 0) 72%);
+	pointer-events: none;
+}
+
+/* --- Texto sobre la imagen: un solo bloque en columna apoyado en el
+       borde inferior, para que el índice, el título y el "View project"
+       se apilen por flujo normal (nada de offsets calculados a mano que
+       se cruzan cuando el título pasa a dos líneas). --- */
+.ab-pfslider__caption {
+	position: absolute;
+	left: clamp(24px, 3vw, 44px);
+	right: clamp(24px, 3vw, 44px);
+	bottom: clamp(24px, 3vw, 44px);
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
+	pointer-events: none;
+}
+.ab-pfslider__index,
+.ab-pfslider__title { margin: 0; }
+.ab-pfslider__index {
+	font-family: var(--ab-font-heading);
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.18em;
+	color: #57e1f3;
+}
+.ab-pfslider__title {
+	max-width: 70%;
+	font-family: var(--ab-font-heading);
+	font-size: clamp(1.375rem, 2.4vw, 2rem);
+	font-weight: 700;
+	line-height: 1.12;
+	letter-spacing: -0.02em;
+	color: #fff;
+	text-wrap: pretty;
+}
+/* "View project" aparece sólo al hover, como una línea fina bajo el
+   título — se genera con ::after para no ensuciar el markup del editor. */
+.ab-pfslider__title::after {
+	content: "View project";
+	display: block;
+	margin-top: 10px;
+	font-family: var(--ab-font-nav);
+	font-size: 0.875rem;
+	font-weight: 400;
+	letter-spacing: 0;
+	color: rgba(255, 255, 255, 0.82);
+	opacity: 0;
+	transform: translateY(6px);
+	transition: opacity var(--ab-transition), transform var(--ab-transition);
+}
+.ab-pfslider__slide:hover .ab-pfslider__title::after,
+.ab-pfslider__slide:focus-within .ab-pfslider__title::after {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* --- Enlace de cobertura total: es un bloque Botón real (queda editable y
+       su texto es el nombre accesible del enlace), invisible y estirado
+       sobre todo el slide. Mismo truco que .ab-service-strip__link. --- */
+.ab-pfslider__link {
+	position: absolute;
+	inset: 0;
+	z-index: 3;
+}
+.ab-pfslider__link .wp-block-button__link {
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	font-size: 0;
+	line-height: 0;
+}
+.ab-pfslider__link .wp-block-button__link:hover,
+.ab-pfslider__link .wp-block-button__link:focus {
+	background: transparent;
+	box-shadow: none;
+	transform: none;
+}
+.ab-pfslider__link .wp-block-button__link:focus-visible {
+	outline: 2px solid #57e1f3;
+	outline-offset: -6px;
+}
+
+/* --- Barra de controles, debajo de la foto --- */
+.ab-pfslider__bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	margin-top: 22px;
+	flex-wrap: wrap;
+}
+.ab-pfslider__meta { display: flex; align-items: center; gap: 20px; }
+.ab-pfslider__counter {
+	font-family: var(--ab-font-heading);
+	font-size: 0.8125rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	color: rgba(255, 255, 255, 0.55);
+	font-variant-numeric: tabular-nums;
+}
+
+/* Indicadores como rayas finas (no puntos): más discretos y muestran
+   progreso porque la activa se alarga. */
+.ab-pfslider__dots { display: flex; align-items: center; gap: 8px; }
+.ab-pfslider__dot {
+	width: 32px;
+	height: 2px;
+	padding: 0;
+	border: 0;
+	background: rgba(255, 255, 255, 0.22);
+	cursor: pointer;
+	transition: background-color var(--ab-transition), width var(--ab-transition);
+}
+.ab-pfslider__dot:hover { background: rgba(255, 255, 255, 0.5); }
+.ab-pfslider__dot.is-active { width: 56px; background: #57e1f3; }
+
+/* --- Flechas sobre la propia imagen, centradas verticalmente en los
+       costados: el gesto de avanzar queda donde el visitante ya tiene el
+       cursor. Vidrio translúcido (no relleno sólido) para no romper la
+       foto, y z-index por encima del enlace de cobertura (z-index:3). --- */
+.ab-pfslider__btn {
+	position: absolute;
+	top: 50%;
+	z-index: 5;
+	transform: translateY(-50%);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 52px;
+	height: 52px;
+	padding: 0;
+	background: rgba(26, 26, 26, 0.32);
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	border-radius: var(--ab-radius-pill);
+	color: #fff;
+	cursor: pointer;
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+	transition: background-color var(--ab-transition), border-color var(--ab-transition), color var(--ab-transition);
+}
+.ab-pfslider__prev { left: clamp(14px, 1.6vw, 22px); }
+.ab-pfslider__next { right: clamp(14px, 1.6vw, 22px); }
+.ab-pfslider__btn:hover,
+.ab-pfslider__btn:focus-visible {
+	background: rgba(26, 26, 26, 0.72);
+	border-color: #57e1f3;
+	color: #57e1f3;
+}
+/* Sin JS no hay a dónde navegar: el markup de las flechas vive dentro del
+   viewport, así que se ocultan igual que la barra inferior. */
+.ab-pfslider:not(.ab-pfslider--js) .ab-pfslider__btn { display: none; }
+
+/* Pista de interacción a la derecha de la barra inferior. */
+.ab-pfslider__hint {
+	font-family: var(--ab-font-nav);
+	font-size: 0.8125rem;
+	letter-spacing: 0.04em;
+	color: rgba(255, 255, 255, 0.4);
+}
+
+/* Sin JS no hay nada que controlar: la barra se oculta y queda una imagen
+   fija enlazada, perfectamente usable. */
+.ab-pfslider:not(.ab-pfslider--js) .ab-pfslider__bar { display: none; }
+
+@media (max-width: 600px) {
+	.ab-pfslider__viewport { aspect-ratio: 4 / 3; }
+	.ab-pfslider__btn { width: 44px; height: 44px; }
+	.ab-pfslider__hint { display: none; }
+	.ab-pfslider__title { max-width: 100%; }
+	.ab-pfslider__bar { justify-content: space-between; }
+	.ab-pfslider__dot { width: 22px; }
+	.ab-pfslider__dot.is-active { width: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ab-pfslider__slide,
+	.ab-pfslider__media img,
+	.ab-pfslider__title::after { transition: none; }
 }

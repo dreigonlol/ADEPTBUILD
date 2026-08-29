@@ -23,6 +23,7 @@
 		initSliders();
 		initWordRotators();
 		initCarousels();
+		initPortfolioSliders();
 	} );
 
 	/**
@@ -216,6 +217,225 @@
 				}
 			} );
 
+			goTo( 0 );
+			start();
+		} );
+	}
+
+	/**
+	 * PORTFOLIO SLIDER (".ab-pfslider") — a single fading image with prev/
+	 * next arrows on either side, a counter, and a row of thin indicators
+	 * below it. Unlike ".ab-carousel" above, the whole slide is a link
+	 * (see ".ab-pfslider__link" in style.css) and the image itself can be
+	 * dragged left/right (mouse, touch, pen — Pointer Events) to change
+	 * project, with an elastic follow while dragging and a real click
+	 * cancelled afterwards so a drag-release over the link doesn't
+	 * navigate. Auto-play pauses on hover, on keyboard focus, and whenever
+	 * the section scrolls out of view (IntersectionObserver), and is
+	 * skipped entirely under reduced-motion (controls still work).
+	 */
+	function initPortfolioSliders() {
+		var sliders = document.querySelectorAll( '.ab-pfslider' );
+
+		Array.prototype.forEach.call( sliders, function ( slider ) {
+			var slides = slider.querySelectorAll( '.ab-pfslider__slide' );
+			if ( slides.length < 1 ) {
+				return;
+			}
+
+			var prev = slider.querySelector( '.ab-pfslider__prev' );
+			var next = slider.querySelector( '.ab-pfslider__next' );
+			var dotsWrap = slider.querySelector( '.ab-pfslider__dots' );
+			var counter = slider.querySelector( '.ab-pfslider__counter' );
+			var interval = parseInt( slider.getAttribute( 'data-interval' ), 10 ) || 5500;
+			var reduced = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+
+			var index = 0;
+			var timer = null;
+			var visible = true;
+			var dots = [];
+
+			var pad = function ( n ) {
+				return n < 10 ? '0' + n : String( n );
+			};
+
+			var goTo = function ( i ) {
+				index = ( i + slides.length ) % slides.length;
+
+				Array.prototype.forEach.call( slides, function ( slide, n ) {
+					slide.classList.toggle( 'is-active', n === index );
+					slide.style.transform = '';
+				} );
+				dots.forEach( function ( dot, n ) {
+					dot.classList.toggle( 'is-active', n === index );
+					dot.setAttribute( 'aria-current', n === index ? 'true' : 'false' );
+				} );
+				if ( counter ) {
+					counter.textContent = pad( index + 1 ) + ' / ' + pad( slides.length );
+				}
+			};
+
+			var stop = function () {
+				if ( timer ) {
+					clearInterval( timer );
+					timer = null;
+				}
+			};
+
+			var start = function () {
+				stop();
+				if ( reduced || ! visible || slides.length < 2 ) {
+					return;
+				}
+				timer = setInterval( function () {
+					goTo( index + 1 );
+				}, interval );
+			};
+
+			var restart = function () {
+				stop();
+				start();
+			};
+
+			// Indicators: one per slide, built here so the editor's markup
+			// only has to list the projects.
+			if ( dotsWrap && slides.length > 1 ) {
+				Array.prototype.forEach.call( slides, function ( slide, i ) {
+					var dot = document.createElement( 'button' );
+					dot.type = 'button';
+					dot.className = 'ab-pfslider__dot';
+					dot.setAttribute( 'aria-label', 'Go to project ' + ( i + 1 ) );
+					dot.addEventListener( 'click', function () {
+						goTo( i );
+						restart();
+					} );
+					dotsWrap.appendChild( dot );
+					dots.push( dot );
+				} );
+			}
+
+			if ( prev ) {
+				prev.addEventListener( 'click', function () {
+					goTo( index - 1 );
+					restart();
+				} );
+			}
+			if ( next ) {
+				next.addEventListener( 'click', function () {
+					goTo( index + 1 );
+					restart();
+				} );
+			}
+
+			// Pause while the visitor is looking at or navigating the slider.
+			slider.addEventListener( 'mouseenter', stop );
+			slider.addEventListener( 'mouseleave', start );
+			slider.addEventListener( 'focusin', stop );
+			slider.addEventListener( 'focusout', function ( event ) {
+				if ( ! slider.contains( event.relatedTarget ) ) {
+					start();
+				}
+			} );
+
+			// Keyboard: ← → arrows while focus is inside the slider.
+			slider.addEventListener( 'keydown', function ( event ) {
+				if ( 'ArrowLeft' === event.key ) {
+					goTo( index - 1 );
+					restart();
+				} else if ( 'ArrowRight' === event.key ) {
+					goTo( index + 1 );
+					restart();
+				}
+			} );
+
+			// --- Image drag -------------------------------------------------
+			// One path for mouse/touch/pen via Pointer Events. The active
+			// slide follows the finger damped (0.32) for tactile response;
+			// past the threshold it changes project, and if there was real
+			// movement the following click is cancelled in the capture phase
+			// — without that, releasing over the link covering the slide
+			// would navigate to the project.
+			var viewport = slider.querySelector( '.ab-pfslider__viewport' );
+
+			if ( viewport && window.PointerEvent && slides.length > 1 ) {
+				var THRESHOLD = 60;
+				var startX = 0;
+				var delta = 0;
+				var dragging = false;
+				var moved = false;
+
+				viewport.addEventListener( 'pointerdown', function ( event ) {
+					if ( 0 !== event.button || event.target.closest( '.ab-pfslider__btn' ) ) {
+						return;
+					}
+					dragging = true;
+					moved = false;
+					delta = 0;
+					startX = event.clientX;
+					stop();
+					viewport.classList.add( 'is-dragging' );
+					slides[ index ].style.transition = 'none';
+					if ( viewport.setPointerCapture ) {
+						viewport.setPointerCapture( event.pointerId );
+					}
+				} );
+
+				viewport.addEventListener( 'pointermove', function ( event ) {
+					if ( ! dragging ) {
+						return;
+					}
+					delta = event.clientX - startX;
+					if ( Math.abs( delta ) > 6 ) {
+						moved = true;
+					}
+					slides[ index ].style.transform = 'translateX(' + ( delta * 0.32 ) + 'px)';
+				} );
+
+				var release = function () {
+					if ( ! dragging ) {
+						return;
+					}
+					dragging = false;
+					viewport.classList.remove( 'is-dragging' );
+					slides[ index ].style.transition = '';
+					slides[ index ].style.transform = '';
+
+					if ( Math.abs( delta ) > THRESHOLD ) {
+						goTo( delta < 0 ? index + 1 : index - 1 );
+					}
+					start();
+					setTimeout( function () {
+						moved = false;
+					}, 60 );
+				};
+
+				viewport.addEventListener( 'pointerup', release );
+				viewport.addEventListener( 'pointercancel', release );
+				viewport.addEventListener( 'dragstart', function ( event ) {
+					event.preventDefault();
+				} );
+				viewport.addEventListener( 'click', function ( event ) {
+					if ( moved ) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+				}, true );
+			}
+
+			// No timers running while the section is off-screen: the visitor
+			// would otherwise come back to a slider advanced 8 positions.
+			if ( 'IntersectionObserver' in window ) {
+				new IntersectionObserver( function ( entries ) {
+					visible = entries[ 0 ].isIntersecting;
+					if ( visible ) {
+						start();
+					} else {
+						stop();
+					}
+				}, { threshold: 0.25 } ).observe( slider );
+			}
+
+			slider.classList.add( 'ab-pfslider--js' );
 			goTo( 0 );
 			start();
 		} );
