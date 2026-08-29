@@ -462,7 +462,7 @@ a.ab-btn:hover {
     transition: box-shadow var(--ab-transition), background-color var(--ab-transition), backdrop-filter var(--ab-transition);
 }
 .site-header.is-stuck {
-    background: rgba(26, 26, 26, 0.92);
+    background: rgba(0, 102, 204, 0.92);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 6px 24px rgba(26, 26, 26, 0.18);
