@@ -61,6 +61,10 @@ Text Domain: adeptbuild
     --ab-container-narrow: 820px;
     --ab-gutter: 24px;
     --ab-section-y: clamp(64px, 8vw, 110px);
+    /* Side gap kept clear of the true viewport edge on full-bleed
+       (100vw breakout) sections — hero videos, story/content bands,
+       the homepage's full-bleed section backgrounds. */
+    --ab-edge-gap: clamp(12px, 3vw, 32px);
 
     /* --- Shapes and shadows: sharp, architectural corners, except buttons
        which use the template's soft-square (not fully sharp, not pill) --- */
@@ -94,21 +98,17 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
-/* Site-wide dark-blue background (used to be body.home only) so every
-   page reads as one continuous surface between .ab-page-hero above and
-   .site-footer below, both already this color everywhere. Self-contained
-   "card" components (.ab-card, .ab-post-card, .ab-sidebar .widget, form
-   inputs) keep their own light background and default dark text, so they
-   stay legible floating on top of it unchanged — only bare text that
-   used to sit directly on the old white page background needs a
-   light-on-dark override, scoped to .ab-entry-content and .ab-404 below. */
+/* Light gray site-wide background — every page except the home page
+   (which keeps its own dark-blue "body.home" background further down)
+   reads as one continuous light gray surface, with normal dark body
+   text throughout. */
 body {
     margin: 0;
     font-family: var(--ab-font-body);
     font-size: var(--ab-fs-base);
     line-height: var(--ab-lh-body);
     color: #3D3D3D;
-    background: #1A1A1A;
+    background: #F6F6F6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -315,22 +315,21 @@ hr {
 input[type="submit"],
 button.ab-btn,
 a.ab-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    display: inline-block;
     font-family: var(--ab-font-heading);
-    font-size: 0.9375rem;
+    font-size: clamp(0.8rem, 1.6vw, 1rem);
     font-weight: 600;
-    letter-spacing: 0.01em;
     line-height: 1;
-    padding: 16px 32px;
-    border: 2px solid #1046bb;
-    border-radius: var(--ab-radius-pill);
-    background: #1046bb;
-    color: #1A1A1A;
+    padding: clamp(12px, 1.6vw, 18px) clamp(20px, 3vw, 32px);
+    border: 2px solid #ffffff;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
     cursor: pointer;
     text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     transition: transform var(--ab-transition), box-shadow var(--ab-transition),
                 background-color var(--ab-transition), border-color var(--ab-transition),
                 color var(--ab-transition);
@@ -341,47 +340,30 @@ a.ab-btn {
 input[type="submit"]:hover,
 button.ab-btn:hover,
 a.ab-btn:hover {
-    background: #1046bb;
-    border-color: #1046bb;
-    color: #fff;
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #1A1A1A;
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(16, 70, 187, 0.32);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
 }
 
-.ab-btn--accent {
-    background: #57e1f3;
-    border-color: #57e1f3;
-    color: #1A1A1A;
-}
-.ab-btn--accent:hover {
-    background: #26d8c9;
-    border-color: #26d8c9;
-    color: #1A1A1A;
-    box-shadow: 0 12px 24px rgba(5, 8, 151, 0.32);
-}
-
-.ab-btn--outline {
-    background: transparent;
-    color: #1046bb;
-}
-.ab-btn--outline:hover {
-    background: #1046bb;
-    color: #fff;
-}
-
+.ab-btn--accent,
+.ab-btn--outline,
 .ab-btn--ghost {
-    background: transparent;
-    border-color: rgba(255, 255, 255, 0.45);
-    color: #fff;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #ffffff;
+    color: #ffffff;
 }
+.ab-btn--accent:hover,
+.ab-btn--outline:hover,
 .ab-btn--ghost:hover {
-    background: #fff;
-    border-color: #fff;
+    background: #ffffff;
+    border-color: #ffffff;
     color: #1A1A1A;
 }
 
-.ab-btn--sm { padding: 11px 22px; font-size: 0.875rem; }
-.ab-btn--lg { padding: 19px 40px; font-size: 1rem; }
+.ab-btn--sm { padding: clamp(8px, 1vw, 12px) clamp(14px, 2vw, 22px); font-size: clamp(0.75rem, 1.6vw, 0.95rem); }
+.ab-btn--lg { padding: clamp(14px, 2vw, 20px) clamp(24px, 3.5vw, 36px); font-size: clamp(0.85rem, 1.8vw, 1.05rem); }
 
 .ab-btn-group {
     display: flex;
@@ -552,9 +534,9 @@ body.ab-menu-open .site-header {
 .main-header-menu > li > a {
     display: block;
     padding: 12px 16px;
-    font-family: var(--ab-font-nav);
-    font-size: 0.9375rem;
-    font-weight: 500;
+    font-family: var(--ab-font-heading);
+    font-size: 20px;
+    font-weight: 700;
     color: rgba(255, 255, 255, 0.92);
     border-radius: var(--ab-radius-sm);
     position: relative;
@@ -621,8 +603,9 @@ body.ab-menu-open .site-header {
 .main-header-menu .sub-menu a {
     display: block;
     padding: 10px 14px;
-    font-family: var(--ab-font-nav);
+    font-family: var(--ab-font-heading);
     font-size: 0.9375rem;
+    font-weight: 700;
     color: #3D3D3D;
     border-radius: var(--ab-radius-sm);
 }
@@ -703,9 +686,9 @@ body.ab-menu-open .site-header {
 }
 
 .main-header-menu .sub-menu.mega-menu .mega-menu__label {
-    font-family: var(--ab-font-nav);
+    font-family: var(--ab-font-heading);
     font-size: 0.9375rem;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.3;
 }
 
@@ -828,9 +811,9 @@ body.ab-menu-open .site-header {
    still centers its actual content to the normal 1200px column. */
 .ab-hero--video {
     background: #1A1A1A;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    width: calc(100vw - (var(--ab-edge-gap) * 2));
+    margin-left: calc(50% - 50vw + var(--ab-edge-gap));
+    margin-right: calc(50% - 50vw + var(--ab-edge-gap));
     margin-top: calc(-1 * var(--ab-header-h));
     min-height: calc(clamp(520px, 76vh, 760px) + var(--ab-header-h));
     padding-top: calc(var(--ab-header-h) + clamp(80px, 10vw, 130px));
@@ -956,9 +939,9 @@ body.ab-menu-open .site-header {
    here the way the flex/grid components above need it. */
 .ab-story {
     position: relative;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    width: calc(100vw - (var(--ab-edge-gap) * 2));
+    margin-left: calc(50% - 50vw + var(--ab-edge-gap));
+    margin-right: calc(50% - 50vw + var(--ab-edge-gap));
     min-height: clamp(460px, 52vw, 600px);
     display: flex;
     align-items: center;
@@ -1065,10 +1048,10 @@ body.ab-menu-open .site-header {
     z-index: 1;
     width: 100%;
     height: auto;
-    color: #1A1A1A;
+    color: #F6F6F6;
     pointer-events: none;
 }
-.ab-wave--alt { color: #F6F6F6; }
+.ab-wave--alt { color: #1A1A1A; }
 
 /* Inner-page header — pulled up by the header's own (transparent) height
    and given that much extra top padding, so the background extends behind
@@ -1133,7 +1116,7 @@ body.ab-menu-open .site-header {
     margin-bottom: clamp(80px, 16vh, 200px);
 }
 .ab-page-hero--video h1 {
-    font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+    font-size: clamp(0.95rem, 1.75vw, 1.4rem);
     max-width: 640px;
 }
 
@@ -1873,11 +1856,13 @@ body.ab-menu-open .site-header {
    styles) — needs equal-or-higher specificity, not just "!important", to
    win. */
 .ab-cta .wp-block-button__link.has-accent-background-color {
-    background-color: #0E7490 !important;
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: #ffffff !important;
     color: #fff !important;
 }
 .ab-cta .wp-block-button__link.has-accent-background-color:hover {
-    background-color: #0B5A70 !important;
+    background-color: #ffffff !important;
+    color: #1A1A1A !important;
 }
 
 /* Logos / trust bar */
@@ -2043,37 +2028,34 @@ label {
 .ab-entry-content img,
 .ab-entry-content .wp-block-image img { border-radius: var(--ab-radius); }
 
-/* Light-on-dark type for page/post body copy now that it sits directly
-   on the site's dark-blue background (see the body rule near the top of
-   this file) — .ab-entry-content is only ever the actual article/page
-   text (page.php, single.php), never mixed with the light "card"
-   components (.ab-card, .ab-post-card, .ab-sidebar .widget) elsewhere in
-   the theme, so this can't wash out text that already has its own light
-   background to sit on. */
-.ab-entry-content h1,
-.ab-entry-content h2,
-.ab-entry-content h3,
-.ab-entry-content h4,
-.ab-entry-content h5,
-.ab-entry-content h6 { color: #fff; }
-.ab-entry-content,
-.ab-entry-content p,
-.ab-entry-content li,
-.ab-entry-content strong { color: rgba(255, 255, 255, 0.8); }
-.ab-entry-content a:not(.wp-element-button) { color: #57e1f3; }
-.ab-entry-content a:not(.wp-element-button):hover { color: #fff; }
-.ab-entry-content blockquote {
+/* Light-on-dark type for page/post body copy — only needed on the home
+   page, which keeps its own dark-blue background (see "body.home" near
+   the top of this file); every other page now sits on the site's light
+   gray background and just uses the normal dark body text color. */
+.home .ab-entry-content h1,
+.home .ab-entry-content h2,
+.home .ab-entry-content h3,
+.home .ab-entry-content h4,
+.home .ab-entry-content h5,
+.home .ab-entry-content h6 { color: #fff; }
+.home .ab-entry-content,
+.home .ab-entry-content p,
+.home .ab-entry-content li,
+.home .ab-entry-content strong { color: rgba(255, 255, 255, 0.8); }
+.home .ab-entry-content a:not(.wp-element-button) { color: #57e1f3; }
+.home .ab-entry-content a:not(.wp-element-button):hover { color: #fff; }
+.home .ab-entry-content blockquote {
     background: rgba(255, 255, 255, 0.06);
     border-left-color: #57e1f3;
     color: rgba(255, 255, 255, 0.85);
 }
-.ab-entry-content hr { background: rgba(255, 255, 255, 0.18); }
-.ab-entry-content table { color: rgba(255, 255, 255, 0.8); }
-.ab-entry-content th,
-.ab-entry-content td { border-color: rgba(255, 255, 255, 0.18); }
-.ab-entry-content th { background: rgba(255, 255, 255, 0.06); color: #fff; }
-.ab-entry-content .wp-caption-text,
-.ab-entry-content .wp-block-image figcaption { color: rgba(255, 255, 255, 0.6); }
+.home .ab-entry-content hr { background: rgba(255, 255, 255, 0.18); }
+.home .ab-entry-content table { color: rgba(255, 255, 255, 0.8); }
+.home .ab-entry-content th,
+.home .ab-entry-content td { border-color: rgba(255, 255, 255, 0.18); }
+.home .ab-entry-content th { background: rgba(255, 255, 255, 0.06); color: #fff; }
+.home .ab-entry-content .wp-caption-text,
+.home .ab-entry-content .wp-block-image figcaption { color: rgba(255, 255, 255, 0.6); }
 
 .wp-caption-text,
 .wp-block-image figcaption {
@@ -2094,9 +2076,9 @@ label {
 .ab-content-band {
     position: relative;
     display: block;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    width: calc(100vw - (var(--ab-edge-gap) * 2));
+    margin-left: calc(50% - 50vw + var(--ab-edge-gap));
+    margin-right: calc(50% - 50vw + var(--ab-edge-gap));
     overflow: hidden;
     color: inherit;
     text-decoration: none;
@@ -2104,7 +2086,7 @@ label {
 .ab-content-band img {
     display: block;
     width: 100%;
-    height: clamp(300px, 42vw, 520px);
+    aspect-ratio: 2.4 / 1;
     object-fit: cover;
     transform: scale(1.01);
     filter: brightness(0.92);
@@ -2218,7 +2200,7 @@ label {
     .ab-content-band img { filter: brightness(0.6); }
 }
 @media (max-width: 600px) {
-    .ab-content-band img { height: clamp(240px, 78vw, 380px); }
+    .ab-content-band img { aspect-ratio: 4 / 3; }
     .ab-content-band__caption { padding: 22px; }
 }
 
@@ -2370,8 +2352,6 @@ h2.ab-services-showcase__title {
 
 /* 404 */
 .ab-404 { text-align: center; padding: clamp(70px, 12vw, 140px) 0; }
-.ab-404 h1 { color: #fff; }
-.ab-404 .ab-lead { color: rgba(255, 255, 255, 0.75); }
 .ab-404__code {
     font-family: var(--ab-font-heading);
     font-size: clamp(5rem, 18vw, 11rem);
@@ -3211,17 +3191,15 @@ ol.wp-block-list li::marker {
     margin-bottom: 16px;
 }
 .home .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link {
-    padding: 7px 20px !important;
-    background: #E3F5FA !important;
-    border-color: #E3F5FA !important;
-    color: #0E7490 !important;
-    font-size: var(--ab-fs-xs) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
     letter-spacing: 0.04em;
 }
 .home .ab-proto-intro-left .wp-block-buttons:first-child .wp-block-button__link:hover {
-    background: #0E7490 !important;
-    border-color: #0E7490 !important;
-    color: #fff !important;
+    background: #ffffff !important;
+    border-color: #ffffff !important;
+    color: #1A1A1A !important;
 }
 .home .ab-proto-intro .wp-block-embed { margin-bottom: 0; }
 .home .ab-proto-intro-left h2 { color: #fff; }
@@ -3231,27 +3209,25 @@ ol.wp-block-list li::marker {
    the "GET STARTED HERE" button above, so both CTAs in this intro block
    read as one consistent pair. */
 .home .ab-proto-intro-left .wp-block-buttons:last-child .wp-block-button__link {
-    padding: 7px 20px !important;
-    background: #E3F5FA !important;
-    border-color: #E3F5FA !important;
-    color: #0E7490 !important;
-    font-size: var(--ab-fs-xs) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
     letter-spacing: 0.04em;
 }
 .home .ab-proto-intro-left .wp-block-buttons:last-child .wp-block-button__link:hover {
-    background: #0E7490 !important;
-    border-color: #0E7490 !important;
-    color: #fff !important;
+    background: #ffffff !important;
+    border-color: #ffffff !important;
+    color: #1A1A1A !important;
 }
-/* ".ab-entry-content strong" (below) paints every <strong> near-white for
-   body copy on the dark page background — this button's label happens to
-   be wrapped in <strong> too, so it needs its own override to actually
-   show the blue set above instead. */
+/* ".ab-entry-content strong" paints every <strong> near-white for body copy
+   on the dark page background — this button's label happens to be wrapped
+   in <strong> too, so it needs its own override to match the button text
+   color set above instead. */
 .home .ab-proto-intro-left .wp-block-buttons:last-child .wp-block-button__link strong {
-    color: #0E7490 !important;
+    color: #ffffff !important;
 }
 .home .ab-proto-intro-left .wp-block-buttons:last-child .wp-block-button__link:hover strong {
-    color: #fff !important;
+    color: #1A1A1A !important;
 }
 
 /* --- Full-bleed helper: breaks a Group block out of the theme's 1200px
@@ -3264,9 +3240,9 @@ ol.wp-block-list li::marker {
 .home .ab-proto-process,
 .home .ab-proto-philosophy,
 .home .ab-proto-blog {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    width: calc(100vw - (var(--ab-edge-gap) * 2));
+    margin-left: calc(50% - 50vw + var(--ab-edge-gap));
+    margin-right: calc(50% - 50vw + var(--ab-edge-gap));
 }
 .home .ab-proto-inner {
     max-width: var(--ab-container);
@@ -3338,13 +3314,14 @@ ol.wp-block-list li::marker {
 }
 .home .ab-proto-philosophy-copy a:not(.wp-element-button):hover { color: #fff !important; }
 .home .ab-proto-philosophy-copy .wp-block-button__link {
-    background: #0E7490 !important;
-    border-color: #0E7490 !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: #ffffff !important;
     color: #fff !important;
 }
 .home .ab-proto-philosophy-copy .wp-block-button__link:hover {
-    background: #0B5A70 !important;
-    border-color: #0B5A70 !important;
+    background: #ffffff !important;
+    border-color: #ffffff !important;
+    color: #1A1A1A !important;
 }
 
 /* --- 4. How We Work: full-bleed alternating rows (.ab-process-row,
