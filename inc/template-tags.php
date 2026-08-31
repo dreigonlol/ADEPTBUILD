@@ -83,6 +83,44 @@ function adeptbuild_tel_href( $phone ) {
 }
 
 /**
+ * Google Tag Manager — container script, injected as high in <head> as
+ * possible per Google's own install instructions. The GTM ID is the only
+ * thing configured here; Google Ads conversion/remarketing tags and any
+ * click or form-submit triggers are set up entirely inside the GTM
+ * container itself (tagmanager.google.com), no further theme code needed.
+ */
+function adeptbuild_gtm_head() {
+	$gtm_id = adeptbuild_option( 'gtm_id' );
+	if ( ! $gtm_id ) {
+		return;
+	}
+	?>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','<?php echo esc_js( $gtm_id ); ?>');</script>
+	<?php
+}
+add_action( 'wp_head', 'adeptbuild_gtm_head', 1 );
+
+/**
+ * Google Tag Manager — noscript fallback, required immediately after the
+ * opening <body> tag per Google's install instructions.
+ */
+function adeptbuild_gtm_body() {
+	$gtm_id = adeptbuild_option( 'gtm_id' );
+	if ( ! $gtm_id ) {
+		return;
+	}
+	?>
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo esc_attr( $gtm_id ); ?>"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<?php
+}
+add_action( 'wp_body_open', 'adeptbuild_gtm_body', 1 );
+
+/**
  * Social network links configured in the Customizer.
  *
  * @return array List of arrays with `icon`, `url` and `label` keys.

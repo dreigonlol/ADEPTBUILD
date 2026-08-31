@@ -147,6 +147,20 @@ function adeptbuild_customize_register( $wp_customize ) {
 	adeptbuild_add_field( $wp_customize, 'footer_about', 'adeptbuild_footer', __( 'About text', 'adeptbuild' ), '', 'textarea' );
 	adeptbuild_add_field( $wp_customize, 'footer_copyright', 'adeptbuild_footer', __( 'Copyright notice (leave empty for the default)', 'adeptbuild' ), '' );
 
+	/* ---------------------------------------------------------------------
+	 * Analytics
+	 * ------------------------------------------------------------------- */
+	$wp_customize->add_section(
+		'adeptbuild_analytics',
+		array(
+			'title'       => __( 'Analytics', 'adeptbuild' ),
+			'panel'       => 'adeptbuild_panel',
+			'description' => __( 'Google Ads conversion tags, remarketing and event tracking are configured inside the GTM container itself (tagmanager.google.com) — pasting the ID here is the only code-side step needed.', 'adeptbuild' ),
+		)
+	);
+
+	adeptbuild_add_field( $wp_customize, 'gtm_id', 'adeptbuild_analytics', __( 'Google Tag Manager container ID (e.g. GTM-XXXXXXX)', 'adeptbuild' ), '' );
+
 	// Live-refresh the site title and tagline in the preview.
 	$wp_customize->get_setting( 'blogname' )->transport        = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
