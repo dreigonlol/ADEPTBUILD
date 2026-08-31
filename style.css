@@ -1,4 +1,4 @@
-/*
+﻿/*
 Theme Name: Adeptbuild Theme
 Theme URI: https://test.adeptbuild.com
 Author: Ivan Gerardo Mendoza Alonso
@@ -108,13 +108,26 @@ body {
     font-size: var(--ab-fs-base);
     line-height: var(--ab-lh-body);
     color: #3D3D3D;
-    background: #F6F6F6;
+    background: #C4C4C4;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
 }
 
 body.ab-menu-open { overflow: hidden; }
+
+/* Thin black outline on every piece of text sitewide — a true per-element
+   "inverse of its own color" isn't something CSS can compute on its own
+   (stroke color has to be a fixed value, not a function of the element's
+   text color), so this uses the flat-black fallback instead, kept as thin
+   as still renders reliably across browsers. Universal selector so it
+   reaches literally everything (headings, links, buttons, form fields,
+   block-editor content) without depending on inheritance into elements
+   like <button>/<input> that don't always inherit text properties. */
+*, *::before, *::after {
+    -webkit-text-stroke: 0px #000000;
+    paint-order: stroke fill;
+}
 
 img,
 svg,
@@ -444,7 +457,7 @@ a.ab-btn:hover {
     transition: box-shadow var(--ab-transition), background-color var(--ab-transition), backdrop-filter var(--ab-transition);
 }
 .site-header.is-stuck {
-    background: rgba(0, 102, 204, 0.92);
+    background: #0170B9;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 6px 24px rgba(26, 26, 26, 0.18);
@@ -1048,7 +1061,7 @@ body.ab-menu-open .site-header {
     z-index: 1;
     width: 100%;
     height: auto;
-    color: #F6F6F6;
+    color: #C4C4C4;
     pointer-events: none;
 }
 .ab-wave--alt { color: #1A1A1A; }
@@ -1358,7 +1371,7 @@ body.ab-menu-open .site-header {
     padding-left: var(--ab-gutter);
     padding-right: var(--ab-gutter);
     box-sizing: border-box;
-    min-height: clamp(420px, 50vw, 600px);
+    min-height: clamp(294px, 35vw, 420px);
     overflow: hidden;
 }
 .ab-service-strip {
@@ -2369,7 +2382,7 @@ h2.ab-services-showcase__title {
    ========================================================================== */
 
 .site-footer {
-    background: #1A1A1A;
+    background: #0170B9;
     color: rgba(255, 255, 255, 0.68);
     font-size: var(--ab-fs-sm);
 }
