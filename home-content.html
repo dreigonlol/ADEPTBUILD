@@ -8,11 +8,9 @@
 <p>Full-service renovations and outdoor living spaces across Los Angeles — from concept to completion.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button {"className":"is-style-fill","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}}},"fontSize":"medium","animation":"slideInLeft"} -->
-<div class="wp-block-button is-style-fill coblocks-animate" data-coblocks-animation="slideInLeft"><a class="wp-block-button__link has-medium-font-size has-custom-font-size wp-element-button" href="#" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px"><strong>Schedule A Meeting</strong></a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
+<!-- wp:html -->
+<div class="wp-block-buttons"><div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#adept-modal-landscaping" onclick="document.getElementById('adept-modal-landscaping').style.display='flex';return false;"><strong>Schedule A Meeting</strong></a></div></div>
+<!-- /wp:html --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
@@ -247,11 +245,9 @@
 <!-- wp:paragraph {"style":{"color":{"text":"#ffffff"},"elements":{"link":{"color":{"text":"#ffffff"}}}}} -->
 <p class="has-text-color has-link-color" style="color:#ffffff"><a style="color:#ff9900" href="https://adeptbuild.com/about-us/"><strong>Click here</strong></a> to learn more about us.</p>
 <!-- /wp:paragraph -->
-<!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button {"style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}}}} -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button ab-phil-btn" href="#" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px">Schedule A Meeting</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
+<!-- wp:html -->
+<div class="wp-block-buttons"><div class="wp-block-button"><a class="wp-block-button__link wp-element-button ab-phil-btn" href="#adept-modal-landscaping" onclick="document.getElementById('adept-modal-landscaping').style.display='flex';return false;">Schedule A Meeting</a></div></div>
+<!-- /wp:html --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
@@ -355,137 +351,165 @@
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"ab-portfolio"} -->
-<div class="wp-block-group ab-portfolio"><!-- wp:group {"className":"ab-proto-inner"} -->
-<div class="wp-block-group ab-proto-inner"><!-- wp:paragraph {"className":"ab-eyebrow"} -->
-<p class="ab-eyebrow">Our Portfolio</p>
-<!-- /wp:paragraph -->
+<div class="wp-block-group ab-portfolio"><!-- wp:html -->
+<div class="abps">
+  <section class="abps-row">
+        <div class="abps-copy">
+      <p class="ab-eyebrow">Our Portfolio</p>
+      <h2 class="wp-block-heading has-text-color has-link-color" style="color:#0170b9">See What We've Built for LA Homeowners</h2>
+      <p class="has-text-color has-link-color" style="color:#0170b9">Browse real Adept projects across Los Angeles: full home renovations, custom pergolas and backyard transformations.</p>
+            <div class="wp-block-buttons">
+        <div class="wp-block-button">
+          <a class="wp-block-button__link wp-element-button ab-pf-btn" href="https://adeptbuild.com/portfolio/">View Full Portfolio</a>
+        </div>
+      </div>
+    </div>
+    <div class="abps-slider">
+      <input class="abps-radio" type="radio" name="pf" id="pf-1" checked>
+      <input class="abps-radio" type="radio" name="pf" id="pf-2">
+      <input class="abps-radio" type="radio" name="pf" id="pf-3">
+      <input class="abps-radio" type="radio" name="pf" id="pf-4">
+      <div class="abps-stage">
+        <label class="abps-slide" for="pf-1"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/AGNEW.jpeg" alt="Agnew Project" loading="eager"></label>
+        <label class="abps-slide" for="pf-2"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/ENSLEY.jpeg" alt="Ensley Project" loading="eager"></label>
+        <label class="abps-slide" for="pf-3"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/SANTA%20MONICA.jpg" alt="Santa Monica Project" loading="eager"></label>
+        <label class="abps-slide" for="pf-4"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/SHEENS.jpg" alt="Sheens Project" loading="lazy"></label>
+      </div>
+      <div class="abps-nav">
+        <div class="abps-prev">
+          <label class="abps-arrow" for="pf-4" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="pf-1" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="pf-2" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="pf-3" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+        </div>
+        <div class="abps-dots">
+          <label class="abps-dot" for="pf-1"><span class="abps-sr">Foto 1</span></label>
+          <label class="abps-dot" for="pf-2"><span class="abps-sr">Foto 2</span></label>
+          <label class="abps-dot" for="pf-3"><span class="abps-sr">Foto 3</span></label>
+          <label class="abps-dot" for="pf-4"><span class="abps-sr">Foto 4</span></label>
+        </div>
+        <div class="abps-next">
+          <label class="abps-arrow" for="pf-2" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="pf-3" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="pf-4" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="pf-1" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- wp:heading {"style":{"color":{"text":"#0170b9"},"elements":{"link":{"color":{"text":"#0170b9"}}}}} -->
-<h2 class="wp-block-heading has-text-color has-link-color" style="color:#0170b9">See What We've Built for LA Homeowners</h2>
-<!-- /wp:heading -->
+  <style>
+  .abps{--abps-accent:#0170b9;}
+  .abps *,.abps *::before,.abps *::after{box-sizing:border-box;}
+  .abps-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  .abps-radio{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
+  .abps-row{max-width:1240px;margin:0 auto;padding:32px;display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;}
+  .abps-copy{min-width:0;}
+  .abps-slider{min-width:0;}
+  .abps-stage{position:relative;width:100%;aspect-ratio:16/11;}
+  .abps-slide{position:absolute;left:40%;width:20%;top:35%;height:30%;opacity:0;z-index:1;pointer-events:none;overflow:hidden;border-radius:3px;cursor:pointer;box-shadow:0 20px 44px rgba(15,42,53,.2);transition:left .5s cubic-bezier(.4,0,.2,1),top .5s cubic-bezier(.4,0,.2,1),width .5s cubic-bezier(.4,0,.2,1),height .5s cubic-bezier(.4,0,.2,1),opacity .4s ease;}
+  .abps-slide img{width:100%;height:100%;object-fit:cover;display:block;margin:0;max-width:none;}
+  .abps-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:26px;}
+  .abps-prev,.abps-next{position:relative;width:42px;height:42px;flex:0 0 auto;}
+  .abps-arrow{display:none;align-items:center;justify-content:center;position:absolute;inset:0;width:42px;height:42px;border-radius:999px;border:1px solid #D7E1E5 !important;background:#ffffff !important;color:#0F2A35 !important;font-size:20px;line-height:1;cursor:pointer;user-select:none;transition:background .2s ease,color .2s ease,border-color .2s ease;}
+  .abps-arrow:hover{background:#0170b9 !important;border-color:#0170b9 !important;color:#ffffff !important;}
+  .abps-dots{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:9px;max-width:300px;}
+  .abps-dot{width:9px;height:9px;border-radius:999px;background:#C8D3D8;cursor:pointer;display:block;transition:background .25s ease,width .25s ease,height .25s ease;}
 
-<!-- wp:paragraph {"style":{"color":{"text":"#0170b9"},"elements":{"link":{"color":{"text":"#0170b9"}}}}} -->
-<p class="has-text-color has-link-color" style="color:#0170b9">Browse real Adept projects across Los Angeles: full home renovations, custom pergolas and backyard transformations.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
+  .abps .ab-pf-btn{
+    display:inline-block;
+    background:transparent !important;
+    color:#000000 !important;
+    border:2px solid #0170b9 !important;
+    border-radius:0 !important;
+    font-weight:600;
+    padding:12px 26px;
+    text-decoration:none;
+    transition:background .2s ease,color .2s ease;
+  }
+  .abps .ab-pf-btn:hover{
+    background:#0170b9 !important;
+    color:#ffffff !important;
+    border-color:#0170b9 !important;
+  }
 
-<!-- wp:group {"className":"ab-pfslider"} -->
-<div class="wp-block-group ab-pfslider" data-interval="5500">
-<!-- wp:group {"className":"ab-pfslider__viewport"} -->
-<div class="wp-block-group ab-pfslider__viewport">
-<!-- wp:group {"className":"ab-pfslider__slide"} -->
-<div class="wp-block-group ab-pfslider__slide">
-<!-- wp:image {"sizeSlug":"large","className":"ab-pfslider__media"} -->
-<figure class="wp-block-image size-large ab-pfslider__media"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/AGNEW.jpeg" alt="Agnew Project"/></figure>
-<!-- /wp:image -->
-<!-- wp:group {"className":"ab-pfslider__caption"} -->
-<div class="wp-block-group ab-pfslider__caption">
-<!-- wp:paragraph {"className":"ab-pfslider__index"} -->
-<p class="ab-pfslider__index">01</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph {"className":"ab-pfslider__title"} -->
-<p class="ab-pfslider__title">Agnew Project</p>
-<!-- /wp:paragraph -->
+  #pf-1:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #pf-1:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-1:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-1:checked ~ .abps-nav .abps-dot:nth-of-type(1){background:var(--abps-accent);width:11px;height:11px;}
+  #pf-1:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(1),#pf-1:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(1){display:flex;}
+
+  #pf-2:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #pf-2:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-2:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-2:checked ~ .abps-nav .abps-dot:nth-of-type(2){background:var(--abps-accent);width:11px;height:11px;}
+  #pf-2:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(2),#pf-2:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(2){display:flex;}
+
+  #pf-3:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #pf-3:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-3:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-3:checked ~ .abps-nav .abps-dot:nth-of-type(3){background:var(--abps-accent);width:11px;height:11px;}
+  #pf-3:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(3),#pf-3:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(3){display:flex;}
+
+  #pf-4:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #pf-4:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-4:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-4:checked ~ .abps-nav .abps-dot:nth-of-type(4){background:var(--abps-accent);width:11px;height:11px;}
+  #pf-4:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(4),#pf-4:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(4){display:flex;}
+
+  @media (max-width:900px){
+    .abps-row{grid-template-columns:1fr;gap:28px;padding:24px;}
+  }
+  </style>
+
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Cambio de slide sin que la página salte
+    document.querySelectorAll('.abps-slider label[for]').forEach(label => {
+      label.addEventListener('click', function(e) {
+        const input = document.getElementById(this.getAttribute('for'));
+        if (input && input.type === 'radio') {
+          e.preventDefault();
+          input.checked = true;
+        }
+      });
+    });
+
+    // Lightbox: crear el contenedor una sola vez
+    if (!document.getElementById('abps-lightbox')) {
+      const lightbox = document.createElement('div');
+      lightbox.id = 'abps-lightbox';
+      Object.assign(lightbox.style, {
+        display: 'none', position: 'fixed', zIndex: '999999', left: '0', top: '0',
+        width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.85)',
+        alignItems: 'center', justifyContent: 'center', cursor: 'zoom-out'
+      });
+      lightbox.innerHTML = '<span style="position:absolute; top:24px; right:32px; color:#fff; font-size:40px; font-weight:bold; cursor:pointer;">&times;</span><img id="abps-lightbox-img" src="" style="max-width:90%; max-height:90vh; object-fit:contain; border-radius:4px; box-shadow:0 8px 32px rgba(0,0,0,0.6);">';
+      document.body.appendChild(lightbox);
+
+      lightbox.addEventListener('click', function() {
+        this.style.display = 'none';
+        document.body.style.overflow = '';
+      });
+    }
+
+    // Solo abre la imagen central (la del input activo)
+    document.querySelectorAll('.abps-slide img').forEach(img => {
+      img.addEventListener('click', function(e) {
+        const inputId = this.parentElement.getAttribute('for');
+        const associatedInput = document.getElementById(inputId);
+        if (associatedInput && associatedInput.checked) {
+          e.preventDefault();
+          document.getElementById('abps-lightbox-img').src = this.src;
+          document.getElementById('abps-lightbox').style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+  });
+  </script>
 </div>
-<!-- /wp:group -->
-<!-- wp:buttons -->
-<div class="wp-block-buttons">
-<!-- wp:button {"className":"ab-pfslider__link"} -->
-<div class="wp-block-button ab-pfslider__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/portfolio/">Agnew Project</a></div>
-<!-- /wp:button -->
-</div>
-<!-- /wp:buttons -->
-</div>
-<!-- /wp:group -->
-<!-- wp:group {"className":"ab-pfslider__slide"} -->
-<div class="wp-block-group ab-pfslider__slide">
-<!-- wp:image {"sizeSlug":"large","className":"ab-pfslider__media"} -->
-<figure class="wp-block-image size-large ab-pfslider__media"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/ENSLEY.jpeg" alt="Ensley Project"/></figure>
-<!-- /wp:image -->
-<!-- wp:group {"className":"ab-pfslider__caption"} -->
-<div class="wp-block-group ab-pfslider__caption">
-<!-- wp:paragraph {"className":"ab-pfslider__index"} -->
-<p class="ab-pfslider__index">02</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph {"className":"ab-pfslider__title"} -->
-<p class="ab-pfslider__title">Ensley Project</p>
-<!-- /wp:paragraph -->
-</div>
-<!-- /wp:group -->
-<!-- wp:buttons -->
-<div class="wp-block-buttons">
-<!-- wp:button {"className":"ab-pfslider__link"} -->
-<div class="wp-block-button ab-pfslider__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/portfolio/">Ensley Project</a></div>
-<!-- /wp:button -->
-</div>
-<!-- /wp:buttons -->
-</div>
-<!-- /wp:group -->
-<!-- wp:group {"className":"ab-pfslider__slide"} -->
-<div class="wp-block-group ab-pfslider__slide">
-<!-- wp:image {"sizeSlug":"large","className":"ab-pfslider__media"} -->
-<figure class="wp-block-image size-large ab-pfslider__media"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/SANTA%20MONICA.jpg" alt="Santa Monica Project"/></figure>
-<!-- /wp:image -->
-<!-- wp:group {"className":"ab-pfslider__caption"} -->
-<div class="wp-block-group ab-pfslider__caption">
-<!-- wp:paragraph {"className":"ab-pfslider__index"} -->
-<p class="ab-pfslider__index">03</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph {"className":"ab-pfslider__title"} -->
-<p class="ab-pfslider__title">Santa Monica Project</p>
-<!-- /wp:paragraph -->
-</div>
-<!-- /wp:group -->
-<!-- wp:buttons -->
-<div class="wp-block-buttons">
-<!-- wp:button {"className":"ab-pfslider__link"} -->
-<div class="wp-block-button ab-pfslider__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/portfolio/">Santa Monica Project</a></div>
-<!-- /wp:button -->
-</div>
-<!-- /wp:buttons -->
-</div>
-<!-- /wp:group -->
-<!-- wp:group {"className":"ab-pfslider__slide"} -->
-<div class="wp-block-group ab-pfslider__slide">
-<!-- wp:image {"sizeSlug":"large","className":"ab-pfslider__media"} -->
-<figure class="wp-block-image size-large ab-pfslider__media"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/SHEENS.jpg" alt="Sheens Project"/></figure>
-<!-- /wp:image -->
-<!-- wp:group {"className":"ab-pfslider__caption"} -->
-<div class="wp-block-group ab-pfslider__caption">
-<!-- wp:paragraph {"className":"ab-pfslider__index"} -->
-<p class="ab-pfslider__index">04</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph {"className":"ab-pfslider__title"} -->
-<p class="ab-pfslider__title">Sheens Project</p>
-<!-- /wp:paragraph -->
-</div>
-<!-- /wp:group -->
-<!-- wp:buttons -->
-<div class="wp-block-buttons">
-<!-- wp:button {"className":"ab-pfslider__link"} -->
-<div class="wp-block-button ab-pfslider__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/portfolio/">Sheens Project</a></div>
-<!-- /wp:button -->
-</div>
-<!-- /wp:buttons -->
-</div>
-<!-- /wp:group -->
-<!-- wp:html -->
-<button class="ab-pfslider__btn ab-pfslider__prev" type="button" aria-label="Previous project"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-<button class="ab-pfslider__btn ab-pfslider__next" type="button" aria-label="Next project"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
-<!-- /wp:html -->
-</div>
-<!-- /wp:group -->
-<!-- wp:html -->
-<div class="ab-pfslider__bar">
-	<div class="ab-pfslider__meta">
-		<span class="ab-pfslider__counter" aria-hidden="true">01 / 04</span>
-		<div class="ab-pfslider__dots"></div>
-	</div>
-	<span class="ab-pfslider__hint">Drag or use the arrows</span>
-</div>
-<!-- /wp:html -->
-</div>
-<!-- /wp:group --></div>
+<!-- /wp:html --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"ab-proto-trust","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->

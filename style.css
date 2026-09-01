@@ -12,6 +12,21 @@ Text Domain: adeptbuild
 */
 
 /* ==========================================================================
+   0. LOCAL FONT FACES
+   Drop the purchased .ttf at assets/fonts/Posterama2001-Regular.ttf (create
+   the "fonts" folder if it doesn't exist yet) — the path below is relative
+   to this file (theme root), so no PHP/enqueue changes are needed. Once the
+   file is in place this simply starts working; nothing else to wire up.
+   ========================================================================== */
+@font-face {
+    font-family: "Posterama 2001";
+    src: url("assets/fonts/Posterama2001-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ==========================================================================
    1. DESIGN TOKENS
    Astra-inspired architecture: typography and spacing variables consumed
    by the rest of the theme. Editing this block changes the whole site.
@@ -145,6 +160,17 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 { font-size: var(--ab-fs-h1); }
 h2 { font-size: var(--ab-fs-h2); }
+
+/* Real "Posterama 2001 Regular" (see the @font-face at the very top of
+   this file) with Poppins Bold as the fallback for as long as the local
+   font file isn't in place yet — browsers just skip to the next name in
+   the list when a face fails to load, so nothing else needs to change
+   once the .ttf is dropped in. Weight 400 to match "Regular", not the
+   700 the Poppins fallback needs to look equally bold. */
+h1, h2 {
+    font-family: "Posterama 2001", "Poppins", var(--ab-font-heading);
+    font-weight: 400;
+}
 h3 { font-size: var(--ab-fs-h3); }
 h4 { font-size: var(--ab-fs-h4); }
 
@@ -334,7 +360,7 @@ a.ab-btn {
     font-weight: 600;
     line-height: 1;
     padding: clamp(12px, 1.6vw, 18px) clamp(20px, 3vw, 32px);
-    border: 2px solid #0170B9;
+    border: 2px solid #ffffff;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.15);
     color: #ffffff;
@@ -1285,15 +1311,20 @@ body.ab-menu-open .site-header {
     background: #1B2430;
     padding: clamp(32px, 5vw, 56px);
 }
-.ab-proto-process .ab-process-row__num {
+/* Not scoped to any particular section wrapper (".ab-proto-process" on
+   home, ".ab-faq" on other pages, or dropped in anywhere else) — this
+   panel's own background is always the dark "#1B2430" set above, so the
+   text always needs to be light regardless of which page it's on. */
+.ab-process-row__num {
     font-family: var(--ab-font-heading);
     font-size: 1.0625rem;
     color: #0170b9;
     letter-spacing: 0.04em;
     margin-bottom: 10px;
 }
-.ab-proto-process .ab-process-row__body h3 { font-size: clamp(1.5rem, 2.5vw, 2rem); margin-bottom: 16px; color: #fff; }
-.ab-proto-process .ab-process-row__body p { max-width: 420px; color: rgba(255, 255, 255, 0.75); margin: 0; }
+.ab-process-row__body h2,
+.ab-process-row__body h3 { font-size: clamp(1.5rem, 2.5vw, 2rem); margin-top: 0; margin-bottom: 16px; color: #fff; }
+.ab-process-row__body p { max-width: 420px; color: rgba(255, 255, 255, 0.75); margin: 0; }
 
 @media (max-width: 782px) {
     .ab-process-row { grid-template-columns: 1fr; }
@@ -1308,6 +1339,15 @@ body.ab-menu-open .site-header {
     .ab-process-row__visual { order: 1; }
     .ab-process-row__body { order: 2; }
 }
+
+/* Full-bleed section wrapper for ".ab-process-rows" on content pages other
+   than home (which uses its own ".ab-proto-process" wrapper instead) — same
+   edge-to-edge alternating-row look, e.g. for an FAQ-style page built from
+   image + question/answer pairs. */
+.ab-faq { width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding: clamp(64px, 8vw, 100px) 0; background: #1A1A1A; }
+.ab-faq .ab-proto-inner { max-width: var(--ab-container); margin: 0 auto; padding: 0 var(--ab-gutter) clamp(32px, 4vw, 48px); }
+.ab-faq .ab-proto-inner h2 { color: #fff; margin-top: 0; }
+.ab-faq .ab-proto-inner p { color: rgba(255, 255, 255, 0.72); max-width: 640px; }
 
 /* Media: text + image */
 .ab-media {
@@ -3337,11 +3377,7 @@ ol.wp-block-list li::marker {
 .home .ab-proto-philosophy h2 {
     font-size: clamp(2rem, 4vw, 2.75rem);
     margin: 0;
-    background: linear-gradient(180deg, #fff 0%, #0170b9 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: #0170b9;
+    color: #ffffff;
 }
 .home .ab-proto-philosophy-copy {
     padding-left: clamp(28px, 4vw, 56px);
