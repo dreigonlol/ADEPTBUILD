@@ -108,7 +108,7 @@ body {
     font-size: var(--ab-fs-base);
     line-height: var(--ab-lh-body);
     color: #3D3D3D;
-    background: #C4C4C4;
+    background: #ffffff;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -334,7 +334,7 @@ a.ab-btn {
     font-weight: 600;
     line-height: 1;
     padding: clamp(12px, 1.6vw, 18px) clamp(20px, 3vw, 32px);
-    border: 2px solid #ffffff;
+    border: 2px solid #0170B9;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.15);
     color: #ffffff;
@@ -364,7 +364,7 @@ a.ab-btn:hover {
 .ab-btn--outline,
 .ab-btn--ghost {
     background: rgba(255, 255, 255, 0.15);
-    border-color: #ffffff;
+    border-color: #0170B9;
     color: #ffffff;
 }
 .ab-btn--accent:hover,
@@ -457,7 +457,7 @@ a.ab-btn:hover {
     transition: box-shadow var(--ab-transition), background-color var(--ab-transition), backdrop-filter var(--ab-transition);
 }
 .site-header.is-stuck {
-    background: #0170B9;
+    background: #00497A;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 6px 24px rgba(26, 26, 26, 0.18);
@@ -533,6 +533,19 @@ body.ab-menu-open .site-header {
     gap: 16px;
     margin-left: auto;
 }
+
+.ab-header-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--ab-font-nav);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+}
+.ab-header-phone:hover { color: #ffffff; }
+.ab-header-phone svg { flex-shrink: 0; }
 
 /* --- Navigation --- */
 .main-navigation ul {
@@ -774,7 +787,7 @@ body.ab-menu-open .site-header {
     box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
     transition: background-color var(--ab-transition), padding var(--ab-transition);
 }
-.ab-floating-cta:hover { background: #1046bb; color: #fff; padding-inline-end: 15px; }
+.ab-floating-cta:hover { background: #ffffff; color: #1A1A1A; padding-inline-end: 15px; }
 
 .ab-floating-whatsapp {
     display: flex;
@@ -1026,7 +1039,7 @@ body.ab-menu-open .site-header {
     transform: translateY(100%);
     opacity: 0;
     white-space: nowrap;
-    color: var(--ab-aqua);
+    color: #57e1f3;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
 }
 /* Shows the first word by default with no JS/class involved at all, so the
@@ -1061,7 +1074,7 @@ body.ab-menu-open .site-header {
     z-index: 1;
     width: 100%;
     height: auto;
-    color: #C4C4C4;
+    color: #ffffff;
     pointer-events: none;
 }
 .ab-wave--alt { color: #1A1A1A; }
@@ -1677,7 +1690,7 @@ body.ab-menu-open .site-header {
     backdrop-filter: blur(2px);
     transition: background-color var(--ab-transition), border-color var(--ab-transition);
 }
-.ab-carousel__btn:hover { background: var(--ab-primary); border-color: var(--ab-primary); }
+.ab-carousel__btn:hover { background: #1046bb; border-color: #1046bb; }
 .ab-carousel__prev { left: 16px; }
 .ab-carousel__next { right: 16px; }
 
@@ -1702,7 +1715,7 @@ body.ab-menu-open .site-header {
     transition: background-color var(--ab-transition), transform var(--ab-transition);
 }
 .ab-carousel__dot:hover { background: rgba(255, 255, 255, 0.75); }
-.ab-carousel__dot.is-active { background: var(--ab-primary); transform: scale(1.2); }
+.ab-carousel__dot.is-active { background: #1046bb; transform: scale(1.2); }
 
 @media (max-width: 600px) {
     .ab-carousel { border-radius: 0; }
@@ -2041,10 +2054,17 @@ label {
 .ab-entry-content img,
 .ab-entry-content .wp-block-image img { border-radius: var(--ab-radius); }
 
-/* Light-on-dark type for page/post body copy — only needed on the home
-   page, which keeps its own dark-blue background (see "body.home" near
-   the top of this file); every other page now sits on the site's light
-   gray background and just uses the normal dark body text color. */
+/* TEMP DISABLED — this block force-whites headings/text/table/etc. inside
+   .ab-entry-content on the home page. It was written back when "body.home"
+   had its own dark-blue background; body's background is now plain white
+   site-wide, so this override was very likely why block-editor color
+   picks (or custom-HTML <style> blocks, which are lower specificity than
+   these ".home .ab-entry-content ..." rules and lose to them even without
+   !important) weren't visibly taking effect on some sections. Commented
+   out to test — if text reads correctly now, delete this block for good;
+   if some section still needs light text on a dark local background,
+   restore only the specific rule that section needs. */
+/*
 .home .ab-entry-content h1,
 .home .ab-entry-content h2,
 .home .ab-entry-content h3,
@@ -2069,6 +2089,7 @@ label {
 .home .ab-entry-content th { background: rgba(255, 255, 255, 0.06); color: #fff; }
 .home .ab-entry-content .wp-caption-text,
 .home .ab-entry-content .wp-block-image figcaption { color: rgba(255, 255, 255, 0.6); }
+*/
 
 .wp-caption-text,
 .wp-block-image figcaption {
@@ -2382,7 +2403,7 @@ h2.ab-services-showcase__title {
    ========================================================================== */
 
 .site-footer {
-    background: #0170B9;
+    background: #00497A;
     color: rgba(255, 255, 255, 0.68);
     font-size: var(--ab-fs-sm);
 }
@@ -3326,6 +3347,14 @@ ol.wp-block-list li::marker {
     color: #7FD8E8 !important;
 }
 .home .ab-proto-philosophy-copy a:not(.wp-element-button):hover { color: #fff !important; }
+/* TEMP DISABLED — same cause as the ".ab-entry-content" block above: this
+   forced a white ghost-button look (translucent white fill, white text)
+   for the dark "body.home" background this page used to have. With that
+   background now white, this "!important" was also the reason a text
+   color picked in the block editor's own color picker (which applies as
+   an inline "style=color:..." on the link) couldn't take effect — only
+   an "!important" external rule beats an inline style, and this was one. */
+/*
 .home .ab-proto-philosophy-copy .wp-block-button__link {
     background: rgba(255, 255, 255, 0.15) !important;
     border-color: #ffffff !important;
@@ -3336,6 +3365,7 @@ ol.wp-block-list li::marker {
     border-color: #ffffff !important;
     color: #1A1A1A !important;
 }
+*/
 
 /* --- 4. How We Work: full-bleed alternating rows (.ab-process-row,
    defined with the other reusable components above) — the heading sits in

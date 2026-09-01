@@ -99,6 +99,11 @@ $ab_social = adeptbuild_social_links();
 		</nav>
 
 		<div class="ab-header-actions">
+			<a class="ab-header-phone" href="<?php echo esc_url( adeptbuild_tel_href( '800-611-1776' ) ); ?>">
+				<?php adeptbuild_icon( 'phone', 16 ); ?>
+				<span>800-611-1776</span>
+			</a>
+
 			<?php
 			$ab_cta_text = adeptbuild_option( 'cta_text' );
 			$ab_cta_url  = adeptbuild_option( 'cta_url', '/contact-us/' );
