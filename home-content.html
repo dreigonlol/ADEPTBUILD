@@ -8,12 +8,98 @@
 <p>Full-service renovations and outdoor living spaces across Los Angeles — from concept to completion.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button {"className":"is-style-fill","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}}},"fontSize":"medium","animation":"slideInLeft"} -->
-<div class="wp-block-button is-style-fill coblocks-animate" data-coblocks-animation="slideInLeft"><a class="wp-block-button__link has-medium-font-size has-custom-font-size wp-element-button" href="https://adeptbuild.com/contact-us/" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px"><strong>Schedule A Meeting</strong></a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
+<!-- wp:html -->
+<div class="wp-block-buttons"><div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#adept-modal-landscaping" onclick="document.getElementById('adept-modal-landscaping').style.display='flex';return false;"><strong>Schedule A Meeting</strong></a></div></div>
+<!-- /wp:html --></div>
 <!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"ab-stats-section"} -->
+<div class="wp-block-group ab-stats-section"><!-- wp:html -->
+<div class="ab-stats">
+  <div class="ab-stats__inner">
+    <h2 class="ab-stats__title">BUILT ON TRUST. BACKED BY THE NUMBERS.</h2>
+
+    <div class="ab-stats__grid">
+      <div class="ab-stat">
+        <p class="ab-stat__num"><span class="ab-stat__digit js-digit" data-target="10">0</span><span class="ab-stat__suffix">+</span></p>
+        <div class="ab-stat__label">years in business</div>
+      </div>
+
+      <div class="ab-stat">
+        <p class="ab-stat__num"><span class="ab-stat__digit js-digit" data-target="15">0</span><span class="ab-stat__suffix">+</span></p>
+        <div class="ab-stat__label">LA communities served</div>
+      </div>
+
+      <div class="ab-stat">
+        <p class="ab-stat__num">Licensed</p>
+        <div class="ab-stat__label">bonded & insured</div>
+      </div>
+
+      <div class="ab-stat">
+        <p class="ab-stat__num"><span class="ab-stat__digit js-digit" data-target="5.0">0</span><span class="ab-stat__suffix">★</span></p>
+        <div class="ab-stat__label">Average client rating</div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+  .ab-stats-section{background:transparent !important;}
+  .ab-stats{--ab-ink:#0F2A35;--ab-muted:#5B6B73;background:transparent;padding:clamp(48px,8vw,96px) 0;}
+  .ab-stats *,.ab-stats *::before,.ab-stats *::after{box-sizing:border-box;}
+  .ab-stats__inner{max-width:1240px;margin:0 auto;padding:0 32px;}
+  .ab-stats__title{margin:0 0 clamp(36px,5vw,64px);text-align:center;color:#0170B9;font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.2;font-size:clamp(1.25rem,2.6vw,2rem);}
+  .ab-stats__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(24px,4vw,48px);}
+  .ab-stat{text-align:center;min-width:0;}
+  .ab-stat__num{margin:0 0 10px;color:#0170B9;font-weight:800;line-height:1;letter-spacing:-.01em;font-size:clamp(2.4rem,6vw,4rem);white-space:nowrap;}
+  .ab-stat__suffix{font-weight:800;}
+  .ab-stat__label{color:#0170B9;line-height:1.4;font-size:clamp(.9rem,1.2vw,1.0625rem);max-width:20ch;margin:0 auto;}
+  @media (max-width:820px){
+    .ab-stats__grid{grid-template-columns:repeat(2,1fr);gap:36px 24px;}
+  }
+  </style>
+
+  <script>
+  (function(){
+    var init = function(){
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('.ab-stats').forEach(function(sec){
+        if (sec.dataset.abInit) return;
+        sec.dataset.abInit = '1';
+        var digits = sec.querySelectorAll('.ab-stat__digit');
+        var run = function(){
+          digits.forEach(function(el){
+            var target = parseInt(el.getAttribute('data-target'), 10) || 0;
+            if (reduce){ el.textContent = target; return; }
+            var dur = 1800, start = null;
+            var step = function(ts){
+              if (!start) start = ts;
+              var p = Math.min((ts - start) / dur, 1);
+              var eased = 1 - Math.pow(1 - p, 3);
+              el.textContent = Math.round(eased * target);
+              if (p < 1) { requestAnimationFrame(step); }
+              else { el.textContent = target; }
+            };
+            requestAnimationFrame(step);
+          });
+        };
+        if ('IntersectionObserver' in window){
+          var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){
+              if (e.isIntersecting){ run(); io.disconnect(); }
+            });
+          }, {threshold:0.35});
+          io.observe(sec);
+        } else { run(); }
+      });
+    };
+    if (document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', init);
+    } else { init(); }
+  })();
+  </script>
+</div>
+<!-- /wp:html --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"ab-story"} -->
@@ -34,17 +120,15 @@
 
 <!-- wp:group {"className":"ab-proto-services"} -->
 <div class="wp-block-group ab-proto-services"><!-- wp:group {"className":"ab-proto-inner"} -->
-<div class="wp-block-group ab-proto-inner"><!-- wp:paragraph {"className":"ab-eyebrow","style":{"color":{"text":"#FFCA10"}}} -->
-<p class="ab-eyebrow has-text-color" style="color:#FFCA10">What We Do</p>
+<div class="wp-block-group ab-proto-inner"><!-- wp:paragraph {"className":"ab-eyebrow","style":{"color":{"text":"#0170b9"}}} -->
+<p class="ab-eyebrow has-text-color" style="color:#0170b9">What We Do</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:heading {"animation":"slideInRight"} -->
-<h2 class="wp-block-heading coblocks-animate" data-coblocks-animation="slideInRight">Our Services</h2>
+<!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"#0170b9"}}},"color":{"text":"#0170b9"}},"animation":"slideInRight"} -->
+<h2 class="wp-block-heading has-text-color has-link-color coblocks-animate" style="color:#0170b9" data-coblocks-animation="slideInRight">Our Services</h2>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"animation":"slideInLeft"} -->
-<p class="coblocks-animate" data-coblocks-animation="slideInLeft"></p>
-<!-- /wp:paragraph --></div>
+</div>
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"ab-service-strips"} -->
@@ -53,8 +137,8 @@
 <figure class="wp-block-image size-large"><img src="https://adeptbuild.com/wp-content/uploads/elementor/thumbs/PHOTO-2019-12-26-13-04-07-p8ronogy6zq4o5vlw5rtzr81flxa3whq0a3tboj6uo.jpg" alt=""/></figure>
 <!-- /wp:image -->
 
-<!-- wp:paragraph {"className":"ab-service-strip__content"} -->
-<p class="ab-service-strip__content"><span class="ab-service-strip__num">01</span><span class="ab-service-strip__label">Full Home Renovation</span><span class="ab-service-strip__desc">A home renewed, top to bottom.</span></p>
+<!-- wp:paragraph {"className":"ab-service-strip__content","style":{"elements":{"link":{"color":{"text":"var:preset|color|white"}}}},"textColor":"white"} -->
+<p class="ab-service-strip__content has-white-color has-text-color has-link-color"><span class="ab-service-strip__num">01</span><span class="ab-service-strip__label">Full Home Renovation</span><span class="ab-service-strip__desc">A home renewed, top to bottom.</span></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons -->
@@ -147,161 +231,31 @@
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"ab-proto-philosophy"} -->
-<div class="wp-block-group ab-proto-philosophy"><!-- wp:group {"className":"ab-proto-inner"} -->
-<div class="wp-block-group ab-proto-inner"><!-- wp:heading -->
-<h2 class="wp-block-heading">Our Philosophy</h2>
+<div class="wp-block-group ab-proto-philosophy" style="background-image:url('https://adeptbuild.com/wp-content/uploads/2026/Index/OurPhilosophy.webp');background-size:cover;background-position:center;position:relative;"><div style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(11,47,62,0.45);z-index:1;"></div><!-- wp:group {"className":"ab-proto-inner"} -->
+<div class="wp-block-group ab-proto-inner" style="position:relative;z-index:2;"><!-- wp:heading {"style":{"color":{"text":"#ffffff"},"elements":{"link":{"color":{"text":"#ffffff"}}}}} -->
+<h2 class="wp-block-heading has-text-color has-link-color" style="color:#ffffff">Our Philosophy</h2>
 <!-- /wp:heading -->
-
 <!-- wp:group {"className":"ab-proto-philosophy-copy"} -->
-<div class="wp-block-group ab-proto-philosophy-copy"><!-- wp:paragraph -->
-<p>Clients should be able to come home to unwind and relax in luxury. We have dedicated ourselves to our craft and take pride in assisting you with designing the home of your dreams.</p>
+<div class="wp-block-group ab-proto-philosophy-copy"><!-- wp:paragraph {"style":{"color":{"text":"#ffffff"},"elements":{"link":{"color":{"text":"#ffffff"}}}}} -->
+<p class="has-text-color has-link-color" style="color:#ffffff">Clients should be able to come home to unwind and relax in luxury. We have dedicated ourselves to our craft and take pride in assisting you with designing the home of your dreams.</p>
 <!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Supporting you with living your best life begins with having the home you desire.</p>
+<!-- wp:paragraph {"style":{"color":{"text":"#ffffff"},"elements":{"link":{"color":{"text":"#ffffff"}}}}} -->
+<p class="has-text-color has-link-color" style="color:#ffffff">Supporting you with living your best life begins with having the home you desire.</p>
 <!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p><a style="color:#ff9900" href="https://adeptbuild.com/about-us/"><strong>Click here</strong></a> to learn more about us.</p>
+<!-- wp:paragraph {"style":{"color":{"text":"#ffffff"},"elements":{"link":{"color":{"text":"#ffffff"}}}}} -->
+<p class="has-text-color has-link-color" style="color:#ffffff"><a style="color:#ff9900" href="https://adeptbuild.com/about-us/"><strong>Click here</strong></a> to learn more about us.</p>
 <!-- /wp:paragraph -->
-
-<!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/contact-us/">SCHEDULE A FREE CONSULTATION</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ab-portfolio"} -->
-<div class="wp-block-group ab-portfolio"><!-- wp:group {"className":"ab-proto-inner"} -->
-<div class="wp-block-group ab-proto-inner"><!-- wp:paragraph {"className":"ab-eyebrow"} -->
-<p class="ab-eyebrow">Our Portfolio</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2 class="wp-block-heading">See What We've Built for LA Homeowners</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Browse real Adept projects across Los Angeles: full home renovations, custom pergolas and backyard transformations.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ab-pfslider"} -->
-<div class="wp-block-group ab-pfslider" data-interval="5500"><!-- wp:group {"className":"ab-pfslider__viewport"} -->
-<div class="wp-block-group ab-pfslider__viewport"><!-- wp:group {"className":"ab-pfslider__slide"} -->
-<div class="wp-block-group ab-pfslider__slide"><!-- wp:image {"sizeSlug":"large","className":"ab-pfslider__media"} -->
-<figure class="wp-block-image size-large ab-pfslider__media"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/AGNEW.jpeg" alt="Agnew Project"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:group {"className":"ab-pfslider__caption"} -->
-<div class="wp-block-group ab-pfslider__caption"><!-- wp:paragraph {"className":"ab-pfslider__index"} -->
-<p class="ab-pfslider__index">01</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"className":"ab-pfslider__title"} -->
-<p class="ab-pfslider__title">Agnew Project</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button {"className":"ab-pfslider__link"} -->
-<div class="wp-block-button ab-pfslider__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/agnew-project-2/">Agnew Project</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ab-pfslider__slide"} -->
-<div class="wp-block-group ab-pfslider__slide"><!-- wp:image {"sizeSlug":"large","className":"ab-pfslider__media"} -->
-<figure class="wp-block-image size-large ab-pfslider__media"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/ENSLEY.jpeg" alt="Ensley Project"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:group {"className":"ab-pfslider__caption"} -->
-<div class="wp-block-group ab-pfslider__caption"><!-- wp:paragraph {"className":"ab-pfslider__index"} -->
-<p class="ab-pfslider__index">02</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"className":"ab-pfslider__title"} -->
-<p class="ab-pfslider__title">Ensley Project</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button {"className":"ab-pfslider__link"} -->
-<div class="wp-block-button ab-pfslider__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/ensley-project/">Ensley Project</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ab-pfslider__slide"} -->
-<div class="wp-block-group ab-pfslider__slide"><!-- wp:image {"sizeSlug":"large","className":"ab-pfslider__media"} -->
-<figure class="wp-block-image size-large ab-pfslider__media"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/SANTA%20MONICA.jpg" alt="Santa Monica Project"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:group {"className":"ab-pfslider__caption"} -->
-<div class="wp-block-group ab-pfslider__caption"><!-- wp:paragraph {"className":"ab-pfslider__index"} -->
-<p class="ab-pfslider__index">03</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"className":"ab-pfslider__title"} -->
-<p class="ab-pfslider__title">Santa Monica Project</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button {"className":"ab-pfslider__link"} -->
-<div class="wp-block-button ab-pfslider__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/santa-monica-project/">Santa Monica Project</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ab-pfslider__slide"} -->
-<div class="wp-block-group ab-pfslider__slide"><!-- wp:image {"sizeSlug":"large","className":"ab-pfslider__media"} -->
-<figure class="wp-block-image size-large ab-pfslider__media"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/SHEENS.jpg" alt="Sheens Project"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:group {"className":"ab-pfslider__caption"} -->
-<div class="wp-block-group ab-pfslider__caption"><!-- wp:paragraph {"className":"ab-pfslider__index"} -->
-<p class="ab-pfslider__index">04</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"className":"ab-pfslider__title"} -->
-<p class="ab-pfslider__title">Sheens Project</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button {"className":"ab-pfslider__link"} -->
-<div class="wp-block-button ab-pfslider__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/sheens-project/">Sheens Project</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
-<!-- /wp:group -->
-
 <!-- wp:html -->
-<button class="ab-pfslider__btn ab-pfslider__prev" type="button" aria-label="Previous project"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-<button class="ab-pfslider__btn ab-pfslider__next" type="button" aria-label="Next project"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
-<!-- /wp:html --></div>
-<!-- /wp:group -->
-
-<!-- wp:html -->
-<div class="ab-pfslider__bar">
-	<div class="ab-pfslider__meta">
-		<span class="ab-pfslider__counter" aria-hidden="true">01 / 04</span>
-		<div class="ab-pfslider__dots"></div>
-	</div>
-	<span class="ab-pfslider__hint">Drag or use the arrows</span>
-</div>
+<div class="wp-block-buttons"><div class="wp-block-button"><a class="wp-block-button__link wp-element-button ab-phil-btn" href="#adept-modal-landscaping" onclick="document.getElementById('adept-modal-landscaping').style.display='flex';return false;">Schedule A Meeting</a></div></div>
 <!-- /wp:html --></div>
 <!-- /wp:group --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group -->
-
 
 <!-- wp:group {"className":"ab-proto-process"} -->
 <div class="wp-block-group ab-proto-process"><!-- wp:group {"className":"ab-proto-inner"} -->
-<div class="wp-block-group ab-proto-inner"><!-- wp:heading -->
-<h2 class="wp-block-heading">How We Work</h2>
+<div class="wp-block-group ab-proto-inner"><!-- wp:heading {"style":{"color":{"text":"#0170b9"},"elements":{"link":{"color":{"text":"#0170b9"}}}}} -->
+<h2 class="wp-block-heading has-text-color has-link-color" style="color:#0170b9">How We Work</h2>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 
@@ -396,67 +350,166 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:heading -->
-<h2 class="wp-block-heading">Watch Our Videos</h2>
-<!-- /wp:heading -->
+<!-- wp:group {"className":"ab-portfolio"} -->
+<div class="wp-block-group ab-portfolio"><!-- wp:html -->
+<div class="abps">
+  <section class="abps-row">
+        <div class="abps-copy">
+      <p class="ab-eyebrow">Our Portfolio</p>
+      <h2 class="wp-block-heading has-text-color has-link-color" style="color:#0170b9">See What We've Built for LA Homeowners</h2>
+      <p class="has-text-color has-link-color" style="color:#0170b9">Browse real Adept projects across Los Angeles: full home renovations, custom pergolas and backyard transformations.</p>
+            <div class="wp-block-buttons">
+        <div class="wp-block-button">
+          <a class="wp-block-button__link wp-element-button ab-pf-btn" href="https://adeptbuild.com/portfolio/">View Full Portfolio</a>
+        </div>
+      </div>
+    </div>
+    <div class="abps-slider">
+      <input class="abps-radio" type="radio" name="pf" id="pf-1" checked>
+      <input class="abps-radio" type="radio" name="pf" id="pf-2">
+      <input class="abps-radio" type="radio" name="pf" id="pf-3">
+      <input class="abps-radio" type="radio" name="pf" id="pf-4">
+      <div class="abps-stage">
+        <label class="abps-slide" for="pf-1"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/AGNEW.jpeg" alt="Agnew Project" loading="eager"></label>
+        <label class="abps-slide" for="pf-2"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/ENSLEY.jpeg" alt="Ensley Project" loading="eager"></label>
+        <label class="abps-slide" for="pf-3"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/SANTA%20MONICA.jpg" alt="Santa Monica Project" loading="eager"></label>
+        <label class="abps-slide" for="pf-4"><img src="https://adeptbuild.com/wp-content/themes/adeptbuild-theme/assets/img/SHEENS.jpg" alt="Sheens Project" loading="lazy"></label>
+      </div>
+      <div class="abps-nav">
+        <div class="abps-prev">
+          <label class="abps-arrow" for="pf-4" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="pf-1" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="pf-2" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="pf-3" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+        </div>
+        <div class="abps-dots">
+          <label class="abps-dot" for="pf-1"><span class="abps-sr">Foto 1</span></label>
+          <label class="abps-dot" for="pf-2"><span class="abps-sr">Foto 2</span></label>
+          <label class="abps-dot" for="pf-3"><span class="abps-sr">Foto 3</span></label>
+          <label class="abps-dot" for="pf-4"><span class="abps-sr">Foto 4</span></label>
+        </div>
+        <div class="abps-next">
+          <label class="abps-arrow" for="pf-2" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="pf-3" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="pf-4" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="pf-1" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- wp:group {"className":"ab-slider"} -->
-<div class="wp-block-group ab-slider"><!-- wp:html -->
-<div class="ab-slider__nav">
-<button class="ab-slider__btn ab-slider__prev" type="button" aria-label="Previous video"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-<button class="ab-slider__btn ab-slider__next" type="button" aria-label="Next video"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+  <style>
+  .abps{--abps-accent:#0170b9;}
+  .abps *,.abps *::before,.abps *::after{box-sizing:border-box;}
+  .abps-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  .abps-radio{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
+  .abps-row{max-width:1240px;margin:0 auto;padding:32px;display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;}
+  .abps-copy{min-width:0;}
+  .abps-slider{min-width:0;}
+  .abps-stage{position:relative;width:100%;aspect-ratio:16/11;}
+  .abps-slide{position:absolute;left:40%;width:20%;top:35%;height:30%;opacity:0;z-index:1;pointer-events:none;overflow:hidden;border-radius:3px;cursor:pointer;box-shadow:0 20px 44px rgba(15,42,53,.2);transition:left .5s cubic-bezier(.4,0,.2,1),top .5s cubic-bezier(.4,0,.2,1),width .5s cubic-bezier(.4,0,.2,1),height .5s cubic-bezier(.4,0,.2,1),opacity .4s ease;}
+  .abps-slide img{width:100%;height:100%;object-fit:cover;display:block;margin:0;max-width:none;}
+  .abps-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:26px;}
+  .abps-prev,.abps-next{position:relative;width:42px;height:42px;flex:0 0 auto;}
+  .abps-arrow{display:none;align-items:center;justify-content:center;position:absolute;inset:0;width:42px;height:42px;border-radius:999px;border:1px solid #D7E1E5 !important;background:#ffffff !important;color:#0F2A35 !important;font-size:20px;line-height:1;cursor:pointer;user-select:none;transition:background .2s ease,color .2s ease,border-color .2s ease;}
+  .abps-arrow:hover{background:#0170b9 !important;border-color:#0170b9 !important;color:#ffffff !important;}
+  .abps-dots{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:9px;max-width:300px;}
+  .abps-dot{width:9px;height:9px;border-radius:999px;background:#C8D3D8;cursor:pointer;display:block;transition:background .25s ease,width .25s ease,height .25s ease;}
+
+  .abps .ab-pf-btn{
+    display:inline-block;
+    background:transparent !important;
+    color:#000000 !important;
+    border:2px solid #0170b9 !important;
+    border-radius:0 !important;
+    font-weight:600;
+    padding:12px 26px;
+    text-decoration:none;
+    transition:background .2s ease,color .2s ease;
+  }
+  .abps .ab-pf-btn:hover{
+    background:#0170b9 !important;
+    color:#ffffff !important;
+    border-color:#0170b9 !important;
+  }
+
+  #pf-1:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #pf-1:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-1:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-1:checked ~ .abps-nav .abps-dot:nth-of-type(1){background:var(--abps-accent);width:11px;height:11px;}
+  #pf-1:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(1),#pf-1:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(1){display:flex;}
+
+  #pf-2:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #pf-2:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-2:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-2:checked ~ .abps-nav .abps-dot:nth-of-type(2){background:var(--abps-accent);width:11px;height:11px;}
+  #pf-2:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(2),#pf-2:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(2){display:flex;}
+
+  #pf-3:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #pf-3:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-3:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-3:checked ~ .abps-nav .abps-dot:nth-of-type(3){background:var(--abps-accent);width:11px;height:11px;}
+  #pf-3:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(3),#pf-3:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(3){display:flex;}
+
+  #pf-4:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #pf-4:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-4:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #pf-4:checked ~ .abps-nav .abps-dot:nth-of-type(4){background:var(--abps-accent);width:11px;height:11px;}
+  #pf-4:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(4),#pf-4:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(4){display:flex;}
+
+  @media (max-width:900px){
+    .abps-row{grid-template-columns:1fr;gap:28px;padding:24px;}
+  }
+  </style>
+
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Cambio de slide sin que la página salte
+    document.querySelectorAll('.abps-slider label[for]').forEach(label => {
+      label.addEventListener('click', function(e) {
+        const input = document.getElementById(this.getAttribute('for'));
+        if (input && input.type === 'radio') {
+          e.preventDefault();
+          input.checked = true;
+        }
+      });
+    });
+
+    // Lightbox: crear el contenedor una sola vez
+    if (!document.getElementById('abps-lightbox')) {
+      const lightbox = document.createElement('div');
+      lightbox.id = 'abps-lightbox';
+      Object.assign(lightbox.style, {
+        display: 'none', position: 'fixed', zIndex: '999999', left: '0', top: '0',
+        width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.85)',
+        alignItems: 'center', justifyContent: 'center', cursor: 'zoom-out'
+      });
+      lightbox.innerHTML = '<span style="position:absolute; top:24px; right:32px; color:#fff; font-size:40px; font-weight:bold; cursor:pointer;">&times;</span><img id="abps-lightbox-img" src="" style="max-width:90%; max-height:90vh; object-fit:contain; border-radius:4px; box-shadow:0 8px 32px rgba(0,0,0,0.6);">';
+      document.body.appendChild(lightbox);
+
+      lightbox.addEventListener('click', function() {
+        this.style.display = 'none';
+        document.body.style.overflow = '';
+      });
+    }
+
+    // Solo abre la imagen central (la del input activo)
+    document.querySelectorAll('.abps-slide img').forEach(img => {
+      img.addEventListener('click', function(e) {
+        const inputId = this.parentElement.getAttribute('for');
+        const associatedInput = document.getElementById(inputId);
+        if (associatedInput && associatedInput.checked) {
+          e.preventDefault();
+          document.getElementById('abps-lightbox-img').src = this.src;
+          document.getElementById('abps-lightbox').style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+  });
+  </script>
 </div>
-<!-- /wp:html -->
-
-<!-- wp:group {"className":"ab-slider__track"} -->
-<div class="wp-block-group ab-slider__track"><!-- wp:group {"className":"ab-slider__item"} -->
-<div class="wp-block-group ab-slider__item"><!-- wp:embed {"url":"https://youtu.be/QgnzUcLLAyU","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
-<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
-https://youtu.be/QgnzUcLLAyU
-</div></figure>
-<!-- /wp:embed --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ab-slider__item"} -->
-<div class="wp-block-group ab-slider__item"><!-- wp:embed {"url":"https://www.youtube.com/watch?v=ZmAxkMjj94Y","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
-<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
-https://www.youtube.com/watch?v=ZmAxkMjj94Y
-</div></figure>
-<!-- /wp:embed --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ab-slider__item"} -->
-<div class="wp-block-group ab-slider__item"><!-- wp:embed {"url":"https://www.youtube.com/watch?v=14uN0RhyAM4","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
-<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
-https://www.youtube.com/watch?v=14uN0RhyAM4
-</div></figure>
-<!-- /wp:embed --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ab-slider__item"} -->
-<div class="wp-block-group ab-slider__item"><!-- wp:embed {"url":"https://www.youtube.com/watch?v=8mNVuL0XNXs","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
-<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
-https://www.youtube.com/watch?v=8mNVuL0XNXs
-</div></figure>
-<!-- /wp:embed --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ab-slider__item"} -->
-<div class="wp-block-group ab-slider__item"><!-- wp:embed {"url":"https://www.youtube.com/watch?v=BSUukeHhv7Q","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
-<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
-https://www.youtube.com/watch?v=BSUukeHhv7Q
-</div></figure>
-<!-- /wp:embed --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ab-slider__item"} -->
-<div class="wp-block-group ab-slider__item"><!-- wp:embed {"url":"https://www.youtube.com/watch?v=ZAIr37qlcSo","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
-<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
-https://www.youtube.com/watch?v=ZAIr37qlcSo
-</div></figure>
-<!-- /wp:embed --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group --></div>
+<!-- /wp:html --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"ab-proto-trust","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
@@ -489,30 +542,53 @@ https://www.youtube.com/watch?v=ZAIr37qlcSo
 <!-- /wp:image --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"ab-proto-blog"} -->
-<div class="wp-block-group ab-proto-blog"><!-- wp:group {"className":"ab-proto-inner"} -->
-<div class="wp-block-group ab-proto-inner"><!-- wp:heading -->
-<h2 class="wp-block-heading">From Our Blog</h2>
-<!-- /wp:heading -->
-
-<!-- wp:latest-posts {"postsToShow":3,"displayPostDate":true,"postLayout":"grid","displayFeaturedImage":true} /--></div>
-<!-- /wp:group --></div>
-<!-- /wp:group -->
-
 <!-- wp:group {"className":"ab-cta"} -->
-<div class="wp-block-group ab-cta"><!-- wp:group -->
-<div class="wp-block-group"><!-- wp:heading -->
+<div class="wp-block-group ab-cta">
+<!-- wp:group -->
+<div class="wp-block-group">
+<!-- wp:heading -->
 <h2 class="wp-block-heading">Have a project in mind?</h2>
 <!-- /wp:heading -->
-
 <!-- wp:paragraph -->
 <p>Tell us about your space and we'll set up a free, no-pressure consultation to talk through the possibilities.</p>
-<!-- /wp:paragraph --></div>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
+<!-- wp:html -->
+<div style="text-align:center;">
+  <button type="button" class="ab-cta-btn" onclick="document.getElementById('adept-modal-landscaping').style.display='flex'">Schedule A Meeting</button>
+</div>
+<style>
+.ab-cta-btn{
+  position:relative;
+  z-index:99;
+  background:rgba(255,255,255,0.15);
+  color:#ffffff;
+  border:2px solid #ffffff;
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-weight:600;
+  font-size:clamp(0.8rem,1.6vw,1rem);
+  padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px);
+  border-radius:0;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  white-space:nowrap;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+.ab-cta-btn:hover{
+  background:#ffffff;
+  color:#000000;
+  border-color:#ffffff;
+}
+</style>
+<!-- /wp:html -->
 <!-- /wp:group -->
 
-<!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"accent","textColor":"deep"} -->
-<div class="wp-block-button"><a class="wp-block-button__link has-deep-color has-accent-background-color has-text-color has-background wp-element-button" href="https://adeptbuild.com/contact-us/">Contact Us</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
-<!-- /wp:group -->
+<div id="adept-modal-landscaping" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(11,47,62,0.65); z-index:99999; align-items:center; justify-content:center; padding:20px; box-sizing:border-box;">
+<div style="background:#ffffff; border-radius:14px; padding:28px 30px; max-width:440px; width:100%; max-height:88vh; overflow-y:auto; position:relative; box-shadow:0 24px 60px rgba(0,0,0,0.35);">
+    <button onclick="document.getElementById('adept-modal-landscaping').style.display='none'" style="position:absolute; top:14px; right:16px; background:none; border:none; font-size:1.6rem; line-height:1; color:#7A8A93; cursor:pointer;">&times;</button></p>
+<h3 style="margin:0 0 16px 0; text-align:center; font-size:1.15rem; color:#0F2A35;">Schedule A Consultation</h3>
+<p>[fluentform id="3"]
+</p>
+</div>
+</div>

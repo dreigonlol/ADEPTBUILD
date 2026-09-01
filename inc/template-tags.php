@@ -83,6 +83,13 @@ function adeptbuild_tel_href( $phone ) {
 }
 
 /**
+ * Normalized "sms:" link from a human-readable phone number.
+ */
+function adeptbuild_sms_href( $phone ) {
+	return 'sms:' . preg_replace( '/[^0-9+]/', '', $phone );
+}
+
+/**
  * Google Tag Manager — container script, injected as high in <head> as
  * possible per Google's own install instructions. The GTM ID is the only
  * thing configured here; Google Ads conversion/remarketing tags and any

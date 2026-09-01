@@ -20,21 +20,17 @@
 <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'adeptbuild' ); ?></a>
 
 <?php
-$ab_phone  = adeptbuild_option( 'phone' );
-$ab_email  = adeptbuild_option( 'email' );
-$ab_hours  = adeptbuild_option( 'hours' );
-$ab_social = adeptbuild_social_links();
+$ab_phone      = adeptbuild_option( 'phone' );
+$ab_phone_text = adeptbuild_option( 'phone_text' );
+$ab_email      = adeptbuild_option( 'email' );
+$ab_hours      = adeptbuild_option( 'hours' );
+$ab_social     = adeptbuild_social_links();
 ?>
 
-<?php if ( $ab_phone || $ab_email || $ab_hours || $ab_social ) : ?>
+<?php if ( $ab_email || $ab_hours || $ab_social ) : ?>
 	<div class="ab-topbar">
 		<div class="ast-container">
 			<div class="ab-topbar__info">
-				<?php if ( $ab_phone ) : ?>
-					<a class="ab-topbar__item" href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>">
-						<?php adeptbuild_icon( 'phone', 14 ); ?><?php echo esc_html( $ab_phone ); ?>
-					</a>
-				<?php endif; ?>
 
 				<?php if ( $ab_email ) : ?>
 					<a class="ab-topbar__item" href="<?php echo esc_url( 'mailto:' . $ab_email ); ?>">
@@ -108,6 +104,20 @@ $ab_social = adeptbuild_social_links();
 			$ab_cta_text = adeptbuild_option( 'cta_text' );
 			$ab_cta_url  = adeptbuild_option( 'cta_url', '/contact-us/' );
 			?>
+			<?php if ( $ab_phone && $ab_phone_text ) : ?>
+				<span class="ab-header-phones">
+					<?php adeptbuild_icon( 'phone', 16 ); ?>
+					<span class="ab-header-phones__list">
+						<a href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>"><?php esc_html_e( 'Call:', 'adeptbuild' ); ?> <?php echo esc_html( $ab_phone ); ?></a>
+						<a href="<?php echo esc_url( adeptbuild_sms_href( $ab_phone_text ) ); ?>"><?php esc_html_e( 'Text:', 'adeptbuild' ); ?> <?php echo esc_html( $ab_phone_text ); ?></a>
+					</span>
+				</span>
+			<?php elseif ( $ab_phone ) : ?>
+				<a class="ab-header-phones" href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>">
+					<?php adeptbuild_icon( 'phone', 16 ); ?><?php echo esc_html( $ab_phone ); ?>
+				</a>
+			<?php endif; ?>
+
 			<?php if ( $ab_cta_text ) : ?>
 				<a class="ast-button ab-btn--accent ab-btn--sm" href="<?php echo esc_url( $ab_cta_url ); ?>">
 					<?php echo esc_html( $ab_cta_text ); ?>

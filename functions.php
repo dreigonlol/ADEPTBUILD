@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADEPTBUILD_VERSION', '1.7.28' );
+define( 'ADEPTBUILD_VERSION', '1.7.34' );
 
 /**
  * Basic theme setup.
@@ -101,10 +101,12 @@ add_action( 'after_setup_theme', 'adeptbuild_content_width', 0 );
  */
 function adeptbuild_scripts() {
 
-	// Montserrat for headings/CTAs, Geist for body text.
+	// Montserrat for headings/CTAs, Geist for body text, Poppins for h1/h2
+	// only (free stand-in for "Posterama 2001 Regular", which isn't a
+	// Google Font and would need purchased font files to use for real).
 	wp_enqueue_style(
 		'adeptbuild-fonts',
-		'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Geist:wght@300;400;500;600;700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+		'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Geist:wght@300;400;500;600;700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@400;600;700;800&display=swap',
 		array(),
 		null
 	);

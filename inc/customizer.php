@@ -92,7 +92,8 @@ function adeptbuild_customize_register( $wp_customize ) {
 		)
 	);
 
-	adeptbuild_add_field( $wp_customize, 'phone', 'adeptbuild_contact', __( 'Phone', 'adeptbuild' ), '+1 (555) 123-4567' );
+	adeptbuild_add_field( $wp_customize, 'phone', 'adeptbuild_contact', __( 'Phone (Call)', 'adeptbuild' ), '+1 (555) 123-4567' );
+	adeptbuild_add_field( $wp_customize, 'phone_text', 'adeptbuild_contact', __( 'Phone (Text/SMS) — leave empty to hide', 'adeptbuild' ), '' );
 	adeptbuild_add_field( $wp_customize, 'email', 'adeptbuild_contact', __( 'Email', 'adeptbuild' ), 'info@adeptbuild.com' );
 	adeptbuild_add_field( $wp_customize, 'address', 'adeptbuild_contact', __( 'Address', 'adeptbuild' ), '' );
 	adeptbuild_add_field( $wp_customize, 'hours', 'adeptbuild_contact', __( 'Business Hours', 'adeptbuild' ), __( 'Mon - Fri · 8:00 AM - 6:00 PM', 'adeptbuild' ) );
