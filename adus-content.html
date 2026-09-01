@@ -1,79 +1,1036 @@
 <!-- wp:html -->
+<style>
+.ab-btn{
+  background:rgba(255,255,255,0.15);
+  color:#ffffff;
+  border:2px solid #ffffff;
+  font-weight:600;
+  border-radius:0 !important;
+  cursor:pointer;
+  text-decoration:none;
+  white-space:nowrap;
+  position:relative;
+  z-index:99;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+.ab-btn:hover{
+  background:#ffffff;
+  color:#000000;
+  border-color:#ffffff;
+}
+</style>
+
 <div style="position:relative; width:100vw; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; height:100vh; min-height:100vh; overflow:hidden; margin-bottom:24px; margin-top:-200px; top:0;">
-  <!-- Para usar video: reemplaza este <img> por el bloque <video> de las otras páginas (Full Home, ADUs...) y renombra el id a adept-video-contact. Para otra foto, cambia el src de esta imagen. -->
-  <img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8198-1-1-scaled.jpg" alt="" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;">
+  <video id="adept-video-fullhome" autoplay muted loop playsinline webkit-playsinline="true" preload="auto" disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback"
+    style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1; pointer-events:none;"
+    src="https://adeptbuild.com/wp-content/uploads/2026/08/fullhome.mp4"></video>
   <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(11,47,62,0.35); z-index:2;"></div>
 
-  <div style="position:relative; z-index:3; display:flex; flex-wrap:nowrap; align-items:center; justify-content:space-between; height:100vh; padding:2vw 4vw; box-sizing:border-box;">
-
-    <div style="min-width:0;">
-      <p style="color:#ffffff; font-size:clamp(0.75rem,1.6vw,0.95rem); letter-spacing:.16em; text-transform:uppercase; margin:0 0 10px 0; text-shadow:0 2px 8px rgba(0,0,0,0.45);">Start a conversation</p>
-      <h1 style="color:#ffffff; font-size:clamp(1.1rem,3.2vw,2rem); margin:0 0 12px 0; text-shadow:0 2px 8px rgba(0,0,0,0.45); overflow-wrap:break-word;">Contact Us</h1>
+  <div style="position:relative; z-index:3; display:flex; flex-wrap:nowrap; align-items:center; justify-content:flex-start; height:100vh; padding:2vw 4vw; box-sizing:border-box;">
+    <div style="min-width:0; display:flex; flex-direction:column; align-items:flex-start;">
+      <h1 style="color:#ffffff; font-size:clamp(1.1rem,3.2vw,2rem); margin:0 0 16px 0; text-shadow:0 2px 8px rgba(0,0,0,0.45); overflow-wrap:break-word;">Explore our Gallery</h1>
+      <button onclick="document.getElementById('adept-modal-portfolio').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px); box-shadow:0 8px 20px rgba(0,0,0,0.15);">Schedule A Meeting</button>
     </div>
-
   </div>
 </div>
-<!-- /wp:html -->
 
-<!-- wp:columns {"className":"ab-contact-cols"} -->
-<div class="wp-block-columns ab-contact-cols">
-<!-- wp:column {"width":"40%"} -->
-<div class="wp-block-column" style="flex-basis:40%">
-<!-- wp:heading -->
-<h2 class="wp-block-heading">Email</h2>
-<!-- /wp:heading -->
-<!-- wp:paragraph -->
-<p><a href="mailto:Office@adeptbuild.com">Office@adeptbuild.com</a></p>
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
-<h2 class="wp-block-heading">Our Location</h2>
-<!-- /wp:heading -->
-<!-- wp:paragraph -->
-<p><a href="https://maps.app.goo.gl/GAXy3HYj2YE4cmbT7" target="_blank" rel="noreferrer noopener">14431 Ventura Blvd. #440 Sherman Oaks, CA 91423 USA</a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2 class="wp-block-heading">Call Us</h2>
-<!-- /wp:heading -->
-<!-- wp:paragraph -->
-<p><a href="tel:800-611-1776">1 (800) 611-1776</a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="tel:%20(213)%20817-5071">Send Us a Text</a></h3>
-<!-- /wp:heading -->
-<!-- wp:paragraph -->
-<p>(213) 817-5071</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Our staff has decades of experience in customer service. We are here and happy to help all Los Angeles homeowners with all their construction, building and remodeling needs. We can help you decide what tile, vanity and shower/tub combination works best for your new bathroom remodel. Let us guide you in choosing the right countertops to compliment your new kitchen cabinets. Our designers can even help you find the right flooring, paint and lighting for your bedrooms and living room. When it comes to your home we want to be your go to contractor for all your needs.</p>
-<!-- /wp:paragraph -->
+<div id="adept-modal-portfolio" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(11,47,62,0.65); z-index:99999; align-items:center; justify-content:center; padding:20px; box-sizing:border-box;">
+  <div style="background:#ffffff; border-radius:14px; padding:28px 30px; max-width:440px; width:100%; max-height:88vh; overflow-y:auto; position:relative; box-shadow:0 24px 60px rgba(0,0,0,0.35);">
+    <button onclick="document.getElementById('adept-modal-portfolio').style.display='none'" style="position:absolute; top:14px; right:16px; background:none; border:none; font-size:1.6rem; line-height:1; color:#7A8A93; cursor:pointer;">&times;</button>
+    <h3 style="margin:0 0 16px 0; text-align:center; font-size:1.15rem; color:#0F2A35;">Schedule A Consultation</h3>
+    [fluentform id="3"]
+  </div>
 </div>
-<!-- /wp:column -->
+  <section class="abps-row">
+    <div class="abps-slider">
+      <input class="abps-radio" type="radio" name="ag" id="ag-1" checked>
+      <input class="abps-radio" type="radio" name="ag" id="ag-2">
+      <input class="abps-radio" type="radio" name="ag" id="ag-3">
+      <input class="abps-radio" type="radio" name="ag" id="ag-4">
+      <input class="abps-radio" type="radio" name="ag" id="ag-5">
+      <input class="abps-radio" type="radio" name="ag" id="ag-6">
+      <input class="abps-radio" type="radio" name="ag" id="ag-7">
+      <input class="abps-radio" type="radio" name="ag" id="ag-8">
+      <input class="abps-radio" type="radio" name="ag" id="ag-9">
+      <input class="abps-radio" type="radio" name="ag" id="ag-10">
+      <input class="abps-radio" type="radio" name="ag" id="ag-11">
+      <div class="abps-stage">
+        <label class="abps-slide" for="ag-1"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5750-scaled.jpeg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="ag-2"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5753-scaled.jpeg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="ag-3"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5759-scaled.jpeg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="ag-4"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5760-scaled.jpeg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="ag-5"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5761-scaled.jpeg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="ag-6"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5763-scaled.jpeg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="ag-7"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5767-scaled.jpeg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="ag-8"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5771-scaled.jpeg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="ag-9"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5775-scaled.jpeg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="ag-10"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5779-scaled.jpeg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="ag-11"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5782-scaled.jpeg" alt="" loading="lazy"></label>
+      </div>
+      <div class="abps-nav">
+        <div class="abps-prev">
+          <label class="abps-arrow" for="ag-11" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="ag-1" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="ag-2" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="ag-3" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="ag-4" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="ag-5" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="ag-6" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="ag-7" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="ag-8" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="ag-9" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="ag-10" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+        </div>
+        <div class="abps-dots">
+          <label class="abps-dot" for="ag-1"><span class="abps-sr">Foto 1</span></label>
+          <label class="abps-dot" for="ag-2"><span class="abps-sr">Foto 2</span></label>
+          <label class="abps-dot" for="ag-3"><span class="abps-sr">Foto 3</span></label>
+          <label class="abps-dot" for="ag-4"><span class="abps-sr">Foto 4</span></label>
+          <label class="abps-dot" for="ag-5"><span class="abps-sr">Foto 5</span></label>
+          <label class="abps-dot" for="ag-6"><span class="abps-sr">Foto 6</span></label>
+          <label class="abps-dot" for="ag-7"><span class="abps-sr">Foto 7</span></label>
+          <label class="abps-dot" for="ag-8"><span class="abps-sr">Foto 8</span></label>
+          <label class="abps-dot" for="ag-9"><span class="abps-sr">Foto 9</span></label>
+          <label class="abps-dot" for="ag-10"><span class="abps-sr">Foto 10</span></label>
+          <label class="abps-dot" for="ag-11"><span class="abps-sr">Foto 11</span></label>
+        </div>
+        <div class="abps-next">
+          <label class="abps-arrow" for="ag-2" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="ag-3" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="ag-4" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="ag-5" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="ag-6" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="ag-7" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="ag-8" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="ag-9" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="ag-10" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="ag-11" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="ag-1" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+        </div>
+      </div>
+    </div>
+    <div class="abps-copy">
+      <p class="abps-eyebrow">Portfolio · Los Angeles</p>
+      <h3 class="abps-h2">Agnew Project</h3>
+      <p class="abps-text">A full backyard transformation: shaded lounge, warm wood detailing and clean modern lines that make the outdoor space feel like another room of the house.</p>
+    </div>
+  </section>
 
-<!-- wp:column {"width":"60%"} -->
-<div class="wp-block-column" style="flex-basis:60%">
-<!-- wp:heading {"level":2} -->
-<h2 class="wp-block-heading"><strong>Let's meet!</strong></h2>
-<!-- /wp:heading -->
-<!-- wp:paragraph -->
-<p>Are you looking to remodel? Curious about the options? Fill out the form below and we'll be in touch.</p>
-<!-- /wp:paragraph -->
+  <div class="abps-band">
+    <section class="abps-row abps-row--alt">
+    <div class="abps-copy">
+      <p class="abps-eyebrow">Portfolio · Ensley</p>
+      <h3 class="abps-h2">Modern Japanese Tea House</h3>
+      <p class="abps-text">A quiet garden pavilion built around natural timber, soft light and careful joinery — a calm retreat only a few steps from the main house.</p>
+    </div>
+    <div class="abps-slider">
+      <input class="abps-radio" type="radio" name="en" id="en-1" checked>
+      <input class="abps-radio" type="radio" name="en" id="en-2">
+      <input class="abps-radio" type="radio" name="en" id="en-3">
+      <input class="abps-radio" type="radio" name="en" id="en-4">
+      <input class="abps-radio" type="radio" name="en" id="en-5">
+      <input class="abps-radio" type="radio" name="en" id="en-6">
+      <input class="abps-radio" type="radio" name="en" id="en-7">
+      <input class="abps-radio" type="radio" name="en" id="en-8">
+      <div class="abps-stage">
+        <label class="abps-slide" for="en-1"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5858-scaled.jpeg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="en-2"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5863-scaled.jpeg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="en-3"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5866-scaled.jpeg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="en-4"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5874-scaled.jpeg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="en-5"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5875-scaled.jpeg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="en-6"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5861-scaled.jpeg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="en-7"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5856-scaled.jpeg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="en-8"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5857-scaled.jpeg" alt="" loading="lazy"></label>
+      </div>
+      <div class="abps-nav">
+        <div class="abps-prev">
+          <label class="abps-arrow" for="en-8" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="en-1" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="en-2" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="en-3" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="en-4" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="en-5" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="en-6" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="en-7" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+        </div>
+        <div class="abps-dots">
+          <label class="abps-dot" for="en-1"><span class="abps-sr">Foto 1</span></label>
+          <label class="abps-dot" for="en-2"><span class="abps-sr">Foto 2</span></label>
+          <label class="abps-dot" for="en-3"><span class="abps-sr">Foto 3</span></label>
+          <label class="abps-dot" for="en-4"><span class="abps-sr">Foto 4</span></label>
+          <label class="abps-dot" for="en-5"><span class="abps-sr">Foto 5</span></label>
+          <label class="abps-dot" for="en-6"><span class="abps-sr">Foto 6</span></label>
+          <label class="abps-dot" for="en-7"><span class="abps-sr">Foto 7</span></label>
+          <label class="abps-dot" for="en-8"><span class="abps-sr">Foto 8</span></label>
+        </div>
+        <div class="abps-next">
+          <label class="abps-arrow" for="en-2" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="en-3" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="en-4" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="en-5" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="en-6" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="en-7" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="en-8" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="en-1" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+        </div>
+      </div>
+    </div>
+    </section>
+  </div>
 
-<!-- wp:shortcode -->
-[fluentform id="3"]
-<!-- /wp:shortcode -->
-</div>
-<!-- /wp:column -->
-</div>
-<!-- /wp:columns -->
+  <section class="abps-row">
+    <div class="abps-slider">
+      <input class="abps-radio" type="radio" name="sm" id="sm-1" checked>
+      <input class="abps-radio" type="radio" name="sm" id="sm-2">
+      <input class="abps-radio" type="radio" name="sm" id="sm-3">
+      <input class="abps-radio" type="radio" name="sm" id="sm-4">
+      <input class="abps-radio" type="radio" name="sm" id="sm-5">
+      <input class="abps-radio" type="radio" name="sm" id="sm-6">
+      <input class="abps-radio" type="radio" name="sm" id="sm-7">
+      <input class="abps-radio" type="radio" name="sm" id="sm-8">
+      <input class="abps-radio" type="radio" name="sm" id="sm-9">
+      <input class="abps-radio" type="radio" name="sm" id="sm-10">
+      <input class="abps-radio" type="radio" name="sm" id="sm-11">
+      <input class="abps-radio" type="radio" name="sm" id="sm-12">
+      <input class="abps-radio" type="radio" name="sm" id="sm-13">
+      <input class="abps-radio" type="radio" name="sm" id="sm-14">
+      <input class="abps-radio" type="radio" name="sm" id="sm-15">
+      <input class="abps-radio" type="radio" name="sm" id="sm-16">
+      <input class="abps-radio" type="radio" name="sm" id="sm-17">
+      <div class="abps-stage">
+        <label class="abps-slide" for="sm-1"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-3.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sm-2"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-5.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sm-3"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-6.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sm-4"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-7.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sm-5"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-8.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sm-6"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-9.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sm-7"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-12.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sm-8"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-15.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sm-9"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-16.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sm-10"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-21.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sm-11"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-24.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sm-12"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-25.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sm-13"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-27.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sm-14"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-28.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sm-15"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-29.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sm-16"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-31.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sm-17"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/Still-33.jpg" alt="" loading="lazy"></label>
+      </div>
+      <div class="abps-nav">
+        <div class="abps-prev">
+          <label class="abps-arrow" for="sm-17" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-1" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-2" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-3" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-4" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-5" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-6" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-7" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-8" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-9" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-10" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-11" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-12" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-13" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-14" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-15" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sm-16" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+        </div>
+        <div class="abps-dots">
+          <label class="abps-dot" for="sm-1"><span class="abps-sr">Foto 1</span></label>
+          <label class="abps-dot" for="sm-2"><span class="abps-sr">Foto 2</span></label>
+          <label class="abps-dot" for="sm-3"><span class="abps-sr">Foto 3</span></label>
+          <label class="abps-dot" for="sm-4"><span class="abps-sr">Foto 4</span></label>
+          <label class="abps-dot" for="sm-5"><span class="abps-sr">Foto 5</span></label>
+          <label class="abps-dot" for="sm-6"><span class="abps-sr">Foto 6</span></label>
+          <label class="abps-dot" for="sm-7"><span class="abps-sr">Foto 7</span></label>
+          <label class="abps-dot" for="sm-8"><span class="abps-sr">Foto 8</span></label>
+          <label class="abps-dot" for="sm-9"><span class="abps-sr">Foto 9</span></label>
+          <label class="abps-dot" for="sm-10"><span class="abps-sr">Foto 10</span></label>
+          <label class="abps-dot" for="sm-11"><span class="abps-sr">Foto 11</span></label>
+          <label class="abps-dot" for="sm-12"><span class="abps-sr">Foto 12</span></label>
+          <label class="abps-dot" for="sm-13"><span class="abps-sr">Foto 13</span></label>
+          <label class="abps-dot" for="sm-14"><span class="abps-sr">Foto 14</span></label>
+          <label class="abps-dot" for="sm-15"><span class="abps-sr">Foto 15</span></label>
+          <label class="abps-dot" for="sm-16"><span class="abps-sr">Foto 16</span></label>
+          <label class="abps-dot" for="sm-17"><span class="abps-sr">Foto 17</span></label>
+        </div>
+        <div class="abps-next">
+          <label class="abps-arrow" for="sm-2" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-3" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-4" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-5" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-6" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-7" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-8" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-9" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-10" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-11" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-12" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-13" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-14" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-15" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-16" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-17" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sm-1" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+        </div>
+      </div>
+    </div>
+    <div class="abps-copy">
+      <p class="abps-eyebrow">Portfolio · Santa Monica</p>
+      <h3 class="abps-h2">Cleopatra Tattoo</h3>
+      <p class="abps-text">A commercial build-out with a strong material story — custom millwork, layered lighting and finishes chosen to hold up to daily use.</p>
+    </div>
+  </section>
 
-<!-- wp:html -->
-<div style="max-width:1240px; margin:0 auto; padding:0 32px; box-sizing:border-box; line-height:0;">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6603.084243198409!2d-118.4527639!3d34.1580547!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2972b3f0e4793%3A0x739de5432c732ebb!2sAdept%20Builders%20%26%20Design%20Inc!5e0!3m2!1ses-419!2smx!4v1788246991717!5m2!1ses-419!2smx" width="800" height="800" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  <div class="abps-band">
+    <section class="abps-row abps-row--alt abps-sheens">
+      <input class="abps-radio" type="radio" name="sheens-cat" id="sheens-cat-pool" checked>
+      <input class="abps-radio" type="radio" name="sheens-cat" id="sheens-cat-pergola">
+      <input class="abps-radio" type="radio" name="sheens-cat" id="sheens-cat-landscaping">
+      <input class="abps-radio" type="radio" name="sheens-cat" id="sheens-cat-deck">
+      <input class="abps-radio" type="radio" name="sheens-cat" id="sheens-cat-interior">
+      <div class="abps-copy">
+        <p class="abps-eyebrow">Portfolio · Sheens</p>
+        <h3 class="abps-h2">Sheens Project</h3>
+        <p class="abps-text">A whole-property build: pool, pergola, deck, landscaping and interior work designed as one continuous space. Switch between areas to see each part of the project.</p>
+      </div>
+      <div class="abps-chips">
+        <label class="abps-chip" for="sheens-cat-pool">Pool</label>
+        <label class="abps-chip" for="sheens-cat-pergola">Pergola</label>
+        <label class="abps-chip" for="sheens-cat-landscaping">Landscaping</label>
+        <label class="abps-chip" for="sheens-cat-deck">Deck</label>
+        <label class="abps-chip" for="sheens-cat-interior">Interior</label>
+      </div>
+      <div class="abps-panels">
+      <div class="abps-panel" data-cat="pool">
+    <div class="abps-slider">
+      <input class="abps-radio" type="radio" name="sh-pool" id="sh-pool-1" checked>
+      <input class="abps-radio" type="radio" name="sh-pool" id="sh-pool-2">
+      <input class="abps-radio" type="radio" name="sh-pool" id="sh-pool-3">
+      <input class="abps-radio" type="radio" name="sh-pool" id="sh-pool-4">
+      <input class="abps-radio" type="radio" name="sh-pool" id="sh-pool-5">
+      <div class="abps-stage">
+        <label class="abps-slide" for="sh-pool-1"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8243-scaled.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sh-pool-2"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8244-scaled.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sh-pool-3"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8247-scaled.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sh-pool-4"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8269-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-pool-5"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8272-scaled.jpg" alt="" loading="lazy"></label>
+      </div>
+      <div class="abps-nav">
+        <div class="abps-prev">
+          <label class="abps-arrow" for="sh-pool-5" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pool-1" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pool-2" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pool-3" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pool-4" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+        </div>
+        <div class="abps-dots">
+          <label class="abps-dot" for="sh-pool-1"><span class="abps-sr">Foto 1</span></label>
+          <label class="abps-dot" for="sh-pool-2"><span class="abps-sr">Foto 2</span></label>
+          <label class="abps-dot" for="sh-pool-3"><span class="abps-sr">Foto 3</span></label>
+          <label class="abps-dot" for="sh-pool-4"><span class="abps-sr">Foto 4</span></label>
+          <label class="abps-dot" for="sh-pool-5"><span class="abps-sr">Foto 5</span></label>
+        </div>
+        <div class="abps-next">
+          <label class="abps-arrow" for="sh-pool-2" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pool-3" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pool-4" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pool-5" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pool-1" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+        </div>
+      </div>
+    </div>
+      </div>
+      <div class="abps-panel" data-cat="pergola">
+    <div class="abps-slider">
+      <input class="abps-radio" type="radio" name="sh-pergola" id="sh-pergola-1" checked>
+      <input class="abps-radio" type="radio" name="sh-pergola" id="sh-pergola-2">
+      <input class="abps-radio" type="radio" name="sh-pergola" id="sh-pergola-3">
+      <input class="abps-radio" type="radio" name="sh-pergola" id="sh-pergola-4">
+      <input class="abps-radio" type="radio" name="sh-pergola" id="sh-pergola-5">
+      <input class="abps-radio" type="radio" name="sh-pergola" id="sh-pergola-6">
+      <input class="abps-radio" type="radio" name="sh-pergola" id="sh-pergola-7">
+      <input class="abps-radio" type="radio" name="sh-pergola" id="sh-pergola-8">
+      <input class="abps-radio" type="radio" name="sh-pergola" id="sh-pergola-9">
+      <input class="abps-radio" type="radio" name="sh-pergola" id="sh-pergola-10">
+      <input class="abps-radio" type="radio" name="sh-pergola" id="sh-pergola-11">
+      <input class="abps-radio" type="radio" name="sh-pergola" id="sh-pergola-12">
+      <div class="abps-stage">
+        <label class="abps-slide" for="sh-pergola-1"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8129-scaled.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sh-pergola-2"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8161-scaled.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sh-pergola-3"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8164-scaled.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sh-pergola-4"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8170-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-pergola-5"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8175-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-pergola-6"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8189-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-pergola-7"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8198-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-pergola-8"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8221-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-pergola-9"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8239-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-pergola-10"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8267-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-pergola-11"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8268-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-pergola-12"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8274-scaled.jpg" alt="" loading="lazy"></label>
+      </div>
+      <div class="abps-nav">
+        <div class="abps-prev">
+          <label class="abps-arrow" for="sh-pergola-12" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pergola-1" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pergola-2" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pergola-3" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pergola-4" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pergola-5" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pergola-6" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pergola-7" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pergola-8" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pergola-9" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pergola-10" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-pergola-11" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+        </div>
+        <div class="abps-dots">
+          <label class="abps-dot" for="sh-pergola-1"><span class="abps-sr">Foto 1</span></label>
+          <label class="abps-dot" for="sh-pergola-2"><span class="abps-sr">Foto 2</span></label>
+          <label class="abps-dot" for="sh-pergola-3"><span class="abps-sr">Foto 3</span></label>
+          <label class="abps-dot" for="sh-pergola-4"><span class="abps-sr">Foto 4</span></label>
+          <label class="abps-dot" for="sh-pergola-5"><span class="abps-sr">Foto 5</span></label>
+          <label class="abps-dot" for="sh-pergola-6"><span class="abps-sr">Foto 6</span></label>
+          <label class="abps-dot" for="sh-pergola-7"><span class="abps-sr">Foto 7</span></label>
+          <label class="abps-dot" for="sh-pergola-8"><span class="abps-sr">Foto 8</span></label>
+          <label class="abps-dot" for="sh-pergola-9"><span class="abps-sr">Foto 9</span></label>
+          <label class="abps-dot" for="sh-pergola-10"><span class="abps-sr">Foto 10</span></label>
+          <label class="abps-dot" for="sh-pergola-11"><span class="abps-sr">Foto 11</span></label>
+          <label class="abps-dot" for="sh-pergola-12"><span class="abps-sr">Foto 12</span></label>
+        </div>
+        <div class="abps-next">
+          <label class="abps-arrow" for="sh-pergola-2" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pergola-3" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pergola-4" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pergola-5" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pergola-6" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pergola-7" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pergola-8" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pergola-9" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pergola-10" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pergola-11" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pergola-12" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-pergola-1" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+        </div>
+      </div>
+    </div>
+      </div>
+      <div class="abps-panel" data-cat="landscaping">
+    <div class="abps-slider">
+      <input class="abps-radio" type="radio" name="sh-landscaping" id="sh-landscaping-1" checked>
+      <input class="abps-radio" type="radio" name="sh-landscaping" id="sh-landscaping-2">
+      <input class="abps-radio" type="radio" name="sh-landscaping" id="sh-landscaping-3">
+      <input class="abps-radio" type="radio" name="sh-landscaping" id="sh-landscaping-4">
+      <input class="abps-radio" type="radio" name="sh-landscaping" id="sh-landscaping-5">
+      <input class="abps-radio" type="radio" name="sh-landscaping" id="sh-landscaping-6">
+      <input class="abps-radio" type="radio" name="sh-landscaping" id="sh-landscaping-7">
+      <input class="abps-radio" type="radio" name="sh-landscaping" id="sh-landscaping-8">
+      <input class="abps-radio" type="radio" name="sh-landscaping" id="sh-landscaping-9">
+      <input class="abps-radio" type="radio" name="sh-landscaping" id="sh-landscaping-10">
+      <input class="abps-radio" type="radio" name="sh-landscaping" id="sh-landscaping-11">
+      <div class="abps-stage">
+        <label class="abps-slide" for="sh-landscaping-1"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8041-scaled.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sh-landscaping-2"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8051-scaled.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sh-landscaping-3"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8066-scaled.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sh-landscaping-4"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8072-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-landscaping-5"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8075-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-landscaping-6"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8076-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-landscaping-7"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8077-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-landscaping-8"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8093-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-landscaping-9"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8095-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-landscaping-10"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8157-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-landscaping-11"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8159-scaled.jpg" alt="" loading="lazy"></label>
+      </div>
+      <div class="abps-nav">
+        <div class="abps-prev">
+          <label class="abps-arrow" for="sh-landscaping-11" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-landscaping-1" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-landscaping-2" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-landscaping-3" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-landscaping-4" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-landscaping-5" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-landscaping-6" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-landscaping-7" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-landscaping-8" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-landscaping-9" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-landscaping-10" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+        </div>
+        <div class="abps-dots">
+          <label class="abps-dot" for="sh-landscaping-1"><span class="abps-sr">Foto 1</span></label>
+          <label class="abps-dot" for="sh-landscaping-2"><span class="abps-sr">Foto 2</span></label>
+          <label class="abps-dot" for="sh-landscaping-3"><span class="abps-sr">Foto 3</span></label>
+          <label class="abps-dot" for="sh-landscaping-4"><span class="abps-sr">Foto 4</span></label>
+          <label class="abps-dot" for="sh-landscaping-5"><span class="abps-sr">Foto 5</span></label>
+          <label class="abps-dot" for="sh-landscaping-6"><span class="abps-sr">Foto 6</span></label>
+          <label class="abps-dot" for="sh-landscaping-7"><span class="abps-sr">Foto 7</span></label>
+          <label class="abps-dot" for="sh-landscaping-8"><span class="abps-sr">Foto 8</span></label>
+          <label class="abps-dot" for="sh-landscaping-9"><span class="abps-sr">Foto 9</span></label>
+          <label class="abps-dot" for="sh-landscaping-10"><span class="abps-sr">Foto 10</span></label>
+          <label class="abps-dot" for="sh-landscaping-11"><span class="abps-sr">Foto 11</span></label>
+        </div>
+        <div class="abps-next">
+          <label class="abps-arrow" for="sh-landscaping-2" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-landscaping-3" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-landscaping-4" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-landscaping-5" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-landscaping-6" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-landscaping-7" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-landscaping-8" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-landscaping-9" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-landscaping-10" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-landscaping-11" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-landscaping-1" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+        </div>
+      </div>
+    </div>
+      </div>
+      <div class="abps-panel" data-cat="deck">
+    <div class="abps-slider">
+      <input class="abps-radio" type="radio" name="sh-deck" id="sh-deck-1" checked>
+      <input class="abps-radio" type="radio" name="sh-deck" id="sh-deck-2">
+      <input class="abps-radio" type="radio" name="sh-deck" id="sh-deck-3">
+      <input class="abps-radio" type="radio" name="sh-deck" id="sh-deck-4">
+      <input class="abps-radio" type="radio" name="sh-deck" id="sh-deck-5">
+      <input class="abps-radio" type="radio" name="sh-deck" id="sh-deck-6">
+      <div class="abps-stage">
+        <label class="abps-slide" for="sh-deck-1"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8161-1-1-scaled.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sh-deck-2"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8164-1-scaled.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sh-deck-3"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8175-1-1-scaled.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sh-deck-4"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8177-2-1-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-deck-5"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8198-1-1-scaled.jpg" alt="" loading="lazy"></label>
+        <label class="abps-slide" for="sh-deck-6"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8221-1-scaled.jpg" alt="" loading="lazy"></label>
+      </div>
+      <div class="abps-nav">
+        <div class="abps-prev">
+          <label class="abps-arrow" for="sh-deck-6" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-deck-1" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-deck-2" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-deck-3" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-deck-4" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-deck-5" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+        </div>
+        <div class="abps-dots">
+          <label class="abps-dot" for="sh-deck-1"><span class="abps-sr">Foto 1</span></label>
+          <label class="abps-dot" for="sh-deck-2"><span class="abps-sr">Foto 2</span></label>
+          <label class="abps-dot" for="sh-deck-3"><span class="abps-sr">Foto 3</span></label>
+          <label class="abps-dot" for="sh-deck-4"><span class="abps-sr">Foto 4</span></label>
+          <label class="abps-dot" for="sh-deck-5"><span class="abps-sr">Foto 5</span></label>
+          <label class="abps-dot" for="sh-deck-6"><span class="abps-sr">Foto 6</span></label>
+        </div>
+        <div class="abps-next">
+          <label class="abps-arrow" for="sh-deck-2" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-deck-3" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-deck-4" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-deck-5" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-deck-6" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-deck-1" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+        </div>
+      </div>
+    </div>
+      </div>
+      <div class="abps-panel" data-cat="interior">
+    <div class="abps-slider">
+      <input class="abps-radio" type="radio" name="sh-interior" id="sh-interior-1" checked>
+      <input class="abps-radio" type="radio" name="sh-interior" id="sh-interior-2">
+      <div class="abps-stage">
+        <label class="abps-slide" for="sh-interior-1"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8330-scaled.jpg" alt="" loading="eager"></label>
+        <label class="abps-slide" for="sh-interior-2"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8333-scaled.jpg" alt="" loading="eager"></label>
+      </div>
+      <div class="abps-nav">
+        <div class="abps-prev">
+          <label class="abps-arrow" for="sh-interior-2" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="sh-interior-1" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+        </div>
+        <div class="abps-dots">
+          <label class="abps-dot" for="sh-interior-1"><span class="abps-sr">Foto 1</span></label>
+          <label class="abps-dot" for="sh-interior-2"><span class="abps-sr">Foto 2</span></label>
+        </div>
+        <div class="abps-next">
+          <label class="abps-arrow" for="sh-interior-2" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="sh-interior-1" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+        </div>
+      </div>
+    </div>
+      </div>
+      </div>
+    </section>
+  </div>
+
 </div>
+
+<style>
+.abps{--abps-accent:#0E7490;--abps-ink:#0F2A35;--abps-muted:#5B6B73;--abps-line:#D7E1E5;font-family:"PT Sans",Helvetica,Arial,sans-serif;color:var(--abps-ink);}
+.abps *,.abps *::before,.abps *::after{box-sizing:border-box;}
+.abps-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+.abps-radio{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
+.abps-intro{max-width:1240px;margin:0 auto;padding:64px 32px 8px;}
+.abps-eyebrow{margin:0 0 12px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--abps-accent);font-weight:700;}
+.abps-h1{margin:0 0 18px;font-size:clamp(2rem,4.2vw,3.2rem);line-height:1.08;max-width:18ch;}
+.abps-band{width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;background:#F6F9FA;}
+.abps-row{max-width:1240px;margin:0 auto;padding:64px 32px;display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:center;}
+.abps-row--alt{grid-template-columns:.88fr 1.12fr;}
+.abps-sheens{position:relative;grid-template-areas:"copy slider" "chips slider";grid-template-columns:.88fr 1.12fr;align-items:center;}
+.abps-sheens > .abps-copy{grid-area:copy;align-self:end;}
+.abps-sheens > .abps-chips{grid-area:chips;align-self:start;margin-top:24px;}
+.abps-sheens > .abps-panels{grid-area:slider;}
+.abps-slider{min-width:0;}
+.abps-panel{display:none;}
+.abps-stage{position:relative;width:100%;aspect-ratio:16/11;}
+.abps-slide{position:absolute;left:40%;width:20%;top:35%;height:30%;opacity:0;z-index:1;pointer-events:none;overflow:hidden;border-radius:3px;cursor:pointer;box-shadow:0 20px 44px rgba(15,42,53,.2);transition:left .5s cubic-bezier(.4,0,.2,1),top .5s cubic-bezier(.4,0,.2,1),width .5s cubic-bezier(.4,0,.2,1),height .5s cubic-bezier(.4,0,.2,1),opacity .4s ease;}
+.abps-slide img{width:100%;height:100%;object-fit:cover;display:block;margin:0;max-width:none;}
+.abps-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:26px;}
+.abps-prev,.abps-next{position:relative;width:42px;height:42px;flex:0 0 auto;}
+/* 1. Diseño base (Secciones oscuras): Botón blanco, flecha negra. Invertido al hover */
+.abps-arrow{display:none;align-items:center;justify-content:center;position:absolute;inset:0;width:42px;height:42px;border-radius:999px;border:1px solid #D7E1E5 !important;background:#ffffff !important;color:#0F2A35 !important;font-size:20px;line-height:1;cursor:pointer;user-select:none;transition:background .2s ease,color .2s ease,border-color .2s ease;}
+.abps-arrow:hover{background:#0F2A35 !important;border-color:#0F2A35 !important;color:#ffffff !important;}
+
+/* 2. Diseño alterno (Secciones claras .abps-band): Botón negro, flecha blanca. Invertido al hover */
+.abps-band .abps-arrow{background:#0F2A35 !important;border-color:#0F2A35 !important;color:#ffffff !important;}
+.abps-band .abps-arrow:hover{background:#ffffff !important;border-color:#0F2A35 !important;color:#0F2A35 !important;}
+
+.abps-dots{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:9px;max-width:300px;}
+.abps-dot{width:9px;height:9px;border-radius:999px;background:#C8D3D8;cursor:pointer;display:block;transition:background .25s ease,width .25s ease,height .25s ease;}
+.abps-copy{min-width:0;}
+.abps-h2{margin:0 0 18px;font-size:clamp(1.6rem,2.6vw,2.25rem);line-height:1.15;}
+.abps-text{margin:0 0 24px;font-size:1.0625rem;line-height:1.75;color:var(--abps-muted);max-width:46ch;}
+.abps-chips{display:flex;flex-wrap:wrap;gap:10px;}
+
+.abps-chip{padding:9px 18px;border-radius:999px;cursor:pointer;font-size:.9375rem;font-weight:700;line-height:1.2;background:transparent !important;color:#0E7490 !important;border:1px solid #0E7490 !important;transition:all .2s ease;}
+.abps-chip:hover{background:#0E7490 !important;color:#ffffff !important;border-color:#0E7490 !important;}
+
+.abps-band .abps-row .abps-eyebrow{color:#1046BB;}
+.abps-band .abps-row .abps-h2{color:#000000;}
+.abps-band .abps-row .abps-text{color:#333333;}
+.abps > .abps-row .abps-eyebrow{color:#57E1F3;}
+.abps > .abps-row .abps-h2{color:#ffffff;}
+.abps > .abps-row .abps-text{color:rgba(255,255,255,.82);}
+#sh-pool-1:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pool-1:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pool-1:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pool-1:checked ~ .abps-nav .abps-dot:nth-of-type(1){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pool-1:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(1),#sh-pool-1:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(1){display:flex;}
+#sh-pool-2:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pool-2:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pool-2:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pool-2:checked ~ .abps-nav .abps-dot:nth-of-type(2){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pool-2:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(2),#sh-pool-2:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(2){display:flex;}
+#sh-pool-3:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pool-3:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pool-3:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pool-3:checked ~ .abps-nav .abps-dot:nth-of-type(3){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pool-3:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(3),#sh-pool-3:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(3){display:flex;}
+#sh-pool-4:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pool-4:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pool-4:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pool-4:checked ~ .abps-nav .abps-dot:nth-of-type(4){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pool-4:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(4),#sh-pool-4:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(4){display:flex;}
+#sh-pool-5:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pool-5:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pool-5:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pool-5:checked ~ .abps-nav .abps-dot:nth-of-type(5){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pool-5:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(5),#sh-pool-5:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(5){display:flex;}
+#sh-pergola-1:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pergola-1:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-1:checked ~ .abps-stage > .abps-slide:nth-of-type(12){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-1:checked ~ .abps-nav .abps-dot:nth-of-type(1){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pergola-1:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(1),#sh-pergola-1:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(1){display:flex;}
+#sh-pergola-2:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pergola-2:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-2:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-2:checked ~ .abps-nav .abps-dot:nth-of-type(2){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pergola-2:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(2),#sh-pergola-2:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(2){display:flex;}
+#sh-pergola-3:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pergola-3:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-3:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-3:checked ~ .abps-nav .abps-dot:nth-of-type(3){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pergola-3:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(3),#sh-pergola-3:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(3){display:flex;}
+#sh-pergola-4:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pergola-4:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-4:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-4:checked ~ .abps-nav .abps-dot:nth-of-type(4){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pergola-4:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(4),#sh-pergola-4:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(4){display:flex;}
+#sh-pergola-5:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pergola-5:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-5:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-5:checked ~ .abps-nav .abps-dot:nth-of-type(5){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pergola-5:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(5),#sh-pergola-5:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(5){display:flex;}
+#sh-pergola-6:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pergola-6:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-6:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-6:checked ~ .abps-nav .abps-dot:nth-of-type(6){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pergola-6:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(6),#sh-pergola-6:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(6){display:flex;}
+#sh-pergola-7:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pergola-7:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-7:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-7:checked ~ .abps-nav .abps-dot:nth-of-type(7){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pergola-7:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(7),#sh-pergola-7:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(7){display:flex;}
+#sh-pergola-8:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pergola-8:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-8:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-8:checked ~ .abps-nav .abps-dot:nth-of-type(8){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pergola-8:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(8),#sh-pergola-8:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(8){display:flex;}
+#sh-pergola-9:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pergola-9:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-9:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-9:checked ~ .abps-nav .abps-dot:nth-of-type(9){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pergola-9:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(9),#sh-pergola-9:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(9){display:flex;}
+#sh-pergola-10:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pergola-10:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-10:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-10:checked ~ .abps-nav .abps-dot:nth-of-type(10){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pergola-10:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(10),#sh-pergola-10:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(10){display:flex;}
+#sh-pergola-11:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pergola-11:checked ~ .abps-stage > .abps-slide:nth-of-type(12){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-11:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-11:checked ~ .abps-nav .abps-dot:nth-of-type(11){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pergola-11:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(11),#sh-pergola-11:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(11){display:flex;}
+#sh-pergola-12:checked ~ .abps-stage > .abps-slide:nth-of-type(12){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-pergola-12:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-12:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-pergola-12:checked ~ .abps-nav .abps-dot:nth-of-type(12){background:var(--abps-accent);width:11px;height:11px;}
+#sh-pergola-12:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(12),#sh-pergola-12:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(12){display:flex;}
+#sh-landscaping-1:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-landscaping-1:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-1:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-1:checked ~ .abps-nav .abps-dot:nth-of-type(1){background:var(--abps-accent);width:11px;height:11px;}
+#sh-landscaping-1:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(1),#sh-landscaping-1:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(1){display:flex;}
+#sh-landscaping-2:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-landscaping-2:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-2:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-2:checked ~ .abps-nav .abps-dot:nth-of-type(2){background:var(--abps-accent);width:11px;height:11px;}
+#sh-landscaping-2:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(2),#sh-landscaping-2:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(2){display:flex;}
+#sh-landscaping-3:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-landscaping-3:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-3:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-3:checked ~ .abps-nav .abps-dot:nth-of-type(3){background:var(--abps-accent);width:11px;height:11px;}
+#sh-landscaping-3:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(3),#sh-landscaping-3:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(3){display:flex;}
+#sh-landscaping-4:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-landscaping-4:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-4:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-4:checked ~ .abps-nav .abps-dot:nth-of-type(4){background:var(--abps-accent);width:11px;height:11px;}
+#sh-landscaping-4:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(4),#sh-landscaping-4:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(4){display:flex;}
+#sh-landscaping-5:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-landscaping-5:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-5:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-5:checked ~ .abps-nav .abps-dot:nth-of-type(5){background:var(--abps-accent);width:11px;height:11px;}
+#sh-landscaping-5:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(5),#sh-landscaping-5:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(5){display:flex;}
+#sh-landscaping-6:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-landscaping-6:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-6:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-6:checked ~ .abps-nav .abps-dot:nth-of-type(6){background:var(--abps-accent);width:11px;height:11px;}
+#sh-landscaping-6:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(6),#sh-landscaping-6:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(6){display:flex;}
+#sh-landscaping-7:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-landscaping-7:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-7:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-7:checked ~ .abps-nav .abps-dot:nth-of-type(7){background:var(--abps-accent);width:11px;height:11px;}
+#sh-landscaping-7:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(7),#sh-landscaping-7:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(7){display:flex;}
+#sh-landscaping-8:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-landscaping-8:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-8:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-8:checked ~ .abps-nav .abps-dot:nth-of-type(8){background:var(--abps-accent);width:11px;height:11px;}
+#sh-landscaping-8:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(8),#sh-landscaping-8:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(8){display:flex;}
+#sh-landscaping-9:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-landscaping-9:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-9:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-9:checked ~ .abps-nav .abps-dot:nth-of-type(9){background:var(--abps-accent);width:11px;height:11px;}
+#sh-landscaping-9:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(9),#sh-landscaping-9:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(9){display:flex;}
+#sh-landscaping-10:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-landscaping-10:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-10:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-10:checked ~ .abps-nav .abps-dot:nth-of-type(10){background:var(--abps-accent);width:11px;height:11px;}
+#sh-landscaping-10:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(10),#sh-landscaping-10:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(10){display:flex;}
+#sh-landscaping-11:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-landscaping-11:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-11:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-landscaping-11:checked ~ .abps-nav .abps-dot:nth-of-type(11){background:var(--abps-accent);width:11px;height:11px;}
+#sh-landscaping-11:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(11),#sh-landscaping-11:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(11){display:flex;}
+#sh-deck-1:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-deck-1:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-deck-1:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-deck-1:checked ~ .abps-nav .abps-dot:nth-of-type(1){background:var(--abps-accent);width:11px;height:11px;}
+#sh-deck-1:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(1),#sh-deck-1:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(1){display:flex;}
+#sh-deck-2:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-deck-2:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-deck-2:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-deck-2:checked ~ .abps-nav .abps-dot:nth-of-type(2){background:var(--abps-accent);width:11px;height:11px;}
+#sh-deck-2:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(2),#sh-deck-2:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(2){display:flex;}
+#sh-deck-3:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-deck-3:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-deck-3:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-deck-3:checked ~ .abps-nav .abps-dot:nth-of-type(3){background:var(--abps-accent);width:11px;height:11px;}
+#sh-deck-3:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(3),#sh-deck-3:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(3){display:flex;}
+#sh-deck-4:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-deck-4:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-deck-4:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-deck-4:checked ~ .abps-nav .abps-dot:nth-of-type(4){background:var(--abps-accent);width:11px;height:11px;}
+#sh-deck-4:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(4),#sh-deck-4:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(4){display:flex;}
+#sh-deck-5:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-deck-5:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-deck-5:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-deck-5:checked ~ .abps-nav .abps-dot:nth-of-type(5){background:var(--abps-accent);width:11px;height:11px;}
+#sh-deck-5:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(5),#sh-deck-5:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(5){display:flex;}
+#sh-deck-6:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-deck-6:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-deck-6:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-deck-6:checked ~ .abps-nav .abps-dot:nth-of-type(6){background:var(--abps-accent);width:11px;height:11px;}
+#sh-deck-6:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(6),#sh-deck-6:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(6){display:flex;}
+#sh-interior-1:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-interior-1:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-interior-1:checked ~ .abps-nav .abps-dot:nth-of-type(1){background:var(--abps-accent);width:11px;height:11px;}
+#sh-interior-1:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(1),#sh-interior-1:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(1){display:flex;}
+#sh-interior-2:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sh-interior-2:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sh-interior-2:checked ~ .abps-nav .abps-dot:nth-of-type(2){background:var(--abps-accent);width:11px;height:11px;}
+#sh-interior-2:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(2),#sh-interior-2:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(2){display:flex;}
+#sheens-cat-pool:checked ~ .abps-chips > .abps-chip:nth-of-type(1){background:var(--abps-accent);border-color:var(--abps-accent);color:#fff;}
+#sheens-cat-pool:checked ~ .abps-panels > .abps-panel:nth-of-type(1){display:block;}
+#sheens-cat-pergola:checked ~ .abps-chips > .abps-chip:nth-of-type(2){background:var(--abps-accent);border-color:var(--abps-accent);color:#fff;}
+#sheens-cat-pergola:checked ~ .abps-panels > .abps-panel:nth-of-type(2){display:block;}
+#sheens-cat-landscaping:checked ~ .abps-chips > .abps-chip:nth-of-type(3){background:var(--abps-accent);border-color:var(--abps-accent);color:#fff;}
+#sheens-cat-landscaping:checked ~ .abps-panels > .abps-panel:nth-of-type(3){display:block;}
+#sheens-cat-deck:checked ~ .abps-chips > .abps-chip:nth-of-type(4){background:var(--abps-accent);border-color:var(--abps-accent);color:#fff;}
+#sheens-cat-deck:checked ~ .abps-panels > .abps-panel:nth-of-type(4){display:block;}
+#sheens-cat-interior:checked ~ .abps-chips > .abps-chip:nth-of-type(5){background:var(--abps-accent);border-color:var(--abps-accent);color:#fff;}
+#sheens-cat-interior:checked ~ .abps-panels > .abps-panel:nth-of-type(5){display:block;}
+#ag-1:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#ag-1:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-1:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-1:checked ~ .abps-nav .abps-dot:nth-of-type(1){background:var(--abps-accent);width:11px;height:11px;}
+#ag-1:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(1),#ag-1:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(1){display:flex;}
+#ag-2:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#ag-2:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-2:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-2:checked ~ .abps-nav .abps-dot:nth-of-type(2){background:var(--abps-accent);width:11px;height:11px;}
+#ag-2:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(2),#ag-2:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(2){display:flex;}
+#ag-3:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#ag-3:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-3:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-3:checked ~ .abps-nav .abps-dot:nth-of-type(3){background:var(--abps-accent);width:11px;height:11px;}
+#ag-3:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(3),#ag-3:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(3){display:flex;}
+#ag-4:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#ag-4:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-4:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-4:checked ~ .abps-nav .abps-dot:nth-of-type(4){background:var(--abps-accent);width:11px;height:11px;}
+#ag-4:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(4),#ag-4:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(4){display:flex;}
+#ag-5:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#ag-5:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-5:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-5:checked ~ .abps-nav .abps-dot:nth-of-type(5){background:var(--abps-accent);width:11px;height:11px;}
+#ag-5:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(5),#ag-5:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(5){display:flex;}
+#ag-6:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#ag-6:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-6:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-6:checked ~ .abps-nav .abps-dot:nth-of-type(6){background:var(--abps-accent);width:11px;height:11px;}
+#ag-6:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(6),#ag-6:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(6){display:flex;}
+#ag-7:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#ag-7:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-7:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-7:checked ~ .abps-nav .abps-dot:nth-of-type(7){background:var(--abps-accent);width:11px;height:11px;}
+#ag-7:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(7),#ag-7:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(7){display:flex;}
+#ag-8:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#ag-8:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-8:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-8:checked ~ .abps-nav .abps-dot:nth-of-type(8){background:var(--abps-accent);width:11px;height:11px;}
+#ag-8:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(8),#ag-8:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(8){display:flex;}
+#ag-9:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#ag-9:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-9:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-9:checked ~ .abps-nav .abps-dot:nth-of-type(9){background:var(--abps-accent);width:11px;height:11px;}
+#ag-9:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(9),#ag-9:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(9){display:flex;}
+#ag-10:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#ag-10:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-10:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-10:checked ~ .abps-nav .abps-dot:nth-of-type(10){background:var(--abps-accent);width:11px;height:11px;}
+#ag-10:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(10),#ag-10:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(10){display:flex;}
+#ag-11:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#ag-11:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-11:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#ag-11:checked ~ .abps-nav .abps-dot:nth-of-type(11){background:var(--abps-accent);width:11px;height:11px;}
+#ag-11:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(11),#ag-11:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(11){display:flex;}
+#en-1:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#en-1:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-1:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-1:checked ~ .abps-nav .abps-dot:nth-of-type(1){background:var(--abps-accent);width:11px;height:11px;}
+#en-1:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(1),#en-1:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(1){display:flex;}
+#en-2:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#en-2:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-2:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-2:checked ~ .abps-nav .abps-dot:nth-of-type(2){background:var(--abps-accent);width:11px;height:11px;}
+#en-2:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(2),#en-2:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(2){display:flex;}
+#en-3:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#en-3:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-3:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-3:checked ~ .abps-nav .abps-dot:nth-of-type(3){background:var(--abps-accent);width:11px;height:11px;}
+#en-3:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(3),#en-3:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(3){display:flex;}
+#en-4:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#en-4:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-4:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-4:checked ~ .abps-nav .abps-dot:nth-of-type(4){background:var(--abps-accent);width:11px;height:11px;}
+#en-4:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(4),#en-4:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(4){display:flex;}
+#en-5:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#en-5:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-5:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-5:checked ~ .abps-nav .abps-dot:nth-of-type(5){background:var(--abps-accent);width:11px;height:11px;}
+#en-5:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(5),#en-5:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(5){display:flex;}
+#en-6:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#en-6:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-6:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-6:checked ~ .abps-nav .abps-dot:nth-of-type(6){background:var(--abps-accent);width:11px;height:11px;}
+#en-6:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(6),#en-6:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(6){display:flex;}
+#en-7:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#en-7:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-7:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-7:checked ~ .abps-nav .abps-dot:nth-of-type(7){background:var(--abps-accent);width:11px;height:11px;}
+#en-7:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(7),#en-7:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(7){display:flex;}
+#en-8:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#en-8:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-8:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#en-8:checked ~ .abps-nav .abps-dot:nth-of-type(8){background:var(--abps-accent);width:11px;height:11px;}
+#en-8:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(8),#en-8:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(8){display:flex;}
+#sm-1:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-1:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-1:checked ~ .abps-stage > .abps-slide:nth-of-type(17){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-1:checked ~ .abps-nav .abps-dot:nth-of-type(1){background:var(--abps-accent);width:11px;height:11px;}
+#sm-1:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(1),#sm-1:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(1){display:flex;}
+#sm-2:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-2:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-2:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-2:checked ~ .abps-nav .abps-dot:nth-of-type(2){background:var(--abps-accent);width:11px;height:11px;}
+#sm-2:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(2),#sm-2:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(2){display:flex;}
+#sm-3:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-3:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-3:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-3:checked ~ .abps-nav .abps-dot:nth-of-type(3){background:var(--abps-accent);width:11px;height:11px;}
+#sm-3:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(3),#sm-3:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(3){display:flex;}
+#sm-4:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-4:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-4:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-4:checked ~ .abps-nav .abps-dot:nth-of-type(4){background:var(--abps-accent);width:11px;height:11px;}
+#sm-4:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(4),#sm-4:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(4){display:flex;}
+#sm-5:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-5:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-5:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-5:checked ~ .abps-nav .abps-dot:nth-of-type(5){background:var(--abps-accent);width:11px;height:11px;}
+#sm-5:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(5),#sm-5:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(5){display:flex;}
+#sm-6:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-6:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-6:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-6:checked ~ .abps-nav .abps-dot:nth-of-type(6){background:var(--abps-accent);width:11px;height:11px;}
+#sm-6:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(6),#sm-6:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(6){display:flex;}
+#sm-7:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-7:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-7:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-7:checked ~ .abps-nav .abps-dot:nth-of-type(7){background:var(--abps-accent);width:11px;height:11px;}
+#sm-7:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(7),#sm-7:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(7){display:flex;}
+#sm-8:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-8:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-8:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-8:checked ~ .abps-nav .abps-dot:nth-of-type(8){background:var(--abps-accent);width:11px;height:11px;}
+#sm-8:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(8),#sm-8:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(8){display:flex;}
+#sm-9:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-9:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-9:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-9:checked ~ .abps-nav .abps-dot:nth-of-type(9){background:var(--abps-accent);width:11px;height:11px;}
+#sm-9:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(9),#sm-9:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(9){display:flex;}
+#sm-10:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-10:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-10:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-10:checked ~ .abps-nav .abps-dot:nth-of-type(10){background:var(--abps-accent);width:11px;height:11px;}
+#sm-10:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(10),#sm-10:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(10){display:flex;}
+#sm-11:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-11:checked ~ .abps-stage > .abps-slide:nth-of-type(12){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-11:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-11:checked ~ .abps-nav .abps-dot:nth-of-type(11){background:var(--abps-accent);width:11px;height:11px;}
+#sm-11:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(11),#sm-11:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(11){display:flex;}
+#sm-12:checked ~ .abps-stage > .abps-slide:nth-of-type(12){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-12:checked ~ .abps-stage > .abps-slide:nth-of-type(13){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-12:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-12:checked ~ .abps-nav .abps-dot:nth-of-type(12){background:var(--abps-accent);width:11px;height:11px;}
+#sm-12:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(12),#sm-12:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(12){display:flex;}
+#sm-13:checked ~ .abps-stage > .abps-slide:nth-of-type(13){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-13:checked ~ .abps-stage > .abps-slide:nth-of-type(14){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-13:checked ~ .abps-stage > .abps-slide:nth-of-type(12){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-13:checked ~ .abps-nav .abps-dot:nth-of-type(13){background:var(--abps-accent);width:11px;height:11px;}
+#sm-13:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(13),#sm-13:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(13){display:flex;}
+#sm-14:checked ~ .abps-stage > .abps-slide:nth-of-type(14){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-14:checked ~ .abps-stage > .abps-slide:nth-of-type(15){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-14:checked ~ .abps-stage > .abps-slide:nth-of-type(13){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-14:checked ~ .abps-nav .abps-dot:nth-of-type(14){background:var(--abps-accent);width:11px;height:11px;}
+#sm-14:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(14),#sm-14:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(14){display:flex;}
+#sm-15:checked ~ .abps-stage > .abps-slide:nth-of-type(15){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-15:checked ~ .abps-stage > .abps-slide:nth-of-type(16){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-15:checked ~ .abps-stage > .abps-slide:nth-of-type(14){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-15:checked ~ .abps-nav .abps-dot:nth-of-type(15){background:var(--abps-accent);width:11px;height:11px;}
+#sm-15:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(15),#sm-15:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(15){display:flex;}
+#sm-16:checked ~ .abps-stage > .abps-slide:nth-of-type(16){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-16:checked ~ .abps-stage > .abps-slide:nth-of-type(17){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-16:checked ~ .abps-stage > .abps-slide:nth-of-type(15){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-16:checked ~ .abps-nav .abps-dot:nth-of-type(16){background:var(--abps-accent);width:11px;height:11px;}
+#sm-16:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(16),#sm-16:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(16){display:flex;}
+#sm-17:checked ~ .abps-stage > .abps-slide:nth-of-type(17){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+#sm-17:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-17:checked ~ .abps-stage > .abps-slide:nth-of-type(16){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+#sm-17:checked ~ .abps-nav .abps-dot:nth-of-type(17){background:var(--abps-accent);width:11px;height:11px;}
+#sm-17:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(17),#sm-17:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(17){display:flex;}
+@media (max-width:900px){
+  .abps-row,.abps-row--alt{grid-template-columns:1fr;gap:28px;padding:44px 24px;}
+  .abps-sheens{grid-template-areas:"slider" "chips" "copy";grid-template-columns:1fr;}
+  .abps-sheens > .abps-chips{margin-top:0;}
+  .abps-intro{padding:44px 24px 0;}
+}
+</style>
+<!-- Script Lightbox Modal -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Crear e inyectar el contenedor del modal en el DOM
+  const lightbox = document.createElement('div');
+  lightbox.id = 'abps-lightbox';
+  Object.assign(lightbox.style, {
+    display: 'none', position: 'fixed', zIndex: '99999', left: '0', top: '0',
+    width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.85)',
+    alignItems: 'center', justifyContent: 'center', cursor: 'zoom-out'
+  });
+  lightbox.innerHTML = '<span style="position:absolute; top:24px; right:32px; color:#fff; font-size:40px; font-weight:bold; cursor:pointer;">&times;</span><img id="abps-lightbox-img" src="" style="max-width:90%; max-height:90vh; object-fit:contain; border-radius:4px; box-shadow:0 8px 32px rgba(0,0,0,0.6);">';
+  document.body.appendChild(lightbox);
+
+  // 2. Evento para cerrar el modal al hacer clic en cualquier parte
+  lightbox.addEventListener('click', function() {
+    this.style.display = 'none';
+    document.body.style.overflow = ''; // Restaura el scroll principal
+  });
+
+  // 3. Lógica de apertura evaluando el input (solo abre la imagen central)
+  document.querySelectorAll('.abps-slide img').forEach(img => {
+    img.addEventListener('click', function(e) {
+      const inputId = this.parentElement.getAttribute('for');
+      const associatedInput = document.getElementById(inputId);
+      
+      // Valida que el input correspondiente sea el activo
+      if (associatedInput && associatedInput.checked) {
+        e.preventDefault(); 
+        document.getElementById('abps-lightbox-img').src = this.src;
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Oculta el scroll trasero
+      }
+    });
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.abps-slider label[for], .abps-sheens label[for]').forEach(label => {
+    label.addEventListener('click', function(e) {
+      const input = document.getElementById(this.getAttribute('for'));
+      if (input && input.type === 'radio') {
+        e.preventDefault();      // evita el foco nativo que causa el scroll
+        input.checked = true;    // cambia el slide sin mover la página
+      }
+    });
+  });
+});
+</script>
 <!-- /wp:html -->
 
 <!-- wp:group {"className":"ab-cta"} -->
@@ -83,7 +1040,15 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>We'd love to hear about it! Fill out the form above and one of our team members will be in touch.</p>
+<p>Tell us about your space and we'll set up a free, no-pressure consultation to talk through the possibilities.</p>
 <!-- /wp:paragraph --></div>
-<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button">
+<button onclick="document.getElementById('adept-modal-portfolio').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px); box-shadow:0 8px 20px rgba(0,0,0,0.15); width:100%;">Schedule A Meeting</button>
+</div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
 <!-- /wp:group -->

@@ -1915,11 +1915,7 @@ body.ab-menu-open .site-header {
     background: linear-gradient(115deg, #1A1A1A 0%, #0E7490 100%);
     color: rgba(255, 255, 255, 0.85);
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 36px;
-    flex-wrap: wrap;
+    display: block;
 }
 .ab-cta.alignfull,
 .ab-cta.alignwide {
@@ -1928,28 +1924,16 @@ body.ab-menu-open .site-header {
     margin-left: 0;
     margin-right: 0;
 }
-/* Client asked for this banner to run the full width of the viewport on
-   home, right up against the footer below it — same viewport-breakout
-   trick as the other full-bleed home sections. Content still needs to read
-   as one centered block though, not pinned to the far edges of the screen,
-   so the flex layout moves down onto the inner wrapper (re-enabled here,
-   normally flattened to "display:contents" by the base rule below) capped
-   at the same 1200px column as everything else. */
+/* Client asked for this banner's background to run the full width of the
+   viewport on home, right up against the footer below it — same viewport-
+   breakout trick as the other full-bleed home sections. The inner content
+   stays centered at 1200px via the ".ab-cta > .wp-block-group__inner-
+   container" rule above, which applies everywhere, not just home. */
 .home .ab-cta {
     width: 100vw;
     max-width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    display: block;
-}
-.home .ab-cta > .wp-block-group__inner-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 36px;
-    flex-wrap: wrap;
-    max-width: var(--ab-container);
-    margin: 0 auto;
 }
 
 /* The "Schedule A Consultation" Fluent Forms modal is nested inside this
@@ -1962,11 +1946,21 @@ body.ab-menu-open .site-header {
 .ab-cta .ff-errors-in-stack {
     color: #1A1A1A;
 }
-/* Legacy inner-container flattening, same reason as the other components
-   in this file — the text group and the buttons need to be direct flex
-   children so "justify-content: space-between" actually has two items to
-   split apart instead of one wrapper containing both. */
-.ab-cta > .wp-block-group__inner-container { display: contents; }
+/* Content always reads as one centered 1200px-wide block, whatever width
+   ".ab-cta" itself ends up being — matters not just for the deliberate
+   full-bleed home version below, but as insurance against pages where the
+   pasted block content has stray unclosed tags that push ".ab-cta" past
+   its normal ".ast-container" width by accident (has happened before). */
+.ab-cta > .wp-block-group__inner-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 36px;
+    flex-wrap: wrap;
+    max-width: var(--ab-container);
+    margin: 0 auto;
+    width: 100%;
+}
 .ab-cta::after {
     content: "";
     position: absolute;
@@ -2806,7 +2800,7 @@ h2.ab-services-showcase__title {
     .ab-posts { grid-template-columns: 1fr; }
     .ab-form__row { grid-template-columns: 1fr; }
 
-    .ab-cta { flex-direction: column; align-items: flex-start; text-align: left; }
+    .ab-cta > .wp-block-group__inner-container { flex-direction: column; align-items: flex-start; text-align: left; }
 }
 
 @media (max-width: 600px) {
