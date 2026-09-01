@@ -1928,6 +1928,29 @@ body.ab-menu-open .site-header {
     margin-left: 0;
     margin-right: 0;
 }
+/* Client asked for this banner to run the full width of the viewport on
+   home, right up against the footer below it — same viewport-breakout
+   trick as the other full-bleed home sections. Content still needs to read
+   as one centered block though, not pinned to the far edges of the screen,
+   so the flex layout moves down onto the inner wrapper (re-enabled here,
+   normally flattened to "display:contents" by the base rule below) capped
+   at the same 1200px column as everything else. */
+.home .ab-cta {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    display: block;
+}
+.home .ab-cta > .wp-block-group__inner-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 36px;
+    flex-wrap: wrap;
+    max-width: var(--ab-container);
+    margin: 0 auto;
+}
 
 /* The "Schedule A Consultation" Fluent Forms modal is nested inside this
    banner in the markup, so its success/error messages were inheriting
@@ -2077,6 +2100,10 @@ label {
    ========================================================================== */
 
 .ab-content-area { padding: var(--ab-section-y) 0; }
+/* Home's last block is the full-bleed CTA banner, which already carries its
+   own generous internal padding — the content-area's own bottom padding on
+   top of that was pushing the footer much further down than needed. */
+.home .ab-content-area { padding-bottom: 0; }
 
 .ab-layout {
     display: grid;
@@ -2129,6 +2156,10 @@ label {
 .ab-meta span { display: inline-flex; align-items: center; gap: 6px; }
 
 .ab-entry-content > * { margin-bottom: 1.4em; }
+/* Home sections (stats, services, philosophy, process, CTA) each manage
+   their own top/bottom padding already — this generic block gap on top of
+   that was leaving visible dead space between them. */
+.home .ab-entry-content > * { margin-bottom: 0; }
 .ab-entry-content h2 { margin-top: 1.8em; }
 .ab-entry-content h3 { margin-top: 1.5em; }
 .ab-entry-content img,
@@ -2141,10 +2172,11 @@ label {
    so it applies automatically anywhere this same embed is pasted, without
    needing a wrapper class. */
 .ab-entry-content iframe[src*="google.com/maps/embed"] {
-    width: 100%;
-    height: auto;
+    width: 80%;
+    height: 400px;
     aspect-ratio: 1 / 1;
     display: block;
+    margin: 0 auto;
 }
 
 
@@ -3365,7 +3397,6 @@ ol.wp-block-list li::marker {
    ".ast-container", so this is done with a CSS breakout instead of a
    template change — keeps the fix scoped to this one page. --- */
 .home .ab-proto-services,
-.home .ab-proto-process,
 .home .ab-proto-philosophy,
 .home .ab-proto-blog {
     width: calc(100vw - (var(--ab-edge-gap) * 2));
@@ -3383,8 +3414,19 @@ ol.wp-block-list li::marker {
    defined with the other reusable components above) run edge to edge
    below — each strip carries its own photo, so the section itself needs
    no background image of its own beyond the page's dark base. --- */
-.home .ab-proto-services { padding: clamp(64px, 8vw, 100px) 0 0; }
+.home .ab-proto-services { padding: clamp(24px, 3vw, 40px) 0 0; }
 .home .ab-proto-services .ab-proto-inner { padding-bottom: clamp(16px, 2vw, 24px); }
+/* Client asked for the photo strip itself to run the full width of the
+   viewport (not just near-full, like the heading/intro block above it) —
+   overrides ".ab-service-strips"'s own 1200px cap just on home. */
+.home .ab-service-strips {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: 0;
+    padding-right: 0;
+}
 /* Same legacy inner-container wrapper as ".ab-proto-intro" above — needs
    flattening here too so each strip becomes a direct flex child of
    ".ab-service-strips" (and each strip's own image/content/link become
@@ -3469,8 +3511,17 @@ ol.wp-block-list li::marker {
    defined with the other reusable components above) — the heading sits in
    the normal centered ".ab-proto-inner" container, the rows themselves are
    siblings of it so they can run edge to edge under it. --- */
-.home .ab-proto-process { padding: clamp(64px, 8vw, 100px) 0 0; }
-.home .ab-proto-process .ab-proto-inner { padding-bottom: clamp(32px, 4vw, 48px); }
+/* Full 100vw of its own (not just the near-full edge-gap width shared by
+   the services/philosophy/blog sections above) — the alternating rows
+   below already carry photos edge to edge, so the wrapper needs to match;
+   the heading above them stays readable via ".ab-proto-inner"'s own cap. */
+.home .ab-proto-process {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: clamp(24px, 3vw, 40px) 0 0;
+}
+.home .ab-proto-process .ab-proto-inner { padding-bottom: clamp(16px, 2vw, 24px); }
 /* Same legacy inner-container flattening as the services strips above, so
    each row becomes a direct flex child of ".ab-process-rows" and each
    row's visual/body become direct grid children of ".ab-process-row". */
