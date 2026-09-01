@@ -102,8 +102,9 @@ add_action( 'after_setup_theme', 'adeptbuild_content_width', 0 );
 function adeptbuild_scripts() {
 
 	// Montserrat for headings/CTAs, Geist for body text, Poppins for h1/h2
-	// only (free stand-in for "Posterama 2001 Regular", which isn't a
-	// Google Font and would need purchased font files to use for real).
+	// only (visual stand-in for "Posterama 2001", which is self-hosted via
+	// @font-face in style.css — Poppins Bold is the fallback for as long
+	// as that local file isn't reachable).
 	wp_enqueue_style(
 		'adeptbuild-fonts',
 		'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Geist:wght@300;400;500;600;700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@400;600;700;800&display=swap',

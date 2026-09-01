@@ -12,6 +12,21 @@ Text Domain: adeptbuild
 */
 
 /* ==========================================================================
+   0. LOCAL FONT FACES
+   Drop the purchased .ttf at assets/fonts/Posterama2001-Regular.ttf (create
+   the "fonts" folder if it doesn't exist yet) — the path below is relative
+   to this file (theme root), so no PHP/enqueue changes are needed. Once the
+   file is in place this simply starts working; nothing else to wire up.
+   ========================================================================== */
+@font-face {
+    font-family: "Posterama 2001";
+    src: url("assets/fonts/Posterama2001-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ==========================================================================
    1. DESIGN TOKENS
    Astra-inspired architecture: typography and spacing variables consumed
    by the rest of the theme. Editing this block changes the whole site.
@@ -26,11 +41,11 @@ Text Domain: adeptbuild
        only:
        primary / primary-dark: #1046bb   (signal blue — CTAs and links)
        primary-light:          #E8ECFB   (soft blue-tinted backgrounds)
-       aqua / accent:          #57e1f3   (cyan — labels, underlines, secondary CTAs)
+       aqua / accent:          #0170b9   (cyan — labels, underlines, secondary CTAs)
        accent-dark:            #26d8c9
        brand-blue:              #0E7490  (logo teal-blue — services tickers, phone pill)
        brand-blue-dark:         #0B5A70
-       brand-blue-light:        #7FD8E8
+       brand-blue-light:        #0170b9
        brand-blue-pale:         #E3F5FA  (hover backgrounds on light/white dropdowns)
        deep / heading:          #1A1A1A  (near-black corporate background / heading text)
        deep-soft:               #262626
@@ -145,6 +160,17 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 { font-size: var(--ab-fs-h1); }
 h2 { font-size: var(--ab-fs-h2); }
+
+/* Real "Posterama 2001 Regular" (see the @font-face at the very top of
+   this file) with Poppins Bold as the fallback for as long as the local
+   font file isn't in place yet — browsers just skip to the next name in
+   the list when a face fails to load, so nothing else needs to change
+   once the .ttf is dropped in. Weight 400 to match "Regular", not the
+   700 the Poppins fallback needs to look equally bold. */
+h1, h2 {
+    font-family: "Posterama 2001", "Poppins", var(--ab-font-heading);
+    font-weight: 400;
+}
 h3 { font-size: var(--ab-fs-h3); }
 h4 { font-size: var(--ab-fs-h4); }
 
@@ -163,7 +189,7 @@ ul, ol { padding-left: 1.25em; }
 blockquote {
     margin: 2em 0;
     padding: 1.25em 1.75em;
-    border-left: 4px solid #57e1f3;
+    border-left: 4px solid #0170b9;
     background: #F6F6F6;
     border-radius: 0 var(--ab-radius) var(--ab-radius) 0;
     font-size: 1.125rem;
@@ -203,12 +229,12 @@ hr {
 }
 
 :focus-visible {
-    outline: 3px solid #57e1f3;
+    outline: 3px solid #0170b9;
     outline-offset: 3px;
     border-radius: 4px;
 }
 
-::selection { background: #57e1f3; color: #fff; }
+::selection { background: #0170b9; color: #fff; }
 
 /* ==========================================================================
    3. ACCESSIBILITY
@@ -301,14 +327,14 @@ hr {
     content: "";
     width: 26px;
     height: 2px;
-    background: #57e1f3;
+    background: #0170b9;
     border-radius: 2px;
 }
 .ab-section-head--center .ab-eyebrow::after {
     content: "";
     width: 26px;
     height: 2px;
-    background: #57e1f3;
+    background: #0170b9;
     border-radius: 2px;
 }
 
@@ -317,7 +343,7 @@ hr {
     color: #3D3D3D;
 }
 
-.ab-section--deep .ab-eyebrow { color: #57e1f3; }
+.ab-section--deep .ab-eyebrow { color: #0170b9; }
 
 /* ==========================================================================
    5. BUTTONS
@@ -334,8 +360,8 @@ a.ab-btn {
     font-weight: 600;
     line-height: 1;
     padding: clamp(12px, 1.6vw, 18px) clamp(20px, 3vw, 32px);
-    border: 2px solid #0170B9;
-    border-radius: 999px;
+    border: 2px solid #ffffff;
+    border-radius: 0px;
     background: rgba(255, 255, 255, 0.15);
     color: #ffffff;
     cursor: pointer;
@@ -428,7 +454,7 @@ a.ab-btn:hover {
     color: rgba(255, 255, 255, 0.82);
 }
 .ab-topbar__item:hover { color: #fff; }
-.ab-topbar__item svg { color: #57e1f3; flex-shrink: 0; }
+.ab-topbar__item svg { color: #0170b9; flex-shrink: 0; }
 
 .ab-social { display: flex; align-items: center; gap: 6px; }
 .ab-social a {
@@ -518,7 +544,7 @@ body.ab-menu-open .site-header {
     line-height: 1.15;
 }
 .site-title a { color: #fff; }
-.site-title a:hover { color: #57e1f3; }
+.site-title a:hover { color: #0170b9; }
 .site-description {
     margin: 2px 0 0;
     font-size: var(--ab-fs-xs);
@@ -532,6 +558,35 @@ body.ab-menu-open .site-header {
     align-items: center;
     gap: 16px;
     margin-left: auto;
+}
+
+/* Phone number(s) next to "contact" in the main nav row — same family/
+   weight as the menu links, sized down and never wrapping to more than
+   this many lines so it stays compact next to the CTA button. */
+.ab-header-phones {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--ab-font-heading);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.92);
+    text-decoration: none;
+    white-space: nowrap;
+}
+.ab-header-phones svg { flex-shrink: 0; color: #ffffff; }
+.ab-header-phones:hover { color: #fff; }
+.ab-header-phones__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    line-height: 1.3;
+}
+.ab-header-phones__list a { color: inherit; text-decoration: none; }
+.ab-header-phones__list a:hover { color: #57e1f3; }
+
+@media (max-width: 1080px) {
+    .ab-header-phones { display: none; }
 }
 
 .ab-header-phone {
@@ -687,7 +742,7 @@ body.ab-menu-open .site-header {
 .main-header-menu .sub-menu.mega-menu .mega-menu__link:hover,
 .main-header-menu .sub-menu.mega-menu .mega-menu__link:focus-visible {
     background: rgba(255, 255, 255, 0.08);
-    color: #57e1f3;
+    color: #0170b9;
 }
 
 .main-header-menu .sub-menu.mega-menu .mega-menu__thumb {
@@ -816,7 +871,7 @@ body.ab-menu-open .site-header {
     padding: clamp(80px, 10vw, 130px) 0 clamp(110px, 12vw, 160px);
     background:
         linear-gradient(115deg, rgba(26, 26, 26, 0.90) 0%, rgba(56, 42, 245, 0.72) 55%, rgba(87, 225, 243, 0.42) 100%),
-        radial-gradient(circle at 78% 22%, #57e1f3 0%, transparent 55%),
+        radial-gradient(circle at 78% 22%, #0170b9 0%, transparent 55%),
         linear-gradient(160deg, #1A1A1A 0%, #2971f7 100%);
     background-size: cover;
     background-position: center;
@@ -906,7 +961,7 @@ body.ab-menu-open .site-header {
     text-transform: uppercase;
     color: #fff;
 }
-.ab-hero__badge svg { color: #57e1f3; }
+.ab-hero__badge svg { color: #0170b9; }
 
 .ab-hero h1 {
     color: #fff;
@@ -915,7 +970,7 @@ body.ab-menu-open .site-header {
 }
 .ab-hero h1 em {
     font-style: normal;
-    color: #57e1f3;
+    color: #0170b9;
 }
 
 .ab-hero__text {
@@ -965,9 +1020,9 @@ body.ab-menu-open .site-header {
    here the way the flex/grid components above need it. */
 .ab-story {
     position: relative;
-    width: calc(100vw - (var(--ab-edge-gap) * 2));
-    margin-left: calc(50% - 50vw + var(--ab-edge-gap));
-    margin-right: calc(50% - 50vw + var(--ab-edge-gap));
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
     min-height: clamp(460px, 52vw, 600px);
     display: flex;
     align-items: center;
@@ -1039,7 +1094,7 @@ body.ab-menu-open .site-header {
     transform: translateY(100%);
     opacity: 0;
     white-space: nowrap;
-    color: #57e1f3;
+    color: #0170b9;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
 }
 /* Shows the first word by default with no JS/class involved at all, so the
@@ -1182,7 +1237,7 @@ body.ab-menu-open .site-header {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #1046bb, #57e1f3);
+    background: linear-gradient(90deg, #1046bb, #0170b9);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform var(--ab-transition);
@@ -1285,15 +1340,20 @@ body.ab-menu-open .site-header {
     background: #1B2430;
     padding: clamp(32px, 5vw, 56px);
 }
-.ab-proto-process .ab-process-row__num {
+/* Not scoped to any particular section wrapper (".ab-proto-process" on
+   home, ".ab-faq" on other pages, or dropped in anywhere else) — this
+   panel's own background is always the dark "#1B2430" set above, so the
+   text always needs to be light regardless of which page it's on. */
+.ab-process-row__num {
     font-family: var(--ab-font-heading);
     font-size: 1.0625rem;
-    color: #57e1f3;
+    color: #0170b9;
     letter-spacing: 0.04em;
     margin-bottom: 10px;
 }
-.ab-proto-process .ab-process-row__body h3 { font-size: clamp(1.5rem, 2.5vw, 2rem); margin-bottom: 16px; color: #fff; }
-.ab-proto-process .ab-process-row__body p { max-width: 420px; color: rgba(255, 255, 255, 0.75); margin: 0; }
+.ab-process-row__body h2,
+.ab-process-row__body h3 { font-size: clamp(1.5rem, 2.5vw, 2rem); margin-top: 0; margin-bottom: 16px; color: #fff; }
+.ab-process-row__body p { max-width: 420px; color: rgba(255, 255, 255, 0.75); margin: 0; }
 
 @media (max-width: 782px) {
     .ab-process-row { grid-template-columns: 1fr; }
@@ -1308,6 +1368,15 @@ body.ab-menu-open .site-header {
     .ab-process-row__visual { order: 1; }
     .ab-process-row__body { order: 2; }
 }
+
+/* Full-bleed section wrapper for ".ab-process-rows" on content pages other
+   than home (which uses its own ".ab-proto-process" wrapper instead) — same
+   edge-to-edge alternating-row look, e.g. for an FAQ-style page built from
+   image + question/answer pairs. */
+.ab-faq { width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding: clamp(64px, 8vw, 100px) 0; background: #1A1A1A; }
+.ab-faq .ab-proto-inner { max-width: var(--ab-container); margin: 0 auto; padding: 0 var(--ab-gutter) clamp(32px, 4vw, 48px); }
+.ab-faq .ab-proto-inner h2 { color: #fff; margin-top: 0; }
+.ab-faq .ab-proto-inner p { color: rgba(255, 255, 255, 0.72); max-width: 640px; }
 
 /* Media: text + image */
 .ab-media {
@@ -1332,7 +1401,7 @@ body.ab-menu-open .site-header {
     overflow: hidden;
     box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
     aspect-ratio: 4 / 3;
-    background: linear-gradient(140deg, #2971f7 0%, #57e1f3 100%);
+    background: linear-gradient(140deg, #2971f7 0%, #0170b9 100%);
 }
 .ab-media__visual img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -1341,7 +1410,7 @@ body.ab-menu-open .site-header {
     right: -12px;
     bottom: 28px;
     padding: 20px 26px;
-    background: #57e1f3;
+    background: #0170b9;
     color: #1A1A1A;
     border-radius: var(--ab-radius);
     box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
@@ -1452,7 +1521,7 @@ body.ab-menu-open .site-header {
     font-size: var(--ab-fs-xs);
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #57e1f3;
+    color: #ffffff;
     margin-bottom: 10px;
     opacity: 0.9;
 }
@@ -1732,7 +1801,7 @@ body.ab-menu-open .site-header {
     border-radius: var(--ab-radius-lg);
     overflow: hidden;
     aspect-ratio: 4 / 3;
-    background: linear-gradient(150deg, #1A1A1A, #2971f7 60%, #57e1f3);
+    background: linear-gradient(150deg, #1A1A1A, #2971f7 60%, #0170b9);
     box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
 }
 .ab-gallery__item--wide { grid-column: span 2; }
@@ -1768,7 +1837,7 @@ body.ab-menu-open .site-header {
     font-size: var(--ab-fs-xs);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #57e1f3;
+    color: #0170b9;
 }
 
 /* 2-column variant — e.g. the "What We Do" service grid on the About page,
@@ -1810,7 +1879,7 @@ body.ab-menu-open .site-header {
     border: 1px solid #E5E5E5;
     box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
 }
-.ab-quote__stars { color: #57e1f3; margin-bottom: 16px; letter-spacing: 2px; }
+.ab-quote__stars { color: #0170b9; margin-bottom: 16px; letter-spacing: 2px; }
 .ab-quote p {
     font-size: var(--ab-fs-sm);
     color: #1A1A1A;
@@ -1821,7 +1890,7 @@ body.ab-menu-open .site-header {
     width: 46px;
     height: 46px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #1046bb, #57e1f3);
+    background: linear-gradient(135deg, #1046bb, #0170b9);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1858,6 +1927,17 @@ body.ab-menu-open .site-header {
     max-width: 100%;
     margin-left: 0;
     margin-right: 0;
+}
+
+/* The "Schedule A Consultation" Fluent Forms modal is nested inside this
+   banner in the markup, so its success/error messages were inheriting
+   .ab-cta's light text color — meant for the dark banner background, not
+   the modal's own white card. Give them their own dark, legible color
+   instead of touching .ab-cta's color (needed as-is for the banner's own
+   heading/paragraph). */
+.ab-cta .ff-message-success,
+.ab-cta .ff-errors-in-stack {
+    color: #1A1A1A;
 }
 /* Legacy inner-container flattening, same reason as the other components
    in this file — the text group and the buttons need to be direct flex
@@ -2022,7 +2102,7 @@ label {
 .ab-post-card__thumb {
     aspect-ratio: 16 / 10;
     overflow: hidden;
-    background: linear-gradient(140deg, #2971f7, #57e1f3);
+    background: linear-gradient(140deg, #2971f7, #0170b9);
 }
 .ab-post-card__thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
 .ab-post-card:hover .ab-post-card__thumb img { transform: scale(1.05); }
@@ -2054,6 +2134,20 @@ label {
 .ab-entry-content img,
 .ab-entry-content .wp-block-image img { border-radius: var(--ab-radius); }
 
+/* Google Maps embed (Contact Us "wp:html" block) — the copied embed code
+   ships with fixed width="800" height="800" HTML attributes, so it never
+   grows past 800px even inside a wider container. Force it responsive and
+   keep it square at any width instead. Targeted by the iframe's own src
+   so it applies automatically anywhere this same embed is pasted, without
+   needing a wrapper class. */
+.ab-entry-content iframe[src*="google.com/maps/embed"] {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    display: block;
+}
+
+
 /* TEMP DISABLED — this block force-whites headings/text/table/etc. inside
    .ab-entry-content on the home page. It was written back when "body.home"
    had its own dark-blue background; body's background is now plain white
@@ -2075,11 +2169,11 @@ label {
 .home .ab-entry-content p,
 .home .ab-entry-content li,
 .home .ab-entry-content strong { color: rgba(255, 255, 255, 0.8); }
-.home .ab-entry-content a:not(.wp-element-button) { color: #57e1f3; }
+.home .ab-entry-content a:not(.wp-element-button) { color: #0170b9; }
 .home .ab-entry-content a:not(.wp-element-button):hover { color: #fff; }
 .home .ab-entry-content blockquote {
     background: rgba(255, 255, 255, 0.06);
-    border-left-color: #57e1f3;
+    border-left-color: #0170b9;
     color: rgba(255, 255, 255, 0.85);
 }
 .home .ab-entry-content hr { background: rgba(255, 255, 255, 0.18); }
@@ -2202,7 +2296,7 @@ label {
     font-family: var(--ab-font-heading);
     font-weight: 700;
     font-size: 1.0625rem;
-    color: #7FD8E8;
+    color: #0170b9;
     margin-bottom: 4px;
 }
 .ab-content-band__ticker span {
@@ -2263,7 +2357,7 @@ h2.ab-services-showcase__title {
    in plain white if the browser can't clip the gradient to the text. */
 @supports (background-clip: text) or (-webkit-background-clip: text) {
     h2.ab-services-showcase__title {
-        background: linear-gradient(120deg, #fff 0%, #7FD8E8 55%, #0E7490 100%);
+        background: linear-gradient(120deg, #fff 0%, #0170b9 55%, #0E7490 100%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -2291,7 +2385,7 @@ h2.ab-services-showcase__title {
     font-family: var(--ab-font-heading);
     font-weight: 600;
     font-size: clamp(1.0625rem, 2.4vw, 1.5rem);
-    color: #7FD8E8;
+    color: #0170b9;
     opacity: 0;
     transform: translateY(-100%);
     animation: ab-services-rotate 24s infinite;
@@ -2348,7 +2442,7 @@ h2.ab-services-showcase__title {
     font-size: 1.0625rem;
     margin-bottom: 16px;
     padding-bottom: 12px;
-    border-bottom: 2px solid #57e1f3;
+    border-bottom: 2px solid #0170b9;
     display: inline-block;
 }
 .ab-sidebar ul { list-style: none; padding: 0; margin: 0; }
@@ -2391,7 +2485,7 @@ h2.ab-services-showcase__title {
     font-size: clamp(5rem, 18vw, 11rem);
     font-weight: 800;
     line-height: 0.9;
-    background: linear-gradient(120deg, #1046bb, #57e1f3);
+    background: linear-gradient(120deg, #1046bb, #0170b9);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -2425,7 +2519,7 @@ h2.ab-services-showcase__title {
 .site-footer ul { list-style: none; padding: 0; margin: 0; }
 .site-footer li { margin-bottom: 11px; }
 .site-footer a { color: rgba(255, 255, 255, 0.68); }
-.site-footer a:hover { color: #57e1f3; }
+.site-footer a:hover { color: #0170b9; }
 
 .ab-footer-brand .site-title a,
 .ab-footer-brand strong {
@@ -2442,7 +2536,7 @@ h2.ab-services-showcase__title {
     align-items: flex-start;
     gap: 12px;
 }
-.ab-footer-contact svg { color: #57e1f3; flex-shrink: 0; margin-top: 4px; }
+.ab-footer-contact svg { color: #0170b9; flex-shrink: 0; margin-top: 4px; }
 
 .ab-footer-contact__phone a {
     font-family: var(--ab-font-heading);
@@ -2451,7 +2545,7 @@ h2.ab-services-showcase__title {
     letter-spacing: 0.02em;
     color: #fff;
 }
-.ab-footer-contact__phone a:hover { color: #57e1f3; }
+.ab-footer-contact__phone a:hover { color: #0170b9; }
 
 /* --- "Follow us" + outlined social row (footer only) --- */
 .ab-footer-follow {
@@ -2537,7 +2631,7 @@ h2.ab-services-showcase__title {
     letter-spacing: -0.02em;
     font-size: clamp(2.75rem, 7vw, 6rem);
     margin: 0 0 0.4em;
-    background: linear-gradient(180deg, #57e1f3 0%, #1046bb 100%);
+    background: linear-gradient(180deg, #0170b9 0%, #1046bb 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -2556,7 +2650,7 @@ h2.ab-services-showcase__title {
    number already in the text (e.g. "250+") and counts up to it from 0
    once it scrolls into view; without the script it just displays as-is. */
 .ab-counter-value {
-    background: linear-gradient(180deg, #57e1f3, #1046bb);
+    background: linear-gradient(180deg, #0170b9, #1046bb);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -3003,7 +3097,7 @@ h2.ab-services-showcase__title {
     margin: 0;
     aspect-ratio: 16 / 10;
     overflow: hidden;
-    background: linear-gradient(140deg, #1046bb, #57e1f3);
+    background: linear-gradient(140deg, #1046bb, #0170b9);
 }
 .wp-block-latest-posts__featured-image img {
     width: 100%;
@@ -3126,7 +3220,7 @@ ul.wp-block-list li::before {
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: #57e1f3;
+    background: #0170b9;
 }
 
 ol.wp-block-list {
@@ -3290,7 +3384,7 @@ ol.wp-block-list li::marker {
    below — each strip carries its own photo, so the section itself needs
    no background image of its own beyond the page's dark base. --- */
 .home .ab-proto-services { padding: clamp(64px, 8vw, 100px) 0 0; }
-.home .ab-proto-services .ab-proto-inner { padding-bottom: clamp(32px, 4vw, 48px); }
+.home .ab-proto-services .ab-proto-inner { padding-bottom: clamp(16px, 2vw, 24px); }
 /* Same legacy inner-container wrapper as ".ab-proto-intro" above — needs
    flattening here too so each strip becomes a direct flex child of
    ".ab-service-strips" (and each strip's own image/content/link become
@@ -3301,14 +3395,28 @@ ol.wp-block-list li::marker {
 .home .ab-proto-process h2,
 .home .ab-proto-blog h2 { color: #fff; }
 .home .ab-proto-services p { color: rgba(255, 255, 255, 0.72); max-width: 640px; }
-/* "What We Do" eyebrow carries an inline gold "color:#57e1f3" straight
+/* "What We Do" eyebrow carries an inline gold "color:#0170b9" straight
    from the block editor — only "!important" beats an inline style. */
-.home .ab-proto-services .ab-eyebrow { color: #7FD8E8 !important; }
+.home .ab-proto-services .ab-eyebrow { color: #0170b9 !important; }
+/* ".ab-entry-content h2" (elsewhere in this file) adds a 1.8em top margin
+   to every heading in the page body — cancelled here so the eyebrow and
+   "Our Services" sit right on top of each other instead of leaving a big
+   gap between them. */
+.home .ab-proto-services .ab-proto-inner h2 { margin-top: 0; }
 
 /* --- 3. Our Philosophy: big heading left, divider + copy right — no photo
    of its own, so it just sits on the page's dark base like the rest of
    the immersive sections instead of breaking it up with a light band. --- */
 .home .ab-proto-philosophy {
+    /* True edge-to-edge, same as ".ab-story" ("We Build") — !important
+       guards against this section's own background-image still carrying
+       stray inline/embedded CSS in the page content that would otherwise
+       re-cap it back to the 1200px column (this exact bug has happened
+       before on this section — see home-content.html). */
+    width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    max-width: none !important;
     padding: clamp(56px, 7vw, 90px) 0;
 }
 .home .ab-proto-philosophy .ab-proto-inner {
@@ -3323,11 +3431,7 @@ ol.wp-block-list li::marker {
 .home .ab-proto-philosophy h2 {
     font-size: clamp(2rem, 4vw, 2.75rem);
     margin: 0;
-    background: linear-gradient(180deg, #fff 0%, #7FD8E8 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: #7FD8E8;
+    color: #ffffff;
 }
 .home .ab-proto-philosophy-copy {
     padding-left: clamp(28px, 4vw, 56px);
@@ -3344,17 +3448,13 @@ ol.wp-block-list li::marker {
     display: inline-block;
     margin-bottom: 22px;
     font-weight: 600;
-    color: #7FD8E8 !important;
+    color: #ffffff !important;
 }
-.home .ab-proto-philosophy-copy a:not(.wp-element-button):hover { color: #fff !important; }
-/* TEMP DISABLED — same cause as the ".ab-entry-content" block above: this
-   forced a white ghost-button look (translucent white fill, white text)
-   for the dark "body.home" background this page used to have. With that
-   background now white, this "!important" was also the reason a text
-   color picked in the block editor's own color picker (which applies as
-   an inline "style=color:..." on the link) couldn't take effect — only
-   an "!important" external rule beats an inline style, and this was one. */
-/*
+.home .ab-proto-philosophy-copy a:not(.wp-element-button):hover { color: #0170b9 !important; }
+/* "Schedule A Meeting" here reuses the sitewide white-pill button look —
+   this just guards its border/background explicitly since the section's
+   own background-image sometimes ships with stray embedded CSS in the
+   page content (see home-content.html) that could otherwise fight it. */
 .home .ab-proto-philosophy-copy .wp-block-button__link {
     background: rgba(255, 255, 255, 0.15) !important;
     border-color: #ffffff !important;
@@ -3365,8 +3465,6 @@ ol.wp-block-list li::marker {
     border-color: #ffffff !important;
     color: #1A1A1A !important;
 }
-*/
-
 /* --- 4. How We Work: full-bleed alternating rows (.ab-process-row,
    defined with the other reusable components above) — the heading sits in
    the normal centered ".ab-proto-inner" container, the rows themselves are
@@ -3438,6 +3536,12 @@ ol.wp-block-list li::marker {
     .home .ab-proto-philosophy-copy { padding-left: 0; border-left: 0; padding-top: 24px; border-top: 1px solid #E5E5E5; }
 }
 
+/* Tighter than the generic ".ab-portfolio" padding — keeps the heading,
+   the (now smaller) slider and its counter/dots bar reading as one group
+   instead of three separately-spaced screens. */
+.home .ab-portfolio { padding: clamp(48px, 6vw, 72px) 0; }
+.home .ab-portfolio .ab-proto-inner { padding-bottom: clamp(12px, 1.5vw, 20px); }
+
 /* ==========================================================================
    PORTFOLIO SLIDER (.ab-pfslider) — minimal fade carousel
 
@@ -3454,7 +3558,7 @@ ol.wp-block-list li::marker {
 
 .ab-pfslider {
 	position: relative;
-	max-width: var(--ab-container);
+	max-width: 720px;
 	margin: 0 auto;
 }
 
@@ -3542,7 +3646,7 @@ ol.wp-block-list li::marker {
 	font-size: 0.75rem;
 	font-weight: 600;
 	letter-spacing: 0.18em;
-	color: #57e1f3;
+	color: #0170b9;
 }
 .ab-pfslider__title {
 	max-width: 70%;
@@ -3601,7 +3705,7 @@ ol.wp-block-list li::marker {
 	transform: none;
 }
 .ab-pfslider__link .wp-block-button__link:focus-visible {
-	outline: 2px solid #57e1f3;
+	outline: 2px solid #0170b9;
 	outline-offset: -6px;
 }
 
@@ -3611,7 +3715,8 @@ ol.wp-block-list li::marker {
 	align-items: center;
 	justify-content: space-between;
 	gap: 24px;
-	margin-top: 22px;
+	max-width: 720px;
+	margin: 22px auto 0;
 	flex-wrap: wrap;
 }
 .ab-pfslider__meta { display: flex; align-items: center; gap: 20px; }
@@ -3637,7 +3742,7 @@ ol.wp-block-list li::marker {
 	transition: background-color var(--ab-transition), width var(--ab-transition);
 }
 .ab-pfslider__dot:hover { background: rgba(255, 255, 255, 0.5); }
-.ab-pfslider__dot.is-active { width: 56px; background: #57e1f3; }
+.ab-pfslider__dot.is-active { width: 56px; background: #0170b9; }
 
 /* --- Flechas sobre la propia imagen, centradas verticalmente en los
        costados: el gesto de avanzar queda donde el visitante ya tiene el
@@ -3668,8 +3773,8 @@ ol.wp-block-list li::marker {
 .ab-pfslider__btn:hover,
 .ab-pfslider__btn:focus-visible {
 	background: rgba(26, 26, 26, 0.72);
-	border-color: #57e1f3;
-	color: #57e1f3;
+	border-color: #0170b9;
+	color: #0170b9;
 }
 /* Sin JS no hay a dónde navegar: el markup de las flechas vive dentro del
    viewport, así que se ocultan igual que la barra inferior. */
