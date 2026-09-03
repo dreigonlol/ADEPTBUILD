@@ -3403,17 +3403,16 @@ ol.wp-block-list li::marker {
     padding: 0 var(--ab-gutter);
 }
 
-/* --- 2. Our Services: heading + intro sit in the normal centered
-   container, then the full-bleed hover strips (.ab-service-strips,
-   defined with the other reusable components above) run edge to edge
-   below — each strip carries its own photo, so the section itself needs
-   no background image of its own beyond the page's dark base. --- */
-.home .ab-proto-services { padding: clamp(24px, 3vw, 40px) 0 0; }
-.home .ab-proto-services .ab-proto-inner { padding-bottom: clamp(16px, 2vw, 24px); }
+/* --- 2. Our Services: no heading band of its own anymore — "What We Do" /
+   "Our Services" is now a small static white-outline box overlaid on top
+   of the photo strips (moved to be the first child inside
+   ".ab-service-strips" in the page content so it can be positioned
+   relative to that full-bleed 100vw box and land in the right place). --- */
+.home .ab-proto-services { padding: 0; }
 /* Client asked for the photo strip itself to run the full width of the
-   viewport (not just near-full, like the heading/intro block above it) —
-   overrides ".ab-service-strips"'s own 1200px cap just on home. */
+   viewport — overrides ".ab-service-strips"'s own 1200px cap just on home. */
 .home .ab-service-strips {
+    position: relative;
     width: 100vw;
     max-width: 100vw;
     margin-left: calc(50% - 50vw);
@@ -3427,18 +3426,45 @@ ol.wp-block-list li::marker {
    direct children of it) instead of every strip collapsing into one. */
 .ab-service-strips > .wp-block-group__inner-container,
 .ab-service-strip > .wp-block-group__inner-container { display: contents; }
-.home .ab-proto-services h2,
-.home .ab-proto-process h2,
 .home .ab-proto-blog h2 { color: #fff; }
 .home .ab-proto-services p { color: rgba(255, 255, 255, 0.72); max-width: 640px; }
-/* "What We Do" eyebrow carries an inline gold "color:#0170b9" straight
-   from the block editor — only "!important" beats an inline style. */
-.home .ab-proto-services .ab-eyebrow { color: #0170b9 !important; }
-/* ".ab-entry-content h2" (elsewhere in this file) adds a 1.8em top margin
-   to every heading in the page body — cancelled here so the eyebrow and
-   "Our Services" sit right on top of each other instead of leaving a big
-   gap between them. */
-.home .ab-proto-services .ab-proto-inner h2 { margin-top: 0; }
+/* The overlay box itself: transparent/white-outline, same idiom as the
+   site's pill buttons (".wp-block-button__link"), pinned to the top-left
+   corner in a fixed, static spot — it never moves or animates.
+   "pointer-events:none" lets clicks fall straight through to whichever
+   strip is underneath the box. */
+/* Descendant selectors (not ">"), not by choice — WordPress sometimes
+   serializes this Group block with an extra ".wp-block-group__inner-
+   container" wrapper div between ".ab-service-strips" and ".ab-proto-
+   inner" (same legacy quirk called out elsewhere in this file), which a
+   direct-child combinator would silently fail to match at all. */
+.home .ab-proto-services .ab-service-strips .ab-proto-inner {
+    position: absolute;
+    top: clamp(20px, 3vw, 36px);
+    left: clamp(20px, 3vw, 36px);
+    z-index: 5;
+    width: auto;
+    max-width: min(70%, 320px);
+    margin: 0;
+    padding: 16px 22px;
+    border: 2px solid #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+/* Both carry an inline "style=color:#0170b9" straight from the block
+   editor — only "!important" beats an inline style. */
+.home .ab-proto-services .ab-service-strips .ab-proto-inner .ab-eyebrow,
+.home .ab-proto-services .ab-service-strips .ab-proto-inner h2 {
+    color: #ffffff !important;
+}
+.home .ab-proto-services .ab-service-strips .ab-proto-inner .ab-eyebrow::before {
+    background: #ffffff;
+}
+.home .ab-proto-services .ab-service-strips .ab-proto-inner .ab-eyebrow { margin-bottom: 6px; }
+.home .ab-proto-services .ab-service-strips .ab-proto-inner h2 {
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    margin: 0;
+}
 
 /* --- 3. Our Philosophy: big heading left, divider + copy right — no photo
    of its own, so it just sits on the page's dark base like the rest of
@@ -3502,26 +3528,52 @@ ol.wp-block-list li::marker {
     color: #1A1A1A !important;
 }
 /* --- 4. How We Work: full-bleed alternating rows (.ab-process-row,
-   defined with the other reusable components above) — the heading sits in
-   the normal centered ".ab-proto-inner" container, the rows themselves are
-   siblings of it so they can run edge to edge under it. --- */
-/* Full 100vw of its own (not just the near-full edge-gap width shared by
-   the services/philosophy/blog sections above) — the alternating rows
-   below already carry photos edge to edge, so the wrapper needs to match;
-   the heading above them stays readable via ".ab-proto-inner"'s own cap. */
+   defined with the other reusable components above). Like "Our Services"
+   above, the heading no longer sits in its own band — it's a static
+   white-outline box overlaid on the first row's photo instead. Full 100vw
+   of its own (not just the near-full edge-gap width shared by the
+   services/philosophy/blog sections) since the rows below already carry
+   photos edge to edge. */
 .home .ab-proto-process {
+    position: relative;
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    padding: clamp(24px, 3vw, 40px) 0 0;
+    padding: 0;
 }
-.home .ab-proto-process .ab-proto-inner { padding-bottom: clamp(16px, 2vw, 24px); }
 /* Same legacy inner-container flattening as the services strips above, so
    each row becomes a direct flex child of ".ab-process-rows" and each
    row's visual/body become direct grid children of ".ab-process-row". */
 .ab-process-rows > .wp-block-group__inner-container,
 .ab-process-row > .wp-block-group__inner-container,
 .ab-process-row__body > .wp-block-group__inner-container { display: contents; }
+/* ".ab-process-rows" is the only thing left in normal flow, so it starts
+   right at the top of the section — positioning the box relative to
+   ".ab-proto-process" itself therefore lines up with the top-left corner
+   of the first row, and since that row has its photo in the left column,
+   with the photo. Descendant selector (not ">"): WordPress sometimes
+   serializes this Group block with an extra ".wp-block-group__inner-
+   container" wrapper between them (same legacy quirk called out
+   elsewhere in this file), which a direct-child combinator would
+   silently fail to match. */
+.home .ab-proto-process .ab-proto-inner {
+    position: absolute;
+    top: clamp(20px, 3vw, 36px);
+    left: clamp(20px, 3vw, 36px);
+    z-index: 5;
+    width: auto;
+    max-width: min(70%, 320px);
+    margin: 0;
+    padding: 16px 22px;
+    border: 2px solid #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+.home .ab-proto-process .ab-proto-inner h2 {
+    color: #ffffff !important;
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    margin: 0;
+}
 
 /* --- 5. Trust bar: plain row of linked logos, no card chrome ---
    Built as a Group block (layout:flex, wrap) with the 7 images as direct
