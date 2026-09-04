@@ -90,6 +90,14 @@ $ab_about   = adeptbuild_option( 'footer_about' );
 			</div>
 
 			<div>
+				<h3><?php esc_html_e( 'Legal', 'adeptbuild' ); ?></h3>
+				<ul>
+					<li><a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>"><?php esc_html_e( 'Privacy Policy', 'adeptbuild' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/terms-of-service/' ) ); ?>"><?php esc_html_e( 'Terms of Service', 'adeptbuild' ); ?></a></li>
+				</ul>
+			</div>
+
+			<div>
 				<h3><?php esc_html_e( 'Contact', 'adeptbuild' ); ?></h3>
 				<ul class="ab-footer-contact">
 					<?php if ( $ab_phone ) : ?>
