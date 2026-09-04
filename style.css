@@ -1073,6 +1073,16 @@ body.ab-menu-open .site-header {
     color: #fff;
     margin: 0 0 26px;
 }
+/* Same static white-outline box idiom as "Our Services" / "How We Work" /
+   "Our Philosophy" — wraps only the static "WE BUILD" label; the rotating
+   word underneath stays outside the box. */
+.ab-story__heading-label {
+    display: inline-block;
+    margin-bottom: 14px;
+    padding: 14px 20px;
+    border: 2px solid #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
 .ab-story__text {
     max-width: 480px;
     margin: 0 0 28px;
@@ -1978,15 +1988,34 @@ body.ab-menu-open .site-header {
 /* The "Contact Us" button carries WP's own accent ".has-accent-background-
    color" utility class (rendered with "!important" by WordPress's global
    styles) — needs equal-or-higher specificity, not just "!important", to
-   win. */
+   win. Gray outline instead of white now that ".ab-cta" itself is a white
+   card everywhere, not just on home — white-on-white was invisible. */
 .ab-cta .wp-block-button__link.has-accent-background-color {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    border-color: #ffffff !important;
-    color: #fff !important;
+    background-color: transparent !important;
+    border-color: #C4C4C4 !important;
+    color: #C4C4C4 !important;
 }
 .ab-cta .wp-block-button__link.has-accent-background-color:hover {
-    background-color: #ffffff !important;
-    color: #1A1A1A !important;
+    background-color: #C4C4C4 !important;
+    color: #ffffff !important;
+}
+/* Several other pages built their own "Have a project in mind?" section
+   with a raw <button class="ab-cta-btn"> plus its own inline <style>
+   block in the page content (copied from what home used to look like) —
+   white border/text, which is now invisible on ".ab-cta"'s white card
+   everywhere. Each page's own <style> is equal specificity and later in
+   the DOM than this stylesheet, so it normally wins on source order;
+   "!important" here forces the same gray look across all of them without
+   editing every page's content individually. */
+.ab-cta .ab-cta-btn {
+    background: transparent !important;
+    color: #C4C4C4 !important;
+    border-color: #C4C4C4 !important;
+}
+.ab-cta .ab-cta-btn:hover {
+    background: #C4C4C4 !important;
+    color: #ffffff !important;
+    border-color: #C4C4C4 !important;
 }
 
 /* Logos / trust bar */
