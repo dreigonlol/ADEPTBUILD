@@ -1023,7 +1023,7 @@ body.ab-menu-open .site-header {
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    min-height: clamp(460px, 52vw, 600px);
+    min-height: clamp(600px, 90vh, 1000px);
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -1065,9 +1065,9 @@ body.ab-menu-open .site-header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    font-family: var(--ab-font-heading);
+    font-family: "Posterama 2001", "Poppins", var(--ab-font-heading);
     font-size: clamp(2.25rem, 5.5vw, 4rem);
-    font-weight: 800;
+    font-weight: 400;
     line-height: 1.05;
     letter-spacing: -0.01em;
     color: #fff;
@@ -1094,7 +1094,7 @@ body.ab-menu-open .site-header {
     transform: translateY(100%);
     opacity: 0;
     white-space: nowrap;
-    color: #0170b9;
+    color: #ffffff;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
 }
 /* Shows the first word by default with no JS/class involved at all, so the
@@ -1570,7 +1570,8 @@ body.ab-menu-open .site-header {
 }
 
 @media (max-width: 900px) {
-    .ab-service-strips { flex-direction: column; min-height: 0; }
+    .ab-service-strips,
+    .home .ab-service-strips { flex-direction: column; min-height: 0 !important; }
     .ab-service-strip { min-height: 130px; flex: none; }
     .ab-service-strip__label { writing-mode: horizontal-tb; transform: none; }
     .ab-service-strip__desc { max-height: 100px; opacity: 1; }
@@ -1912,8 +1913,8 @@ body.ab-menu-open .site-header {
     position: relative;
     padding: clamp(48px, 6vw, 72px) clamp(28px, 5vw, 64px);
     border-radius: var(--ab-radius-lg);
-    background: linear-gradient(115deg, #1A1A1A 0%, #0E7490 100%);
-    color: rgba(255, 255, 255, 0.85);
+    background: #ffffff;
+    color: #C4C4C4;
     overflow: hidden;
     display: block;
 }
@@ -1972,8 +1973,8 @@ body.ab-menu-open .site-header {
     background: radial-gradient(circle, rgba(127, 216, 232, 0.45), transparent 70%);
 }
 .ab-cta > * { position: relative; z-index: 1; }
-.ab-cta h2 { color: #fff; margin-bottom: 10px; }
-.ab-cta p { max-width: 520px; margin: 0; }
+.ab-cta h2 { color: #C4C4C4; margin-bottom: 10px; }
+.ab-cta p { max-width: 520px; margin: 0; color: #C4C4C4; }
 /* The "Contact Us" button carries WP's own accent ".has-accent-background-
    color" utility class (rendered with "!important" by WordPress's global
    styles) — needs equal-or-higher specificity, not just "!important", to
@@ -3419,6 +3420,7 @@ ol.wp-block-list li::marker {
     margin-right: calc(50% - 50vw);
     padding-left: 0;
     padding-right: 0;
+    min-height: clamp(600px, 90vh, 1000px);
 }
 /* Same legacy inner-container wrapper as ".ab-proto-intro" above — needs
    flattening here too so each strip becomes a direct flex child of
@@ -3462,8 +3464,21 @@ ol.wp-block-list li::marker {
 }
 .home .ab-proto-services .ab-service-strips .ab-proto-inner .ab-eyebrow { margin-bottom: 6px; }
 .home .ab-proto-services .ab-service-strips .ab-proto-inner h2 {
+    font-family: "Posterama 2001", "Poppins", var(--ab-font-heading);
+    font-weight: 400;
     font-size: clamp(1.25rem, 2.4vw, 1.75rem);
     margin: 0;
+}
+/* Mobile only: strips stack into full-width rows here, so the box (pinned
+   top-left of the whole ".ab-service-strips") lands right on top of the
+   first strip's own "01 / Full Home Renovation" label, which also sits
+   bottom-left. Moving the box to the right side on this breakpoint only
+   keeps it clear of that label without touching the desktop position. */
+@media (max-width: 900px) {
+    .home .ab-proto-services .ab-service-strips .ab-proto-inner {
+        left: auto;
+        right: clamp(16px, 4vw, 28px);
+    }
 }
 
 /* --- 3. Our Philosophy: big heading left, divider + copy right — no photo
@@ -3479,21 +3494,33 @@ ol.wp-block-list li::marker {
     margin-left: calc(50% - 50vw) !important;
     margin-right: calc(50% - 50vw) !important;
     max-width: none !important;
+    min-height: clamp(600px, 90vh, 1000px);
     padding: clamp(56px, 7vw, 90px) 0;
+    display: flex;
+    align-items: center;
 }
 .home .ab-proto-philosophy .ab-proto-inner {
     display: grid !important;
     grid-template-columns: 1fr 1.3fr !important;
     gap: clamp(28px, 4vw, 56px);
     align-items: center;
+    width: 100%;
 }
 .home .ab-proto-philosophy .ab-proto-inner > .wp-block-group__inner-container {
     display: contents;
 }
+/* Same static white-outline box idiom as "Our Services" / "How We Work",
+   so all four section titles read as one consistent family. */
 .home .ab-proto-philosophy h2 {
-    font-size: clamp(2rem, 4vw, 2.75rem);
+    display: inline-block;
+    font-family: "Posterama 2001", "Poppins", var(--ab-font-heading);
+    font-weight: 400;
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
     margin: 0;
+    padding: 16px 22px;
     color: #ffffff;
+    border: 2px solid #ffffff;
+    background: rgba(255, 255, 255, 0.1);
 }
 .home .ab-proto-philosophy-copy {
     padding-left: clamp(28px, 4vw, 56px);
@@ -3571,6 +3598,8 @@ ol.wp-block-list li::marker {
 }
 .home .ab-proto-process .ab-proto-inner h2 {
     color: #ffffff !important;
+    font-family: "Posterama 2001", "Poppins", var(--ab-font-heading);
+    font-weight: 400;
     font-size: clamp(1.25rem, 2.4vw, 1.75rem);
     margin: 0;
 }
@@ -3636,7 +3665,13 @@ ol.wp-block-list li::marker {
 /* Tighter than the generic ".ab-portfolio" padding — keeps the heading,
    the (now smaller) slider and its counter/dots bar reading as one group
    instead of three separately-spaced screens. */
-.home .ab-portfolio { padding: clamp(48px, 6vw, 72px) 0; }
+.home .ab-portfolio {
+    padding: clamp(48px, 6vw, 72px) 0;
+    min-height: clamp(600px, 90vh, 1000px);
+    display: flex;
+    align-items: center;
+}
+.home .ab-portfolio .abps { width: 100%; }
 .home .ab-portfolio .ab-proto-inner { padding-bottom: clamp(12px, 1.5vw, 20px); }
 
 /* ==========================================================================
