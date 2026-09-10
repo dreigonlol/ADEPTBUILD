@@ -1,1 +1,223 @@
-<!-- Pega aquí el código de WordPress de la página "About" -->
+<!-- wp:html -->
+<style>
+.ab-btn{
+  background:rgba(255,255,255,0.15);
+  color:#ffffff;
+  border:2px solid #ffffff;
+  font-weight:600;
+  border-radius:0 !important;
+  cursor:pointer;
+  text-decoration:none;
+  white-space:nowrap;
+  position:relative;
+  z-index:99;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+.ab-btn:hover{
+  background:#ffffff;
+  color:#000000;
+  border-color:#ffffff;
+}
+</style>
+
+<div style="position:relative; width:100vw; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; height:100vh; min-height:100vh; overflow:hidden; margin-bottom:24px; margin-top:-200px; top:0;">
+  <!-- To swap this photo for a video later: replace this image element with a video element like the autoplay hero video used on the other project pages (Full Home Renovation, ADUs, etc.) - copy that whole video block plus its autoplay script from any of those pages' code, then rename the two adept-video-... ids to adept-video-about. To use a different photo instead, just change this image's src attribute. -->
+  <img src="http://adeptbuild.com/wp-content/uploads/2021/02/Roofing-2.jpeg" alt="" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;">
+  <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(11,47,62,0.35); z-index:2;"></div>
+
+  <div style="position:relative; z-index:3; display:flex; flex-wrap:nowrap; align-items:center; justify-content:flex-start; height:100vh; padding:2vw 4vw; box-sizing:border-box;">
+    <div style="min-width:0; display:flex; flex-direction:column; align-items:flex-start;">
+      <h1 style="color:#ffffff; font-size:clamp(1.1rem,3.2vw,2rem); margin:0 0 16px 0; text-shadow:0 2px 8px rgba(0,0,0,0.45); overflow-wrap:break-word;">About Us</h1>
+      <button onclick="document.getElementById('adept-modal-about').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px); box-shadow:0 8px 20px rgba(0,0,0,0.15);">Schedule A Meeting</button>
+    </div>
+  </div>
+</div>
+
+<div id="adept-modal-about" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(11,47,62,0.65); z-index:9999; align-items:center; justify-content:center; padding:20px; box-sizing:border-box;">
+  <div style="background:#ffffff; border-radius:14px; padding:28px 30px; max-width:440px; width:100%; max-height:88vh; overflow-y:auto; position:relative; box-shadow:0 24px 60px rgba(0,0,0,0.35);">
+    <button onclick="document.getElementById('adept-modal-about').style.display='none'" style="position:absolute; top:14px; right:16px; background:none; border:none; font-size:1.6rem; line-height:1; color:#7A8A93; cursor:pointer;">&times;</button>
+    <h3 style="margin:0 0 16px 0; text-align:center; font-size:1.15rem; color:#0F2A35;">Schedule A Consultation</h3>
+    [fluentform id="3"]
+  </div>
+</div>
+<!-- /wp:html -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Adept Builders &amp; Design</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For over a decade, Adept Builders &amp; Design has helped Los Angeles homeowners turn their vision into a home they love coming home to.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"ab-section-head ab-section-head\u002d\u002dcenter"} -->
+<div class="wp-block-group ab-section-head ab-section-head--center"><!-- wp:paragraph {"className":"ab-eyebrow"} -->
+<p class="ab-eyebrow">Meet The Founder</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Message From The Owner</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
+
+<!-- wp:media-text {"mediaType":"image"} -->
+<div class="wp-block-media-text is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="http://adeptbuild.com/wp-content/uploads/2021/06/fiunderr-796x1024-1.jpg" alt="Founder of Adept Builders &amp; Design"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph -->
+<p>As a young man, I traveled and experienced cultures that shaped how I see design and craftsmanship. That experience became the foundation for Adept Builders &amp; Design.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>My goal is simple: help you build the home you've been dreaming of, and make sure you're smiling when it's done.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>— <strong>Lior Ohayon</strong>, Founder</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:media-text -->
+
+<!-- wp:group {"className":"ab-section-head ab-section-head\u002d\u002dcenter"} -->
+<div class="wp-block-group ab-section-head ab-section-head--center"><!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What We Do</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Adept Builders &amp; Design specializes in making the home you have been dreaming of a reality. We are capable of any project your home needs. Let our expertise and the experience of our team guide you through your project from start to finish.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"ab-service-strips"} -->
+<div class="wp-block-group ab-service-strips"><!-- wp:group {"className":"ab-service-strip"} -->
+<div class="wp-block-group ab-service-strip"><!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://adeptbuild.com/wp-content/uploads/elementor/thumbs/PHOTO-2019-12-26-13-04-07-p8ronogy6zq4o5vlw5rtzr81flxa3whq0a3tboj6uo.jpg" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"className":"ab-service-strip__content"} -->
+<p class="ab-service-strip__content"><span class="ab-service-strip__num">01</span><span class="ab-service-strip__label">Full Home Renovation</span><span class="ab-service-strip__desc">A home renewed, top to bottom.</span></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"className":"ab-service-strip__link"} -->
+<div class="wp-block-button ab-service-strip__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/full-home-renovations/">Full Home Renovation</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"ab-service-strip"} -->
+<div class="wp-block-group ab-service-strip"><!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://adeptbuild.com/wp-content/uploads/elementor/thumbs/PHOTO-2019-12-26-13-04-13-p8rm5mjlfeg6d2ooqqfklzb8lnsbntzhyk254c20z4.jpg" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"className":"ab-service-strip__content"} -->
+<p class="ab-service-strip__content"><span class="ab-service-strip__num">02</span><span class="ab-service-strip__label">ADUs</span><span class="ab-service-strip__desc">Extra space, seamlessly added.</span></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"className":"ab-service-strip__link"} -->
+<div class="wp-block-button ab-service-strip__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/adus/">ADUs</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"ab-service-strip"} -->
+<div class="wp-block-group ab-service-strip"><!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8239-1024x683.jpg" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"className":"ab-service-strip__content"} -->
+<p class="ab-service-strip__content"><span class="ab-service-strip__num">03</span><span class="ab-service-strip__label">Decking</span><span class="ab-service-strip__desc">Outdoor living, built to last.</span></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"className":"ab-service-strip__link"} -->
+<div class="wp-block-button ab-service-strip__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/decking/">Decking</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"ab-service-strip"} -->
+<div class="wp-block-group ab-service-strip"><!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://adeptbuild.com/wp-content/uploads/elementor/thumbs/palms-15-scaled-q9iaj04rci0nmvxsqnvm75jsiyu1dgh623qbwj0o70.jpg" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"className":"ab-service-strip__content"} -->
+<p class="ab-service-strip__content"><span class="ab-service-strip__num">04</span><span class="ab-service-strip__label">Pools</span><span class="ab-service-strip__desc">Your own backyard escape.</span></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"className":"ab-service-strip__link"} -->
+<div class="wp-block-button ab-service-strip__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/custom-pools/">Pools</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"ab-service-strip"} -->
+<div class="wp-block-group ab-service-strip"><!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://adeptbuild.com/wp-content/uploads/2023/08/FyAmJHUP-1024x576.jpeg" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"className":"ab-service-strip__content"} -->
+<p class="ab-service-strip__content"><span class="ab-service-strip__num">05</span><span class="ab-service-strip__label">Pergolas</span><span class="ab-service-strip__desc">Shade and style, custom-built.</span></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"className":"ab-service-strip__link"} -->
+<div class="wp-block-button ab-service-strip__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/pergolas/">Pergolas</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"ab-service-strip"} -->
+<div class="wp-block-group ab-service-strip"><!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://adeptbuild.com/wp-content/uploads/2023/03/dsc5682-1024x683.jpeg" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"className":"ab-service-strip__content"} -->
+<p class="ab-service-strip__content"><span class="ab-service-strip__num">06</span><span class="ab-service-strip__label">Landscaping</span><span class="ab-service-strip__desc">Grounds as beautiful as your home.</span></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"className":"ab-service-strip__link"} -->
+<div class="wp-block-button ab-service-strip__link"><a class="wp-block-button__link wp-element-button" href="https://adeptbuild.com/landscape-design/">Landscaping</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:heading {"level":2,"textAlign":"center"} -->
+<h2 class="has-text-align-center">Hear From Our Clients…</h2>
+<!-- /wp:heading -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>Leo and his team at Adept knocked it our of the park on our pool deck project. Once we met him for a consultation, we knew right away that he was our guy. He was thorough in his planning and very accessible with any questions we had before, during and after the build. He utilizes the best materials, tools, and techniques/practices from start to finish. Even when the project hit a snag, he worked with us to find an acceptable outcome that satisfied all parties. I can truly say he and his team went above and beyond for us. I highly recommend his services for any home project.</p><cite>Dane Mount</cite></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>So happy I chose Adept builders &amp; Design! I needed help with my remodeling, and home design, and Adept offered both! Leo arrived on time, offered professional service, quality work and an excellent customer service like no one else! After we agreed on designs, they did a complete remodel to our home (kitchen, bathrooms, floorings, drywall, and all outdoor remodel like decking, pavers, turf, fencing and more). They were recommended to me through my friends and I am very happy that I trusted them. Highly recommended, you won't be disappointed &#x1f642;</p><cite>Simha Kadar</cite></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>Adept Builders &amp; Design remodeled our new dream home and did an amazing job. The quality was beyond what we expected. Leo and his whole team were great to work with, and very professional. There were several trades involved, like our kitchen and bathroom remodel, painting, flooring and many more, and overall Leo made sure the work was coordinated so that there were no delays and kept the work flowing so that it was completed in the timeframe he initially gave to us.</p><p>Thank you Adept Builders &amp; Design.</p><p>Ps: be sure just like we were recommended to you by our friends, we all ready making sure our family and friends are in the same loop.</p><cite>Dvir Dotan</cite></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:group {"className":"ab-cta"} -->
+<div class="wp-block-group ab-cta"><!-- wp:group -->
+<div class="wp-block-group"><!-- wp:heading -->
+<h2 class="wp-block-heading">Have a project in mind?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Tell us about your space and we'll set up a free, no-pressure consultation to talk through the possibilities.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button">
+<button onclick="document.getElementById('adept-modal-about').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px); box-shadow:0 8px 20px rgba(0,0,0,0.15); width:100%;">Schedule A Meeting</button>
+</div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group -->
