@@ -119,6 +119,7 @@ function adeptbuild_customize_register( $wp_customize ) {
 	adeptbuild_add_field( $wp_customize, 'facebook_url', 'adeptbuild_social', 'Facebook', '', 'url' );
 	adeptbuild_add_field( $wp_customize, 'instagram_url', 'adeptbuild_social', 'Instagram', '', 'url' );
 	adeptbuild_add_field( $wp_customize, 'whatsapp_url', 'adeptbuild_social', 'WhatsApp', '', 'url' );
+	adeptbuild_add_field( $wp_customize, 'google_maps_url', 'adeptbuild_social', __( 'Google Maps (shown in the header instead of WhatsApp)', 'adeptbuild' ), 'https://maps.app.goo.gl/Xrm4UWWqjy95AXHt7', 'url' );
 
 	/* ---------------------------------------------------------------------
 	 * Header

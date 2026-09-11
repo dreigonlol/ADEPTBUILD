@@ -25,6 +25,22 @@ Text Domain: adeptbuild
     font-style: normal;
     font-display: swap;
 }
+/* Main nav font (mcclean-style) — assets/fonts/Quicksand.ttf. */
+@font-face {
+    font-family: "Quicksand";
+    src: url("assets/fonts/Quicksand.ttf") format("truetype");
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Site-wide: Quicksand everywhere, no exceptions — overrides every other
+   font-family declaration in this file (Montserrat/Geist/PT Sans/Posterama/
+   Poppins included), any inline "style=font-family:..." from block-editor
+   content, and any plugin/Gutenberg CSS, regardless of specificity. */
+*, *::before, *::after {
+    font-family: var(--ab-font-quicksand) !important;
+}
 
 /* ==========================================================================
    1. DESIGN TOKENS
@@ -57,9 +73,10 @@ Text Domain: adeptbuild
        slate:                   #1B2430  (dark blue-slate — process-row text panels) --- */
 
     /* --- Typography --- */
-    --ab-font-heading: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --ab-font-body: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --ab-font-nav: "PT Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --ab-font-heading: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --ab-font-body: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --ab-font-nav: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --ab-font-quicksand: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
     --ab-fs-base: 1.0625rem;   /* 17px */
     --ab-fs-sm: 0.9375rem;
@@ -161,14 +178,10 @@ h1, h2, h3, h4, h5, h6 {
 h1 { font-size: var(--ab-fs-h1); }
 h2 { font-size: var(--ab-fs-h2); }
 
-/* Real "Posterama 2001 Regular" (see the @font-face at the very top of
-   this file) with Poppins Bold as the fallback for as long as the local
-   font file isn't in place yet — browsers just skip to the next name in
-   the list when a face fails to load, so nothing else needs to change
-   once the .ttf is dropped in. Weight 400 to match "Regular", not the
-   700 the Poppins fallback needs to look equally bold. */
+/* h1/h2 use the regular (400) Quicksand weight, lighter than the 700 used
+   for h3-h6 and the nav elsewhere. */
 h1, h2 {
-    font-family: "Posterama 2001", "Poppins", var(--ab-font-heading);
+    font-family: var(--ab-font-heading);
     font-weight: 400;
 }
 h3 { font-size: var(--ab-fs-h3); }
@@ -469,21 +482,21 @@ a.ab-btn:hover {
 }
 .ab-social a:hover { background: #1046bb; color: #fff; }
 
-/* Main bar — fully transparent, overlaid on the page-hero image/video
-   underneath it (see ".ab-page-hero" margin-top below), like the template's
-   header; it only picks up a solid backdrop once scrolled past the hero. */
+/* Main bar — semi-transparent black at all times (mcclean-style: the bar
+   never goes fully transparent, even resting over the hero image/video),
+   picking up a touch more opacity + blur once scrolled past the hero. */
 .site-header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    background: rgba(10, 10, 10, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     box-shadow: none;
     transition: box-shadow var(--ab-transition), background-color var(--ab-transition), backdrop-filter var(--ab-transition);
 }
 .site-header.is-stuck {
-    background: #00497A;
+    background: rgba(10, 10, 10, 0.82);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 6px 24px rgba(26, 26, 26, 0.18);
@@ -560,47 +573,26 @@ body.ab-menu-open .site-header {
     margin-left: auto;
 }
 
-/* Phone number(s) next to "contact" in the main nav row — same family/
-   weight as the menu links, sized down and never wrapping to more than
-   this many lines so it stays compact next to the CTA button. */
-.ab-header-phones {
+/* Social icons in the main nav row, after the CTA button — kept plain/
+   transparent (no filled circle backdrop) so they read as elegant marks
+   next to the menu, not as buttons; Instagram + Google Maps only. */
+.ab-header-social {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.ab-header-social a {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-family: var(--ab-font-heading);
-    font-weight: 700;
-    font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.92);
-    text-decoration: none;
-    white-space: nowrap;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.75);
+    transition: color var(--ab-transition), transform var(--ab-transition);
 }
-.ab-header-phones svg { flex-shrink: 0; color: #ffffff; }
-.ab-header-phones:hover { color: #fff; }
-.ab-header-phones__list {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    line-height: 1.3;
-}
-.ab-header-phones__list a { color: inherit; text-decoration: none; }
-.ab-header-phones__list a:hover { color: #57e1f3; }
+.ab-header-social a:hover { color: #57e1f3; transform: translateY(-1px); }
 
 @media (max-width: 1080px) {
-    .ab-header-phones { display: none; }
+    .ab-header-social { display: none; }
 }
-
-.ab-header-phone {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--ab-font-nav);
-    font-size: 0.9375rem;
-    font-weight: 600;
-    color: #fff;
-    white-space: nowrap;
-}
-.ab-header-phone:hover { color: #ffffff; }
-.ab-header-phone svg { flex-shrink: 0; }
 
 /* --- Navigation --- */
 .main-navigation ul {
@@ -612,44 +604,26 @@ body.ab-menu-open .site-header {
     gap: 4px;
 }
 
+/* McClean-style nav: Quicksand, uppercase, lightly spaced, no fill/box on
+   hover — just a plain color shift to Adept blue, like the reference. */
 .main-header-menu > li > a {
     display: block;
     padding: 12px 16px;
-    font-family: var(--ab-font-heading);
-    font-size: 20px;
-    font-weight: 700;
+    font-family: var(--ab-font-quicksand);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: rgba(255, 255, 255, 0.92);
-    border-radius: var(--ab-radius-sm);
     position: relative;
     z-index: 0;
-    overflow: hidden;
     transition: color var(--ab-transition);
-}
-
-/* Fill-from-the-bottom hover, matching the reference template's nav
-   (Breakdance's "background" link effect, direction "bottom"): a plain
-   white rectangle grows up from the bottom edge to fill the item instead
-   of the old underline-bar indicator, which this replaces entirely. */
-.main-header-menu > li > a::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: #fff;
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform var(--ab-transition);
-}
-.main-header-menu > li:hover > a::before,
-.main-header-menu > .current-menu-item > a::before,
-.main-header-menu > .current-menu-ancestor > a::before {
-    transform: scaleY(1);
 }
 
 .main-header-menu > li:hover > a,
 .main-header-menu > .current-menu-item > a,
 .main-header-menu > .current-menu-ancestor > a {
-    color: #0E7490;
+    color: #0170b9;
 }
 
 /* Submenus */
@@ -859,6 +833,49 @@ body.ab-menu-open .site-header {
 }
 .ab-floating-whatsapp:hover { transform: scale(1.08); color: #fff; }
 
+/* Call / Text floating pills — white for Call, Adept blue for Text, a
+   round icon badge fused to a rounded label (mcclean reference). */
+.ab-floating-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 14px;
+    padding: 6px 18px 6px 6px;
+    border-radius: var(--ab-radius-pill);
+    text-decoration: none;
+    font-family: var(--ab-font-heading);
+    font-weight: 700;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.16);
+    transition: transform var(--ab-transition), box-shadow var(--ab-transition);
+}
+.ab-floating-pill:hover { transform: translateY(-2px); }
+.ab-floating-pill__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.ab-floating-pill--call {
+    background: #fff;
+    color: #1A1A1A;
+}
+.ab-floating-pill--call .ab-floating-pill__icon { background: #1A1A1A; color: #fff; }
+.ab-floating-pill--text {
+    background: #0170b9;
+    color: #fff;
+}
+.ab-floating-pill--text .ab-floating-pill__icon { background: #fff; color: #0170b9; }
+
+@media (max-width: 600px) {
+    .ab-floating-pill__text { display: none; }
+    .ab-floating-pill { padding: 4px; margin-right: 10px; }
+}
+
 /* ==========================================================================
    7. HERO
    ========================================================================== */
@@ -1065,7 +1082,7 @@ body.ab-menu-open .site-header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    font-family: "Posterama 2001", "Poppins", var(--ab-font-heading);
+    font-family: var(--ab-font-heading);
     font-size: clamp(2.25rem, 5.5vw, 4rem);
     font-weight: 400;
     line-height: 1.05;
@@ -3509,7 +3526,7 @@ ol.wp-block-list li::marker {
 }
 .home .ab-proto-services .ab-service-strips .ab-proto-inner .ab-eyebrow { margin-bottom: 6px; }
 .home .ab-proto-services .ab-service-strips .ab-proto-inner h2 {
-    font-family: "Posterama 2001", "Poppins", var(--ab-font-heading);
+    font-family: var(--ab-font-heading);
     font-weight: 400;
     font-size: clamp(1.25rem, 2.4vw, 1.75rem);
     margin: 0;
@@ -3556,7 +3573,7 @@ ol.wp-block-list li::marker {
 }
 .home .ab-proto-philosophy h2 {
     display: inline-block;
-    font-family: "Posterama 2001", "Poppins", var(--ab-font-heading);
+    font-family: var(--ab-font-heading);
     font-weight: 400;
     font-size: clamp(1.25rem, 2.4vw, 1.75rem);
     margin: 0;
@@ -3637,7 +3654,7 @@ ol.wp-block-list li::marker {
 }
 .home .ab-proto-process .ab-proto-inner h2 {
     color: #ffffff !important;
-    font-family: "Posterama 2001", "Poppins", var(--ab-font-heading);
+    font-family: var(--ab-font-heading);
     font-weight: 400;
     font-size: clamp(1.25rem, 2.4vw, 1.75rem);
     margin: 0;

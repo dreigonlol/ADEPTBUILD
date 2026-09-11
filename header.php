@@ -27,7 +27,7 @@ $ab_hours      = adeptbuild_option( 'hours' );
 $ab_social     = adeptbuild_social_links();
 ?>
 
-<?php if ( $ab_email || $ab_hours || $ab_social ) : ?>
+<?php if ( $ab_email || $ab_hours ) : ?>
 	<div class="ab-topbar">
 		<div class="ast-container">
 			<div class="ab-topbar__info">
@@ -44,17 +44,6 @@ $ab_social     = adeptbuild_social_links();
 					</span>
 				<?php endif; ?>
 			</div>
-
-			<?php if ( $ab_social ) : ?>
-				<div class="ab-social">
-					<?php foreach ( $ab_social as $ab_link ) : ?>
-						<a href="<?php echo esc_url( $ab_link['url'] ); ?>" target="_blank" rel="noopener noreferrer">
-							<span class="screen-reader-text"><?php echo esc_html( $ab_link['label'] ); ?></span>
-							<?php adeptbuild_icon( $ab_link['icon'], 15 ); ?>
-						</a>
-					<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
 		</div>
 	</div>
 <?php endif; ?>
@@ -95,33 +84,39 @@ $ab_social     = adeptbuild_social_links();
 		</nav>
 
 		<div class="ab-header-actions">
-			<a class="ab-header-phone" href="<?php echo esc_url( adeptbuild_tel_href( '800-611-1776' ) ); ?>">
-				<?php adeptbuild_icon( 'phone', 16 ); ?>
-				<span>800-611-1776</span>
-			</a>
-
 			<?php
-			$ab_cta_text = adeptbuild_option( 'cta_text' );
-			$ab_cta_url  = adeptbuild_option( 'cta_url', '/contact-us/' );
+			$ab_cta_text     = adeptbuild_option( 'cta_text' );
+			$ab_cta_url      = adeptbuild_option( 'cta_url', '/contact-us/' );
+			$ab_maps_url     = adeptbuild_option( 'google_maps_url' );
+			$ab_header_social = array_filter(
+				$ab_social,
+				function ( $ab_link ) {
+					return 'whatsapp' !== $ab_link['icon'];
+				}
+			);
 			?>
-			<?php if ( $ab_phone && $ab_phone_text ) : ?>
-				<span class="ab-header-phones">
-					<?php adeptbuild_icon( 'phone', 16 ); ?>
-					<span class="ab-header-phones__list">
-						<a href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>"><?php esc_html_e( 'Call:', 'adeptbuild' ); ?> <?php echo esc_html( $ab_phone ); ?></a>
-						<a href="<?php echo esc_url( adeptbuild_sms_href( $ab_phone_text ) ); ?>"><?php esc_html_e( 'Text:', 'adeptbuild' ); ?> <?php echo esc_html( $ab_phone_text ); ?></a>
-					</span>
-				</span>
-			<?php elseif ( $ab_phone ) : ?>
-				<a class="ab-header-phones" href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>">
-					<?php adeptbuild_icon( 'phone', 16 ); ?><?php echo esc_html( $ab_phone ); ?>
-				</a>
-			<?php endif; ?>
-
 			<?php if ( $ab_cta_text ) : ?>
 				<a class="ast-button ab-btn--accent ab-btn--sm" href="<?php echo esc_url( $ab_cta_url ); ?>">
 					<?php echo esc_html( $ab_cta_text ); ?>
 				</a>
+			<?php endif; ?>
+
+			<?php if ( $ab_header_social || $ab_maps_url ) : ?>
+				<div class="ab-header-social">
+					<?php foreach ( $ab_header_social as $ab_link ) : ?>
+						<a href="<?php echo esc_url( $ab_link['url'] ); ?>" target="_blank" rel="noopener noreferrer">
+							<span class="screen-reader-text"><?php echo esc_html( $ab_link['label'] ); ?></span>
+							<?php adeptbuild_icon( $ab_link['icon'], 16 ); ?>
+						</a>
+					<?php endforeach; ?>
+
+					<?php if ( $ab_maps_url ) : ?>
+						<a href="<?php echo esc_url( $ab_maps_url ); ?>" target="_blank" rel="noopener noreferrer" class="ab-header-social__maps">
+							<span class="screen-reader-text"><?php esc_html_e( 'Find us on Google Maps', 'adeptbuild' ); ?></span>
+							<?php adeptbuild_icon( 'map-pin', 16 ); ?>
+						</a>
+					<?php endif; ?>
+				</div>
 			<?php endif; ?>
 
 			<button
@@ -148,13 +143,22 @@ $ab_whatsapp = adeptbuild_option( 'whatsapp_url' );
 		</a>
 	<?php endif; ?>
 
-	<?php if ( $ab_whatsapp ) : ?>
-		<a class="ab-floating-whatsapp" href="<?php echo esc_url( $ab_whatsapp ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Chat on WhatsApp', 'adeptbuild' ); ?>">
-			<?php adeptbuild_icon( 'whatsapp', 26 ); ?>
+	<?php if ( $ab_phone ) : ?>
+		<a class="ab-floating-pill ab-floating-pill--call" href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>">
+			<span class="ab-floating-pill__icon"><?php adeptbuild_icon( 'phone', 18 ); ?></span>
+			<span class="ab-floating-pill__text"><?php echo esc_html( $ab_phone ); ?></span>
 		</a>
-	<?php elseif ( $ab_phone ) : ?>
-		<a class="ab-floating-whatsapp" href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>" aria-label="<?php esc_attr_e( 'Call us', 'adeptbuild' ); ?>">
-			<?php adeptbuild_icon( 'phone', 24 ); ?>
+	<?php endif; ?>
+
+	<?php if ( $ab_phone_text ) : ?>
+		<a class="ab-floating-pill ab-floating-pill--text" href="<?php echo esc_url( adeptbuild_sms_href( $ab_phone_text ) ); ?>">
+			<span class="ab-floating-pill__icon"><?php adeptbuild_icon( 'message', 18 ); ?></span>
+			<span class="ab-floating-pill__text"><?php echo esc_html( $ab_phone_text ); ?></span>
+		</a>
+	<?php elseif ( $ab_whatsapp ) : ?>
+		<a class="ab-floating-pill ab-floating-pill--text" href="<?php echo esc_url( $ab_whatsapp ); ?>" target="_blank" rel="noopener noreferrer">
+			<span class="ab-floating-pill__icon"><?php adeptbuild_icon( 'whatsapp', 18 ); ?></span>
+			<span class="ab-floating-pill__text"><?php esc_html_e( 'WhatsApp', 'adeptbuild' ); ?></span>
 		</a>
 	<?php endif; ?>
 </div>
