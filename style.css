@@ -3683,18 +3683,24 @@ ol.wp-block-list li::marker {
 }
 .home .ab-proto-trust .wp-block-image { margin: 0; }
 .home .ab-proto-trust .wp-block-image img {
-    width: 64px;
-    height: 64px;
+    width: 112px !important;
+    height: 112px !important;
     aspect-ratio: auto;
     object-fit: contain;
     border-radius: 0;
-    transition: transform var(--ab-transition);
+    filter: grayscale(1);
+    opacity: 0.85;
+    transition: transform var(--ab-transition), filter var(--ab-transition), opacity var(--ab-transition);
 }
-.home .ab-proto-trust .wp-block-image a:hover img { transform: scale(1.18); }
+.home .ab-proto-trust .wp-block-image a:hover img {
+    transform: scale(1.18);
+    filter: grayscale(0);
+    opacity: 1;
+}
 
 @media (max-width: 600px) {
     .home .ab-proto-trust { gap: 20px !important; }
-    .home .ab-proto-trust .wp-block-image img { width: 44px; height: 44px; }
+    .home .ab-proto-trust .wp-block-image img { width: 90px !important; height: 90px !important; }
 }
 
 /* --- 6. Watch Our Videos: full-bleed slider (.ab-slider, defined
