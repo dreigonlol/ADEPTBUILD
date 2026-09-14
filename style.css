@@ -2589,7 +2589,7 @@ h2.ab-services-showcase__title {
    ========================================================================== */
 
 .site-footer {
-    background: #00497A;
+    background: #0A0A0AD1;
     color: rgba(255, 255, 255, 0.68);
     font-size: var(--ab-fs-sm);
 }
@@ -2628,7 +2628,7 @@ h2.ab-services-showcase__title {
     align-items: flex-start;
     gap: 12px;
 }
-.ab-footer-contact svg { color: #0170b9; flex-shrink: 0; margin-top: 4px; }
+.ab-footer-contact svg { color: #FFFFFF; flex-shrink: 0; margin-top: 4px; }
 
 .ab-footer-contact__phone a {
     font-family: var(--ab-font-heading);
