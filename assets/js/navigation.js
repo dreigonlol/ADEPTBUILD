@@ -12,7 +12,7 @@
 ( function () {
 	'use strict';
 
-	document.addEventListener( 'DOMContentLoaded', function () {
+	function init() {
 		splitMenuAroundLogo();
 		setHeaderHeight();
 		setHeroIntroOverlap();
@@ -24,7 +24,18 @@
 		initWordRotators();
 		initCarousels();
 		initPortfolioSliders();
-	} );
+	}
+
+	// On the live site this script tag often ends up loading near the end of
+	// <body>, after third-party scripts — by then "DOMContentLoaded" has
+	// usually already fired, and a listener attached after the fact never
+	// runs. Falling back to an immediate call when the DOM is already ready
+	// avoids silently losing every one of the functions above in production.
+	if ( 'loading' === document.readyState ) {
+		document.addEventListener( 'DOMContentLoaded', init );
+	} else {
+		init();
+	}
 
 	/**
 	 * Prev/next buttons for any ".ab-slider" (a row of video cards, ...) —
@@ -89,36 +100,83 @@
 	 */
 	function initWordRotators() {
 		var rotators = document.querySelectorAll( '.ab-word-rotate' );
+		var INTERVAL = 4500; // was 2400 — slower, so each word/photo lingers longer.
 
-		Array.prototype.forEach.call( rotators, function ( rotator ) {
+		var advance = function ( items, index ) {
+			var current = items[ index ];
+			var nextIndex = ( index + 1 ) % items.length;
+			var next = items[ nextIndex ];
+
+			current.classList.remove( 'is-active' );
+			current.classList.add( 'is-leaving' );
+			next.classList.add( 'is-active' );
+
+			setTimeout( function () {
+				current.classList.remove( 'is-leaving' );
+			}, 650 );
+
+			return nextIndex;
+		};
+
+		var setUp = function ( rotator ) {
 			var items = rotator.querySelectorAll( '.ab-word-rotate__item' );
-
 			if ( items.length < 2 ) {
-				return;
+				return null;
 			}
-
 			rotator.classList.add( 'ab-word-rotate--js' );
 			items[ 0 ].classList.add( 'is-active' );
+			return items;
+		};
 
-			if ( window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) {
+		var reduceMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+
+		// Rotators sharing a "data-rotate-sync" value (e.g. the "WE BUILD"
+		// word and its background photo) advance together on one shared
+		// interval/index instead of each running its own independent timer,
+		// so the photo shown always matches the word currently on screen.
+		var synced = {};
+		var standalone = [];
+
+		Array.prototype.forEach.call( rotators, function ( rotator ) {
+			var key = rotator.getAttribute( 'data-rotate-sync' );
+			if ( key ) {
+				( synced[ key ] = synced[ key ] || [] ).push( rotator );
+			} else {
+				standalone.push( rotator );
+			}
+		} );
+
+		standalone.forEach( function ( rotator ) {
+			var items = setUp( rotator );
+			if ( ! items || reduceMotion ) {
 				return;
 			}
-
 			var index = 0;
-
 			setInterval( function () {
-				var current = items[ index ];
-				index = ( index + 1 ) % items.length;
-				var next = items[ index ];
+				index = advance( items, index );
+			}, INTERVAL );
+		} );
 
-				current.classList.remove( 'is-active' );
-				current.classList.add( 'is-leaving' );
-				next.classList.add( 'is-active' );
-
-				setTimeout( function () {
-					current.classList.remove( 'is-leaving' );
-				}, 650 );
-			}, 2400 );
+		Object.keys( synced ).forEach( function ( key ) {
+			var group = synced[ key ]
+				.map( setUp )
+				.filter( function ( items ) {
+					return !! items;
+				} );
+			if ( ! group.length || reduceMotion ) {
+				return;
+			}
+			var index = 0;
+			setInterval( function () {
+				group.forEach( function ( items ) {
+					// Each member's own item count may differ, so it keeps
+					// its own effective index even on a shared clock tick.
+					advance( items, index % items.length );
+				} );
+				index = ( index + 1 ) % Math.max.apply( null, group.map( function ( items ) {
+					return items.length;
+				} ) );
+			}, INTERVAL );
 		} );
 	}
 
@@ -534,8 +592,8 @@
 
 		if ( document.body.classList.contains( 'home' ) ) {
 			// 1. Intro: copy slides in from the left, the video from the right.
-			tag( '.ab-proto-intro-left', 'ab-reveal--left' );
-			tag( '.ab-proto-intro .wp-block-embed', 'ab-reveal--right' );
+			//tag( '.ab-proto-intro-left', 'ab-reveal--left' );
+			//tag( '.ab-proto-intro .wp-block-embed', 'ab-reveal--right' );
 
 			// 2. Our Services: each card fades up, staggered by initReveal().
 			tag( '.ab-proto-services .wp-block-column' );
@@ -888,6 +946,25 @@
 		Array.prototype.forEach.call( items, function ( item ) {
 			observer.observe( item );
 		} );
+
+		// IntersectionObserver is supposed to fire an initial callback as
+		// soon as observe() runs, but while the hero video/images are still
+		// loading and the page is still settling into its final layout,
+		// that first callback can end up waiting for the next real scroll
+		// or layout event instead — so anything already in view on load
+		// stays invisible until the user scrolls at all. A manual check
+		// right away, and again once everything has finished loading,
+		// reveals those immediately instead of waiting on that.
+		var revealAlreadyVisible = function () {
+			Array.prototype.forEach.call( items, function ( item ) {
+				var rect = item.getBoundingClientRect();
+				if ( rect.top < window.innerHeight * 0.88 && rect.bottom > 0 ) {
+					item.classList.add( 'is-visible' );
+				}
+			} );
+		};
+		revealAlreadyVisible();
+		window.addEventListener( 'load', revealAlreadyVisible );
 	}
 
 	/**

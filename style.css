@@ -1063,6 +1063,35 @@ body.ab-menu-open .site-header {
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg, rgba(26, 26, 26, 0.88) 0%, rgba(26, 26, 26, 0.55) 55%, rgba(26, 26, 26, 0.3) 100%);
+    z-index: 1;
+}
+/* ".ab-story__bg" doubles as a ".ab-word-rotate" image stage — one photo
+   per "WE BUILD ___" word, synced to it via "data-rotate-sync" (see
+   initWordRotators() in navigation.js) so the photo changes together with
+   the word it illustrates instead of drifting on its own timer. The two
+   classes tie on specificity, and the base ".ab-word-rotate" rule (further
+   down, for the text version) sits later in the file — without repeating
+   it here at equal (two-class) specificity, its "position:relative"
+   silently wins on source order and collapses this from a full-bleed
+   background back down to an inline-sized box. */
+.ab-story__bg.ab-word-rotate {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+/* Overrides the base ".ab-word-rotate__item" sizing (built for a line of
+   text) to fill the section like the plain image it's replacing did. */
+.ab-story__bg.ab-word-rotate .ab-word-rotate__item {
+    width: 100%;
+    height: 100%;
+    white-space: normal;
+}
+.ab-story__bg.ab-word-rotate .ab-word-rotate__item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0;
 }
 /* Full 1200px-wide, centered exactly like ".ast-container"/".ab-proto-inner"
    elsewhere — the text itself still only takes up the left part of that
@@ -2686,7 +2715,7 @@ h2.ab-services-showcase__title {
 .ab-reveal {
     opacity: 0;
     transform: translateY(32px);
-    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
 }
 .ab-reveal.is-visible { opacity: 1; transform: none; }

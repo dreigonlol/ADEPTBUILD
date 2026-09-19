@@ -151,6 +151,76 @@ function adeptbuild_resource_hints( $urls, $relation_type ) {
 add_filter( 'wp_resource_hints', 'adeptbuild_resource_hints', 10, 2 );
 
 /**
+ * Preloads the home hero video so the browser starts fetching it right
+ * away, in parallel with CSS/fonts, instead of only discovering it once it
+ * parses that far down the HTML.
+ */
+function adeptbuild_preload_hero_video() {
+	if ( ! is_front_page() ) {
+		return;
+	}
+
+	$video_path = get_theme_file_path( '/assets/img/videohome.mp4' );
+	if ( ! file_exists( $video_path ) ) {
+		return;
+	}
+
+	printf(
+		'<link rel="preload" as="video" type="video/mp4" href="%s">' . "\n",
+		esc_url( get_theme_file_uri( '/assets/img/videohome.mp4' ) )
+	);
+}
+add_action( 'wp_head', 'adeptbuild_preload_hero_video', 1 );
+
+/**
+ * Positions the hero intro (title/button/Google review) over the tail of
+ * the home video — same math as setHeroIntroOverlap() in navigation.js,
+ * duplicated here as an inline script instead of relying on that external
+ * file. navigation.js loads behind a long queue of third-party footer
+ * scripts (CallRail, Fluent Forms, LiteSpeed's own delayed-JS handling…),
+ * so by the time it finally runs, the intro has already been sitting in
+ * its unpositioned spot (pushed below the hero) for a very visible moment.
+ * Printed inline at the very front of wp_footer (priority 1, before any
+ * plugin's own footer scripts) so it runs as early as the DOM allows,
+ * with no external file to wait on. navigation.js still runs its own copy
+ * afterwards — harmless (same numbers either way) — and that copy is the
+ * one that keeps it correct on resize.
+ */
+function adeptbuild_inline_hero_intro_overlap() {
+	if ( ! is_front_page() ) {
+		return;
+	}
+	?>
+	<script data-no-litespeed-delay="adeptbuild-hero-overlap">
+	/* adeptbuild-hero-overlap: excluded from LiteSpeed's "JS Delayed"
+	   optimization (Page Optimization → JS Settings → JS Delayed Excludes)
+	   — this must run immediately, not after the visitor's first click/
+	   scroll/mousemove, or the hero text sits unpositioned until then. */
+	( function () {
+		var intro = document.querySelector( '.home .ab-proto-intro' );
+		var title = document.querySelector( '.ab-page-hero--video h1' );
+		var hero  = document.querySelector( '.ab-page-hero--video' );
+		if ( ! intro || ! title || ! hero ) {
+			return;
+		}
+		var GAP = 4;
+		intro.style.marginTop = '0px';
+		intro.style.paddingBottom = '0px';
+		var naturalTop = intro.getBoundingClientRect().top + window.scrollY;
+		var titleBottom = title.getBoundingClientRect().bottom + window.scrollY;
+		intro.style.marginTop = ( titleBottom + GAP - naturalTop ) + 'px';
+		var heroBottom = hero.getBoundingClientRect().bottom + window.scrollY;
+		var introBottom = intro.getBoundingClientRect().bottom + window.scrollY;
+		if ( introBottom < heroBottom ) {
+			intro.style.paddingBottom = ( heroBottom - introBottom ) + 'px';
+		}
+	} )();
+	</script>
+	<?php
+}
+add_action( 'wp_footer', 'adeptbuild_inline_hero_intro_overlap', 1 );
+
+/**
  * Widget areas.
  */
 function adeptbuild_widgets_init() {

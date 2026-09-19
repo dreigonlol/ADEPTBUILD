@@ -193,6 +193,8 @@ function adeptbuild_page_hero( $title = '' ) {
 				loop
 				muted
 				playsinline
+				preload="auto"
+				fetchpriority="high"
 				aria-hidden="true"></video>
 			<div class="ab-page-hero__overlay" aria-hidden="true"></div>
 		<?php endif; ?>
