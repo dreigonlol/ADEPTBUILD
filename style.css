@@ -2199,6 +2199,13 @@ label {
 .home .ab-content-area { padding-bottom: 0; }
 
 .page .ab-content-area { padding-bottom: 0; }
+/* The photo CTA at the end of About carries an inline "margin-bottom:-80px
+   !important" in its own <style> — it was written back when this area still
+   had its ~110px bottom padding to absorb that pull. With the padding gone
+   (rule above), the same -80px drags the section 80px past the end of the
+   page content, and its "position:relative; z-index:2" then paints it over
+   the top of the footer. Zero it so the section ends flush with the footer. */
+.page .ab-content-area .ab-cta-photo { margin-bottom: 0 !important; }
 
 .ab-layout {
     display: grid;
@@ -2624,7 +2631,7 @@ h2.ab-services-showcase__title {
    ========================================================================== */
 
 .site-footer {
-    background: #0A0A0AD1;
+    background: #000000e8;
     color: #fff;
     font-size: 18px;
     text-transform: uppercase;

@@ -27,7 +27,7 @@ $ab_social     = adeptbuild_social_links();
 					<a href="https://maps.app.goo.gl/GAXy3HYj2YE4cmbT7" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $ab_address ); ?></a>
 				<?php endif; ?>
 				<?php if ( $ab_phone ) : ?>
-					<a href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>"><?php echo esc_html( $ab_phone ); ?></a>
+					<a href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>"><?php echo esc_html( __( 'Call:', 'adeptbuild' ) . ' ' . $ab_phone ); ?></a>
 				<?php endif; ?>
 				<?php if ( $ab_phone_text ) : ?>
 					<a href="<?php echo esc_url( adeptbuild_sms_href( $ab_phone_text ) ); ?>"><?php echo esc_html( __( 'Text:', 'adeptbuild' ) . ' ' . $ab_phone_text ); ?></a>

@@ -11,6 +11,8 @@
   white-space:nowrap;
   position:relative;
   z-index:99;
+  text-transform:uppercase;
+  letter-spacing:.08em;
   transition:background .2s ease,color .2s ease,border-color .2s ease;
 }
 .ab-btn:hover{
@@ -18,11 +20,17 @@
   color:#000000;
   border-color:#ffffff;
 }
+h2.wp-block-heading{
+  font-size:clamp(2rem,4.2vw,3.4rem) !important;
+  font-weight:300 !important;
+  letter-spacing:-.01em !important;
+  line-height:1.15 !important;
+}
 </style>
 
 <div style="position:relative; width:100vw; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; height:100vh; min-height:100vh; overflow:hidden; margin-bottom:24px; margin-top:-200px; top:0;">
   <!-- To swap this photo for a video later: replace this image element with a video element like the autoplay hero video used on the other project pages (Full Home Renovation, ADUs, etc.) - copy that whole video block plus its autoplay script from any of those pages' code, then rename the two adept-video-... ids to adept-video-about. To use a different photo instead, just change this image's src attribute. -->
-  <img src="http://adeptbuild.com/wp-content/uploads/2021/02/Roofing-2.jpeg" alt="Los Angeles home renovation by Adept Builders &amp; Design" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;">
+  <img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/HeroImage.webp" alt="Los Angeles home renovation by Adept Builders &amp; Design" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;">
   <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(11,47,62,0.35); z-index:2;"></div>
 
   <div style="position:relative; z-index:3; display:flex; flex-wrap:nowrap; align-items:center; justify-content:flex-start; height:100vh; padding:2vw 4vw; box-sizing:border-box;">
@@ -42,68 +50,160 @@
 </div>
 <!-- /wp:html -->
 
-<!-- wp:heading -->
-<h2 class="wp-block-heading">Adept Builders &amp; Design</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>For over a decade, Adept Builders &amp; Design has helped Los Angeles homeowners turn their vision into a home they love coming home to.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:group {"className":"ab-section-head ab-section-head\u002d\u002dcenter"} -->
-<div class="wp-block-group ab-section-head ab-section-head--center"><!-- wp:paragraph {"className":"ab-eyebrow"} -->
-<p class="ab-eyebrow">Meet The Founder</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2 class="wp-block-heading">A Message From The Owner</h2>
-<!-- /wp:heading --></div>
-<!-- /wp:group -->
-
 <!-- wp:html -->
-<div class="ab-founder-row">
-  <figure class="ab-founder-row__img"><img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/OwnerLior1.webp" alt="Lior Ohayon, founder and CEO of Adept Builders &amp; Design"/></figure>
-  <div class="ab-founder-row__text">
-    <p>Lior Ohayon is the founder and CEO of Adept Builders &amp; Design, a premier construction and design-build firm serving discerning homeowners throughout Los Angeles. With more than a decade of experience in high-end residential construction, Lior is known for transforming ambitious visions into beautifully executed homes, renovations, and outdoor living spaces.</p>
-    <p>His hands-on leadership, meticulous attention to detail, and commitment to superior craftsmanship ensure every project is managed with precision from the initial consultation through final completion. Working closely with clients, architects, and designers, Lior delivers tailored spaces that reflect each homeowner's lifestyle while adding enduring value to their property.</p>
-    <p>Lior is also the owner of NovaDeck, Adept Builders &amp; Design's sister company, specializing in innovative movable pool-deck solutions. This unique relationship gives Adept clients access to forward-thinking outdoor-living possibilities and integrated design solutions that are not typically available through a traditional construction company—all delivered with the same focus on quality, sophistication, and exceptional service.</p>
-  </div>
-  <figure class="ab-founder-row__img"><img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/OwnerLior2.webp" alt="Lior Ohayon on a job site with the Adept Builders &amp; Design team"/></figure>
-</div>
 <style>
-.ab-founder-row{display:flex;align-items:center;gap:clamp(20px,3vw,36px);}
-.ab-founder-row__img{flex:0 0 clamp(160px,20vw,240px);margin:0;}
-.ab-founder-row__img img{display:block;width:100%;height:auto;border-radius:var(--ab-radius);}
-.ab-founder-row__text{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.1em;}
-.ab-founder-row__text p{margin:0;}
-@media (max-width:782px){
-  .ab-founder-row{flex-direction:column;}
-  .ab-founder-row__img{flex-basis:auto;width:100%;order:-1;}
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+.ab-intro-dark{
+  position:relative;
+  width:100vw;
+  left:50%;
+  right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+  margin-top: -40px;
+  margin-bottom: -40px;
+  background:#000000;
+  padding:clamp(70px,8vw,110px) 24px;
+  text-align:center;
+  box-sizing:border-box;
+  z-index: 2;
 }
+
+.ab-intro-dark__rule{width:36px;height:1px;background:#D99A3E;margin:0 auto 26px;}
+.ab-intro-dark h2{margin:0 0 22px;font-size:clamp(2rem,4vw,3rem);font-weight:400;color:#ffffff;font-family:'Quicksand',sans-serif;}
+.ab-intro-dark p{max-width:640px;margin:0 auto;font-size:17px;line-height:1.8;color:rgba(255,255,255,0.8);font-family:'Quicksand',sans-serif;}
 </style>
+
+<div class="ab-intro-dark ab-reveal">
+  <div class="ab-intro-dark__rule"></div>
+  <h2>Adept Builders &amp; Design</h2>
+  <p>For over a decade, Adept Builders &amp; Design has helped Los Angeles homeowners turn their vision into a home they love coming home to.</p>
+</div>
 <!-- /wp:html -->
 
 <!-- wp:html -->
-<div class="ab-whatwedo-row">
-  <div class="ab-whatwedo-row__text">
-    <h2 class="wp-block-heading">What We Do</h2>
-    <p>Adept Builders &amp; Design delivers exceptional residential construction, renovation, and design-build services for homeowners who expect more from their homes—and from their construction experience.</p>
-    <p>From refined whole-home renovations and custom additions to bespoke kitchens, bathrooms, and elevated outdoor living spaces, our team manages every detail with thoughtful planning, superior craftsmanship, and clear communication. We collaborate closely with each client, architect, and designer to transform a vision into a space that is beautifully executed, highly functional, and built to endure.</p>
-    <p>Our approach is personal, precise, and transparent from the first consultation through completion. With Adept, clients gain a trusted construction partner dedicated to protecting their investment, honoring their home, and delivering a finished result that feels distinctly their own.</p>
-  </div>
-  <figure class="ab-whatwedo-row__img"><img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/OurOwnerLior.webp" alt="Lior Ohayon reviewing plans for Adept Builders &amp; Design"/></figure>
-</div>
 <style>
-.ab-whatwedo-row{display:flex;align-items:flex-start;gap:clamp(28px,4vw,56px);}
-.ab-whatwedo-row__text{flex:1;min-width:0;}
-.ab-whatwedo-row__text h2{margin:0 0 20px;}
-.ab-whatwedo-row__text p{margin:0 0 1.1em;}
-.ab-whatwedo-row__text p:last-child{margin-bottom:0;}
-.ab-whatwedo-row__img{flex:0 0 clamp(260px,34vw,420px);margin:0;}
-.ab-whatwedo-row__img img{display:block;width:100%;height:auto;border-radius:var(--ab-radius);}
-@media (max-width:782px){
-  .ab-whatwedo-row{flex-direction:column;}
-  .ab-whatwedo-row__img{flex-basis:auto;width:100%;}
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+.ab-founder-triptych{position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;min-height:680px;overflow:visible;}
+.ab-founder-triptych__bg{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;}
+.ab-founder-triptych__bg img{flex:1;width:100%;height:100%;object-fit:cover;}
+.ab-founder-triptych__overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(6,9,11,0.72);}
+.ab-founder-triptych__content{position:relative;min-height:680px;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 60px;box-sizing:border-box;}
+.ab-founder-triptych__inner{max-width:760px;}
+.ab-founder-triptych__eyebrow{font-size:16px;letter-spacing:.22em;text-transform:uppercase;color:#E8C98A;margin-bottom:14px;display:block;font-weight:600;}
+.ab-founder-triptych__rule{width:40px;height:2px;background:#D99A3E;margin:0 auto 18px;}
+.ab-founder-triptych h2{margin:0 0 18px;font-size:38px;font-weight:500;color:#ffffff;line-height:1.15;font-family:'Quicksand',sans-serif;text-shadow:0 2px 14px rgba(0,0,0,0.5);}
+.ab-founder-triptych p{margin:0 0 18px;font-size:16.5px;line-height:1.8;color:#ffffff;font-weight:400;text-shadow:0 1px 8px rgba(0,0,0,0.4);font-family:'Quicksand',sans-serif;}
+.ab-founder-triptych p:last-child{margin-bottom:0;}
+@media (max-width:900px){
+  .ab-founder-triptych{height:auto;min-height:560px;}
+  .ab-founder-triptych h2{font-size:28px;}
+}
+</style>
+
+<div class="ab-founder-triptych ab-reveal">
+  <div class="ab-founder-triptych__bg">
+    <img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/OwnerLior1.webp" alt="Lior Ohayon, founder and CEO of Adept Builders &amp; Design">
+    <img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/OwnerLior2.webp" alt="Lior Ohayon on a job site with the Adept Builders &amp; Design team">
+    <img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/OurOwnerLior.webp" alt="Lior Ohayon reviewing plans for Adept Builders &amp; Design">
+  </div>
+  <div class="ab-founder-triptych__overlay"></div>
+  <div class="ab-founder-triptych__content">
+    <div class="ab-founder-triptych__inner">
+      <span class="ab-founder-triptych__eyebrow">Leadership</span>
+      <div class="ab-founder-triptych__rule"></div>
+      <h2>About the Founder</h2>
+      <p>Lior Ohayon is the founder and CEO of Adept Builders &amp; Design, a premier construction and design-build firm serving discerning homeowners throughout Los Angeles. With more than a decade of experience in high-end residential construction, Lior is known for transforming ambitious visions into beautifully executed homes, renovations, and outdoor living spaces.</p>
+      <p>His hands-on leadership, meticulous attention to detail, and commitment to superior craftsmanship ensure every project is managed with precision from the initial consultation through final completion. Working closely with clients, architects, and designers, Lior delivers tailored spaces that reflect each homeowner&rsquo;s lifestyle while adding enduring value to their property.</p>
+      <p>Lior is also the owner of NovaDeck, Adept Builders &amp; Design&rsquo;s sister company, specializing in innovative movable pool-deck solutions. This unique relationship gives Adept clients access to forward-thinking outdoor-living possibilities and integrated design solutions that are not typically available through a traditional construction company&mdash;all delivered with the same focus on quality, sophistication, and exceptional service.</p>
+    </div>
+  </div>
+</div>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<style>
+.ab-whatwedo-cols{padding:60px 40px;background:#FBFAF8;}
+.ab-whatwedo-cols__head{text-align:center;margin-bottom:36px;}
+.ab-whatwedo-cols__rule{width:36px;height:1px;background:#D99A3E;margin:0 auto 24px;}
+.ab-whatwedo-cols__head h2{margin:0;font-size:36px;font-weight:400;color:#14202A;font-family:'Quicksand',sans-serif;}
+.ab-whatwedo-cols__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;}
+.ab-whatwedo-cols__num{font-size:18px;color:#B8935A;letter-spacing:.1em;margin-bottom:16px;font-family:'Quicksand',sans-serif;}
+.ab-whatwedo-cols__grid p{margin:0;font-size:18px;line-height:1.85;color:#4A5A63;font-weight:300;font-family:'Quicksand',sans-serif;}
+@media (max-width:900px){
+  .ab-whatwedo-cols{padding:70px 24px;}
+  .ab-whatwedo-cols__grid{grid-template-columns:1fr;gap:36px;}
+}
+</style>
+
+<div class="ab-whatwedo-cols ab-reveal">
+  <div class="ab-whatwedo-cols__head">
+    <div class="ab-whatwedo-cols__rule"></div>
+    <h2>What We Do</h2>
+  </div>
+  <div class="ab-whatwedo-cols__grid">
+    <div>
+      <div class="ab-whatwedo-cols__num">01</div>
+      <p>Adept Builders &amp; Design delivers exceptional residential construction, renovation, and design-build services for homeowners who expect more from their homes&mdash;and from their construction experience.</p>
+    </div>
+    <div>
+      <div class="ab-whatwedo-cols__num">02</div>
+      <p>From refined whole-home renovations and custom additions to bespoke kitchens, bathrooms, and elevated outdoor living spaces, our team manages every detail with thoughtful planning, superior craftsmanship, and clear communication. We collaborate closely with each client, architect, and designer to transform a vision into a space that is beautifully executed, highly functional, and built to endure.</p>
+    </div>
+    <div>
+      <div class="ab-whatwedo-cols__num">03</div>
+      <p>Our approach is personal, precise, and transparent from the first consultation through completion. With Adept, clients gain a trusted construction partner dedicated to protecting their investment, honoring their home, and delivering a finished result that feels distinctly their own.</p>
+    </div>
+  </div>
+</div>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<style>
+.ab-owner-gallery{
+  display:grid !important;
+  grid-template-columns:repeat(6, 1fr) !important;
+  gap:0px !important;
+  align-items:stretch !important;
+  width:100vw !important;
+  position:relative !important;
+  left:50% !important;
+  right:50% !important;
+  margin-left:-50vw !important;
+  margin-right:-50vw !important;
+  margin-top:-120px !important;
+  margin-bottom:-120px !important;
+  padding:0 !important;
+  box-sizing:border-box !important;
+  z-index:10 !important;
+}
+
+.ab-owner-gallery figure.wp-block-image{
+  display:block !important;
+  width:100% !important;
+  height:650px !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  flex:none !important;
+}
+
+.ab-owner-gallery figure.wp-block-image > a,
+.ab-owner-gallery figure.wp-block-image > div{
+  display:block !important;
+  height:100% !important;
+  width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+
+.ab-owner-gallery figure.wp-block-image img{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center !important;
 }
 </style>
 <!-- /wp:html -->
@@ -206,30 +306,136 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:heading {"level":2,"textAlign":"center"} -->
-<h2 class="has-text-align-center">Hear From Our Clients…</h2>
-<!-- /wp:heading -->
+<!-- wp:html -->
+<style>
+.ab-clients-dark{
+  position:relative;
+  width:100vw;
+  left:50%;
+  right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+  margin-top:-80px !important;
+  margin-bottom:-80px !important;
+  background:#000000;
+  padding:clamp(64px,8vw,110px) 24px;
+  text-align:center;
+  box-sizing:border-box;
+  z-index:2;
+}
+.ab-clients-dark__rule{width:36px;height:1px;background:#D99A3E;margin:0 auto 24px;}
+.ab-clients-dark h2{margin:0 0 40px;font-size:clamp(1.8rem,3.4vw,2.4rem);font-weight:400;color:#ffffff;font-family:'Quicksand',sans-serif;}
+.ab-clients-dark__widget{max-width:1400px;margin:0 auto;position:relative;z-index:1;}
 
-<!-- wp:group -->
-[trustindex no-registration=google]
-<!-- /wp:group -->
+.ab-clients-dark__widget .ti-large-title,
+.ab-clients-dark__widget .ti-rating-text,
+.ab-clients-dark__widget .ti-text-small,
+.ab-clients-dark__widget .ti-small-text,
+.ab-clients-dark__widget .ti-footer,
+.ab-clients-dark__widget .ti-footer *,
+.ab-clients-dark__widget .ti-summary,
+.ab-clients-dark__widget .ti-summary * {
+  color: #ffffff !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
 
-<!-- wp:group {"className":"ab-cta"} -->
-<div class="wp-block-group ab-cta"><!-- wp:group -->
-<div class="wp-block-group"><!-- wp:heading -->
-<h2 class="wp-block-heading">Have a project in mind?</h2>
-<!-- /wp:heading -->
+.ab-clients-dark__widget .ti-review-item {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 12px !important;
+  padding: 20px !important;
+  margin: 0 10px !important;
+  box-sizing: border-box !important;
+}
+
+.ab-clients-dark__widget .ti-review-item,
+.ab-clients-dark__widget .ti-review-item * {
+  color: #ffffff !important;
+}
+
+.ab-clients-dark__widget .ti-review-item .ti-star {
+  color: #f6bb06 !important;
+}
+</style>
+
+<div class="ab-clients-dark ab-reveal">
+  <div class="ab-clients-dark__rule"></div>
+  <h2>Hear From Our Clients…</h2>
+  <div class="ab-clients-dark__widget">[trustindex no-registration=google]</div>
+</div>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<style>
+.ab-cta-photo{
+  position:relative;
+  width:100vw;
+  left:50%;
+  right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+  margin-top:-80px !important;
+  margin-bottom:-80px !important;
+  height:clamp(380px,42vw,520px);
+  overflow:hidden;
+  z-index:2;
+}
+.ab-cta-photo__bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;}
+.ab-cta-photo__overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(10,14,17,0.55);z-index:2;}
+.ab-cta-photo__content{position:relative;z-index:3;height:100%;display:flex;align-items:center;justify-content:center;padding:0 24px;box-sizing:border-box;}
+.ab-cta-photo__card{background:rgba(15,20,23,0.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.14);padding:clamp(36px,5vw,52px) clamp(28px,5vw,60px);text-align:center;max-width:540px;border-radius:4px;}
+.ab-cta-photo__rule{width:32px;height:1px;background:#D99A3E;margin:0 auto 22px;}
+.ab-cta-photo__card h2{margin:0 0 16px;font-size:clamp(1.5rem,3vw,1.9rem);font-weight:400;color:#ffffff;font-family:'Quicksand',sans-serif;}
+.ab-cta-photo__card p{margin:0 0 28px;font-size:14.5px;color:rgba(255,255,255,0.8);font-family:'Quicksand',sans-serif;}
+</style>
+
+<div class="ab-cta-photo ab-reveal">
+  <img class="ab-cta-photo__bg" src="https://adeptbuild.com/wp-content/uploads/2023/03/dsc5682-1024x683.jpeg" alt="">
+  <div class="ab-cta-photo__overlay"></div>
+  <div class="ab-cta-photo__content">
+    <div class="ab-cta-photo__card">
+      <div class="ab-cta-photo__rule"></div>
+      <h2>Have a project in mind?</h2>
+      <p>Tell us about your space and we'll set up a free, no-pressure consultation to talk through the possibilities.</p>
+      <button onclick="document.getElementById('adept-modal-about').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px);">Schedule A Meeting</button>
+    </div>
+  </div>
+</div>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<style>
+.ab-reveal{opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s ease;}
+.ab-reveal.is-visible{opacity:1; transform:translateY(0);}
+@media (prefers-reduced-motion: reduce){
+  .ab-reveal{transition:none !important; opacity:1 !important; transform:none !important;}
+}
+</style>
+<script>
+(function(){
+  var init = function(){
+    var els = document.querySelectorAll('.ab-reveal');
+    if (!els.length) return;
+    if ('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+        });
+      }, {threshold:0.15});
+      els.forEach(function(el){ io.observe(el); });
+    } else {
+      els.forEach(function(el){ el.classList.add('is-visible'); });
+    }
+  };
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+})();
+</script>
+<!-- /wp:html -->
 
 <!-- wp:paragraph -->
-<p>Tell us about your space and we'll set up a free, no-pressure consultation to talk through the possibilities.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button -->
-<div class="wp-block-button">
-<button onclick="document.getElementById('adept-modal-about').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px); box-shadow:0 8px 20px rgba(0,0,0,0.15); width:100%;">Schedule A Meeting</button>
-</div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
-<!-- /wp:group -->
+<p></p>
+<!-- /wp:paragraph -->
