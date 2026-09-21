@@ -2625,81 +2625,43 @@ h2.ab-services-showcase__title {
 
 .site-footer {
     background: #0A0A0AD1;
-    color: rgba(255, 255, 255, 0.68);
-    font-size: var(--ab-fs-sm);
-}
-
-.ab-footer-widgets {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr 1fr 1.3fr;
-    gap: clamp(30px, 4vw, 56px);
-    padding: clamp(56px, 7vw, 84px) 0 clamp(40px, 5vw, 56px);
-}
-
-.site-footer .widget-title,
-.ab-footer-widgets h3 {
     color: #fff;
-    font-size: 1.0625rem;
-    margin-bottom: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+.site-footer,
+.site-footer * { font-family: var(--ab-font-quicksand); }
+
+.ab-footer-main {
+    display: grid;
+    grid-template-columns: minmax(260px, 1fr) minmax(0, 420px) minmax(160px, 1fr);
+    align-items: start;
+    gap: clamp(24px, 4vw, 56px);
+    padding: clamp(48px, 6vw, 80px) 0 clamp(32px, 4vw, 48px);
 }
 
 .site-footer ul { list-style: none; padding: 0; margin: 0; }
-.site-footer li { margin-bottom: 11px; }
-.site-footer a { color: rgba(255, 255, 255, 0.68); }
+.site-footer a { color: #fff; font-size: 18px; text-decoration: none; }
 .site-footer a:hover { color: #0170b9; }
 
-.ab-footer-brand .site-title a,
-.ab-footer-brand strong {
-    color: #fff;
-    font-family: var(--ab-font-heading);
-    font-size: 1.375rem;
-    font-weight: 300;
-    letter-spacing: -0.02em;
-}
-.ab-footer-brand p { margin-top: 16px; max-width: 340px; }
+/* Left: contact info, one line each */
+.ab-footer-info { display: flex; flex-direction: column; gap: 6px; line-height: 1.5; }
+.ab-footer-info a { white-space: nowrap; }
+.ab-footer-info a:first-of-type { white-space: normal; }
+.ab-footer-info strong { color: #fff; font-size: 18px; font-weight: 300; }
 
-.ab-footer-contact li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-}
-.ab-footer-contact svg { color: #FFFFFF; flex-shrink: 0; margin-top: 4px; }
+/* Middle: large logo */
+.ab-footer-logo { display: flex; justify-content: center; align-items: center; }
+.ab-footer-logo img,
+.ab-footer-logo .custom-logo { max-height: none; }
+.ab-footer-logo img { max-width: 100%; height: auto; }
+.ab-footer-logo a { display: block; max-width: 420px; }
 
-.ab-footer-contact__phone a {
-    font-family: var(--ab-font-heading);
-    font-size: 1.375rem;
-    font-weight: 300;
-    letter-spacing: 0.02em;
-    color: #fff;
-}
-.ab-footer-contact__phone a:hover { color: #0170b9; }
+/* Right: sub-pages, right-aligned */
+.ab-footer-nav ul { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.ab-footer-nav li { margin: 0; }
 
-/* --- "Follow us" + outlined social row (footer only) --- */
-.ab-footer-follow {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-top: 22px;
-    flex-wrap: wrap;
-}
-.ab-footer-follow__label {
-    font-size: var(--ab-fs-sm);
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.7);
-}
-.ab-social--outline a {
-    width: 38px;
-    height: 38px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    background: transparent;
-    transition: transform var(--ab-transition), border-color var(--ab-transition), background-color var(--ab-transition);
-}
-.ab-social--outline a:hover {
-    background: transparent;
-    border-color: #fff;
-    transform: scale(1.1);
-}
-
+/* Bottom bar */
 .ab-footer-bottom {
     display: flex;
     align-items: center;
@@ -2707,12 +2669,12 @@ h2.ab-services-showcase__title {
     gap: 18px;
     flex-wrap: wrap;
     padding: 22px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.10);
-    font-size: var(--ab-fs-xs);
-    color: rgba(255, 255, 255, 0.55);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
 }
+.ab-footer-bottom p { margin: 0; font-size: 18px; }
 .ab-footer-bottom ul { display: flex; gap: 22px; flex-wrap: wrap; }
 .ab-footer-bottom li { margin: 0; }
+
 
 /* ==========================================================================
    12. ANIMATIONS
@@ -2791,7 +2753,9 @@ h2.ab-services-showcase__title {
 @media (max-width: 1024px) {
     .ab-grid--4 { grid-template-columns: repeat(2, 1fr); }
     .ab-layout { grid-template-columns: minmax(0, 1fr); }
-    .ab-footer-widgets { grid-template-columns: repeat(2, 1fr); }
+    .ab-footer-main { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+    .ab-footer-info { align-items: center; }
+    .ab-footer-nav ul { align-items: center; }
     .ab-steps::before { display: none; }
 }
 
@@ -2914,7 +2878,7 @@ h2.ab-services-showcase__title {
     .ab-gallery { grid-template-columns: 1fr; }
     .ab-gallery__item--wide { grid-column: span 1; }
 
-    .ab-footer-widgets { grid-template-columns: 1fr; }
+
     .ab-footer-bottom { justify-content: center; text-align: center; }
 
     .ab-btn-group { width: 100%; }
