@@ -3566,31 +3566,52 @@ ol.wp-block-list li::marker {
     padding: clamp(56px, 7vw, 90px) 0;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .home .ab-proto-philosophy .ab-proto-inner {
     display: grid !important;
-    grid-template-columns: 1fr 1.3fr !important;
+    grid-template-columns: auto 1fr !important;
     gap: clamp(28px, 4vw, 56px);
     align-items: center;
-    width: 100%;
+    width: 100% !important;
+    max-width: var(--ab-container) !important;
+    margin: 0 auto !important;
 }
 .home .ab-proto-philosophy .ab-proto-inner > .wp-block-group__inner-container {
     display: contents;
 }
+/* Title + icon stack, centered in its own column instead of the old
+   left-aligned boxed/padded heading. */
+.home .ab-proto-philosophy-title {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: max-content !important;
+    margin: 0 auto !important;
+    gap: 18px;
+}
 .home .ab-proto-philosophy h2 {
-    display: inline-block;
     font-family: var(--ab-font-heading);
-    font-weight: 300;
+    font-weight: 200;
     font-size: clamp(1.25rem, 2.4vw, 1.75rem);
     margin: 0;
-    padding: 16px 22px;
     color: #ffffff;
 }
+.home .ab-proto-philosophy-title__icon {
+    color: rgba(255, 255, 255, 0.85);
+}
 .home .ab-proto-philosophy-copy {
+    width: 100% !important;
+    max-width: none !important;
     padding-left: clamp(28px, 4vw, 56px);
     border-left: 1px solid rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
 }
 .home .ab-proto-philosophy-copy p {
+    width: 100%;
+    max-width: none !important;
     font-size: 1.0625rem;
     color: rgba(255, 255, 255, 0.75);
 }
