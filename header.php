@@ -143,23 +143,64 @@ $ab_whatsapp = adeptbuild_option( 'whatsapp_url' );
 		</a>
 	<?php endif; ?>
 
-	<?php if ( $ab_phone ) : ?>
-		<a class="ab-floating-pill ab-floating-pill--call" href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>">
-			<span class="ab-floating-pill__icon"><?php adeptbuild_icon( 'phone', 18 ); ?></span>
-			<span class="ab-floating-pill__text"><?php echo esc_html( $ab_phone ); ?></span>
-		</a>
-	<?php endif; ?>
+	<?php if ( $ab_phone || $ab_phone_text || $ab_whatsapp ) : ?>
+		<div class="ab-floating-contact" id="ab-floating-contact">
+			<div class="ab-floating-contact__scrim" data-ab-fc-close></div>
 
-	<?php if ( $ab_phone_text ) : ?>
-		<a class="ab-floating-pill ab-floating-pill--text" href="<?php echo esc_url( adeptbuild_sms_href( $ab_phone_text ) ); ?>">
-			<span class="ab-floating-pill__icon"><?php adeptbuild_icon( 'message', 18 ); ?></span>
-			<span class="ab-floating-pill__text"><?php echo esc_html( $ab_phone_text ); ?></span>
-		</a>
-	<?php elseif ( $ab_whatsapp ) : ?>
-		<a class="ab-floating-pill ab-floating-pill--text" href="<?php echo esc_url( $ab_whatsapp ); ?>" target="_blank" rel="noopener noreferrer">
-			<span class="ab-floating-pill__icon"><?php adeptbuild_icon( 'whatsapp', 18 ); ?></span>
-			<span class="ab-floating-pill__text"><?php esc_html_e( 'WhatsApp', 'adeptbuild' ); ?></span>
-		</a>
+			<button
+				class="ab-floating-contact__tab"
+				type="button"
+				aria-label="<?php esc_attr_e( 'Contact us', 'adeptbuild' ); ?>"
+				aria-expanded="false"
+				aria-controls="ab-floating-contact-panel">
+				<?php adeptbuild_icon( 'phone', 14 ); ?>
+				<i></i>
+			</button>
+
+			<div class="ab-floating-contact__panel" id="ab-floating-contact-panel">
+				<?php if ( $ab_phone ) : ?>
+					<a
+						class="ab-floating-pill ab-floating-pill--call"
+						href="<?php echo esc_url( adeptbuild_tel_href( $ab_phone ) ); ?>"
+						aria-label="<?php echo esc_attr( sprintf( /* translators: %s: phone number. */ __( 'Call us at %s', 'adeptbuild' ), $ab_phone ) ); ?>">
+						<span class="ab-floating-pill__icon"><?php adeptbuild_icon( 'phone', 18 ); ?></span>
+						<span class="ab-floating-pill__text">
+							<span class="ab-floating-pill__label"><?php esc_html_e( 'Call us', 'adeptbuild' ); ?></span>
+							<span class="ab-floating-pill__num"><?php echo esc_html( $ab_phone ); ?></span>
+						</span>
+					</a>
+				<?php endif; ?>
+
+				<?php if ( $ab_phone_text ) : ?>
+					<a
+						class="ab-floating-pill ab-floating-pill--text"
+						href="<?php echo esc_url( adeptbuild_sms_href( $ab_phone_text ) ); ?>"
+						aria-label="<?php echo esc_attr( sprintf( /* translators: %s: phone number. */ __( 'Text us at %s', 'adeptbuild' ), $ab_phone_text ) ); ?>">
+						<span class="ab-floating-pill__icon"><?php adeptbuild_icon( 'message', 18 ); ?></span>
+						<span class="ab-floating-pill__text">
+							<span class="ab-floating-pill__label"><?php esc_html_e( 'Text us', 'adeptbuild' ); ?></span>
+							<span class="ab-floating-pill__num"><?php echo esc_html( $ab_phone_text ); ?></span>
+						</span>
+					</a>
+				<?php elseif ( $ab_whatsapp ) : ?>
+					<a
+						class="ab-floating-pill ab-floating-pill--text"
+						href="<?php echo esc_url( $ab_whatsapp ); ?>"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="<?php esc_attr_e( 'Chat on WhatsApp', 'adeptbuild' ); ?>">
+						<span class="ab-floating-pill__icon"><?php adeptbuild_icon( 'whatsapp', 18 ); ?></span>
+						<span class="ab-floating-pill__text">
+							<span class="ab-floating-pill__label"><?php esc_html_e( 'WhatsApp', 'adeptbuild' ); ?></span>
+						</span>
+					</a>
+				<?php endif; ?>
+
+				<button class="ab-floating-contact__close" type="button" aria-label="<?php esc_attr_e( 'Close', 'adeptbuild' ); ?>" data-ab-fc-close>
+					<?php adeptbuild_icon( 'close', 14 ); ?>
+				</button>
+			</div>
+		</div>
 	<?php endif; ?>
 </div>
 

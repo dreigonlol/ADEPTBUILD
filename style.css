@@ -837,47 +837,169 @@ body.ab-menu-open .site-header {
 }
 .ab-floating-whatsapp:hover { transform: scale(1.08); color: #fff; }
 
-/* Call / Text floating pills — white for Call, Adept blue for Text, a
-   round icon badge fused to a rounded label (mcclean reference). */
-.ab-floating-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-right: 14px;
-    padding: 6px 18px 6px 6px;
-    border-radius: var(--ab-radius-pill);
-    text-decoration: none;
-    font-family: var(--ab-font-heading);
-    font-weight: 300;
-    font-size: 0.875rem;
-    white-space: nowrap;
-    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.16);
-    transition: transform var(--ab-transition), box-shadow var(--ab-transition);
+/* --- Floating Call/Text contact widget, pinned to the bottom-right corner.
+   Desktop: two circles that expand left on hover to reveal a label + the
+   number (reversed from a left-edge widget, so the reveal always grows
+   back into the page instead of off the screen edge). Mobile (<768px):
+   collapses to a slim tab on the right edge — a tap opens a small panel
+   with both pills plus a close button; tapping the scrim, the close
+   button, or Escape closes it again (initFloatingContact() in
+   navigation.js). Gold/ink/cream colors match the shared reference design
+   exactly (not the site's usual blue), since that palette is this
+   widget's own look, not a section of the rebrand. --- */
+.ab-floating-contact {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 95;
+    display: flex;
+    align-items: flex-end;
 }
-.ab-floating-pill:hover { transform: translateY(-2px); }
+.ab-floating-contact__scrim { display: none; }
+.ab-floating-contact__tab { display: none; }
+.ab-floating-contact__panel {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    /* Panel now sits at the right edge of the screen, so each pill needs
+       to grow leftward (back into the page) on hover, not rightward off
+       the edge. "direction:rtl" flips which side of each flex item is
+       "fixed" as it resizes — its icon (first child) anchors flush to the
+       pill's own right edge and stays put, while the box's left edge (and
+       the text revealed there) is what moves as max-width grows. Actual
+       text content gets "direction:ltr" below so numbers/labels still
+       read normally, left to right. */
+    direction: rtl;
+}
+.ab-floating-contact__close { display: none; }
+
+.ab-floating-pill {
+    display: flex;
+    align-items: center;
+    height: 56px;
+    max-width: 56px;
+    padding: 0;
+    border-radius: var(--ab-radius-pill);
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.16);
+    transition: max-width var(--ab-transition), box-shadow var(--ab-transition);
+}
+.ab-floating-pill:hover,
+.ab-floating-pill:focus-visible { max-width: 240px; }
+.ab-floating-pill:focus-visible { outline: 2px solid #C9A55C; outline-offset: 3px; }
 .ab-floating-pill__icon {
+    flex: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    flex-shrink: 0;
 }
-.ab-floating-pill--call {
-    background: #fff;
-    color: #1A1A1A;
+.ab-floating-pill__text {
+    display: flex;
+    flex-direction: column;
+    direction: ltr;
+    text-align: left;
+    padding-left: 20px;
+    white-space: nowrap;
+    font-family: var(--ab-font-heading);
+    opacity: 0;
+    transition: opacity 0.25s ease;
 }
-.ab-floating-pill--call .ab-floating-pill__icon { background: #1A1A1A; color: #fff; }
-.ab-floating-pill--text {
-    background: #0170b9;
-    color: #fff;
+.ab-floating-pill:hover .ab-floating-pill__text,
+.ab-floating-pill:focus-visible .ab-floating-pill__text { opacity: 1; }
+.ab-floating-pill__label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    color: #ffffff;
+    opacity: 0.85;
 }
-.ab-floating-pill--text .ab-floating-pill__icon { background: #fff; color: #0170b9; }
+.ab-floating-pill__num { font-size: 1rem; font-weight: 600; line-height: 1.3; color: #ffffff; }
 
-@media (max-width: 600px) {
+.ab-floating-pill--call { background: #C9A55C; color: #1C1B19; }
+.ab-floating-pill--call:hover,
+.ab-floating-pill--call:focus-visible { background: #D4B26B; }
+.ab-floating-pill--call .ab-floating-pill__icon { background: transparent; color: #1C1B19; }
+.ab-floating-pill--text { background: #1C1B19; color: #F3EFE6; }
+.ab-floating-pill--text:hover,
+.ab-floating-pill--text:focus-visible { background: #2A2926; }
+.ab-floating-pill--text .ab-floating-pill__icon { background: transparent; color: #F3EFE6; }
+
+@media (max-width: 767px) {
+    .ab-floating-contact { right: 0; bottom: calc(88px + env(safe-area-inset-bottom, 0px)); }
+    .ab-floating-contact__scrim {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background: rgba(28, 27, 25, 0.22);
+    }
+    .ab-floating-contact.is-open .ab-floating-contact__scrim { display: block; }
+    .ab-floating-contact__tab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: 30px;
+        height: 60px;
+        padding: 0;
+        border: 0;
+        border-radius: var(--ab-radius-pill) 0 0 var(--ab-radius-pill);
+        background: #1C1B19;
+        color: #C9A55C;
+        cursor: pointer;
+        box-shadow: -4px 8px 20px -8px rgba(0, 0, 0, 0.5);
+    }
+    .ab-floating-contact__tab i { width: 3px; height: 14px; border-radius: 2px; background: rgba(201, 165, 92, 0.5); }
+    .ab-floating-contact.is-open .ab-floating-contact__tab { display: none; }
+    .ab-floating-contact__panel {
+        display: none;
+        align-items: center;
+        gap: 14px;
+        direction: ltr;
+        margin-right: 12px;
+        padding: 7px;
+        border-radius: var(--ab-radius-pill);
+        background: #FFFDF8;
+        box-shadow: 0 16px 34px -12px rgba(0, 0, 0, 0.5);
+    }
+    .ab-floating-contact.is-open .ab-floating-contact__panel {
+        display: flex;
+        animation: ab-floating-contact-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .ab-floating-pill,
+    .ab-floating-pill:hover { height: 46px; max-width: 46px; box-shadow: none; }
+    .ab-floating-pill__icon { width: 46px; height: 46px; }
     .ab-floating-pill__text { display: none; }
-    .ab-floating-pill { padding: 4px; margin-right: 10px; }
+    .ab-floating-contact__close {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        border: 1px solid #E2DDD2;
+        border-radius: 50%;
+        background: transparent;
+        color: #6B6A66;
+        cursor: pointer;
+    }
+}
+
+@keyframes ab-floating-contact-in {
+    from { opacity: 0; transform: translateX(-12px); }
+    to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-floating-pill,
+    .ab-floating-pill__text { transition: none; }
+    .ab-floating-contact.is-open .ab-floating-contact__panel { animation: none; }
 }
 
 /* ==========================================================================

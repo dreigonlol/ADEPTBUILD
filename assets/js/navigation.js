@@ -17,6 +17,7 @@
 		setHeaderHeight();
 		setHeroIntroOverlap();
 		initMobileMenu();
+		initFloatingContact();
 		autoTagReveals();
 		initReveal();
 		initCounters();
@@ -788,6 +789,47 @@
 		} );
 
 		initSubmenus( nav );
+	}
+
+	/**
+	 * Floating Call/Text widget, bottom-left. Desktop just relies on the
+	 * ":hover"/":focus-visible" CSS to expand the pills — this only handles
+	 * the mobile tab-opens-a-panel interaction (tap the tab, tap the scrim/
+	 * close button/Escape to close). No-ops entirely above the 768px
+	 * breakpoint where the tab is hidden and the panel is always shown.
+	 */
+	function initFloatingContact() {
+		var widget = document.getElementById( 'ab-floating-contact' );
+		if ( ! widget ) {
+			return;
+		}
+
+		var tab = widget.querySelector( '.ab-floating-contact__tab' );
+		if ( ! tab ) {
+			return;
+		}
+
+		var setOpen = function ( open ) {
+			widget.classList.toggle( 'is-open', open );
+			tab.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+		};
+
+		tab.addEventListener( 'click', function () {
+			setOpen( true );
+		} );
+
+		Array.prototype.forEach.call( widget.querySelectorAll( '[data-ab-fc-close]' ), function ( el ) {
+			el.addEventListener( 'click', function () {
+				setOpen( false );
+			} );
+		} );
+
+		document.addEventListener( 'keydown', function ( event ) {
+			if ( 'Escape' === event.key && widget.classList.contains( 'is-open' ) ) {
+				setOpen( false );
+				tab.focus();
+			}
+		} );
 	}
 
 	/**

@@ -29,7 +29,7 @@
   <div style="position:relative; z-index:3; display:flex; flex-wrap:nowrap; align-items:center; justify-content:flex-start; height:100vh; padding:2vw 4vw; box-sizing:border-box;">
     <div style="min-width:0; display:flex; flex-direction:column; align-items:flex-start;">
       <h1 style="color:#ffffff; font-size:clamp(1.1rem,3.2vw,2rem); margin:0 0 16px 0; text-shadow:0 2px 8px rgba(0,0,0,0.45); overflow-wrap:break-word;">Pools</h1>
-      <button onclick="document.getElementById('adept-modal-pools').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px); box-shadow:0 8px 20px rgba(0,0,0,0.15);">Schedule A Meeting</button>
+      <button onclick="document.getElementById('adept-modal-pools').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px); box-shadow:0 8px 20px rgba(0,0,0,0.15);">SCHEDULE A MEETING</button>
     </div>
   </div>
 </div>
@@ -388,6 +388,43 @@
   }
   </style>
 
+  <!-- Script Lightbox Modal -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('abps-lightbox')) return;
+
+    const lightbox = document.createElement('div');
+    lightbox.id = 'abps-lightbox';
+    Object.assign(lightbox.style, {
+      display: 'none', position: 'fixed', zIndex: '999999', left: '0', top: '0',
+      width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.85)',
+      alignItems: 'center', justifyContent: 'center', cursor: 'zoom-out'
+    });
+    lightbox.innerHTML = '<span style="position:absolute; top:24px; right:32px; color:#fff; font-size:40px; font-weight:bold; cursor:pointer;">&times;</span><img id="abps-lightbox-img" src="" style="max-width:90%; max-height:90vh; object-fit:contain; border-radius:4px; box-shadow:0 8px 32px rgba(0,0,0,0.6);">';
+    document.body.appendChild(lightbox);
+
+    lightbox.addEventListener('click', function() {
+      this.style.display = 'none';
+      document.body.style.overflow = '';
+    });
+
+    document.querySelectorAll('.abps-slide img').forEach(img => {
+      img.addEventListener('click', function(e) {
+        const inputId = this.parentElement.getAttribute('for');
+        const associatedInput = document.getElementById(inputId);
+        if (associatedInput && associatedInput.checked) {
+          e.preventDefault();
+          document.getElementById('abps-lightbox-img').src = this.src;
+          lightbox.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+  });
+  </script>
+</div>
+<!-- /wp:html -->
+
 <!-- wp:html -->
 <style>
 .ab-cta-photo{
@@ -420,8 +457,8 @@
       <div class="ab-cta-photo__rule"></div>
       <h2>Have a project in mind?</h2>
       <p>Tell us about your space and we'll set up a free, no-pressure consultation to talk through the possibilities.</p>
-      <button onclick="document.getElementById('adept-modal-pools').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px);">Schedule A Meeting</button>
+      <button onclick="document.getElementById('adept-modal-pools').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px);">SCHEDULE A MEETING</button>
     </div>
   </div>
 </div>
-<!-- /wp:html -->
+<!-- /wp:html --><!-- /wp:html -->
