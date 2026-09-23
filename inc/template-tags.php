@@ -219,7 +219,7 @@ function adeptbuild_menu_item_image( $title ) {
 	static $map = array(
 		'full home renovation' => 'Full Home Renovation.jpg',
 		'adus'                  => 'ADUS.jpg',
-		'decking'               => 'DECKING.jpeg',
+		'decking'               => 'DECKING.jpg',
 		'pools'                 => 'POOLS.jpg',
 		'pergolas'              => 'PERGOLAS.jpeg',
 		'landscaping'           => 'LADNSCAPING.jpeg',
