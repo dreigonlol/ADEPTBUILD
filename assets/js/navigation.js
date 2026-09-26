@@ -101,7 +101,7 @@
 	 */
 	function initWordRotators() {
 		var rotators = document.querySelectorAll( '.ab-word-rotate' );
-		var INTERVAL = 4500; // was 2400 — slower, so each word/photo lingers longer.
+		var INTERVAL = 2600; // was 4500, before that 2400 — how long each word/photo lingers before advancing.
 
 		var advance = function ( items, index ) {
 			var current = items[ index ];
@@ -158,6 +158,22 @@
 			}, INTERVAL );
 		} );
 
+		// A synced group can be gated behind mouse hover instead of running
+		// on its own timer from page load — used by "WE BUILD" so the photo
+		// sits still (and fully lit) until a visitor's cursor is actually on
+		// it. Opt in by adding data-rotate-hover="<the shared sync key>" to
+		// whatever element should act as the hover zone (see ".ab-story" in
+		// home-content.html). Desktop-only by nature (mouseenter/mouseleave
+		// don't fire meaningfully on touch), so touch devices — and anyone
+		// with reduced motion, same as every other rotator — just keep the
+		// original always-cycling behavior instead of sitting frozen with
+		// no way to trigger it.
+		var hoverScopes = {};
+		Array.prototype.forEach.call( document.querySelectorAll( '[data-rotate-hover]' ), function ( el ) {
+			hoverScopes[ el.getAttribute( 'data-rotate-hover' ) ] = el;
+		} );
+		var canHover = window.matchMedia( '(hover: hover) and (pointer: fine)' ).matches;
+
 		Object.keys( synced ).forEach( function ( key ) {
 			var group = synced[ key ]
 				.map( setUp )
@@ -168,7 +184,7 @@
 				return;
 			}
 			var index = 0;
-			setInterval( function () {
+			var tick = function () {
 				group.forEach( function ( items ) {
 					// Each member's own item count may differ, so it keeps
 					// its own effective index even on a shared clock tick.
@@ -177,7 +193,28 @@
 				index = ( index + 1 ) % Math.max.apply( null, group.map( function ( items ) {
 					return items.length;
 				} ) );
-			}, INTERVAL );
+			};
+
+			var hoverEl = hoverScopes[ key ];
+			if ( hoverEl && canHover ) {
+				var timer = null;
+				hoverEl.addEventListener( 'mouseenter', function () {
+					if ( timer ) {
+						return;
+					}
+					hoverEl.classList.add( 'is-rotate-hover' );
+					timer = setInterval( tick, INTERVAL );
+				} );
+				hoverEl.addEventListener( 'mouseleave', function () {
+					clearInterval( timer );
+					timer = null;
+					hoverEl.classList.remove( 'is-rotate-hover' );
+					// Just stops in place — whichever photo/word was showing
+					// when the cursor left stays put (no snap back to #1).
+				} );
+			} else {
+				setInterval( tick, INTERVAL );
+			}
 		} );
 	}
 

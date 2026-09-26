@@ -1184,12 +1184,38 @@ body.ab-menu-open .site-header {
     margin: 0;
 }
 .ab-story__bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Extra darkening on top of the permanent scrim below, only while the
+   rotation is actually running (".is-rotate-hover", toggled by
+   initWordRotators() in navigation.js on mouseenter/mouseleave — see
+   "data-rotate-hover" there). Static/lit by default; desktop-only, since
+   that's the only place hover — and so the rotation itself — ever runs. */
+@media (hover: hover) and (pointer: fine) {
+    .ab-story__bg img { transition: filter 0.3s ease; }
+    .ab-story.is-rotate-hover .ab-story__bg img { filter: brightness(0.62); }
+}
+/* Faster slide/fade than the base ".ab-word-rotate__item" (0.6s/0.5s) —
+   this rotator only ever moves while a cursor is actively on it, so a
+   snappier swap reads better than the slower, ambient pace elsewhere. */
+.ab-story .ab-word-rotate__item {
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
 .ab-story__bg::after {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg, rgba(26, 26, 26, 0.88) 0%, rgba(26, 26, 26, 0.55) 55%, rgba(26, 26, 26, 0.3) 100%);
     z-index: 1;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+/* Only shown while the rotation is actually running (see ".is-rotate-hover"
+   below) — static/idle, the photo sits fully lit with no scrim at all. */
+.ab-story.is-rotate-hover .ab-story__bg::after { opacity: 1; }
+@media not all and (hover: hover) and (pointer: fine) {
+    /* Touch/no-hover devices never get ".is-rotate-hover" (see
+       navigation.js), so the scrim needs to stay on there the way it always
+       has, or the "WE BUILD ___" text loses its contrast permanently. */
+    .ab-story__bg::after { opacity: 1; }
 }
 /* ".ab-story__bg" doubles as a ".ab-word-rotate" image stage — one photo
    per "WE BUILD ___" word, synced to it via "data-rotate-sync" (see
