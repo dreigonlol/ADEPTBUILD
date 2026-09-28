@@ -282,18 +282,6 @@ function adeptbuild_body_classes( $classes ) {
 add_filter( 'body_class', 'adeptbuild_body_classes' );
 
 /**
- * Appends a caret icon to primary menu items that have a submenu.
- */
-function adeptbuild_menu_caret( $title, $item, $args ) {
-	if ( isset( $args->theme_location ) && 'primary-menu' === $args->theme_location
-		&& in_array( 'menu-item-has-children', (array) $item->classes, true ) ) {
-		$title .= adeptbuild_get_icon( 'chevron-down', 14, 'ab-caret' );
-	}
-	return $title;
-}
-add_filter( 'nav_menu_item_title', 'adeptbuild_menu_caret', 10, 3 );
-
-/**
  * Adds ARIA attributes to primary menu links that open a dropdown.
  */
 function adeptbuild_menu_link_attributes( $atts, $item, $args ) {

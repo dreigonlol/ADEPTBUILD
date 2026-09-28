@@ -751,11 +751,6 @@ body.ab-menu-open .site-header {
     line-height: 1.3;
 }
 
-.menu-item-has-children > a > .ab-caret { margin-left: 6px; transition: transform var(--ab-transition); }
-.menu-item-has-children:hover > a > .ab-caret,
-.menu-item-has-children.is-expanded > a > .ab-caret,
-.menu-item-has-children > a[aria-expanded="true"] > .ab-caret { transform: rotate(180deg); }
-
 /* Hamburger button */
 .menu-toggle {
     display: none;
@@ -2834,24 +2829,6 @@ h2.ab-services-showcase__title {
    12. ANIMATIONS
    ========================================================================== */
 
-.ab-reveal {
-    opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
-}
-.ab-reveal.is-visible { opacity: 1; transform: none; }
-
-/* Directional variants — same .is-visible toggle, different starting
-   transform. Add one of these alongside .ab-reveal (e.g.
-   class="ab-reveal ab-reveal--left"). */
-.ab-reveal--left { transform: translateX(-40px); }
-.ab-reveal--right { transform: translateX(40px); }
-.ab-reveal--scale { transform: scale(0.92); }
-.ab-reveal--scale.is-visible,
-.ab-reveal--left.is-visible,
-.ab-reveal--right.is-visible { transform: none; }
-
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *,
@@ -2860,10 +2837,6 @@ h2.ab-services-showcase__title {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
     }
-    .ab-reveal,
-    .ab-reveal--left,
-    .ab-reveal--right,
-    .ab-reveal--scale { opacity: 1; transform: none; }
 }
 
 /* --- Giant gradient headline — for a hero-scale statement heading --- */

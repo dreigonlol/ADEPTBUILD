@@ -4,7 +4,6 @@
  * - Accessible mobile menu (aria-expanded, close on Escape and outside click).
  * - Collapsible dropdown submenus on mobile, with synced aria-expanded state.
  * - Header shadow on scroll.
- * - Fade-in animation for revealed sections.
  *
  * @package Adeptbuild
  */
@@ -18,8 +17,6 @@
 		setHeroIntroOverlap();
 		initMobileMenu();
 		initFloatingContact();
-		autoTagReveals();
-		initReveal();
 		initCounters();
 		initSliders();
 		initWordRotators();
