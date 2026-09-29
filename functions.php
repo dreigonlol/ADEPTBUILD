@@ -161,11 +161,7 @@ function adeptbuild_local_business_schema( $data ) {
 }
 add_filter( 'wpseo_schema_organization', 'adeptbuild_local_business_schema' );
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
-define( 'ADEPTBUILD_VERSION', '1.7.71' );
+define( 'ADEPTBUILD_VERSION', '1.8.0' );
 
 /**
  * Basic theme setup.
@@ -257,18 +253,8 @@ add_action( 'after_setup_theme', 'adeptbuild_content_width', 0 );
  */
 function adeptbuild_scripts() {
 
-	// Montserrat for headings/CTAs, Geist for body text, Poppins for h1/h2
-	// only (visual stand-in for "Posterama 2001", which is self-hosted via
-	// @font-face in style.css — Poppins Bold is the fallback for as long
-	// as that local file isn't reachable).
-	wp_enqueue_style(
-		'adeptbuild-fonts',
-		'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Geist:wght@300;400;500;600;700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@400;600;700;800&display=swap',
-		array(),
-		null
-	);
-
-	wp_enqueue_style( 'adeptbuild-style', get_stylesheet_uri(), array( 'adeptbuild-fonts' ), ADEPTBUILD_VERSION );
+	// The only web font is Quicksand, self-hosted via @font-face in style.css.
+	wp_enqueue_style( 'adeptbuild-style', get_stylesheet_uri(), array(), ADEPTBUILD_VERSION );
 
 	wp_enqueue_script(
 		'adeptbuild-navigation',
@@ -278,13 +264,17 @@ function adeptbuild_scripts() {
 		true
 	);
 
-	wp_enqueue_script(
-		'adeptbuild-lite-embed',
-		get_theme_file_uri( '/assets/js/lite-embed.js' ),
-		array(),
-		ADEPTBUILD_VERSION,
-		true
-	);
+	// Only where the content actually has a YouTube embed (none of the
+	// static pages do — mostly blog posts).
+	if ( is_singular() && false !== stripos( (string) get_post_field( 'post_content', get_queried_object_id() ), 'youtu' ) ) {
+		wp_enqueue_script(
+			'adeptbuild-lite-embed',
+			get_theme_file_uri( '/assets/js/lite-embed.js' ),
+			array(),
+			ADEPTBUILD_VERSION,
+			true
+		);
+	}
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -293,40 +283,16 @@ function adeptbuild_scripts() {
 add_action( 'wp_enqueue_scripts', 'adeptbuild_scripts' );
 
 /**
- * Preconnects to Google Fonts to speed up loading.
+ * Preloads Quicksand — every element on the site uses it, so the browser
+ * shouldn't wait until it parses style.css to discover it.
  */
-function adeptbuild_resource_hints( $urls, $relation_type ) {
-	if ( 'preconnect' === $relation_type && wp_style_is( 'adeptbuild-fonts', 'queue' ) ) {
-		$urls[] = array(
-			'href'        => 'https://fonts.gstatic.com',
-			'crossorigin' => '',
-		);
-	}
-	return $urls;
-}
-add_filter( 'wp_resource_hints', 'adeptbuild_resource_hints', 10, 2 );
-
-/**
- * Preloads the home hero video so the browser starts fetching it right
- * away, in parallel with CSS/fonts, instead of only discovering it once it
- * parses that far down the HTML.
- */
-function adeptbuild_preload_hero_video() {
-	if ( ! is_front_page() ) {
-		return;
-	}
-
-	$video_path = get_theme_file_path( '/assets/img/videohome.mp4' );
-	if ( ! file_exists( $video_path ) ) {
-		return;
-	}
-
+function adeptbuild_preload_font() {
 	printf(
-		'<link rel="preload" as="video" type="video/mp4" href="%s">' . "\n",
-		esc_url( get_theme_file_uri( '/assets/img/videohome.mp4' ) )
+		'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+		esc_url( get_theme_file_uri( '/assets/fonts/Quicksand.woff2' ) )
 	);
 }
-add_action( 'wp_head', 'adeptbuild_preload_hero_video', 1 );
+add_action( 'wp_head', 'adeptbuild_preload_font', 1 );
 
 /**
  * Positions the hero intro (title/button/Google review) over the tail of

@@ -20,7 +20,12 @@
 ( function () {
 	'use strict';
 
-	document.addEventListener( 'DOMContentLoaded', init );
+	// Same as navigation.js: this may run after DOMContentLoaded already fired.
+	if ( 'loading' === document.readyState ) {
+		document.addEventListener( 'DOMContentLoaded', init );
+	} else {
+		init();
+	}
 
 	function init() {
 		var frames = document.querySelectorAll(

@@ -195,7 +195,6 @@ function adeptbuild_page_hero( $title = '' ) {
 				muted
 				playsinline
 				preload="auto"
-				fetchpriority="high"
 				aria-hidden="true"></video>
 			<div class="ab-page-hero__overlay" aria-hidden="true"></div>
 		<?php endif; ?>
@@ -216,17 +215,20 @@ function adeptbuild_page_hero( $title = '' ) {
  */
 function adeptbuild_menu_item_image( $title ) {
 
+	// 640x480 WebP thumbnails in assets/img/menu/. The desktop dropdown is
+	// hidden with visibility:hidden (not display:none), so the browser
+	// fetches these on every page load despite loading="lazy" — keep them small.
 	static $map = array(
-		'full home renovation' => 'Full Home Renovation.jpg',
-		'adus'                  => 'ADUS.jpg',
-		'decking'               => 'DECKING.jpg',
-		'pools'                 => 'POOLS.jpg',
-		'pergolas'              => 'PERGOLAS.jpeg',
-		'landscaping'           => 'LADNSCAPING.jpeg',
-		'agnew project'         => 'AGNEW.jpeg',
-		'ensley project'        => 'ENSLEY.jpeg',
-		'santa monica project'  => 'SANTA MONICA.jpg',
-		'sheens project'        => 'SHEENS.jpg',
+		'full home renovation' => 'full-home-renovation.webp',
+		'adus'                  => 'adus.webp',
+		'decking'               => 'decking.webp',
+		'pools'                 => 'pools.webp',
+		'pergolas'              => 'pergolas.webp',
+		'landscaping'           => 'landscaping.webp',
+		'agnew project'         => 'agnew.webp',
+		'ensley project'        => 'ensley.webp',
+		'santa monica project'  => 'santa-monica.webp',
+		'sheens project'        => 'sheens.webp',
 	);
 
 	$key = strtolower( trim( $title ) );
@@ -235,7 +237,7 @@ function adeptbuild_menu_item_image( $title ) {
 		return '';
 	}
 
-	return get_theme_file_uri( '/assets/img/' ) . rawurlencode( $map[ $key ] );
+	return get_theme_file_uri( '/assets/img/menu/' . $map[ $key ] );
 }
 
 /**
@@ -248,17 +250,4 @@ function adeptbuild_menu_fallback() {
 	}
 	echo '<ul class="main-header-menu"><li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">'
 		. esc_html__( 'Create a menu', 'adeptbuild' ) . '</a></li></ul>';
-}
-
-/**
- * Decorative wave that separates a dark section from the next one.
- *
- * @param string $modifier Extra class, e.g. 'ab-wave--alt'.
- */
-function adeptbuild_wave( $modifier = '' ) {
-	?>
-	<svg class="ab-wave <?php echo esc_attr( $modifier ); ?>" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-		<path fill="currentColor" d="M0,64 C240,110 480,110 720,80 C960,50 1200,20 1440,48 L1440,110 L0,110 Z"></path>
-	</svg>
-	<?php
 }

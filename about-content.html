@@ -4,7 +4,7 @@
   background:rgba(255,255,255,0.15);
   color:#ffffff;
   border:2px solid #ffffff;
-  font-weight:600;
+  font-weight:300;
   border-radius:0 !important;
   cursor:pointer;
   text-decoration:none;
@@ -36,7 +36,7 @@ h2.wp-block-heading{
   <div style="position:relative; z-index:3; display:flex; flex-wrap:nowrap; align-items:center; justify-content:flex-start; height:100vh; padding:2vw 4vw; box-sizing:border-box;">
     <div style="min-width:0; display:flex; flex-direction:column; align-items:flex-start;">
       <h1 style="color:#ffffff; font-size:clamp(1.1rem,3.2vw,2rem); margin:0 0 16px 0; text-shadow:0 2px 8px rgba(0,0,0,0.45); overflow-wrap:break-word;">About Us</h1>
-      <button onclick="document.getElementById('adept-modal-about').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px); box-shadow:0 8px 20px rgba(0,0,0,0.15);">Schedule A Meeting</button>
+      <button onclick="document.getElementById('adept-modal-about').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px); box-shadow:0 8px 20px rgba(0,0,0,0.15);">REQUEST A PRIVATE CONSULTATION</button>
     </div>
   </div>
 </div>
@@ -52,27 +52,27 @@ h2.wp-block-heading{
 
 <!-- wp:html -->
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap');
 
 .ab-intro-dark{
-  margin-top:-20px;
-  margin-bottom:-8px;
   position:relative;
   width:100vw;
   left:50%;
   right:50%;
   margin-left:-50vw;
   margin-right:-50vw;
+  margin-top:-40px;
+  margin-bottom:-40px;
   background:#000000;
-  padding:clamp(70px,8vw,110px) 24px;
+  padding:clamp(56px,6vw,80px) 24px clamp(64px,7vw,96px);
   text-align:center;
   box-sizing:border-box;
-  z-index: 2;
+  z-index:2;
 }
 
 .ab-intro-dark__rule{width:36px;height:1px;background:#D99A3E;margin:0 auto 26px;}
-.ab-intro-dark h2{margin:0 0 22px;font-size:clamp(2rem,4vw,3rem);font-weight:400;color:#ffffff;font-family:'Quicksand',sans-serif;}
-.ab-intro-dark p{max-width:640px;margin:0 auto;font-size:17px;line-height:1.8;color:rgba(255,255,255,0.8);font-family:'Quicksand',sans-serif;}
+.ab-intro-dark h2{margin:0 0 22px;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:#ffffff !important;font-family:'Quicksand',sans-serif;}
+.ab-intro-dark p{max-width:640px;margin:0 auto;font-size:17px;line-height:1.8;color:rgba(255,255,255,0.8);font-weight:400;font-family:'Quicksand',sans-serif;}
 </style>
 
 <div class="ab-intro-dark ab-reveal">
@@ -84,42 +84,217 @@ h2.wp-block-heading{
 
 <!-- wp:html -->
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
-.ab-founder-triptych{position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;min-height:680px;overflow:visible;}
-.ab-founder-triptych__bg{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;}
-.ab-founder-triptych__bg img{flex:1;width:100%;height:100%;object-fit:cover;}
-.ab-founder-triptych__overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(6,9,11,0.72);}
-.ab-founder-triptych__content{position:relative;min-height:680px;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 60px;box-sizing:border-box;}
-.ab-founder-triptych__inner{max-width:760px;}
-.ab-founder-triptych__eyebrow{font-size:16px;letter-spacing:.22em;text-transform:uppercase;color:#E8C98A;margin-bottom:14px;display:block;font-weight:600;}
-.ab-founder-triptych__rule{width:40px;height:2px;background:#D99A3E;margin:0 auto 18px;}
-.ab-founder-triptych h2{margin:0 0 18px;font-size:38px;font-weight:500;color:#ffffff;line-height:1.15;font-family:'Quicksand',sans-serif;text-shadow:0 2px 14px rgba(0,0,0,0.5);}
-.ab-founder-triptych p{margin:0 0 18px;font-size:16.5px;line-height:1.8;color:#ffffff;font-weight:400;text-shadow:0 1px 8px rgba(0,0,0,0.4);font-family:'Quicksand',sans-serif;}
-.ab-founder-triptych p:last-child{margin-bottom:0;}
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap');
+
+.ab-split{
+  position:relative;
+  z-index:3;
+  width:100vw;
+  left:50%;
+  right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+  display:grid;
+  grid-template-columns:58% 42%;
+  box-sizing:border-box;
+  font-family:'Quicksand',sans-serif;
+}
+.ab-split *,.ab-split *::before,.ab-split *::after{box-sizing:border-box;}
+
+.ab-split__text{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:clamp(56px,6vw,90px) clamp(28px,5vw,80px);
+}
+.ab-split__head{text-align:center;margin-bottom:clamp(24px,3vw,36px);}
+.ab-split__eyebrow{display:block;font-size:15px;letter-spacing:.22em;text-transform:uppercase;font-weight:400;margin-bottom:14px;}
+.ab-split__rule{width:40px;height:1px;margin:0 auto 20px;}
+.ab-split h2{
+  margin:0;
+  font-family:'Quicksand',sans-serif !important;
+  font-weight:300 !important;
+  font-size:clamp(2rem,3.6vw,3rem) !important;
+  letter-spacing:.04em !important;
+  line-height:1.15 !important;
+  text-transform:uppercase;
+}
+.ab-split__icon{display:block;width:90px;height:auto;margin:20px auto 0;}
+.ab-split p{
+  margin:0 0 18px;
+  font-family:'Quicksand',sans-serif;
+  font-size:clamp(16px,1.15vw,17px);
+  line-height:1.8;
+  font-weight:400;
+}
+.ab-split p:last-of-type{margin-bottom:0;}
+.ab-split__body,
+.ab-split__copy{max-width:720px;margin:0 auto;}
+.ab-split__cta{margin-top:30px;text-align:center;}
+
+.ab-split__link{
+  color:#1046BB !important;
+  font-weight:600;
+  text-decoration:none;
+  border-bottom:1px solid transparent;
+  transition:border-color .2s ease,color .2s ease;
+}
+.ab-split__link:hover,
+.ab-split__link:focus-visible{
+  color:#0B3591 !important;
+  border-bottom-color:currentColor;
+}
+
+.ab-split__media--framed{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(32px,4vw,64px) clamp(24px,4vw,64px) clamp(32px,4vw,64px) 0;
+}
+.ab-split__frame{
+  position:relative;
+  width:100%;
+  max-width:560px;
+  aspect-ratio:4/5;
+  overflow:hidden;
+}
+.ab-split__frame img{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center top;
+}
+
+.ab-split__frame--fade img{opacity:0;animation:abFade 12s infinite;}
+.ab-split__frame--fade img:nth-child(1){animation-delay:0s;}
+.ab-split__frame--fade img:nth-child(2){animation-delay:6s;}
+@keyframes abFade{
+  0%{opacity:0;}
+  6%{opacity:1;}
+  46%{opacity:1;}
+  54%{opacity:0;}
+  100%{opacity:0;}
+}
+@media (prefers-reduced-motion: reduce){
+  .ab-split__frame--fade img{animation:none;}
+  .ab-split__frame--fade img:nth-child(1){opacity:1;}
+}
+
+.ab-split__media--photo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(16px,2.5vw,36px) 0 clamp(16px,2.5vw,36px) clamp(20px,3vw,48px);
+}
+.ab-split__media--photo img{
+  display:block;
+  width:auto;
+  height:auto;
+  max-width:100%;
+  max-height:88vh;
+  max-height:88svh;
+  object-fit:contain;
+}
+
+.ab-split--founder{background:#E3DDD1;}
+.ab-split--founder .ab-split__eyebrow{color:#C28A35;}
+.ab-split--founder .ab-split__rule{background:#C28A35;}
+.ab-split--founder h2{color:#1E1E1E !important;}
+.ab-split--founder p{color:#2B2B2B;}
+
+.ab-split--philosophy{background:#000000;grid-template-columns:48% 52%;}
+.ab-split--philosophy .ab-split__rule{background:#D99A3E;}
+.ab-split--philosophy h2{color:#ffffff !important;}
+.ab-split--philosophy p{color:rgba(255,255,255,0.85);font-weight:300;}
+
+.ab-split--philosophy .ab-btn{
+  background:rgba(255,255,255,0.08) !important;
+  color:#ffffff !important;
+  border:1.5px solid rgba(255,255,255,0.85) !important;
+  border-radius:0 !important;
+  font-family:'Quicksand',sans-serif !important;
+  font-weight:300 !important;
+  text-transform:uppercase !important;
+  letter-spacing:.12em !important;
+  box-shadow:none !important;
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+  cursor:pointer;
+  transition:background .25s ease,color .25s ease,border-color .25s ease !important;
+}
+.ab-split--philosophy .ab-btn:hover,
+.ab-split--philosophy .ab-btn:focus-visible{
+  background:#D99A3E !important;
+  color:#1E1E1E !important;
+  border-color:#D99A3E !important;
+}
+
+@media (min-width:901px){
+  .ab-split{height:100vh;height:100svh;overflow:hidden;}
+  .ab-split .ab-split__text{padding:clamp(20px,4vh,48px) clamp(24px,3.5vw,56px);}
+  .ab-split .ab-split__head{margin-bottom:clamp(12px,2.5vh,28px);}
+  .ab-split .ab-split__eyebrow{font-size:clamp(12px,1.6vh,15px);margin-bottom:clamp(8px,1.2vh,14px);}
+  .ab-split .ab-split__rule{margin-bottom:clamp(10px,1.8vh,20px);}
+  .ab-split h2{font-size:clamp(1.7rem,4.8vh,2.8rem) !important;}
+  .ab-split .ab-split__icon{width:clamp(44px,7vh,72px);margin-top:clamp(10px,1.8vh,18px);}
+  .ab-split p{font-size:clamp(15px,2.25vh,19px);line-height:1.7;margin-bottom:clamp(10px,1.6vh,16px);}
+  .ab-split .ab-split__cta{margin-top:clamp(18px,3.2vh,34px);}
+  .ab-split .ab-btn{padding:clamp(10px,1.6vh,17px) clamp(22px,2.4vw,32px) !important;}
+  .ab-split__media--framed{padding:clamp(16px,2.5vw,36px) clamp(20px,3vw,48px) clamp(16px,2.5vw,36px) 0;}
+  .ab-split__frame{width:auto;height:84vh;height:84svh;max-width:100%;max-height:100%;}
+}
+
 @media (max-width:900px){
-  .ab-founder-triptych{height:auto;min-height:560px;}
-  .ab-founder-triptych h2{font-size:28px;}
+  .ab-split,.ab-split--philosophy{grid-template-columns:1fr;}
+  .ab-split__media--framed{order:-1;padding:32px 24px 0;}
+  .ab-split__media--photo{order:-1;padding:32px 24px 0;}
+  .ab-split__media--photo img{max-height:none;width:100%;}
 }
 </style>
 
-<div class="ab-founder-triptych ab-reveal">
-  <div class="ab-founder-triptych__bg">
-    <img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/OwnerLior1.webp" alt="Lior Ohayon, founder and CEO of Adept Builders &amp; Design">
-    <img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/OwnerLior2.webp" alt="Lior Ohayon on a job site with the Adept Builders &amp; Design team">
-    <img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/OurOwnerLior.webp" alt="Lior Ohayon reviewing plans for Adept Builders &amp; Design">
-  </div>
-  <div class="ab-founder-triptych__overlay"></div>
-  <div class="ab-founder-triptych__content">
-    <div class="ab-founder-triptych__inner">
-      <span class="ab-founder-triptych__eyebrow">Leadership</span>
-      <div class="ab-founder-triptych__rule"></div>
+<section class="ab-split ab-split--founder ab-reveal">
+  <div class="ab-split__text">
+    <div class="ab-split__head">
+      <span class="ab-split__eyebrow">Leadership</span>
+      <div class="ab-split__rule"></div>
       <h2>About the Founder</h2>
+    </div>
+    <div class="ab-split__body">
       <p>Lior Ohayon is the founder and CEO of Adept Builders &amp; Design, a premier construction and design-build firm serving discerning homeowners throughout Los Angeles. With more than a decade of experience in high-end residential construction, Lior is known for transforming ambitious visions into beautifully executed homes, renovations, and outdoor living spaces.</p>
-      <p>His hands-on leadership, meticulous attention to detail, and commitment to superior craftsmanship ensure every project is managed with precision from the initial consultation through final completion. Working closely with clients, architects, and designers, Lior delivers tailored spaces that reflect each homeowner&rsquo;s lifestyle while adding enduring value to their property.</p>
-      <p>Lior is also the owner of NovaDeck, Adept Builders &amp; Design&rsquo;s sister company, specializing in innovative movable pool-deck solutions. This unique relationship gives Adept clients access to forward-thinking outdoor-living possibilities and integrated design solutions that are not typically available through a traditional construction company&mdash;all delivered with the same focus on quality, sophistication, and exceptional service.</p>
+      <p>His hands-on leadership, meticulous attention to detail, and commitment to superior craftsmanship ensure every project is managed with precision from the initial consultation through final completion. Working closely with clients, architects, and designers, Lior delivers tailored spaces that reflect each homeowner’s lifestyle while adding enduring value to their property.</p>
+      <p>Lior is also the owner of <a class="ab-split__link" href="https://novadeck.co/?utm_source=adeptbuild&amp;utm_medium=referral&amp;utm_campaign=about-founder" target="_blank" rel="noopener">NovaDeck</a>, Adept Builders &amp; Design’s sister company, specializing in innovative movable pool-deck solutions. This unique relationship gives Adept clients access to forward-thinking outdoor-living possibilities and integrated design solutions that are not typically available through a traditional construction company—all delivered with the same focus on quality, sophistication, and exceptional service.</p>
     </div>
   </div>
-</div>
+  <div class="ab-split__media--framed">
+    <div class="ab-split__frame ab-split__frame--fade">
+      <img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/OwnerLior1.webp" alt="Lior Ohayon, founder and CEO of Adept Builders &amp; Design">
+      <img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/OwnerLior2.webp" alt="Lior Ohayon, founder of Adept Builders &amp; Design, in a finished Los Angeles home">
+    </div>
+  </div>
+</section>
+
+<section class="ab-split ab-split--philosophy ab-reveal">
+  <div class="ab-split__media--photo">
+    <img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/OurOwnerLior.webp" alt="Lior Ohayon reviewing plans for an Adept Builders &amp; Design project">
+  </div>
+  <div class="ab-split__text">
+    <div class="ab-split__head">
+      <div class="ab-split__rule"></div>
+      <h2>Our Philosophy</h2>
+      <img class="ab-split__icon" src="https://adeptbuild.com/wp-content/uploads/2026/Index/phylosophy.png" alt="" aria-hidden="true" width="176" height="176">
+    </div>
+    <div class="ab-split__copy">
+      <p>Your home should be more than a place to live; it should be a reflection of how you want to experience life.</p>
+      <p>At Adept, we believe luxury is found in the details: thoughtful design, exceptional craftsmanship, seamless functionality, and spaces created specifically around you. From sophisticated renovations and custom outdoor living spaces to complete home transformations, we approach every project with the same commitment to quality, precision, and timeless design. Our goal is to create homes where you can truly unwind, entertain, and enjoy the lifestyle you’ve worked hard to build. Because living well begins with a home designed around the way you live.</p>
+      <div class="ab-split__cta">
+        <button onclick="document.getElementById('adept-modal-about').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px);">REQUEST A PRIVATE CONSULTATION</button>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- /wp:html -->
 
 <!-- wp:html -->
@@ -127,7 +302,7 @@ h2.wp-block-heading{
 .ab-whatwedo-cols{padding:60px 40px;background:#FBFAF8;}
 .ab-whatwedo-cols__head{text-align:center;margin-bottom:36px;}
 .ab-whatwedo-cols__rule{width:36px;height:1px;background:#D99A3E;margin:0 auto 24px;}
-.ab-whatwedo-cols__head h2{margin:0;font-size:36px;font-weight:400;color:#14202A;font-family:'Quicksand',sans-serif;}
+.ab-whatwedo-cols__head h2{margin:0;font-size:36px;font-weight:300;color:#14202A;font-family:'Quicksand',sans-serif;}
 .ab-whatwedo-cols__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;}
 .ab-whatwedo-cols__num{font-size:18px;color:#B8935A;letter-spacing:.1em;margin-bottom:16px;font-family:'Quicksand',sans-serif;}
 .ab-whatwedo-cols__grid p{margin:0;font-size:18px;line-height:1.85;color:#4A5A63;font-weight:300;font-family:'Quicksand',sans-serif;}
@@ -162,7 +337,6 @@ h2.wp-block-heading{
 <!-- wp:html -->
 <style>
 .ab-owner-gallery{
-  margin-top:-20px !important;
   display:grid !important;
   grid-template-columns:repeat(6, 1fr) !important;
   gap:0px !important;
@@ -173,6 +347,8 @@ h2.wp-block-heading{
   right:50% !important;
   margin-left:-50vw !important;
   margin-right:-50vw !important;
+  margin-top:-80px !important;
+  margin-bottom:-80px !important;
   padding:0 !important;
   box-sizing:border-box !important;
   z-index:10 !important;
@@ -226,7 +402,7 @@ h2.wp-block-heading{
 
 <!-- wp:group {"className":"ab-service-strip"} -->
 <div class="wp-block-group ab-service-strip"><!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://adeptbuild.com/wp-content/uploads/elementor/thumbs/PHOTO-2019-12-26-13-04-13-p8rm5mjlfeg6d2ooqqfklzb8lnsbntzhyk254c20z4.jpg" alt="ADU addition built in Los Angeles"/></figure>
+<figure class="wp-block-image size-large"><img src="https://adeptbuild.com/wp-content/uploads/2026/Index/ADUS.jpg" alt="ADU addition built in Los Angeles"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph {"className":"ab-service-strip__content"} -->
@@ -258,7 +434,7 @@ h2.wp-block-heading{
 
 <!-- wp:group {"className":"ab-service-strip"} -->
 <div class="wp-block-group ab-service-strip"><!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://adeptbuild.com/wp-content/uploads/elementor/thumbs/palms-15-scaled-q9iaj04rci0nmvxsqnvm75jsiyu1dgh623qbwj0o70.jpg" alt="Custom backyard pool built in Los Angeles"/></figure>
+<figure class="wp-block-image size-large"><img src="https://adeptbuild.com/wp-content/uploads/2026/AboutUs/HeroImage.webp" alt="Custom backyard pool built in Los Angeles"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph {"className":"ab-service-strip__content"} -->
@@ -274,7 +450,7 @@ h2.wp-block-heading{
 
 <!-- wp:group {"className":"ab-service-strip"} -->
 <div class="wp-block-group ab-service-strip"><!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://adeptbuild.com/wp-content/uploads/2023/08/FyAmJHUP-1024x576.jpeg" alt="Custom pergola built in Los Angeles backyard"/></figure>
+<figure class="wp-block-image size-large"><img src="https://adeptbuild.com/wp-content/uploads/2026/09/custom-wood-pergola-los-angeles.webp" alt="Custom pergola built in Los Angeles backyard"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph {"className":"ab-service-strip__content"} -->
@@ -314,6 +490,8 @@ h2.wp-block-heading{
   right:50%;
   margin-left:-50vw;
   margin-right:-50vw;
+  margin-top:-40px !important;
+  margin-bottom:-40px !important;
   background:#000000;
   padding:clamp(64px,8vw,110px) 24px;
   text-align:center;
@@ -321,7 +499,7 @@ h2.wp-block-heading{
   z-index:2;
 }
 .ab-clients-dark__rule{width:36px;height:1px;background:#D99A3E;margin:0 auto 24px;}
-.ab-clients-dark h2{margin:0 0 40px;font-size:clamp(1.8rem,3.4vw,2.4rem);font-weight:400;color:#ffffff;font-family:'Quicksand',sans-serif;}
+.ab-clients-dark h2{margin:0 0 40px;font-size:clamp(1.8rem,3.4vw,2.4rem);font-weight:300 !important;color:#ffffff !important;font-family:'Quicksand',sans-serif;}
 .ab-clients-dark__widget{max-width:1400px;margin:0 auto;position:relative;z-index:1;}
 
 .ab-clients-dark__widget .ti-large-title,
@@ -332,28 +510,54 @@ h2.wp-block-heading{
 .ab-clients-dark__widget .ti-footer *,
 .ab-clients-dark__widget .ti-summary,
 .ab-clients-dark__widget .ti-summary * {
-  color: #ffffff !important;
-  display: block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
+  color:#ffffff !important;
+  display:block !important;
+  opacity:1 !important;
+  visibility:visible !important;
 }
 
 .ab-clients-dark__widget .ti-review-item {
-  background-color: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 12px !important;
-  padding: 20px !important;
-  margin: 0 10px !important;
-  box-sizing: border-box !important;
+  background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03)) !important;
+  backdrop-filter:blur(14px) !important;
+  -webkit-backdrop-filter:blur(14px) !important;
+  border:1px solid rgba(255,255,255,0.18) !important;
+  border-radius:20px !important;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12) !important;
+  padding:20px !important;
+  margin:0 10px !important;
+  box-sizing:border-box !important;
+  transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease !important;
+}
+.ab-clients-dark__widget .ti-review-item:hover {
+  transform:translateY(-4px) !important;
+  border-color:rgba(217,154,62,0.45) !important;
+  box-shadow:0 16px 36px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.12) !important;
+}
+
+.ab-clients-dark__widget .ti-review-item > .ti-inner,
+.ab-clients-dark__widget .ti-review-item .ti-inner {
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
 }
 
 .ab-clients-dark__widget .ti-review-item,
 .ab-clients-dark__widget .ti-review-item * {
-  color: #ffffff !important;
+  color:rgba(255,255,255,0.9) !important;
 }
 
-.ab-clients-dark__widget .ti-review-item .ti-star {
-  color: #f6bb06 !important;
+.ab-clients-dark__widget .ti-read-more,
+.ab-clients-dark__widget .ti-read-more *,
+.ab-clients-dark__widget [class*="read-more"],
+.ab-clients-dark__widget [class*="read-more"] * {
+  color:#ffffff !important;
+  opacity:1 !important;
+  font-weight:500 !important;
+}
+
+.ab-clients-dark__widget .ti-review-item .ti-star,
+.ab-clients-dark__widget .ti-star {
+  color:#f6bb06 !important;
 }
 </style>
 
@@ -367,34 +571,36 @@ h2.wp-block-heading{
 <!-- wp:html -->
 <style>
 .ab-cta-photo{
-  margin-top:-16px !important;
   position:relative;
   width:100vw;
   left:50%;
   right:50%;
   margin-left:-50vw;
   margin-right:-50vw;
+  margin-top:-40px !important;
+  margin-bottom:-40px !important;
   height:clamp(380px,42vw,520px);
   overflow:hidden;
   z-index:2;
 }
 .ab-cta-photo__bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;}
-.ab-cta-photo__overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(10,14,17,0.55);z-index:2;}
+.ab-cta-photo__overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(10,14,17,0.25);z-index:2;}
 .ab-cta-photo__content{position:relative;z-index:3;height:100%;display:flex;align-items:center;justify-content:center;padding:0 24px;box-sizing:border-box;}
-.ab-cta-photo__card{background:rgba(15,20,23,0.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.14);padding:clamp(36px,5vw,52px) clamp(28px,5vw,60px);text-align:center;max-width:540px;border-radius:4px;}
+.ab-cta-photo__card{background:rgba(15,20,23,0.3);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.14);padding:clamp(36px,5vw,52px) clamp(28px,5vw,60px);text-align:center;max-width:540px;border-radius:4px;}
 .ab-cta-photo__rule{width:32px;height:1px;background:#D99A3E;margin:0 auto 22px;}
-.ab-cta-photo__card h2{margin:0 0 16px;font-size:clamp(1.5rem,3vw,1.9rem);font-weight:400;color:#ffffff;font-family:'Quicksand',sans-serif;}
+.ab-cta-photo__card h2{margin:0 0 16px;font-size:clamp(1.5rem,3vw,1.9rem);font-weight:300;color:#ffffff;font-family:'Quicksand',sans-serif;}
 .ab-cta-photo__card p{margin:0 0 28px;font-size:14.5px;color:rgba(255,255,255,0.8);font-family:'Quicksand',sans-serif;}
+.ti-widget.ti-goog strong, .ti-widget.ti-goog strong * {font-weight: 300;}
 </style>
 
 <div class="ab-cta-photo ab-reveal">
-  <img class="ab-cta-photo__bg" src="https://adeptbuild.com/wp-content/uploads/2023/03/dsc5682-1024x683.jpeg" alt="">
+  <img class="ab-cta-photo__bg" src="https://adeptbuild.com/wp-content/uploads/2026/Index/ADUS.jpg" alt="Luxury home additions">
   <div class="ab-cta-photo__overlay"></div>
   <div class="ab-cta-photo__content">
     <div class="ab-cta-photo__card">
       <div class="ab-cta-photo__rule"></div>
       <h2>Have a project in mind?</h2>
-      <p>Tell us about your space and we'll set up a free, no-pressure consultation to talk through the possibilities.</p>
+      <p>Tell us about your space and we'll set up a consultation to talk through the possibilities.</p>
       <button onclick="document.getElementById('adept-modal-about').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px);">Schedule A Meeting</button>
     </div>
   </div>
@@ -403,33 +609,14 @@ h2.wp-block-heading{
 
 <!-- wp:html -->
 <style>
-.ab-reveal{opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s ease;}
-.ab-reveal.is-visible{opacity:1; transform:translateY(0);}
-@media (prefers-reduced-motion: reduce){
-  .ab-reveal{transition:none !important; opacity:1 !important; transform:none !important;}
+.ab-reveal,
+.ab-reveal.is-visible{
+  opacity:1 !important;
+  transform:none !important;
+  transition:none !important;
+  transition-delay:0s !important;
 }
 </style>
-<script>
-(function(){
-  var init = function(){
-    var els = document.querySelectorAll('.ab-reveal');
-    if (!els.length) return;
-    if ('IntersectionObserver' in window){
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if (e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
-        });
-      }, {threshold:0.15});
-      els.forEach(function(el){ io.observe(el); });
-    } else {
-      els.forEach(function(el){ el.classList.add('is-visible'); });
-    }
-  };
-  if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', init);
-  } else { init(); }
-})();
-</script>
 <!-- /wp:html -->
 
 <!-- wp:paragraph -->

@@ -21,7 +21,7 @@
 </style>
 
 <div style="position:relative; width:100vw; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; height:100vh; min-height:100vh; overflow:hidden; margin-bottom:24px; margin-top:-200px; top:0;">
-  <video id="adept-video-landscaping" autoplay muted loop playsinline webkit-playsinline="true" preload="auto" disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback"
+  <video id="adept-video-landscaping" aria-label="Landscape design and outdoor living by Adept Builders &amp; Design" autoplay muted loop playsinline webkit-playsinline="true" preload="auto" disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback"
     style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1; pointer-events:none;"
     src="https://adeptbuild.com/wp-content/uploads/2026/08/landscaping.mp4"></video>
   <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(11,47,62,0.35); z-index:2;"></div>
@@ -29,7 +29,7 @@
   <div style="position:relative; z-index:3; display:flex; flex-wrap:nowrap; align-items:center; justify-content:flex-start; height:100vh; padding:2vw 4vw; box-sizing:border-box;">
     <div style="min-width:0; display:flex; flex-direction:column; align-items:flex-start;">
       <h1 style="color:#ffffff; font-size:clamp(1.1rem,3.2vw,2rem); margin:0 0 16px 0; text-shadow:0 2px 8px rgba(0,0,0,0.45); overflow-wrap:break-word;">Landscaping</h1>
-      <button onclick="document.getElementById('adept-modal-landscaping').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px); box-shadow:0 8px 20px rgba(0,0,0,0.15);">Schedule A Meeting</button>
+      <button onclick="document.getElementById('adept-modal-landscaping').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px); box-shadow:0 8px 20px rgba(0,0,0,0.15);">REQUEST A PRIVATE CONSULTATION</button>
     </div>
   </div>
 </div>
@@ -57,55 +57,50 @@
 
 <!-- wp:html -->
 <div class="ab-content-band">
-  <img src="https://adeptbuild.com/wp-content/uploads/2023/03/dsc5682-1024x683.jpeg" alt="Landscape Design & Outdoor Living" loading="lazy">
+  <img src="https://adeptbuild.com/wp-content/uploads/2026/09/landscape-design-outdoor-living-los-angeles.webp" alt="Landscaped backyard with stone walkway, lawn, hedges, and patio dining area in Los Angeles" loading="lazy">
   <div class="ab-content-band__caption">
-    <h2>Landscape Design &amp; Outdoor Living</h2>
-    <p>Landscape design, pavers, outdoor kitchens, and fire pits — one cohesive plan covering hardscaping, plant selection, water features, and lighting.</p>
+    <h2>Landscape Design &amp; Outdoor Living Spaces</h2>
+    <p>One cohesive plan for your entire yard — hardscaping, plant selection, water features, and landscape lighting designed together as a complete outdoor living space.</p>
   </div>
 </div>
 <!-- /wp:html -->
 
 <!-- wp:html -->
 <div class="ab-content-band">
-  <img src="https://adeptbuild.com/wp-content/uploads/2021/02/Pergola-1.png" alt="Pavers & Hardscaping" loading="lazy">
+  <img src="https://adeptbuild.com/wp-content/uploads/2026/09/paver-fire-pit-seat-wall-los-angeles.webp" alt="Paver patio with stone fire pit and seat wall beside a covered patio in Los Angeles" loading="lazy">
   <div class="ab-content-band__caption">
-    <h2>Pavers &amp; Hardscaping</h2>
-    <p>Concrete, natural stone, or brick pavers for patios, walkways, and driveways — matched to your budget and maintenance preferences.</p>
+    <h2>Paver Installation &amp; Hardscaping</h2>
+    <p>Concrete, natural stone, or brick pavers for patios, walkways, and driveways — professionally installed and matched to your style, budget, and maintenance preferences.</p>
   </div>
 </div>
 <!-- /wp:html -->
 
 <!-- wp:html -->
 <div class="ab-content-band">
-  <img src="https://adeptbuild.com/wp-content/uploads/2024/01/069A8095-1024x683.jpg" alt="Outdoor Kitchens & Fire Pits" loading="lazy">
+  <img src="https://adeptbuild.com/wp-content/uploads/2026/09/front-yard-landscaping-los-angeles.webp" alt="Front yard landscaping with mature trees, layered hedges, and olive trees beside a white farmhouse in Los Angeles" loading="lazy">
   <div class="ab-content-band__caption">
-    <h2>Outdoor Kitchens &amp; Fire Pits</h2>
-    <p>Cabinets, countertops, and a built-in grill, or a fire pit for year-round evenings outside — designed to fit your layout.</p>
+    <h2>Front Yard Landscaping &amp; Planting Design</h2>
+    <p>Mature trees, layered hedges, and drought-tolerant plantings chosen for the Southern California climate — designed to frame your home, add privacy, and boost curb appeal year-round.</p>
   </div>
 </div>
-<!-- /wp:html -->
-
-<!-- wp:html -->
-<div class="ab-content-band">
-  <img src="https://adeptbuild.com/wp-content/uploads/2022/11/adeptbuildroofing.jpeg" alt="Why Choose Adept Builders & Design" loading="lazy">
-  <div class="ab-content-band__caption">
-    <h2>Why Choose Adept Builders &amp; Design</h2>
-    <div class="ab-services-ticker ab-services-ticker--sm">
-      <ul class="ab-services-ticker__list">
-        <li style="--i:0">Over a decade of experience in landscape design and hardscaping</li>
-        <li style="--i:1">Fully licensed, bonded, and insured</li>
-        <li style="--i:2">Comprehensive warranty and aftercare support</li>
-      </ul>
-    </div>
-  </div>
-</div>
+<style>
+.ab-content-band__caption{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  background:rgba(0,0,0,.35) !important;
+}
+.ab-content-band__caption h2,
+.ab-content-band__caption p{
+  text-shadow:0 2px 12px rgba(0,0,0,.5);
+}
+</style>
 <!-- /wp:html -->
 
 <!-- wp:html -->
 <div class="abps" style="margin-top: 48px;">
   <section class="abps-row">
     <div class="abps-slider">
-      <input class="abps-radio" type="radio" name="ls" id="ls-1" checked>
+      <input class="abps-radio" type="radio" name="ls" id="ls-1" checked="">
       <input class="abps-radio" type="radio" name="ls" id="ls-2">
       <input class="abps-radio" type="radio" name="ls" id="ls-3">
       <input class="abps-radio" type="radio" name="ls" id="ls-4">
@@ -117,7 +112,7 @@
       <input class="abps-radio" type="radio" name="ls" id="ls-10">
       <input class="abps-radio" type="radio" name="ls" id="ls-11">
       <input class="abps-radio" type="radio" name="ls" id="ls-12">
-      
+
       <div class="abps-stage">
         <label class="abps-slide" for="ls-1"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5771-scaled.jpeg" alt="Landscape design overview in Los Angeles" loading="eager"></label>
         <label class="abps-slide" for="ls-2"><img src="https://adeptbuild.com/wp-content/uploads/2024/01/DSC5877-scaled.jpeg" alt="Paver walkway hardscaping detail" loading="eager"></label>
@@ -135,18 +130,18 @@
 
       <div class="abps-nav">
         <div class="abps-prev">
-          <label class="abps-arrow" for="ls-12" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
-          <label class="abps-arrow" for="ls-1" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
-          <label class="abps-arrow" for="ls-2" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
-          <label class="abps-arrow" for="ls-3" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
-          <label class="abps-arrow" for="ls-4" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
-          <label class="abps-arrow" for="ls-5" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
-          <label class="abps-arrow" for="ls-6" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
-          <label class="abps-arrow" for="ls-7" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
-          <label class="abps-arrow" for="ls-8" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
-          <label class="abps-arrow" for="ls-9" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
-          <label class="abps-arrow" for="ls-10" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
-          <label class="abps-arrow" for="ls-11" aria-hidden="true">&lsaquo;<span class="abps-sr">Anterior</span></label>
+          <label class="abps-arrow" for="ls-12" aria-hidden="true">‹<span class="abps-sr">Previous</span></label>
+          <label class="abps-arrow" for="ls-1" aria-hidden="true">‹<span class="abps-sr">Previous</span></label>
+          <label class="abps-arrow" for="ls-2" aria-hidden="true">‹<span class="abps-sr">Previous</span></label>
+          <label class="abps-arrow" for="ls-3" aria-hidden="true">‹<span class="abps-sr">Previous</span></label>
+          <label class="abps-arrow" for="ls-4" aria-hidden="true">‹<span class="abps-sr">Previous</span></label>
+          <label class="abps-arrow" for="ls-5" aria-hidden="true">‹<span class="abps-sr">Previous</span></label>
+          <label class="abps-arrow" for="ls-6" aria-hidden="true">‹<span class="abps-sr">Previous</span></label>
+          <label class="abps-arrow" for="ls-7" aria-hidden="true">‹<span class="abps-sr">Previous</span></label>
+          <label class="abps-arrow" for="ls-8" aria-hidden="true">‹<span class="abps-sr">Previous</span></label>
+          <label class="abps-arrow" for="ls-9" aria-hidden="true">‹<span class="abps-sr">Previous</span></label>
+          <label class="abps-arrow" for="ls-10" aria-hidden="true">‹<span class="abps-sr">Previous</span></label>
+          <label class="abps-arrow" for="ls-11" aria-hidden="true">‹<span class="abps-sr">Previous</span></label>
         </div>
         <div class="abps-dots">
           <label class="abps-dot" for="ls-1"><span class="abps-sr">Foto 1</span></label>
@@ -163,138 +158,136 @@
           <label class="abps-dot" for="ls-12"><span class="abps-sr">Foto 12</span></label>
         </div>
         <div class="abps-next">
-          <label class="abps-arrow" for="ls-2" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
-          <label class="abps-arrow" for="ls-3" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
-          <label class="abps-arrow" for="ls-4" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
-          <label class="abps-arrow" for="ls-5" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
-          <label class="abps-arrow" for="ls-6" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
-          <label class="abps-arrow" for="ls-7" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
-          <label class="abps-arrow" for="ls-8" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
-          <label class="abps-arrow" for="ls-9" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
-          <label class="abps-arrow" for="ls-10" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
-          <label class="abps-arrow" for="ls-11" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
-          <label class="abps-arrow" for="ls-12" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
-          <label class="abps-arrow" for="ls-1" aria-hidden="true">&rsaquo;<span class="abps-sr">Siguiente</span></label>
+          <label class="abps-arrow" for="ls-2" aria-hidden="true">›<span class="abps-sr">Next</span></label>
+          <label class="abps-arrow" for="ls-3" aria-hidden="true">›<span class="abps-sr">Next</span></label>
+          <label class="abps-arrow" for="ls-4" aria-hidden="true">›<span class="abps-sr">Next</span></label>
+          <label class="abps-arrow" for="ls-5" aria-hidden="true">›<span class="abps-sr">Next</span></label>
+          <label class="abps-arrow" for="ls-6" aria-hidden="true">›<span class="abps-sr">Next</span></label>
+          <label class="abps-arrow" for="ls-7" aria-hidden="true">›<span class="abps-sr">Next</span></label>
+          <label class="abps-arrow" for="ls-8" aria-hidden="true">›<span class="abps-sr">Next</span></label>
+          <label class="abps-arrow" for="ls-9" aria-hidden="true">›<span class="abps-sr">Next</span></label>
+          <label class="abps-arrow" for="ls-10" aria-hidden="true">›<span class="abps-sr">Next</span></label>
+          <label class="abps-arrow" for="ls-11" aria-hidden="true">›<span class="abps-sr">Next</span></label>
+          <label class="abps-arrow" for="ls-12" aria-hidden="true">›<span class="abps-sr">Next</span></label>
+          <label class="abps-arrow" for="ls-1" aria-hidden="true">›<span class="abps-sr">Next</span></label>
         </div>
       </div>
     </div>
-    
+
     <div class="abps-copy">
       <p class="abps-eyebrow">Portfolio</p>
+      <div class="abps-rule"></div>
       <h3 class="abps-h2">Landscaping Gallery</h3>
       <p class="abps-text">Explore our recent outdoor living, hardscaping, and landscape design projects.</p>
     </div>
   </section>
 
-  <!-- CSS Lógica y Base -->
   <style>
-  .abps{--abps-accent:#0E7490;--abps-ink:#0F2A35;--abps-muted:#5B6B73;--abps-line:#D7E1E5;font-family:"PT Sans",Helvetica,Arial,sans-serif;color:var(--abps-ink);}
+  .abps{--abps-accent:#C28A35;--abps-ink:#1E1E1E;--abps-muted:#3A3A3A;--abps-line:rgba(194,138,53,.45);font-family:"PT Sans",Helvetica,Arial,sans-serif;color:var(--abps-ink);position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;background:#E3DDD1;}
   .abps *,.abps *::before,.abps *::after{box-sizing:border-box;}
   .abps-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
   .abps-radio{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
-  .abps-intro{max-width:1240px;margin:0 auto;padding:64px 32px 8px;}
-  .abps-eyebrow{margin:0 0 12px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--abps-accent);font-weight:300;}
-  .abps-h1{margin:0 0 18px;font-size:clamp(2rem,4.2vw,3.2rem);line-height:1.08;max-width:18ch;}
-  .abps-band{width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;background:#F6F9FA;}
-  .abps-row{max-width:1240px;margin:0 auto;padding:64px 32px;display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:center;}
-  .abps-row--alt{grid-template-columns:.88fr 1.12fr;}
+  .abps-eyebrow{margin:0 0 12px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--abps-accent);font-weight:700;}
+  .abps-rule{width:40px;height:1px;background:var(--abps-accent);margin:0 0 20px;}
+  .abps-row{max-width:1480px;margin:0 auto;padding:clamp(56px,6vw,88px) clamp(20px,3vw,40px);display:grid;grid-template-columns:1.5fr .5fr;gap:clamp(32px,4vw,56px);align-items:center;}
   .abps-slider{min-width:0;}
-  .abps-stage{position:relative;width:100%;aspect-ratio:16/11;}
-  .abps-slide{position:absolute;left:40%;width:20%;top:35%;height:30%;opacity:0;z-index:1;pointer-events:none;overflow:hidden;border-radius:3px;cursor:pointer;box-shadow:0 20px 44px rgba(15,42,53,.2);transition:left .5s cubic-bezier(.4,0,.2,1),top .5s cubic-bezier(.4,0,.2,1),width .5s cubic-bezier(.4,0,.2,1),height .5s cubic-bezier(.4,0,.2,1),opacity .4s ease;}
+  .abps-stage{position:relative;width:100%;aspect-ratio:16/10;}
+  .abps-slide{position:absolute;left:40%;width:20%;top:35%;height:30%;opacity:0;z-index:1;pointer-events:none;overflow:hidden;border-radius:3px;cursor:pointer;box-shadow:0 20px 44px rgba(30,30,30,.22);transition:left .5s cubic-bezier(.4,0,.2,1),top .5s cubic-bezier(.4,0,.2,1),width .5s cubic-bezier(.4,0,.2,1),height .5s cubic-bezier(.4,0,.2,1),opacity .4s ease;}
   .abps-slide img{width:100%;height:100%;object-fit:cover;display:block;margin:0;max-width:none;}
   .abps-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:26px;}
   .abps-prev,.abps-next{position:relative;width:42px;height:42px;flex:0 0 auto;}
-  .abps-arrow{display:none;align-items:center;justify-content:center;position:absolute;inset:0;width:42px;height:42px;border-radius:999px;border:1px solid #D7E1E5 !important;background:#ffffff !important;color:#0F2A35 !important;font-size:20px;line-height:1;cursor:pointer;user-select:none;transition:background .2s ease,color .2s ease,border-color .2s ease;}
-  .abps-arrow:hover{background:#0F2A35 !important;border-color:#0F2A35 !important;color:#ffffff !important;}
-  .abps-dots{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:9px;max-width:300px;}
-  .abps-dot{width:9px;height:9px;border-radius:999px;background:#C8D3D8;cursor:pointer;display:block;transition:background .25s ease,width .25s ease,height .25s ease;}
+  .abps-arrow{display:none;align-items:center;justify-content:center;position:absolute;inset:0;width:42px;height:42px;border-radius:999px;border:1px solid var(--abps-accent) !important;background:transparent !important;color:var(--abps-accent) !important;font-size:20px;line-height:1;cursor:pointer;user-select:none;transition:background .2s ease,color .2s ease,border-color .2s ease;}
+  .abps-arrow:hover{background:var(--abps-accent) !important;border-color:var(--abps-accent) !important;color:#ffffff !important;}
+  .abps-dots{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:9px;max-width:360px;}
+  .abps-dot{width:9px;height:9px;border-radius:999px;background:rgba(30,30,30,.18);cursor:pointer;display:block;transition:background .25s ease,width .25s ease,height .25s ease;}
   .abps-copy{min-width:0;}
-  .abps-h2{margin:0 0 18px;font-size:clamp(1.6rem,2.6vw,2.25rem);line-height:1.15;}
-  .abps-text{margin:0 0 24px;font-size:1.0625rem;line-height:1.75;color:var(--abps-muted);max-width:46ch;}
-  
-  /* Lógica de los 12 Sliders */
-  #ls-1:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
-  #ls-1:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
-  #ls-1:checked ~ .abps-stage > .abps-slide:nth-of-type(12){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  .abps-h2{margin:0 0 18px;font-size:clamp(1.6rem,2.4vw,2.25rem);line-height:1.15;color:var(--abps-ink);}
+  .abps-text{margin:0 0 24px;font-size:1.0625rem;line-height:1.75;color:var(--abps-muted);max-width:40ch;}
+
+  #ls-1:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:17%;width:66%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #ls-1:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:85%;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-1:checked ~ .abps-stage > .abps-slide:nth-of-type(12){left:0;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
   #ls-1:checked ~ .abps-nav .abps-dot:nth-of-type(1){background:var(--abps-accent);width:11px;height:11px;}
   #ls-1:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(1),#ls-1:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(1){display:flex;}
 
-  #ls-2:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
-  #ls-2:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
-  #ls-2:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-2:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:17%;width:66%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #ls-2:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:85%;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-2:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:0;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
   #ls-2:checked ~ .abps-nav .abps-dot:nth-of-type(2){background:var(--abps-accent);width:11px;height:11px;}
   #ls-2:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(2),#ls-2:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(2){display:flex;}
 
-  #ls-3:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
-  #ls-3:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
-  #ls-3:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-3:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:17%;width:66%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #ls-3:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:85%;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-3:checked ~ .abps-stage > .abps-slide:nth-of-type(2){left:0;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
   #ls-3:checked ~ .abps-nav .abps-dot:nth-of-type(3){background:var(--abps-accent);width:11px;height:11px;}
   #ls-3:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(3),#ls-3:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(3){display:flex;}
 
-  #ls-4:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
-  #ls-4:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
-  #ls-4:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-4:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:17%;width:66%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #ls-4:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:85%;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-4:checked ~ .abps-stage > .abps-slide:nth-of-type(3){left:0;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
   #ls-4:checked ~ .abps-nav .abps-dot:nth-of-type(4){background:var(--abps-accent);width:11px;height:11px;}
   #ls-4:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(4),#ls-4:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(4){display:flex;}
 
-  #ls-5:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
-  #ls-5:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
-  #ls-5:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-5:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:17%;width:66%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #ls-5:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:85%;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-5:checked ~ .abps-stage > .abps-slide:nth-of-type(4){left:0;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
   #ls-5:checked ~ .abps-nav .abps-dot:nth-of-type(5){background:var(--abps-accent);width:11px;height:11px;}
   #ls-5:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(5),#ls-5:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(5){display:flex;}
 
-  #ls-6:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
-  #ls-6:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
-  #ls-6:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-6:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:17%;width:66%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #ls-6:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:85%;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-6:checked ~ .abps-stage > .abps-slide:nth-of-type(5){left:0;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
   #ls-6:checked ~ .abps-nav .abps-dot:nth-of-type(6){background:var(--abps-accent);width:11px;height:11px;}
   #ls-6:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(6),#ls-6:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(6){display:flex;}
 
-  #ls-7:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
-  #ls-7:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
-  #ls-7:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-7:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:17%;width:66%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #ls-7:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:85%;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-7:checked ~ .abps-stage > .abps-slide:nth-of-type(6){left:0;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
   #ls-7:checked ~ .abps-nav .abps-dot:nth-of-type(7){background:var(--abps-accent);width:11px;height:11px;}
   #ls-7:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(7),#ls-7:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(7){display:flex;}
 
-  #ls-8:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
-  #ls-8:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
-  #ls-8:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-8:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:17%;width:66%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #ls-8:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:85%;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-8:checked ~ .abps-stage > .abps-slide:nth-of-type(7){left:0;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
   #ls-8:checked ~ .abps-nav .abps-dot:nth-of-type(8){background:var(--abps-accent);width:11px;height:11px;}
   #ls-8:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(8),#ls-8:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(8){display:flex;}
 
-  #ls-9:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
-  #ls-9:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
-  #ls-9:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-9:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:17%;width:66%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #ls-9:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:85%;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-9:checked ~ .abps-stage > .abps-slide:nth-of-type(8){left:0;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
   #ls-9:checked ~ .abps-nav .abps-dot:nth-of-type(9){background:var(--abps-accent);width:11px;height:11px;}
   #ls-9:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(9),#ls-9:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(9){display:flex;}
 
-  #ls-10:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
-  #ls-10:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
-  #ls-10:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-10:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:17%;width:66%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #ls-10:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:85%;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-10:checked ~ .abps-stage > .abps-slide:nth-of-type(9){left:0;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
   #ls-10:checked ~ .abps-nav .abps-dot:nth-of-type(10){background:var(--abps-accent);width:11px;height:11px;}
   #ls-10:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(10),#ls-10:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(10){display:flex;}
 
-  #ls-11:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
-  #ls-11:checked ~ .abps-stage > .abps-slide:nth-of-type(12){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
-  #ls-11:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-11:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:17%;width:66%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #ls-11:checked ~ .abps-stage > .abps-slide:nth-of-type(12){left:85%;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-11:checked ~ .abps-stage > .abps-slide:nth-of-type(10){left:0;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
   #ls-11:checked ~ .abps-nav .abps-dot:nth-of-type(11){background:var(--abps-accent);width:11px;height:11px;}
   #ls-11:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(11),#ls-11:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(11){display:flex;}
 
-  #ls-12:checked ~ .abps-stage > .abps-slide:nth-of-type(12){left:19%;width:62%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
-  #ls-12:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:84%;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
-  #ls-12:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:0;width:16%;top:16%;height:68%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-12:checked ~ .abps-stage > .abps-slide:nth-of-type(12){left:17%;width:66%;top:0;height:100%;opacity:1;z-index:3;pointer-events:auto;cursor:zoom-in;}
+  #ls-12:checked ~ .abps-stage > .abps-slide:nth-of-type(1){left:85%;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
+  #ls-12:checked ~ .abps-stage > .abps-slide:nth-of-type(11){left:0;width:15%;top:14%;height:72%;opacity:1;z-index:2;pointer-events:auto;}
   #ls-12:checked ~ .abps-nav .abps-dot:nth-of-type(12){background:var(--abps-accent);width:11px;height:11px;}
   #ls-12:checked ~ .abps-nav > .abps-prev > .abps-arrow:nth-of-type(12),#ls-12:checked ~ .abps-nav > .abps-next > .abps-arrow:nth-of-type(12){display:flex;}
 
   @media (max-width:900px){
-    .abps-row{grid-template-columns:1fr;gap:28px;padding:44px 24px;}
+    .abps-row{grid-template-columns:1fr;gap:28px;padding:44px 20px;}
+    .abps-copy{text-align:center;}
+    .abps-rule{margin:0 auto 20px;}
+    .abps-text{margin-left:auto;margin-right:auto;}
   }
   </style>
 
-  <!-- Script Lightbox Modal -->
   <script>
   document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('abps-lightbox')) return;
-    
+
     const lightbox = document.createElement('div');
     lightbox.id = 'abps-lightbox';
     Object.assign(lightbox.style, {
@@ -307,7 +300,7 @@
 
     lightbox.addEventListener('click', function() {
       this.style.display = 'none';
-      document.body.style.overflow = ''; 
+      document.body.style.overflow = '';
     });
 
     document.querySelectorAll('.abps-slide img').forEach(img => {
@@ -315,10 +308,24 @@
         const inputId = this.parentElement.getAttribute('for');
         const associatedInput = document.getElementById(inputId);
         if (associatedInput && associatedInput.checked) {
-          e.preventDefault(); 
+          e.preventDefault();
           document.getElementById('abps-lightbox-img').src = this.src;
           lightbox.style.display = 'flex';
           document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+  });
+  </script>
+  <!-- Prevent native label-focus scroll-jump on the arrow/dot/slide labels -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.abps-slider label[for]').forEach(label => {
+      label.addEventListener('click', function(e) {
+        const input = document.getElementById(this.getAttribute('for'));
+        if (input && input.type === 'radio') {
+          e.preventDefault();
+          input.checked = true;
         }
       });
     });
@@ -330,36 +337,49 @@
 <!-- wp:html -->
 <style>
 .ab-cta-photo{
-  margin-top:-16px !important;
   position:relative;
   width:100vw;
   left:50%;
   right:50%;
   margin-left:-50vw;
   margin-right:-50vw;
+  margin-top:-40px !important;
+  margin-bottom:-40px !important;
   height:clamp(380px,42vw,520px);
   overflow:hidden;
   z-index:2;
 }
 .ab-cta-photo__bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;}
-.ab-cta-photo__overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(10,14,17,0.55);z-index:2;}
+.ab-cta-photo__overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(10,14,17,0.25);z-index:2;}
 .ab-cta-photo__content{position:relative;z-index:3;height:100%;display:flex;align-items:center;justify-content:center;padding:0 24px;box-sizing:border-box;}
-.ab-cta-photo__card{background:rgba(15,20,23,0.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.14);padding:clamp(36px,5vw,52px) clamp(28px,5vw,60px);text-align:center;max-width:540px;border-radius:4px;}
+.ab-cta-photo__card{background:rgba(15,20,23,0.3);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.14);padding:clamp(36px,5vw,52px) clamp(28px,5vw,60px);text-align:center;max-width:540px;border-radius:4px;}
 .ab-cta-photo__rule{width:32px;height:1px;background:#D99A3E;margin:0 auto 22px;}
-.ab-cta-photo__card h2{margin:0 0 16px;font-size:clamp(1.5rem,3vw,1.9rem);font-weight:400;color:#ffffff;font-family:'Quicksand',sans-serif;}
+.ab-cta-photo__card h2{margin:0 0 16px;font-size:clamp(1.5rem,3vw,1.9rem);font-weight:300;color:#ffffff;font-family:'Quicksand',sans-serif;}
 .ab-cta-photo__card p{margin:0 0 28px;font-size:14.5px;color:rgba(255,255,255,0.8);font-family:'Quicksand',sans-serif;}
 </style>
 
 <div class="ab-cta-photo ab-reveal">
-  <img class="ab-cta-photo__bg" src="https://adeptbuild.com/wp-content/uploads/2023/03/dsc5682-1024x683.jpeg" alt="">
+  <img class="ab-cta-photo__bg" src="https://adeptbuild.com/wp-content/uploads/2026/09/full-home-interior-renovation-los-angeles.png" alt="Backyard landscape design by Adept Builders &amp; Design in Los Angeles">
   <div class="ab-cta-photo__overlay"></div>
   <div class="ab-cta-photo__content">
     <div class="ab-cta-photo__card">
       <div class="ab-cta-photo__rule"></div>
       <h2>Have a project in mind?</h2>
-      <p>Tell us about your space and we'll set up a free, no-pressure consultation to talk through the possibilities.</p>
-      <button onclick="document.getElementById('adept-modal-about').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px);">Schedule A Meeting</button>
+      <p>Tell us about your space and we'll set up a consultation to talk through the possibilities.</p>
+      <button onclick="document.getElementById('adept-modal-landscaping').style.display='flex'" class="ab-btn" style="font-size:clamp(0.8rem,1.6vw,1rem); padding:clamp(12px,1.6vw,18px) clamp(20px,3vw,32px);">REQUEST A PRIVATE CONSULTATION</button>
     </div>
   </div>
 </div>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<style>
+.ab-reveal,
+.ab-reveal.is-visible{
+  opacity:1 !important;
+  transform:none !important;
+  transition:none !important;
+  transition-delay:0s !important;
+}
+</style>
 <!-- /wp:html -->

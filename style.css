@@ -1,4 +1,4 @@
-﻿/*
+/*
 Theme Name: Adeptbuild Theme
 Theme URI: https://test.adeptbuild.com
 Author: Ivan Gerardo Mendoza Alonso
@@ -12,32 +12,22 @@ Text Domain: adeptbuild
 */
 
 /* ==========================================================================
-   0. LOCAL FONT FACES
-   Drop the purchased .ttf at assets/fonts/Posterama2001-Regular.ttf (create
-   the "fonts" folder if it doesn't exist yet) — the path below is relative
-   to this file (theme root), so no PHP/enqueue changes are needed. Once the
-   file is in place this simply starts working; nothing else to wire up.
+   0. LOCAL FONT FACE
+   Quicksand is the only web font on the site (preloaded from functions.php).
    ========================================================================== */
 @font-face {
-    font-family: "Posterama 2001";
-    src: url("assets/fonts/Posterama2001-Regular.ttf") format("truetype");
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-/* Main nav font (mcclean-style) — assets/fonts/Quicksand.ttf. */
-@font-face {
     font-family: "Quicksand";
-    src: url("assets/fonts/Quicksand.ttf") format("truetype");
+    src: url("assets/fonts/Quicksand.woff2") format("woff2"),
+         url("assets/fonts/Quicksand.ttf") format("truetype");
     font-weight: 300 700;
     font-style: normal;
     font-display: swap;
 }
 
 /* Site-wide: Quicksand everywhere, no exceptions — overrides every other
-   font-family declaration in this file (Montserrat/Geist/PT Sans/Posterama/
-   Poppins included), any inline "style=font-family:..." from block-editor
-   content, and any plugin/Gutenberg CSS, regardless of specificity. */
+   font-family declaration, any inline "style=font-family:..." from
+   block-editor content, and any plugin/Gutenberg CSS, regardless of
+   specificity. */
 *, *::before, *::after {
     font-family: var(--ab-font-quicksand) !important;
 }
@@ -299,69 +289,6 @@ hr {
 
 .ast-container--narrow { max-width: var(--ab-container-narrow); }
 
-.ab-section { padding: var(--ab-section-y) 0; }
-.ab-section--alt { background: #F6F6F6; }
-.ab-section--tight { padding: clamp(40px, 5vw, 64px) 0; }
-
-.ab-section--deep {
-    background: #1A1A1A;
-    color: rgba(255, 255, 255, 0.78);
-}
-.ab-section--deep h1,
-.ab-section--deep h2,
-.ab-section--deep h3,
-.ab-section--deep h4 { color: #fff; }
-
-.ab-grid { display: grid; gap: 28px; }
-.ab-grid--2 { grid-template-columns: repeat(2, 1fr); }
-.ab-grid--3 { grid-template-columns: repeat(3, 1fr); }
-.ab-grid--4 { grid-template-columns: repeat(4, 1fr); }
-/* Legacy inner-container flattening, same reason as the other components
-   in this file — each card needs to be a direct grid child. */
-.ab-grid > .wp-block-group__inner-container { display: contents; }
-
-/* Section heading */
-.ab-section-head {
-    max-width: 720px;
-    margin: 0 auto clamp(40px, 5vw, 64px);
-    text-align: center;
-}
-.ab-section-head--left { margin-left: 0; text-align: left; }
-
-.ab-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--ab-font-heading);
-    font-size: var(--ab-fs-xs);
-    font-weight: 300;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #1046bb;
-    margin-bottom: 14px;
-}
-.ab-eyebrow::before {
-    content: "";
-    width: 26px;
-    height: 2px;
-    background: #0170b9;
-    border-radius: 2px;
-}
-.ab-section-head--center .ab-eyebrow::after {
-    content: "";
-    width: 26px;
-    height: 2px;
-    background: #0170b9;
-    border-radius: 2px;
-}
-
-.ab-section-head p {
-    font-size: 1.0625rem;
-    color: #3D3D3D;
-}
-
-.ab-section--deep .ab-eyebrow { color: #0170b9; }
-
 /* ==========================================================================
    5. BUTTONS
    ========================================================================== */
@@ -404,23 +331,19 @@ a.ab-btn:hover {
 }
 
 .ab-btn--accent,
-.ab-btn--outline,
-.ab-btn--ghost {
+.ab-btn--outline {
     background: rgba(255, 255, 255, 0.15);
     border-color: #0170B9;
     color: #ffffff;
 }
 .ab-btn--accent:hover,
-.ab-btn--outline:hover,
-.ab-btn--ghost:hover {
+.ab-btn--outline:hover {
     background: #ffffff;
     border-color: #ffffff;
     color: #1A1A1A;
 }
 
 .ab-btn--sm { padding: clamp(8px, 1vw, 12px) clamp(14px, 2vw, 22px); font-size: clamp(0.75rem, 1.6vw, 0.95rem); }
-.ab-btn--lg { padding: clamp(14px, 2vw, 20px) clamp(24px, 3.5vw, 36px); font-size: clamp(0.85rem, 1.8vw, 1.05rem); }
-
 .ab-btn-group {
     display: flex;
     flex-wrap: wrap;
@@ -472,19 +395,6 @@ a.ab-btn:hover {
 }
 .ab-topbar__item:hover { color: #fff; }
 .ab-topbar__item svg { color: #0170b9; flex-shrink: 0; }
-
-.ab-social { display: flex; align-items: center; gap: 6px; }
-.ab-social a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    color: rgba(255, 255, 255, 0.75);
-    transition: background-color var(--ab-transition), color var(--ab-transition);
-}
-.ab-social a:hover { background: #1046bb; color: #fff; }
 
 /* Main bar — semi-transparent black at all times (mcclean-style: the bar
    never goes fully transparent, even resting over the hero image/video),
@@ -817,21 +727,6 @@ body.ab-menu-open .site-header {
 }
 .ab-floating-cta:hover { background: #ffffff; color: #1A1A1A; padding-inline-end: 15px; }
 
-.ab-floating-whatsapp {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
-    margin-right: 14px;
-    border-radius: 50%;
-    background: #25D366;
-    color: #fff;
-    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
-    transition: transform var(--ab-transition);
-}
-.ab-floating-whatsapp:hover { transform: scale(1.08); color: #fff; }
-
 /* --- Floating Call/Text contact widget, pinned to the bottom-right corner.
    Desktop: two circles that expand left on hover to reveal a label + the
    number (reversed from a left-edge widget, so the reveal always grows
@@ -1000,146 +895,6 @@ body.ab-menu-open .site-header {
 /* ==========================================================================
    7. HERO
    ========================================================================== */
-
-.ab-hero {
-    position: relative;
-    display: flex;
-    align-items: center;
-    min-height: clamp(520px, 76vh, 760px);
-    padding: clamp(80px, 10vw, 130px) 0 clamp(110px, 12vw, 160px);
-    background:
-        linear-gradient(115deg, rgba(26, 26, 26, 0.90) 0%, rgba(56, 42, 245, 0.72) 55%, rgba(87, 225, 243, 0.42) 100%),
-        radial-gradient(circle at 78% 22%, #0170b9 0%, transparent 55%),
-        linear-gradient(160deg, #1A1A1A 0%, #2971f7 100%);
-    background-size: cover;
-    background-position: center;
-    color: rgba(255, 255, 255, 0.88);
-    overflow: hidden;
-}
-
-/* Video variant — used for per-page custom heroes (individual pages
-   build their own hero directly into their content instead of getting
-   the theme's built-in one; see page.php) that want real footage instead
-   of the plain gradient. Same plain dark vignette as ".ab-page-hero__overlay"
-   (no brand-color wash over the footage), and a two-up grid so a form
-   card can sit beside the heading instead of only stacking under it.
-
-   Also full-bleed and pulled up under the transparent header, exactly
-   like ".ab-page-hero--video" above (this is what replaces that hero on
-   pages that opt out of it in page.php) — the section's own ".ast-container"
-   still centers its actual content to the normal 1200px column. */
-.ab-hero--video {
-    background: #1A1A1A;
-    width: calc(100vw - (var(--ab-edge-gap) * 2));
-    margin-left: calc(50% - 50vw + var(--ab-edge-gap));
-    margin-right: calc(50% - 50vw + var(--ab-edge-gap));
-    margin-top: calc(-1 * var(--ab-header-h));
-    min-height: calc(clamp(520px, 76vh, 760px) + var(--ab-header-h));
-    padding-top: calc(var(--ab-header-h) + clamp(80px, 10vw, 130px));
-}
-.ab-hero__video {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.ab-hero--video .ab-hero__overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(to top, rgba(26, 26, 26, 0.8) 0%, rgba(26, 26, 26, 0.3) 45%, rgba(26, 26, 26, 0.1) 100%);
-}
-.ab-hero--video .ast-container {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-}
-.ab-hero__grid {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: clamp(24px, 4vw, 56px);
-    flex-wrap: wrap;
-}
-.ab-hero__form-card {
-    flex: 0 1 340px;
-    background: #FFFFFF;
-    border-radius: var(--ab-radius-lg);
-    box-shadow: 0 24px 60px rgba(26, 26, 26, 0.16);
-    padding: clamp(24px, 3vw, 32px);
-}
-.ab-hero__form-card h3 {
-    margin: 0 0 16px;
-    text-align: center;
-    font-size: 1.125rem;
-}
-
-.ab-hero__content {
-    position: relative;
-    z-index: 2;
-    max-width: 680px;
-    flex: 1 1 420px;
-}
-
-.ab-hero__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 18px 8px 10px;
-    margin-bottom: 26px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: var(--ab-radius-pill);
-    backdrop-filter: blur(8px);
-    font-size: var(--ab-fs-xs);
-    font-weight: 300;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #fff;
-}
-.ab-hero__badge svg { color: #0170b9; }
-
-.ab-hero h1 {
-    color: #fff;
-    margin-bottom: 22px;
-    text-shadow: 0 2px 24px rgba(26, 26, 26, 0.35);
-}
-.ab-hero h1 em {
-    font-style: normal;
-    color: #0170b9;
-}
-
-.ab-hero__text {
-    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
-    max-width: 560px;
-    margin-bottom: 34px;
-    color: rgba(255, 255, 255, 0.86);
-}
-
-.ab-hero__stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    margin-top: 52px;
-    padding-top: 32px;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-}
-.ab-hero__stat strong {
-    display: block;
-    font-family: var(--ab-font-heading);
-    font-size: 2.25rem;
-    font-weight: 300;
-    line-height: 1;
-    color: #fff;
-}
-.ab-hero__stat span {
-    font-size: var(--ab-fs-xs);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.68);
-}
 
 /* "We build [rotating word]" statement section — matches the template's
    "Our Story" section: a real photo (an actual Image block, ".ab-story__bg",
@@ -1320,21 +1075,6 @@ body.ab-menu-open .site-header {
     .ab-story__body { max-width: none; }
 }
 
-/* Decorative bottom wave — matches the page background it blends into,
-   which is now dark blue site-wide (see the body rule above). */
-.ab-wave {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    z-index: 1;
-    width: 100%;
-    height: auto;
-    color: #ffffff;
-    pointer-events: none;
-}
-.ab-wave--alt { color: #1A1A1A; }
-
 /* Inner-page header — pulled up by the header's own (transparent) height
    and given that much extra top padding, so the background extends behind
    the overlaid nav bar while the title itself still clears it. Bottom edge
@@ -1402,19 +1142,6 @@ body.ab-menu-open .site-header {
     max-width: 640px;
 }
 
-/*
- * Opt-in utility: pulls a single block up so it overlaps the bottom of the
- * page hero, instead of sitting in the empty gap below it. Attach it from
- * the block editor (Advanced panel → Additional CSS Class(es)) to whichever
- * block needs it — it never runs unless a block explicitly carries it, so it
- * can't affect any other page.
- */
-.ab-rise-into-hero {
-    position: relative;
-    z-index: 2;
-    margin-top: -64px !important;
-}
-
 /* ==========================================================================
    8. CARDS AND COMPONENTS
    ========================================================================== */
@@ -1450,60 +1177,9 @@ body.ab-menu-open .site-header {
 }
 .ab-card:hover::before { transform: scaleX(1); }
 
-.ab-card__icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    margin-bottom: 22px;
-    border-radius: 0;
-    background: #E8ECFB;
-    color: #1046bb;
-    transition: background-color var(--ab-transition), color var(--ab-transition);
-}
-.ab-card:hover .ab-card__icon { background: #1046bb; color: #fff; }
-
 .ab-card h3 { font-size: 1.25rem; margin-bottom: 12px; }
 .ab-card p { font-size: var(--ab-fs-sm); margin-bottom: 18px; }
 .ab-card .ab-link-arrow { margin-top: auto; }
-
-/* Process steps */
-.ab-step {
-    position: relative;
-    padding: 32px 28px;
-    background: #FFFFFF;
-    border-radius: var(--ab-radius-lg);
-    border: 1px solid #E5E5E5;
-}
-.ab-step__num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    margin-bottom: 18px;
-    border-radius: 50%;
-    background: #1A1A1A;
-    color: #fff;
-    font-family: var(--ab-font-heading);
-    font-weight: 300;
-    font-size: 1.0625rem;
-}
-.ab-step h3 { font-size: 1.125rem; margin-bottom: 8px; }
-.ab-step p { font-size: var(--ab-fs-sm); margin: 0; }
-
-.ab-steps { counter-reset: step; position: relative; }
-.ab-steps::before {
-    content: "";
-    position: absolute;
-    top: 56px;
-    left: 10%;
-    right: 10%;
-    height: 2px;
-    background: repeating-linear-gradient(90deg, #E5E5E5 0 10px, transparent 10px 20px);
-    z-index: -1;
-}
 
 /* Full-bleed alternating process rows — photo fills one half edge to edge,
    a solid dark slate panel with the step number fills the other, flipping
@@ -1541,17 +1217,6 @@ body.ab-menu-open .site-header {
     background: #1B2430;
     padding: clamp(32px, 5vw, 56px);
 }
-/* Not scoped to any particular section wrapper (".ab-proto-process" on
-   home, ".ab-faq" on other pages, or dropped in anywhere else) — this
-   panel's own background is always the dark "#1B2430" set above, so the
-   text always needs to be light regardless of which page it's on. */
-.ab-process-row__num {
-    font-family: var(--ab-font-heading);
-    font-size: 1.0625rem;
-    color: #0170b9;
-    letter-spacing: 0.04em;
-    margin-bottom: 10px;
-}
 .ab-process-row__body h2,
 .ab-process-row__body h3 { font-size: clamp(1.5rem, 2.5vw, 2rem); margin-top: 0; margin-bottom: 16px; color: #fff; }
 .ab-process-row__body p { max-width: 420px; color: rgba(255, 255, 255, 0.75); margin: 0; }
@@ -1578,68 +1243,6 @@ body.ab-menu-open .site-header {
 .ab-faq .ab-proto-inner { max-width: var(--ab-container); margin: 0 auto; padding: 0 var(--ab-gutter) clamp(32px, 4vw, 48px); }
 .ab-faq .ab-proto-inner h2 { color: #fff; margin-top: 0; }
 .ab-faq .ab-proto-inner p { color: rgba(255, 255, 255, 0.72); max-width: 640px; }
-
-/* Media: text + image */
-.ab-media {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(32px, 5vw, 72px);
-    align-items: center;
-}
-.ab-media--reverse .ab-media__visual { order: -1; }
-/* Same legacy inner-container flattening as the other components (see
-   ".ab-service-strips" etc. below) — the visual and text column need to
-   be direct grid children of ".ab-media", and the image needs to be a
-   direct child of ".ab-media__visual" for its height:100% to resolve
-   against that element's own aspect-ratio box instead of an intervening
-   auto-height wrapper. */
-.ab-media > .wp-block-group__inner-container,
-.ab-media__visual > .wp-block-group__inner-container { display: contents; }
-
-.ab-media__visual {
-    position: relative;
-    border-radius: var(--ab-radius-lg);
-    overflow: hidden;
-    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
-    aspect-ratio: 4 / 3;
-    background: linear-gradient(140deg, #2971f7 0%, #0170b9 100%);
-}
-.ab-media__visual img { width: 100%; height: 100%; object-fit: cover; }
-
-.ab-media__badge {
-    position: absolute;
-    right: -12px;
-    bottom: 28px;
-    padding: 20px 26px;
-    background: #0170b9;
-    color: #1A1A1A;
-    border-radius: var(--ab-radius);
-    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
-    font-family: var(--ab-font-heading);
-    text-align: center;
-}
-.ab-media__badge strong { display: block; font-size: 1.875rem; line-height: 1; }
-.ab-media__badge span { font-size: var(--ab-fs-xs); text-transform: uppercase; letter-spacing: 0.08em; }
-
-/* Checklist */
-.ab-checklist { list-style: none; padding: 0; margin: 0 0 30px; }
-.ab-checklist li {
-    position: relative;
-    padding-left: 34px;
-    margin-bottom: 14px;
-    font-size: var(--ab-fs-sm);
-}
-.ab-checklist li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 3px;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: #E8ECFB url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%232971f7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 13px no-repeat;
-}
-.ab-section--deep .ab-checklist li { color: rgba(255, 255, 255, 0.82); }
 
 /* Full-bleed hover-expanding service strips — a full-width row of narrow
    photo panels, each with a vertical label; hovering (or focusing, for
@@ -1792,276 +1395,6 @@ body:not(.home) .ab-service-strips {
     .ab-service-strip img { filter: grayscale(0) brightness(0.8); transform: none; }
 }
 
-/* Full-bleed horizontal carousel — generic base for any row of cards that
-   should scroll/snap (the video carousel, the portfolio carousel below,
-   any future one): native scroll-snap (works, and feels smooth, with no
-   JS at all), with prev/next buttons above the track as a progressive
-   enhancement — navigation.js adds ".ab-slider--js" once it wires them up
-   (and disables whichever end is already fully scrolled to), so without
-   JS they just never appear and the row is still fully usable by
-   touch/trackpad/scrollbar drag alone. What actually fills ".ab-slider__item"
-   (a video embed, a ".ab-portfolio-item", ...) is up to whoever uses it.
-   Ghost-button styling (transparent, light border) to sit on the dark page
-   background these normally appear on. */
-.ab-slider__nav {
-    display: none;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 10px;
-    margin: 0 0 14px;
-}
-.ab-slider--js .ab-slider__nav { display: flex; }
-.ab-slider__btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 46px;
-    height: 46px;
-    border-radius: var(--ab-radius-pill);
-    border: 2px solid rgba(255, 255, 255, 0.35);
-    background: transparent;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color var(--ab-transition), border-color var(--ab-transition), color var(--ab-transition);
-}
-.ab-slider__btn:hover { background: #1046bb; border-color: #1046bb; color: #1A1A1A; }
-.ab-slider__btn:disabled { opacity: 0.35; cursor: default; }
-.ab-slider__btn:disabled:hover { background: transparent; border-color: rgba(255, 255, 255, 0.35); color: #fff; }
-.ab-slider__btn svg { width: 18px; height: 18px; }
-
-.ab-slider__track {
-    display: flex;
-    gap: 20px;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    padding: 4px clamp(20px, 5vw, calc((100vw - var(--ab-container)) / 2 + var(--ab-gutter))) 12px;
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-    scroll-padding-left: clamp(20px, 5vw, calc((100vw - var(--ab-container)) / 2 + var(--ab-gutter)));
-    scrollbar-width: none;
-}
-.ab-slider__track::-webkit-scrollbar { display: none; }
-.ab-slider__item {
-    flex: 0 0 clamp(240px, 30vw, 360px);
-    scroll-snap-align: start;
-}
-.ab-slider__item .wp-block-embed { margin-bottom: 0; }
-.ab-slider__item .wp-block-embed__wrapper {
-    box-shadow: 0 12px 32px rgba(26, 26, 26, 0.10);
-    transition: transform var(--ab-transition);
-}
-.ab-slider__item:hover .wp-block-embed__wrapper { transform: translateY(-4px); }
-
-/* Same legacy inner-container flattening as the other full-bleed
-   components above — each item needs to be a direct flex child of
-   ".ab-slider__track", not wrapped one level deeper. */
-.ab-slider__track > .wp-block-group__inner-container,
-.ab-carousel__track > .wp-block-group__inner-container { display: contents; }
-
-@media (max-width: 600px) {
-    .ab-slider__nav { display: none !important; }
-}
-
-/* "Our Portfolio" section — eyebrow/heading/copy in the normal centered
-   container, then a ".ab-carousel" below it: one project photo at a time,
-   sized to that same content column (not full-bleed, not a row of small
-   cards like ".ab-slider"), advancing on its own or via the prev/next
-   arrows — see initCarousels() in navigation.js. Each slide is a real
-   Image block (so it can be swapped from wp-admin) with a caption and a
-   full-tile invisible link button layered over it, same "cover link"
-   trick as ".ab-service-strip__link" above — img/caption/link are all
-   position:absolute, so none of them need to be a *direct* child of
-   ".ab-portfolio-item" and the legacy Group inner-container wrapper
-   between them is a non-issue here. */
-.ab-portfolio { padding: clamp(64px, 8vw, 100px) 0; }
-
-.ab-portfolio-item {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: var(--ab-radius-lg);
-    overflow: hidden;
-    aspect-ratio: 4 / 3;
-    box-shadow: var(--ab-shadow);
-}
-.ab-portfolio-item img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.6s ease;
-}
-.ab-portfolio-item:hover img { transform: scale(1.06); }
-.ab-portfolio-item__caption {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    margin: 0;
-    padding: 20px;
-    background: linear-gradient(to top, rgba(26, 26, 26, 0.85) 0%, transparent 70%);
-    color: #fff;
-    font-family: var(--ab-font-heading);
-    font-weight: 300;
-    font-size: 1.0625rem;
-}
-.ab-portfolio-item__link {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-}
-.ab-portfolio-item__link .wp-block-button__link {
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    font-size: 0;
-    line-height: 0;
-}
-.ab-portfolio-item__link .wp-block-button__link:hover { background: transparent; box-shadow: none; transform: none; }
-
-/* Single-slide "window" carousel — one image fills the whole content-width
-   frame; the track holds every slide side by side and JS translates it by
-   whole slide-widths (see initCarousels()) rather than free-scrolling like
-   ".ab-slider" above, since only ever one slide should be visible/active
-   at a time here, whether it changed by the arrows or on its own. */
-.ab-carousel {
-    position: relative;
-    max-width: var(--ab-container);
-    margin: 0 auto;
-    border-radius: var(--ab-radius-lg);
-    overflow: hidden;
-    box-shadow: var(--ab-shadow-lg);
-}
-.ab-carousel__viewport { overflow: hidden; }
-.ab-carousel__track {
-    display: flex;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.ab-carousel__slide {
-    flex: 0 0 100%;
-    min-width: 0;
-    aspect-ratio: 16 / 9;
-}
-.ab-carousel__slide .ab-portfolio-item {
-    aspect-ratio: auto;
-    border-radius: 0;
-    box-shadow: none;
-}
-
-.ab-carousel__btn {
-    position: absolute;
-    top: 50%;
-    z-index: 3;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(26, 26, 26, 0.55);
-    border: 2px solid rgba(255, 255, 255, 0.75);
-    color: #fff;
-    cursor: pointer;
-    backdrop-filter: blur(2px);
-    transition: background-color var(--ab-transition), border-color var(--ab-transition);
-}
-.ab-carousel__btn:hover { background: #1046bb; border-color: #1046bb; }
-.ab-carousel__prev { left: 16px; }
-.ab-carousel__next { right: 16px; }
-
-.ab-carousel__dots {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 16px;
-    z-index: 3;
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-}
-.ab-carousel__dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.45);
-    border: 0;
-    padding: 0;
-    cursor: pointer;
-    transition: background-color var(--ab-transition), transform var(--ab-transition);
-}
-.ab-carousel__dot:hover { background: rgba(255, 255, 255, 0.75); }
-.ab-carousel__dot.is-active { background: #1046bb; transform: scale(1.2); }
-
-@media (max-width: 600px) {
-    .ab-carousel { border-radius: 0; }
-    .ab-carousel__slide { aspect-ratio: 4 / 3; }
-    .ab-carousel__btn { width: 40px; height: 40px; }
-}
-
-/* Project gallery */
-.ab-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-
-.ab-gallery__item {
-    position: relative;
-    display: block;
-    border-radius: var(--ab-radius-lg);
-    overflow: hidden;
-    aspect-ratio: 4 / 3;
-    background: linear-gradient(150deg, #1A1A1A, #2971f7 60%, #0170b9);
-    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
-}
-.ab-gallery__item--wide { grid-column: span 2; }
-.ab-gallery__item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.ab-gallery__item:hover img { transform: scale(1.06); }
-
-.ab-gallery__overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 26px;
-    background: linear-gradient(to top, rgba(26, 26, 26, 0.88) 0%, rgba(26, 26, 26, 0.20) 55%, transparent 100%);
-    color: #fff;
-    opacity: 0;
-    transition: opacity var(--ab-transition);
-}
-.ab-gallery__item:hover .ab-gallery__overlay,
-.ab-gallery__item:focus-visible .ab-gallery__overlay { opacity: 1; }
-
-.ab-gallery__overlay strong {
-    font-family: var(--ab-font-heading);
-    font-size: 1.125rem;
-    display: block;
-}
-.ab-gallery__overlay span {
-    font-size: var(--ab-fs-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #0170b9;
-}
-
-/* 2-column variant — e.g. the "What We Do" service grid on the About page,
-   where 4 square-ish cards read better as 2x2 than the default 3-up grid. */
-.ab-gallery--2 { grid-template-columns: repeat(2, 1fr); }
-@media (max-width: 640px) {
-    .ab-gallery--2 { grid-template-columns: 1fr; }
-}
-
 /* Founder/owner spotlight (see the About page) — plain WP core
    ".wp-block-media-text", given the same photo-one-side / copy-the-other
    treatment as the rest of the theme's media rows, sized down for a
@@ -2085,37 +1418,6 @@ body:not(.home) .ab-service-strips {
 @media (max-width: 700px) {
     .ab-entry-content .wp-block-media-text { grid-template-columns: 1fr; }
 }
-
-/* Testimonials */
-.ab-quote {
-    padding: 34px 30px;
-    background: #FFFFFF;
-    border-radius: var(--ab-radius-lg);
-    border: 1px solid #E5E5E5;
-    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
-}
-.ab-quote__stars { color: #0170b9; margin-bottom: 16px; letter-spacing: 2px; }
-.ab-quote p {
-    font-size: var(--ab-fs-sm);
-    color: #1A1A1A;
-    margin-bottom: 22px;
-}
-.ab-quote__author { display: flex; align-items: center; gap: 14px; }
-.ab-quote__avatar {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #1046bb, #0170b9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-family: var(--ab-font-heading);
-    font-weight: 300;
-    flex-shrink: 0;
-}
-.ab-quote__author strong { display: block; color: #1A1A1A; font-size: 0.9375rem; }
-.ab-quote__author span { font-size: var(--ab-fs-xs); color: #6B6B6B; }
 
 /* CTA banner — deliberately NOT full-bleed: it's meant to sit inside the
    page's normal 1200px ".ast-container" like any other block. Guards
@@ -2211,42 +1513,6 @@ body:not(.home) .ab-service-strips {
     background-color: #3A3A3A !important;
     color: #ffffff !important;
 }
-/* Several other pages built their own "Have a project in mind?" section
-   with a raw <button class="ab-cta-btn"> plus its own inline <style>
-   block in the page content (copied from what home used to look like) —
-   white border/text, which is now invisible on ".ab-cta"'s white card
-   everywhere. Each page's own <style> is equal specificity and later in
-   the DOM than this stylesheet, so it normally wins on source order;
-   "!important" here forces the same gray look across all of them without
-   editing every page's content individually. */
-.ab-cta .ab-cta-btn {
-    background: transparent !important;
-    color: #3A3A3A !important;
-    border-color: #3A3A3A !important;
-}
-.ab-cta .ab-cta-btn:hover {
-    background: #3A3A3A !important;
-    color: #ffffff !important;
-    border-color: #3A3A3A !important;
-}
-
-/* Logos / trust bar */
-.ab-logos {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(28px, 5vw, 64px);
-    opacity: 0.55;
-}
-.ab-logos span {
-    font-family: var(--ab-font-heading);
-    font-weight: 300;
-    font-size: 1.125rem;
-    letter-spacing: 0.02em;
-    color: #6B6B6B;
-}
-
 /* ==========================================================================
    9. FORMS
    ========================================================================== */
@@ -2357,8 +1623,6 @@ label {
 }
 .ab-layout--full { grid-template-columns: minmax(0, 1fr); }
 
-.ab-posts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-
 .ab-post-card {
     display: flex;
     flex-direction: column;
@@ -2422,7 +1686,6 @@ label {
     display: block;
     margin: 0 auto;
 }
-
 
 /* TEMP DISABLED — this block force-whites headings/text/table/etc. inside
    .ab-entry-content on the home page. It was written back when "body.home"
@@ -2615,30 +1878,6 @@ label {
    item shares one keyframe animation, staggered by a per-item --i custom
    property so exactly one is ever in its "visible" slot at a time.
    ========================================================================== */
-.ab-services-showcase {
-    text-align: center;
-    padding: clamp(36px, 6vw, 64px) 0;
-}
-h2.ab-services-showcase__title {
-    font-family: var(--ab-font-heading);
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-    line-height: 1.08;
-    font-size: clamp(2.1rem, 6vw, 4.5rem);
-    margin: 0 0 clamp(18px, 3vw, 34px);
-    color: #fff;
-}
-/* Gradient fill, gated behind feature support so the title always shows
-   in plain white if the browser can't clip the gradient to the text. */
-@supports (background-clip: text) or (-webkit-background-clip: text) {
-    h2.ab-services-showcase__title {
-        background: linear-gradient(120deg, #fff 0%, #0170b9 55%, #0E7490 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    }
-}
 .ab-services-ticker {
     position: relative;
     width: 100%;
@@ -2824,7 +2063,6 @@ h2.ab-services-showcase__title {
 .ab-footer-bottom ul { display: flex; gap: 22px; flex-wrap: wrap; }
 .ab-footer-bottom li { margin: 0; }
 
-
 /* ==========================================================================
    12. ANIMATIONS
    ========================================================================== */
@@ -2839,51 +2077,15 @@ h2.ab-services-showcase__title {
     }
 }
 
-/* --- Giant gradient headline — for a hero-scale statement heading --- */
-.ab-gradient-heading {
-    font-family: var(--ab-font-heading);
-    font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    font-size: clamp(2.75rem, 7vw, 6rem);
-    margin: 0 0 0.4em;
-    background: linear-gradient(180deg, #0170b9 0%, #1046bb 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: #1046bb;
-}
-.ab-gradient-heading--light {
-    background: linear-gradient(180deg, #fff 0%, #E8ECFB 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* --- Animated stat counter number ---
-   Add this class to any heading via the block editor's Additional CSS
-   Class(es) field. assets/js/navigation.js's initCounters() reads the
-   number already in the text (e.g. "250+") and counts up to it from 0
-   once it scrolls into view; without the script it just displays as-is. */
-.ab-counter-value {
-    background: linear-gradient(180deg, #0170b9, #1046bb);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: #1046bb;
-}
-
 /* ==========================================================================
    13. RESPONSIVE
    ========================================================================== */
 
 @media (max-width: 1024px) {
-    .ab-grid--4 { grid-template-columns: repeat(2, 1fr); }
     .ab-layout { grid-template-columns: minmax(0, 1fr); }
     .ab-footer-main { grid-template-columns: 1fr; justify-items: center; text-align: center; }
     .ab-footer-info { align-items: center; }
     .ab-footer-nav ul { align-items: center; }
-    .ab-steps::before { display: none; }
 }
 
 @media (max-width: 921px) {
@@ -2975,21 +2177,9 @@ h2.ab-services-showcase__title {
     .ab-header-actions .ast-button { display: none; }
 
     .ab-topbar__info { gap: 16px; }
-    .ab-topbar .ab-social { display: none; }
 }
 
 @media (max-width: 782px) {
-    .ab-grid--2,
-    .ab-grid--3,
-    .ab-grid--4 { grid-template-columns: 1fr; }
-
-    .ab-media { grid-template-columns: 1fr; }
-    .ab-media--reverse .ab-media__visual { order: 0; }
-
-    .ab-gallery { grid-template-columns: repeat(2, 1fr); }
-    .ab-gallery__item--wide { grid-column: span 2; }
-
-    .ab-posts { grid-template-columns: 1fr; }
     .ab-form__row { grid-template-columns: 1fr; }
 
     .ab-cta > .wp-block-group__inner-container { flex-direction: column; align-items: flex-start; text-align: left; }
@@ -2999,20 +2189,12 @@ h2.ab-services-showcase__title {
     :root { --ab-gutter: 18px; }
 
     .ab-topbar { display: none; }
-    .ab-hero__stats { gap: 26px; }
-    .ab-hero__stat strong { font-size: 1.75rem; }
-
-    .ab-gallery { grid-template-columns: 1fr; }
-    .ab-gallery__item--wide { grid-column: span 1; }
-
-
     .ab-footer-bottom { justify-content: center; text-align: center; }
 
     .ab-btn-group { width: 100%; }
     .ab-btn-group > .ast-button { width: 100%; }
 
     .ab-floating-cta { padding: 14px 8px; font-size: 0.6875rem; }
-    .ab-floating-whatsapp { width: 46px; height: 46px; margin-right: 10px; }
 }
 
 /* ==========================================================================
@@ -3123,159 +2305,6 @@ h2.ab-services-showcase__title {
    hover-reveal photos follow. */
 @media (hover: none) {
     .wp-block-gallery.has-nested-images > .wp-block-image figcaption { opacity: 1; }
-}
-
-/* --- Full-bleed vertical photo accordion (".ab-photo-accordion") — used
-   on portfolio/evidence pages (Agnew Project, etc.): the whole photo set
-   stacked edge-to-edge, one under another, each a thin strip until
-   hovered. Same grow-on-hover idea as the home page's ".ab-service-strips"
-   (a hovered strip claims more of the shared space via flex-grow while
-   its neighbors give way), just turned 90° — height grows instead of
-   width, since every strip already spans the full page width instead of
-   sitting side-by-side with the others.
-
-   Hand-written markup (a "Custom HTML" block), not a wp:gallery block:
-   WordPress's own gallery block ships a large stylesheet for
-   ".wp-block-gallery"/".wp-block-image" (crop modes, caption backdrop,
-   the "not(.has-nested-images)" legacy format, etc.) that kept fighting
-   this layout for control of flex-grow/height/position no matter how the
-   selectors here were tuned — a losing battle against a moving target.
-   Plain classes with no WordPress meaning sidestep all of it. Each
-   photo's caption is an empty <figcaption> — type text into it directly
-   in the code editor whenever there's copy for a given photo; the reveal
-   styling below is already wired up either way.
-
-   Height scales with photo count instead of a fixed viewport-relative
-   number: with only a handful of photos a fixed height reads fine, but
-   the same box divided across a dozen photos crushed each resting strip
-   down to a barely-there sliver. Set "--count" (inline style, on this
-   same element) to however many photos are in this particular gallery —
-   e.g. style="--count:12" — so each one keeps a comfortable resting
-   height (set by "--ab-item-h" below, 300px) regardless of how many
-   photos are in the set; override "--ab-item-h" inline the same way for
-   a different resting size on a particular page.
-
-   Unlike ".ab-content-band" on the service pages (deliberately full-bleed
-   edge-to-edge), this one stays inside the normal reading column — same
-   width and side gutter as ".ast-container" — matching the margins the
-   reference template's own image accordion keeps at both sides instead
-   of running to the browser edge. */
-.ab-photo-accordion {
-    --ab-item-h: 300px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: var(--ab-container);
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: var(--ab-gutter);
-    padding-right: var(--ab-gutter);
-    box-sizing: border-box;
-    gap: 10px;
-    height: calc(var(--count, 6) * var(--ab-item-h));
-    overflow: hidden;
-}
-.ab-photo-accordion__item {
-    position: relative;
-    display: block;
-    flex: 1 1 0%;
-    min-height: 90px;
-    overflow: hidden;
-    color: inherit;
-    text-decoration: none;
-    transition: flex-grow var(--ab-transition);
-}
-.ab-photo-accordion__item img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.82);
-    transform: scale(1.04);
-    transition: filter 0.5s ease, transform 0.6s ease;
-}
-.ab-photo-accordion__item:hover,
-.ab-photo-accordion__item:focus-within {
-    flex-grow: 5;
-}
-.ab-photo-accordion__item:hover img,
-.ab-photo-accordion__item:focus-within img {
-    filter: brightness(1);
-    transform: scale(1);
-}
-.ab-photo-accordion__item figcaption {
-    position: absolute;
-    inset: auto 0 0 0;
-    margin: 0;
-    padding: 20px 24px;
-    background: linear-gradient(to top, rgba(26, 26, 26, 0.85) 0%, rgba(26, 26, 26, 0.2) 60%, transparent 100%);
-    color: #fff;
-    font-size: var(--ab-fs-sm);
-    text-align: left;
-    opacity: 0;
-    transition: opacity var(--ab-transition);
-}
-.ab-photo-accordion__item:hover figcaption,
-.ab-photo-accordion__item:focus-within figcaption {
-    opacity: 1;
-}
-
-/* Touch devices: no hover to grow strips, so give every photo a normal,
-   comfortable fixed height in a plain scrolling stack instead. Tapping
-   still opens the lightbox below rather than trying to simulate the
-   desktop grow effect. */
-@media (hover: none) {
-    .ab-photo-accordion { height: auto; }
-    .ab-photo-accordion__item { flex: none; height: clamp(220px, 60vw, 380px); }
-    .ab-photo-accordion__item img { filter: brightness(0.9); transform: none; }
-    .ab-photo-accordion__item figcaption { opacity: 1; }
-}
-
-/* --- Lightbox: tapping/clicking a photo in ".ab-photo-accordion" (or any
-   future gallery) opens it here, maximized, without leaving the page —
-   pure CSS via the ":target" trick (the item links to "#photo-id", the
-   overlay below has that id, and only the currently-targeted one gets
-   shown), so it needs no JavaScript and works identically with a tap or
-   a click. The overlay is itself a link back to "#" (an id nothing
-   matches), so clicking anywhere on it — backdrop or photo — closes it;
-   the "×" glyph is just a visual affordance inside that same link, not a
-   second, separate control. */
-.ab-lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 9998;
-    align-items: center;
-    justify-content: center;
-    padding: clamp(20px, 5vw, 60px);
-    background: rgba(11, 11, 11, 0.94);
-    cursor: zoom-out;
-}
-.ab-lightbox:target { display: flex; }
-.ab-lightbox img {
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    box-shadow: 0 24px 60px rgba(26, 26, 26, 0.16);
-}
-.ab-lightbox__close {
-    position: absolute;
-    top: 18px;
-    right: 24px;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.75rem;
-    line-height: 1;
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
 }
 
 /* --- Latest Posts: "More From Our Blog", 3-column grid ---
@@ -3478,13 +2507,8 @@ ol.wp-block-list li::marker {
    15. UTILITIES
    ========================================================================== */
 
-.ab-text-center { text-align: center; }
-.ab-mt-0 { margin-top: 0; }
-.ab-mb-0 { margin-bottom: 0; }
 .ab-mt-lg { margin-top: clamp(32px, 5vw, 56px); }
 .ab-lead { font-size: 1.125rem; }
-.ab-muted { color: #6B6B6B; }
-
 /* ==========================================================================
    16. PAGE — "A full-service Construction & Design Company" (the site's
    front page)
@@ -3583,7 +2607,6 @@ ol.wp-block-list li::marker {
    ".ast-container", so this is done with a CSS breakout instead of a
    template change — keeps the fix scoped to this one page. --- */
 .home .ab-proto-services,
-.home .ab-proto-philosophy,
 .home .ab-proto-blog {
     width: calc(100vw - (var(--ab-edge-gap) * 2));
     margin-left: calc(50% - 50vw + var(--ab-edge-gap));
@@ -3643,14 +2666,9 @@ ol.wp-block-list li::marker {
 }
 /* Both carry an inline "style=color:#0170b9" straight from the block
    editor — only "!important" beats an inline style. */
-.home .ab-proto-services .ab-service-strips .ab-proto-inner .ab-eyebrow,
 .home .ab-proto-services .ab-service-strips .ab-proto-inner h2 {
     color: #ffffff !important;
 }
-.home .ab-proto-services .ab-service-strips .ab-proto-inner .ab-eyebrow::before {
-    background: #ffffff;
-}
-.home .ab-proto-services .ab-service-strips .ab-proto-inner .ab-eyebrow { margin-bottom: 6px; }
 .home .ab-proto-services .ab-service-strips .ab-proto-inner h2 {
     font-family: var(--ab-font-heading);
     font-weight: 300;
@@ -3669,144 +2687,12 @@ ol.wp-block-list li::marker {
     }
 }
 
-/* --- 3. Our Philosophy: big heading left, divider + copy right — no photo
-   of its own, so it just sits on the page's dark base like the rest of
-   the immersive sections instead of breaking it up with a light band. --- */
-.home .ab-proto-philosophy {
-    /* True edge-to-edge, same as ".ab-story" ("We Build") — !important
-       guards against this section's own background-image still carrying
-       stray inline/embedded CSS in the page content that would otherwise
-       re-cap it back to the 1200px column (this exact bug has happened
-       before on this section — see home-content.html). */
-    width: 100vw !important;
-    margin-left: calc(50% - 50vw) !important;
-    margin-right: calc(50% - 50vw) !important;
-    max-width: none !important;
-    min-height: clamp(600px, 90vh, 1000px);
-    padding: clamp(56px, 7vw, 90px) 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.home .ab-proto-philosophy .ab-proto-inner {
-    display: grid !important;
-    grid-template-columns: auto 1fr !important;
-    gap: clamp(28px, 4vw, 56px);
-    align-items: center;
-    width: 100% !important;
-    max-width: var(--ab-container) !important;
-    margin: 0 auto !important;
-}
-.home .ab-proto-philosophy .ab-proto-inner > .wp-block-group__inner-container {
-    display: contents;
-}
-/* Title + icon stack, centered in its own column instead of the old
-   left-aligned boxed/padded heading. */
-.home .ab-proto-philosophy-title {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    width: max-content !important;
-    margin: 0 auto !important;
-    gap: 18px;
-}
-.home .ab-proto-philosophy h2 {
-    font-family: var(--ab-font-heading);
-    font-weight: 200;
-    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
-    margin: 0;
-    color: #ffffff;
-}
-.home .ab-proto-philosophy-title__icon {
-    color: rgba(255, 255, 255, 0.85);
-}
-.home .ab-proto-philosophy-copy {
-    width: 100% !important;
-    max-width: none !important;
-    padding-left: clamp(28px, 4vw, 56px);
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
-    box-sizing: border-box;
-}
-.home .ab-proto-philosophy-copy p {
-    width: 100%;
-    max-width: none !important;
-    font-size: 1.0625rem;
-    color: rgba(255, 255, 255, 0.75);
-}
-/* The "Click here" link carries an inline "style=color:#ff9900" (orange)
-   straight from the block editor — "!important" is the only way to beat
-   an inline style from a plain class selector. */
-.home .ab-proto-philosophy-copy a:not(.wp-element-button) {
-    display: inline-block;
-    margin-bottom: 22px;
-    font-weight: 300;
-    color: #ffffff !important;
-}
-.home .ab-proto-philosophy-copy a:not(.wp-element-button):hover { color: #0170b9 !important; }
-/* "Schedule A Meeting" here reuses the sitewide white-pill button look —
-   this just guards its border/background explicitly since the section's
-   own background-image sometimes ships with stray embedded CSS in the
-   page content (see home-content.html) that could otherwise fight it. */
-.home .ab-proto-philosophy-copy .wp-block-button__link {
-    background: rgba(255, 255, 255, 0.15) !important;
-    border-color: #ffffff !important;
-    color: #fff !important;
-}
-.home .ab-proto-philosophy-copy .wp-block-button__link:hover {
-    background: #ffffff !important;
-    border-color: #ffffff !important;
-    color: #1A1A1A !important;
-}
-/* --- 4. How We Work: full-bleed alternating rows (.ab-process-row,
-   defined with the other reusable components above). Like "Our Services"
-   above, the heading no longer sits in its own band — it's a static
-   white-outline box overlaid on the first row's photo instead. Full 100vw
-   of its own (not just the near-full edge-gap width shared by the
-   services/philosophy/blog sections) since the rows below already carry
-   photos edge to edge. */
-.home .ab-proto-process {
-    position: relative;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    padding: 0;
-}
 /* Same legacy inner-container flattening as the services strips above, so
    each row becomes a direct flex child of ".ab-process-rows" and each
    row's visual/body become direct grid children of ".ab-process-row". */
 .ab-process-rows > .wp-block-group__inner-container,
 .ab-process-row > .wp-block-group__inner-container,
 .ab-process-row__body > .wp-block-group__inner-container { display: contents; }
-/* ".ab-process-rows" is the only thing left in normal flow, so it starts
-   right at the top of the section — positioning the box relative to
-   ".ab-proto-process" itself therefore lines up with the top-left corner
-   of the first row, and since that row has its photo in the left column,
-   with the photo. Descendant selector (not ">"): WordPress sometimes
-   serializes this Group block with an extra ".wp-block-group__inner-
-   container" wrapper between them (same legacy quirk called out
-   elsewhere in this file), which a direct-child combinator would
-   silently fail to match. */
-.home .ab-proto-process .ab-proto-inner {
-    position: absolute;
-    top: clamp(20px, 3vw, 36px);
-    left: clamp(20px, 3vw, 36px);
-    z-index: 5;
-    width: auto;
-    max-width: min(70%, 320px);
-    margin: 0;
-    padding: 16px 22px;
-    pointer-events: none;
-}
-.home .ab-proto-process .ab-proto-inner h2 {
-    color: #ffffff !important;
-    font-family: var(--ab-font-heading);
-    font-weight: 300;
-    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
-    margin: 0;
-}
-
 /* --- 5. Trust bar: plain row of linked logos, no card chrome ---
    Built as a Group block (layout:flex, wrap) with the 7 images as direct
    children — not a Columns block. Columns exist to hold distinct content
@@ -3866,285 +2752,3 @@ ol.wp-block-list li::marker {
 }
 .home .ab-proto-blog .wp-block-latest-posts { margin-top: 40px; }
 
-@media (max-width: 900px) {
-    .home .ab-proto-philosophy .ab-proto-inner { grid-template-columns: 1fr !important; }
-    .home .ab-proto-philosophy-copy { padding-left: 0; border-left: 0; padding-top: 24px; border-top: 1px solid #E5E5E5; }
-}
-
-/* Tighter than the generic ".ab-portfolio" padding — keeps the heading,
-   the (now smaller) slider and its counter/dots bar reading as one group
-   instead of three separately-spaced screens. */
-.home .ab-portfolio {
-    padding: clamp(48px, 6vw, 72px) 0;
-    min-height: clamp(600px, 90vh, 1000px);
-    display: flex;
-    align-items: center;
-}
-.home .ab-portfolio .abps { width: 100%; }
-.home .ab-portfolio .ab-proto-inner { padding-bottom: clamp(12px, 1.5vw, 20px); }
-
-/* ==========================================================================
-   PORTFOLIO SLIDER (.ab-pfslider) — minimal fade carousel
-
-   Idea visual: una sola ventana 16:9 al ancho de la columna de contenido,
-   sin sombras ni bordes redondeados (el tema es de esquinas rectas). Toda
-   la superficie es el enlace; el texto vive sobre la imagen apoyado en un
-   degradado oscuro de abajo hacia arriba (nada de cajas ni cintillos), y
-   las flechas van sobre la foto, centradas en cada costado, y la imagen
-   se puede arrastrar a izquierda/derecha (pointer + touch) para cambiar de
-   proyecto; debajo queda una fila fina con contador e indicadores. La
-   transición es un cross-fade con un zoom-out muy leve de la imagen
-   entrante, más un desplazamiento elástico mientras se arrastra.
-   ========================================================================== */
-
-.ab-pfslider {
-	position: relative;
-	max-width: 720px;
-	margin: 0 auto;
-}
-
-/* Aplanado de los inner-container heredados de Gutenberg, igual que el
-   resto de componentes del tema: cada slide debe ser hijo directo del
-   viewport para que su position:absolute mida contra él. */
-.ab-pfslider > .wp-block-group__inner-container,
-.ab-pfslider__viewport > .wp-block-group__inner-container,
-.ab-pfslider__slide > .wp-block-group__inner-container,
-.ab-pfslider__caption > .wp-block-group__inner-container { display: contents; }
-
-.ab-pfslider__viewport {
-	position: relative;
-	aspect-ratio: 16 / 9;
-	overflow: hidden;
-	background: #111111;
-	cursor: grab;
-	/* Deja pasar el scroll vertical de la página y reserva el eje X para
-	   el arrastre entre slides. */
-	touch-action: pan-y;
-}
-.ab-pfslider__viewport.is-dragging { cursor: grabbing; }
-
-/* --- Slides: apilados, sólo uno visible. Sin JS queda visible el primero
-       (regla :first-child abajo), así que el bloque nunca aparece vacío. --- */
-.ab-pfslider__slide {
-	position: absolute;
-	inset: 0;
-	opacity: 0;
-	z-index: 1;
-	pointer-events: none;
-	transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.ab-pfslider:not(.ab-pfslider--js) .ab-pfslider__slide:first-child,
-.ab-pfslider__slide.is-active {
-	opacity: 1;
-	z-index: 2;
-	pointer-events: auto;
-}
-
-.ab-pfslider__media { margin: 0; }
-.ab-pfslider__media img {
-	position: absolute;
-	inset: 0;
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	transform: scale(1.03);
-	transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.ab-pfslider__slide:hover .ab-pfslider__media img { transform: scale(1.07); }
-
-/* Velo: pesado abajo donde va el texto, inexistente arriba — la foto se
-   lee en su color real en los dos tercios superiores. */
-.ab-pfslider__slide::after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	z-index: 1;
-	background: linear-gradient(to top, rgba(26, 26, 26, 0.86) 0%, rgba(26, 26, 26, 0.28) 42%, rgba(26, 26, 26, 0) 72%);
-	pointer-events: none;
-}
-
-/* --- Texto sobre la imagen: un solo bloque en columna apoyado en el
-       borde inferior, para que el índice, el título y el "View project"
-       se apilen por flujo normal (nada de offsets calculados a mano que
-       se cruzan cuando el título pasa a dos líneas). --- */
-.ab-pfslider__caption {
-	position: absolute;
-	left: clamp(24px, 3vw, 44px);
-	right: clamp(24px, 3vw, 44px);
-	bottom: clamp(24px, 3vw, 44px);
-	z-index: 2;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 10px;
-	pointer-events: none;
-}
-.ab-pfslider__index,
-.ab-pfslider__title { margin: 0; }
-.ab-pfslider__index {
-	font-family: var(--ab-font-heading);
-	font-size: 0.75rem;
-	font-weight: 300;
-	letter-spacing: 0.18em;
-	color: #0170b9;
-}
-.ab-pfslider__title {
-	max-width: 70%;
-	font-family: var(--ab-font-heading);
-	font-size: clamp(1.375rem, 2.4vw, 2rem);
-	font-weight: 300;
-	line-height: 1.12;
-	letter-spacing: -0.02em;
-	color: #fff;
-	text-wrap: pretty;
-}
-/* "View project" aparece sólo al hover, como una línea fina bajo el
-   título — se genera con ::after para no ensuciar el markup del editor. */
-.ab-pfslider__title::after {
-	content: "View project";
-	display: block;
-	margin-top: 10px;
-	font-family: var(--ab-font-nav);
-	font-size: 0.875rem;
-	font-weight: 300;
-	letter-spacing: 0;
-	color: rgba(255, 255, 255, 0.82);
-	opacity: 0;
-	transform: translateY(6px);
-	transition: opacity var(--ab-transition), transform var(--ab-transition);
-}
-.ab-pfslider__slide:hover .ab-pfslider__title::after,
-.ab-pfslider__slide:focus-within .ab-pfslider__title::after {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-/* --- Enlace de cobertura total: es un bloque Botón real (queda editable y
-       su texto es el nombre accesible del enlace), invisible y estirado
-       sobre todo el slide. Mismo truco que .ab-service-strip__link. --- */
-.ab-pfslider__link {
-	position: absolute;
-	inset: 0;
-	z-index: 3;
-}
-.ab-pfslider__link .wp-block-button__link {
-	display: block;
-	width: 100%;
-	height: 100%;
-	padding: 0;
-	border: 0;
-	border-radius: 0;
-	background: transparent;
-	font-size: 0;
-	line-height: 0;
-}
-.ab-pfslider__link .wp-block-button__link:hover,
-.ab-pfslider__link .wp-block-button__link:focus {
-	background: transparent;
-	box-shadow: none;
-	transform: none;
-}
-.ab-pfslider__link .wp-block-button__link:focus-visible {
-	outline: 2px solid #0170b9;
-	outline-offset: -6px;
-}
-
-/* --- Barra de controles, debajo de la foto --- */
-.ab-pfslider__bar {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 24px;
-	max-width: 720px;
-	margin: 22px auto 0;
-	flex-wrap: wrap;
-}
-.ab-pfslider__meta { display: flex; align-items: center; gap: 20px; }
-.ab-pfslider__counter {
-	font-family: var(--ab-font-heading);
-	font-size: 0.8125rem;
-	font-weight: 300;
-	letter-spacing: 0.14em;
-	color: rgba(255, 255, 255, 0.55);
-	font-variant-numeric: tabular-nums;
-}
-
-/* Indicadores como rayas finas (no puntos): más discretos y muestran
-   progreso porque la activa se alarga. */
-.ab-pfslider__dots { display: flex; align-items: center; gap: 8px; }
-.ab-pfslider__dot {
-	width: 32px;
-	height: 2px;
-	padding: 0;
-	border: 0;
-	background: rgba(255, 255, 255, 0.22);
-	cursor: pointer;
-	transition: background-color var(--ab-transition), width var(--ab-transition);
-}
-.ab-pfslider__dot:hover { background: rgba(255, 255, 255, 0.5); }
-.ab-pfslider__dot.is-active { width: 56px; background: #0170b9; }
-
-/* --- Flechas sobre la propia imagen, centradas verticalmente en los
-       costados: el gesto de avanzar queda donde el visitante ya tiene el
-       cursor. Vidrio translúcido (no relleno sólido) para no romper la
-       foto, y z-index por encima del enlace de cobertura (z-index:3). --- */
-.ab-pfslider__btn {
-	position: absolute;
-	top: 50%;
-	z-index: 5;
-	transform: translateY(-50%);
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 52px;
-	height: 52px;
-	padding: 0;
-	background: rgba(26, 26, 26, 0.32);
-	border: 1px solid rgba(255, 255, 255, 0.4);
-	border-radius: var(--ab-radius-pill);
-	color: #fff;
-	cursor: pointer;
-	backdrop-filter: blur(6px);
-	-webkit-backdrop-filter: blur(6px);
-	transition: background-color var(--ab-transition), border-color var(--ab-transition), color var(--ab-transition);
-}
-.ab-pfslider__prev { left: clamp(14px, 1.6vw, 22px); }
-.ab-pfslider__next { right: clamp(14px, 1.6vw, 22px); }
-.ab-pfslider__btn:hover,
-.ab-pfslider__btn:focus-visible {
-	background: rgba(26, 26, 26, 0.72);
-	border-color: #0170b9;
-	color: #0170b9;
-}
-/* Sin JS no hay a dónde navegar: el markup de las flechas vive dentro del
-   viewport, así que se ocultan igual que la barra inferior. */
-.ab-pfslider:not(.ab-pfslider--js) .ab-pfslider__btn { display: none; }
-
-/* Pista de interacción a la derecha de la barra inferior. */
-.ab-pfslider__hint {
-	font-family: var(--ab-font-nav);
-	font-size: 0.8125rem;
-	letter-spacing: 0.04em;
-	color: rgba(255, 255, 255, 0.4);
-}
-
-/* Sin JS no hay nada que controlar: la barra se oculta y queda una imagen
-   fija enlazada, perfectamente usable. */
-.ab-pfslider:not(.ab-pfslider--js) .ab-pfslider__bar { display: none; }
-
-@media (max-width: 600px) {
-	.ab-pfslider__viewport { aspect-ratio: 4 / 3; }
-	.ab-pfslider__btn { width: 44px; height: 44px; }
-	.ab-pfslider__hint { display: none; }
-	.ab-pfslider__title { max-width: 100%; }
-	.ab-pfslider__bar { justify-content: space-between; }
-	.ab-pfslider__dot { width: 22px; }
-	.ab-pfslider__dot.is-active { width: 40px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.ab-pfslider__slide,
-	.ab-pfslider__media img,
-	.ab-pfslider__title::after { transition: none; }
-}
