@@ -161,7 +161,7 @@ function adeptbuild_local_business_schema( $data ) {
 }
 add_filter( 'wpseo_schema_organization', 'adeptbuild_local_business_schema' );
 
-define( 'ADEPTBUILD_VERSION', '1.8.0' );
+define( 'ADEPTBUILD_VERSION', '1.8.1' );
 
 /**
  * Basic theme setup.
@@ -239,6 +239,25 @@ function adeptbuild_setup() {
 	);
 }
 add_action( 'after_setup_theme', 'adeptbuild_setup' );
+
+/**
+ * Tells the browser the real rendered width of the header logo.
+ *
+ * WordPress outputs sizes="(max-width: 2558px) 100vw, 2558px" for the custom
+ * logo, so the browser downloads the full-size file even though the logo is
+ * displayed at roughly 260px. The logo is the LCP element on the home page,
+ * so this directly affects LCP. Adjust the values if the logo width changes.
+ *
+ * @param array $attr Custom logo image attributes.
+ * @return array
+ */
+function adeptbuild_custom_logo_sizes( $attr ) {
+	$attr['sizes']         = '(max-width: 768px) 180px, 260px';
+	$attr['fetchpriority'] = 'high';
+	unset( $attr['loading'] );
+	return $attr;
+}
+add_filter( 'get_custom_logo_image_attributes', 'adeptbuild_custom_logo_sizes' );
 
 /**
  * Content width (used by WordPress for embeds and images).
