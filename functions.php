@@ -34,29 +34,44 @@ function adeptbuild_dequeue_unused_styles() {
 add_action( 'wp_enqueue_scripts', 'adeptbuild_dequeue_unused_styles', 100 );
 
 /**
- * Lazy-loads every image in the front page content.
+ * Lazy-loads images in the page content across the whole site.
  *
  * WordPress only adds loading="lazy" automatically to images that have
- * width and height attributes, and the home page images live in custom
- * HTML blocks without them, so all of them (rotating "We Build"
- * backgrounds, service strips, CTA photo) were downloaded on page load.
- * Everything in the content sits below the video hero, so none of these
- * images is the LCP element and all of them can wait until scrolled near.
+ * width and height attributes. Most of this site's images live in custom
+ * HTML blocks and galleries without them, so every image on a page was
+ * downloaded on load (60+ full-size photos on Full Home Renovation alone,
+ * enough to make PageSpeed time out).
+ *
+ * - Front page: every content image is lazy, since all of them sit below
+ *   the video hero (the intro is printed inside the hero, not the content).
+ * - Other pages: the first content image is left alone, because it may be
+ *   visible on load (and even be the LCP element); lazy-loading it would
+ *   delay it. Everything after it is lazy.
  *
  * @param string $img     Full <img> tag.
  * @param string $context Where the tag comes from.
  * @return string
  */
-function adeptbuild_lazy_home_content_images( $img, $context ) {
-	if ( 'the_content' !== $context || ! is_front_page() ) {
+function adeptbuild_lazy_content_images( $img, $context ) {
+	static $count = 0;
+
+	if ( 'the_content' !== $context || is_admin() ) {
 		return $img;
 	}
+
+	$count++;
+
+	if ( ! is_front_page() && 1 === $count ) {
+		return $img;
+	}
+
 	if ( false === strpos( $img, ' loading=' ) ) {
 		$img = str_replace( '<img ', '<img loading="lazy" ', $img );
 	}
+
 	return $img;
 }
-add_filter( 'wp_content_img_tag', 'adeptbuild_lazy_home_content_images', 10, 2 );
+add_filter( 'wp_content_img_tag', 'adeptbuild_lazy_content_images', 10, 2 );
 
 /**
  * LocalBusiness structured data for Adept Builders & Design.
