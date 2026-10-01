@@ -200,6 +200,14 @@ function adeptbuild_page_hero( $title = '' ) {
 		<?php endif; ?>
 		<div class="ast-container">
 			<h1 class="ab-reveal"><?php echo esc_html( $title ); ?></h1>
+			<?php
+			// Front page only: prints the ".ab-proto-intro" block from the page
+			// content right under the title, so it is laid out in place on the
+			// first paint (see inc/home-intro.php).
+			if ( $is_home && function_exists( 'adeptbuild_home_intro' ) ) {
+				adeptbuild_home_intro();
+			}
+			?>
 		</div>
 	</section>
 	<?php

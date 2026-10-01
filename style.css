@@ -1091,19 +1091,22 @@ body.ab-menu-open .site-header {
 
 /* --- Video hero: front page only (adeptbuild_page_hero() only renders
    the <video> when is_front_page() finds assets/img/videohome.mp4) — a
-   true full-viewport-height opening screen (exactly 100vh, not a clamped
-   fraction of it) so the footage always fills the whole first screen
-   regardless of device, and nothing of the next section is visible until
-   the visitor actually scrolls. height (not min-height) grows by the
-   same header height its margin-top subtracts, so the box extends
-   upward under the header instead of shrinking, while still landing on
-   exactly 100vh of VISIBLE video. See ".home .ab-proto-intro" further
-   down — it's pulled up to sit inside the tail of this same video
-   instead of starting fresh in its own section below it. --- */
+   full-viewport-height opening screen so the footage fills the whole first
+   screen on any device. min-height (not height) grows by the same header
+   height its margin-top subtracts, so the box extends upward under the
+   header while still showing at least 100vh of visible video.
+
+   The home intro (".ab-proto-intro") is rendered INSIDE this hero, right
+   under the title, by adeptbuild_home_intro() (inc/home-intro.php). Since
+   both live in the same container, the browser places them in normal flow
+   on the first paint — no JavaScript measuring and no layout shift. Using
+   min-height instead of a fixed height lets the hero (and its video) grow
+   if the title + intro are ever taller than the screen, e.g. on small
+   phones, instead of clipping them. --- */
 .ab-page-hero--video {
     display: flex;
     align-items: center;
-    height: calc(100vh + var(--ab-header-h));
+    min-height: calc(100vh + var(--ab-header-h));
     padding-top: var(--ab-header-h);
     padding-bottom: clamp(48px, 6vw, 84px);
     background: #1A1A1A;
@@ -1126,16 +1129,17 @@ body.ab-menu-open .site-header {
     z-index: 1;
     background: linear-gradient(to top, rgba(26, 26, 26, 0.85) 0%, rgba(26, 26, 26, 0.4) 40%, rgba(26, 26, 26, 0) 75%);
 }
-/* Nudged up from dead-center: a bottom margin on the (vertically
-   centered, via ".ab-page-hero--video { align-items:center }") container
-   shifts its centered position higher, leaving more of the hero's own
-   100vh free below the title for setHeroIntroOverlap() (navigation.js)
-   to fit ".home .ab-proto-intro" into without needing to pad it out to
-   reach the hero's bottom edge. */
+/* Title + intro container, vertically centered in the hero by
+   ".ab-page-hero--video { align-items:center }". To sit the whole block
+   lower (closer to the bottom of the video), switch that to
+   "align-items: flex-end". */
 .ab-page-hero--video .ast-container {
     position: relative;
     z-index: 2;
-    margin-bottom: clamp(80px, 16vh, 200px);
+}
+/* Spacing between the title and the intro copy right under it. */
+.ab-page-hero--video .ab-proto-intro {
+    margin-top: 4px;
 }
 .ab-page-hero--video h1 {
     font-size: clamp(0.95rem, 1.75vw, 1.4rem);
@@ -1602,10 +1606,13 @@ label {
    ========================================================================== */
 
 .ab-content-area { padding: var(--ab-section-y) 0; }
-/* Home's last block is the full-bleed CTA banner, which already carries its
-   own generous internal padding — the content-area's own bottom padding on
-   top of that was pushing the footer much further down than needed. */
-.home .ab-content-area { padding-bottom: 0; }
+/* Home: no vertical padding at all. The first block (stats band) has to
+   start right where the video hero ends — the intro used to cover this gap
+   by being pulled up with a negative margin, but it now lives inside the
+   hero (inc/home-intro.php), so the top padding would show as an empty
+   band. The last block is the full-bleed CTA banner, which already carries
+   its own generous internal padding, so no bottom padding either. */
+.home .ab-content-area { padding-top: 0; padding-bottom: 0; }
 
 .page .ab-content-area { padding-bottom: 0; }
 /* Fallback for pages whose own .ab-cta-photo <style> doesn't set its own
@@ -2528,23 +2535,12 @@ ol.wp-block-list li::marker {
    itself is dark/transparent-overlay site-wide now (see section 6 above),
    so nothing home-specific is needed for it here any more. --- */
 
-/* --- 1. Intro: pulled up to sit right under the front-page hero's
-   title — as close as a single line break — instead of starting fresh
-   in its own section below the 100vh video, so the headline and this
-   supporting copy read as one continuous opener, matching the
-   reference template's home page, with the next section only revealed
-   on scroll.
-
-   The negative margin is applied by JS (setHeroIntroOverlap() in
-   navigation.js as an inline "style.marginTop"), which measures the
-   title's real bottom edge and this block's real natural position and
-   sets the exact pixel gap between them — a calc() built on 100vh kept
-   drifting from the truth (scrollbar width, mobile browser chrome
-   collapsing, etc. all make "100vh" an unreliable stand-in for the
-   hero's real rendered height). The 0px here is only what shows before
-   that JS runs, or with JS disabled — a plain stack, safe either way.
-   No background of its own is needed here — the copy just sits on the
-   same video + dark vignette the hero above it already provides. --- */
+/* --- 1. Intro: rendered inside the front-page video hero, right under
+   its title, by adeptbuild_home_intro() (inc/home-intro.php), so the
+   headline and this supporting copy read as one continuous opener, with
+   the next section only revealed on scroll. It sits on the same video +
+   dark vignette the hero provides, so it needs no background of its own.
+   See ".ab-page-hero--video .ab-proto-intro" for the gap under the title. --- */
 .home .ab-proto-intro {
     display: block !important;
     position: relative;

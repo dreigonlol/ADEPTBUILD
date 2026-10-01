@@ -1,6 +1,64 @@
 <?php
 
 /**
+ * Removes stylesheets that plugins load on the public site even though
+ * visitors never use them. Each one is render-blocking, which hurts
+ * mobile FCP/LCP the most (slow 4G makes every extra request expensive).
+ *
+ * - dashicons: the WordPress admin icon font.
+ * - wp-components: the block editor's UI styles (panels, modals, sidebar
+ *   controls). Not needed to display blocks; front-end block styles live
+ *   in wp-block-library and the wp-block-* inline styles.
+ *
+ * Logged-in users keep both, since the admin bar and any front-end
+ * editing tools may rely on them.
+ *
+ * If a stylesheet keeps showing up after this, another stylesheet lists
+ * it as a dependency and WordPress re-adds it; find that plugin before
+ * removing anything else.
+ */
+function adeptbuild_dequeue_unused_styles() {
+	if ( is_user_logged_in() ) {
+		return;
+	}
+
+	$handles = array(
+		'dashicons',
+		'wp-components',
+	);
+
+	foreach ( $handles as $handle ) {
+		wp_dequeue_style( $handle );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'adeptbuild_dequeue_unused_styles', 100 );
+
+/**
+ * Lazy-loads every image in the front page content.
+ *
+ * WordPress only adds loading="lazy" automatically to images that have
+ * width and height attributes, and the home page images live in custom
+ * HTML blocks without them, so all of them (rotating "We Build"
+ * backgrounds, service strips, CTA photo) were downloaded on page load.
+ * Everything in the content sits below the video hero, so none of these
+ * images is the LCP element and all of them can wait until scrolled near.
+ *
+ * @param string $img     Full <img> tag.
+ * @param string $context Where the tag comes from.
+ * @return string
+ */
+function adeptbuild_lazy_home_content_images( $img, $context ) {
+	if ( 'the_content' !== $context || ! is_front_page() ) {
+		return $img;
+	}
+	if ( false === strpos( $img, ' loading=' ) ) {
+		$img = str_replace( '<img ', '<img loading="lazy" ', $img );
+	}
+	return $img;
+}
+add_filter( 'wp_content_img_tag', 'adeptbuild_lazy_home_content_images', 10, 2 );
+
+/**
  * LocalBusiness structured data for Adept Builders & Design.
  *
  * Instead of printing a separate JSON-LD block (which would create a second
@@ -161,7 +219,7 @@ function adeptbuild_local_business_schema( $data ) {
 }
 add_filter( 'wpseo_schema_organization', 'adeptbuild_local_business_schema' );
 
-define( 'ADEPTBUILD_VERSION', '1.8.1' );
+define( 'ADEPTBUILD_VERSION', '1.8.3' );
 
 /**
  * Basic theme setup.
@@ -314,54 +372,6 @@ function adeptbuild_preload_font() {
 add_action( 'wp_head', 'adeptbuild_preload_font', 1 );
 
 /**
- * Positions the hero intro (title/button/Google review) over the tail of
- * the home video — same math as setHeroIntroOverlap() in navigation.js,
- * duplicated here as an inline script instead of relying on that external
- * file. navigation.js loads behind a long queue of third-party footer
- * scripts (CallRail, Fluent Forms, LiteSpeed's own delayed-JS handling…),
- * so by the time it finally runs, the intro has already been sitting in
- * its unpositioned spot (pushed below the hero) for a very visible moment.
- * Printed inline at the very front of wp_footer (priority 1, before any
- * plugin's own footer scripts) so it runs as early as the DOM allows,
- * with no external file to wait on. navigation.js still runs its own copy
- * afterwards — harmless (same numbers either way) — and that copy is the
- * one that keeps it correct on resize.
- */
-function adeptbuild_inline_hero_intro_overlap() {
-	if ( ! is_front_page() ) {
-		return;
-	}
-	?>
-	<script data-no-litespeed-delay="adeptbuild-hero-overlap">
-	/* adeptbuild-hero-overlap: excluded from LiteSpeed's "JS Delayed"
-	   optimization (Page Optimization → JS Settings → JS Delayed Excludes)
-	   — this must run immediately, not after the visitor's first click/
-	   scroll/mousemove, or the hero text sits unpositioned until then. */
-	( function () {
-		var intro = document.querySelector( '.home .ab-proto-intro' );
-		var title = document.querySelector( '.ab-page-hero--video h1' );
-		var hero  = document.querySelector( '.ab-page-hero--video' );
-		if ( ! intro || ! title || ! hero ) {
-			return;
-		}
-		var GAP = 4;
-		intro.style.marginTop = '0px';
-		intro.style.paddingBottom = '0px';
-		var naturalTop = intro.getBoundingClientRect().top + window.scrollY;
-		var titleBottom = title.getBoundingClientRect().bottom + window.scrollY;
-		intro.style.marginTop = ( titleBottom + GAP - naturalTop ) + 'px';
-		var heroBottom = hero.getBoundingClientRect().bottom + window.scrollY;
-		var introBottom = intro.getBoundingClientRect().bottom + window.scrollY;
-		if ( introBottom < heroBottom ) {
-			intro.style.paddingBottom = ( heroBottom - introBottom ) + 'px';
-		}
-	} )();
-	</script>
-	<?php
-}
-add_action( 'wp_footer', 'adeptbuild_inline_hero_intro_overlap', 1 );
-
-/**
  * Widget areas.
  */
 function adeptbuild_widgets_init() {
@@ -439,3 +449,4 @@ require_once get_template_directory() . '/inc/template-tags.php';
 require_once get_template_directory() . '/inc/customizer.php';
 require_once get_template_directory() . '/inc/meta-boxes.php';
 require_once get_template_directory() . '/inc/class-mega-menu-walker.php';
+require_once get_template_directory() . '/inc/home-intro.php';
