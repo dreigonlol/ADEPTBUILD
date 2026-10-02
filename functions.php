@@ -1,6 +1,23 @@
 <?php
 
 /**
+ * Preloads the home hero poster. With a poster on the video, it becomes the
+ * largest element on screen (the LCP element), so the browser should start
+ * fetching it right away instead of waiting until it parses the <video>.
+ * Phones only ever see the poster (they don't download the video at all).
+ */
+function adeptbuild_preload_hero_poster() {
+	if ( ! is_front_page() || ! file_exists( get_theme_file_path( '/assets/img/hero-poster.webp' ) ) ) {
+		return;
+	}
+	printf(
+		'<link rel="preload" as="image" href="%s" fetchpriority="high">' . "\n",
+		esc_url( get_theme_file_uri( '/assets/img/hero-poster.webp' ) )
+	);
+}
+add_action( 'wp_head', 'adeptbuild_preload_hero_poster', 1 );
+
+/**
  * Removes stylesheets that plugins load on the public site even though
  * visitors never use them. Each one is render-blocking, which hurts
  * mobile FCP/LCP the most (slow 4G makes every extra request expensive).
