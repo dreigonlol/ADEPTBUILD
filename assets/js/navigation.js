@@ -17,6 +17,7 @@
 		initMobileMenu();
 		initFloatingContact();
 		initWordRotators();
+		initHeroVideo();
 	}
 
 	// On the live site this script tag often ends up loading near the end of
@@ -28,6 +29,52 @@
 		document.addEventListener( 'DOMContentLoaded', init );
 	} else {
 		init();
+	}
+
+	/**
+	 * Home video hero: makes sure the right file is loaded and playing.
+	 *
+	 * The <video> picks its file through <source media="…"> (full video on
+	 * desktop, light portrait clip on phones). iOS Safari wasn't starting it
+	 * on its own even though the file plays fine when opened directly, so
+	 * this does the selection explicitly with matchMedia when the browser
+	 * hasn't picked a source, then calls play(). The video is muted and
+	 * inline, which is what iOS requires to allow autoplay. If playback is
+	 * still refused (e.g. Low Power Mode), the poster image stays visible.
+	 */
+	function initHeroVideo() {
+		var video = document.querySelector( '.ab-page-hero__video' );
+		if ( ! video ) {
+			return;
+		}
+
+		video.muted = true;
+		video.playsInline = true;
+		video.setAttribute( 'playsinline', '' );
+
+		if ( ! video.currentSrc ) {
+			var sources = video.querySelectorAll( 'source' );
+			for ( var i = 0; i < sources.length; i++ ) {
+				var media = sources[ i ].getAttribute( 'media' );
+				if ( ! media || window.matchMedia( media ).matches ) {
+					video.src = sources[ i ].src;
+					video.load();
+					break;
+				}
+			}
+		}
+
+		var play = function () {
+			var attempt = video.play();
+			if ( attempt && attempt.catch ) {
+				attempt.catch( function () {} );
+			}
+		};
+
+		play();
+		video.addEventListener( 'canplay', play, { once: true } );
+		// Last resort: start on the first touch if autoplay was refused.
+		document.addEventListener( 'touchstart', play, { once: true, passive: true } );
 	}
 
 	/**

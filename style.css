@@ -1112,6 +1112,19 @@ body.ab-menu-open .site-header {
     background: #1A1A1A;
     overflow: hidden;
 }
+/* Poster <img> behind the home video (see adeptbuild_page_hero()). Same
+   box as the video; the video comes later in the DOM, so it paints on top
+   once it plays. Phones never get a video source, so they keep the image.
+   height:100% overrides the global "img { height:auto }". */
+.ab-page-hero__poster {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+}
 .ab-page-hero__video {
     position: absolute;
     inset: 0;
@@ -2748,3 +2761,18 @@ ol.wp-block-list li::marker {
 }
 .home .ab-proto-blog .wp-block-latest-posts { margin-top: 40px; }
 
+/* --- Gallery carousels (".abpg-track", the horizontal photo sliders on the
+   service pages). Their block CSS sets "scroll-snap-type: x mandatory" with
+   2px of side padding and "scroll-behavior: smooth". On load the browser
+   snapped the track by those 2px with a smooth (compositor) scroll, and
+   Chrome treats that scroll like user input: it stopped measuring Largest
+   Contentful Paint before reporting anything, so PageSpeed showed NO_LCP.
+   No side padding = the first photo is already aligned, so no snap on load;
+   no CSS smooth scrolling = any snap correction is instant. The arrow
+   buttons still scroll smoothly because their JS passes behavior:'smooth'.
+   ".ab-entry-content" raises specificity so this wins over the block CSS. */
+.ab-entry-content .abpg-track {
+    padding-left: 0;
+    padding-right: 0;
+    scroll-behavior: auto;
+}

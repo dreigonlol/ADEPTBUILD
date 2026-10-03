@@ -184,18 +184,62 @@ function adeptbuild_page_hero( $title = '' ) {
 	$is_home    = is_front_page();
 	$video_path = get_theme_file_path( '/assets/img/videohome.mp4' );
 	$has_video  = $is_home && file_exists( $video_path );
+
+	// Poster image shown while the video loads, and the only thing phones get (see
+	// the <source> media query below). It is also the LCP element of the home
+	// page, so it is preloaded in adeptbuild_preload_hero_poster().
+	$has_poster = $has_video && file_exists( get_theme_file_path( '/assets/img/hero-poster.webp' ) );
+
+	// Optional lighter clip for phones (20 s, portrait crop, under 1 MB).
+	// If it isn't uploaded, phones keep showing only the poster image.
+	$has_mobile_video = $has_poster && file_exists( get_theme_file_path( '/assets/img/videohome-mobile.mp4' ) );
 	?>
 	<section class="ab-page-hero<?php echo $has_video ? ' ab-page-hero--video' : ''; ?>">
 		<?php if ( $has_video ) : ?>
+			<?php if ( $has_poster ) : ?>
+				<?php
+				// Poster as a real <img> behind the video instead of the video's
+				// poster attribute: iOS Safari doesn't paint a <video> poster when
+				// no <source> matches (phones get no source, see below), so the hero
+				// showed black on iPhone. An <img> always paints, and is always a
+				// valid LCP candidate. On desktop the video covers it once playing.
+				?>
+				<img
+					class="ab-page-hero__poster"
+					src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hero-poster.webp' ) ); ?>"
+					alt=""
+					aria-hidden="true"
+					width="1280"
+					height="720"
+					fetchpriority="high"
+					decoding="async">
+			<?php endif; ?>
 			<video
 				class="ab-page-hero__video"
-				src="<?php echo esc_url( get_theme_file_uri( '/assets/img/videohome.mp4' ) ); ?>"
 				autoplay
 				loop
 				muted
 				playsinline
-				preload="auto"
-				aria-hidden="true"></video>
+				preload="metadata"
+				aria-hidden="true">
+				<?php
+				// Desktop/tablet source first: browsers that ignore the media
+				// attribute pick the first <source>, so they fall back to the full
+				// video. Modern browsers on phones skip it (media doesn't match) and
+				// take the light mobile clip if it exists; with no mobile clip, no
+				// source matches on phones and only the poster image shows.
+				?>
+				<source
+					src="<?php echo esc_url( get_theme_file_uri( '/assets/img/videohome.mp4' ) ); ?>"
+					type="video/mp4"
+					<?php echo $has_poster ? 'media="(min-width: 768px)"' : ''; ?>>
+				<?php if ( $has_mobile_video ) : ?>
+					<source
+						src="<?php echo esc_url( get_theme_file_uri( '/assets/img/videohome-mobile.mp4' ) ); ?>"
+						type="video/mp4"
+						media="(max-width: 767px)">
+				<?php endif; ?>
+			</video>
 			<div class="ab-page-hero__overlay" aria-hidden="true"></div>
 		<?php endif; ?>
 		<div class="ast-container">

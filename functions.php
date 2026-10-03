@@ -1,6 +1,98 @@
 <?php
 
 /**
+ * Adds srcset/sizes to hand-written content images that point to the
+ * media library but lack the wp-image-{ID} class, so WordPress can't
+ * add them by itself. Without srcset, phones download the original
+ * file (often 1600px+) for a ~300px gallery card.
+ *
+ * - URLs are compared without their scheme, so an http/https mismatch
+ *   between the uploads URL and the image src doesn't break the match.
+ * - The URL → attachment ID lookup is cached in a transient (a month when
+ *   found, a day when not), so it only hits the database once per image.
+ *
+ * @param string $img           Full <img> tag.
+ * @param string $context       Where the tag comes from.
+ * @param int    $attachment_id Attachment ID if WordPress already knows it.
+ * @return string
+ */
+function adeptbuild_content_img_srcset( $img, $context, $attachment_id ) {
+	if ( 'the_content' !== $context || $attachment_id || false !== strpos( $img, ' srcset=' ) ) {
+		return $img;
+	}
+	if ( ! preg_match( '/ src="([^"]+)"/', $img, $m ) ) {
+		return $img;
+	}
+
+	$src      = $m[1];
+	$uploads  = wp_get_upload_dir();
+	$strip    = function ( $url ) {
+		return preg_replace( '#^https?:#', '', $url );
+	};
+
+	if ( 0 !== strpos( $strip( $src ), $strip( $uploads['baseurl'] ) ) ) {
+		return $img;
+	}
+
+	$key = 'ab_att2_' . md5( $src );
+	$id  = get_transient( $key );
+	if ( false === $id ) {
+		$id = (int) attachment_url_to_postid( $src );
+		set_transient( $key, $id, $id ? MONTH_IN_SECONDS : DAY_IN_SECONDS );
+	}
+	if ( ! $id ) {
+		return $img;
+	}
+
+	$meta = wp_get_attachment_metadata( $id );
+	if ( empty( $meta['width'] ) ) {
+		return $img;
+	}
+
+	$img = wp_image_add_srcset_and_sizes( $img, $meta, $id );
+
+	// Lazy images can use sizes="auto": the browser picks the file by the
+	// image's real rendered width (gallery cards, bands) instead of 100vw.
+	if ( function_exists( 'wp_img_tag_add_auto_sizes' ) ) {
+		$img = wp_img_tag_add_auto_sizes( $img );
+	}
+
+	return $img;
+}
+add_filter( 'wp_content_img_tag', 'adeptbuild_content_img_srcset', 9, 3 );
+
+/**
+ * Loads stylesheets that aren't needed for the first screen without
+ * blocking rendering. The Fluent Forms styles only apply to the
+ * consultation modal, which is hidden on load, so the page can paint
+ * before they arrive. Uses the media="print" swap: the browser fetches
+ * the file at low priority and applies it once loaded.
+ *
+ * @param string $html   The <link> tag.
+ * @param string $handle Stylesheet handle.
+ * @return string
+ */
+function adeptbuild_async_styles( $html, $handle ) {
+	$async = array(
+		'fluent-form-styles',
+		'fluentform-public-default',
+	);
+
+	if ( is_admin() || ! in_array( $handle, $async, true ) ) {
+		return $html;
+	}
+
+	$async_html = preg_replace(
+		'/media=([\'"])all\1/',
+		'media="print" onload="this.media=\'all\'"',
+		$html
+	);
+
+	return $async_html . '<noscript>' . $html . '</noscript>';
+}
+add_filter( 'style_loader_tag', 'adeptbuild_async_styles', 10, 2 );
+
+/**
  * Preloads the home hero poster. With a poster on the video, it becomes the
  * largest element on screen (the LCP element), so the browser should start
  * fetching it right away instead of waiting until it parses the <video>.
@@ -42,6 +134,8 @@ function adeptbuild_dequeue_unused_styles() {
 	$handles = array(
 		'dashicons',
 		'wp-components',
+		'godaddy-styles',
+		'reviewstream',
 	);
 
 	foreach ( $handles as $handle ) {
