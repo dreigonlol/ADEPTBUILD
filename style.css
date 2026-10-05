@@ -943,6 +943,33 @@ body.ab-menu-open .site-header {
     .ab-story__bg img { transition: filter 0.3s ease; }
     .ab-story.is-rotate-hover .ab-story__bg img { filter: brightness(0.62); }
 }
+/* Clickable "WE BUILD" photos and words. Each photo and each rotating word
+   is an <a> to its service page (or to #kitchens / #bathrooms on the Full
+   Home page). The items are stacked on top of each other, so only the one
+   currently showing may take clicks; otherwise every click would land on
+   the last item in the stack. The body copy and the scrim sit above the
+   photo, so they let clicks pass through to it, and only the visible word
+   inside them is re-enabled. */
+.ab-story .ab-word-rotate__item {
+    pointer-events: none;
+    text-decoration: none;
+    color: inherit;
+}
+.ab-story .ab-word-rotate__item.is-active,
+.ab-story .ab-word-rotate:not(.ab-word-rotate--js) .ab-word-rotate__item:first-child {
+    pointer-events: auto;
+    cursor: pointer;
+}
+.ab-story__body,
+.ab-story__bg::after {
+    pointer-events: none;
+}
+.ab-story__heading .ab-word-rotate__item.is-active:hover,
+.ab-story__heading .ab-word-rotate__item.is-active:focus-visible {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.12em;
+}
 /* Faster slide/fade than the base ".ab-word-rotate__item" (0.6s/0.5s) —
    this rotator only ever moves while a cursor is actively on it, so a
    snappier swap reads better than the slower, ambient pace elsewhere. */
@@ -1870,7 +1897,7 @@ label {
     33.34% { opacity: 0; transform: translateY(100%); }
     100%   { opacity: 0; transform: translateY(100%); }
 }
-@media (prefers-uced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
     .ab-content-band__ticker { min-height: 0; overflow: visible; }
     .ab-content-band__ticker li {
         animation: none;
@@ -1886,9 +1913,59 @@ label {
     .ab-content-band__caption { opacity: 1; }
     .ab-content-band img { filter: brightness(0.6); }
 }
-@media (max-width: 600px) {
-    .ab-content-band img { aspect-ratio: 4 / 3; }
-    .ab-content-band__caption { padding: 22px; }
+/* Phones: stack the band instead of overlaying the copy on the photo.
+   Text sits on its own slate panel above the image, and the image shows
+   at full brightness with nothing covering it. Selectors are doubled up
+   (.ab-content-band .ab-content-band__caption) and the background uses
+   !important so this also beats the per-page inline overrides that set
+   a translucent caption background and text shadows. */
+@media (max-width: 767px) {
+    /* Edge to edge on phones: no side gap, and no vertical gap between
+       stacked bands, so text panels and photos read as one continuous strip. */
+    .ab-content-band {
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        margin-left: calc(50% - 50vw) !important;
+        margin-right: calc(50% - 50vw) !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    .ab-content-band img,
+    .ab-content-band:hover img,
+    .ab-content-band:focus-within img {
+        aspect-ratio: 4 / 3;
+        transform: none;
+        filter: none;
+    }
+    .ab-content-band .ab-content-band__caption {
+        order: -1;
+        position: static;
+        inset: auto;
+        opacity: 1;
+        padding: 32px 22px 28px;
+        background: #1B2430 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+    .ab-content-band .ab-content-band__caption h2,
+    .ab-content-band .ab-content-band__caption h3 {
+        font-size: 1.375rem;
+        line-height: 1.3;
+        margin: 0 0 12px;
+        text-shadow: none;
+        text-wrap: balance;
+    }
+    .ab-content-band .ab-content-band__caption p {
+        font-size: 1rem;
+        line-height: 1.65;
+        max-width: 34rem;
+        text-shadow: none;
+    }
+    /* Rotating tickers need a little more height once the text wraps
+       on a narrow screen, or the longer items get clipped. */
+    .ab-content-band .ab-content-band__ticker { min-height: 6.5rem; }
+    .ab-content-band .ab-services-ticker--sm { height: 4.75rem; }
 }
 
 /* ==========================================================================
