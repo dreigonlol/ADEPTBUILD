@@ -345,7 +345,16 @@ function adeptbuild_local_business_schema( $data ) {
 }
 add_filter( 'wpseo_schema_organization', 'adeptbuild_local_business_schema' );
 
-define( 'ADEPTBUILD_VERSION', '1.8.4' );
+define( 'ADEPTBUILD_VERSION', '1.8.5' );
+
+/**
+ * Cache-busting version for theme assets: the file's last-modified time,
+ * so browsers fetch a fresh copy every time the file is updated.
+ */
+function adeptbuild_asset_ver( $relative_path ) {
+	$path = get_theme_file_path( $relative_path );
+	return file_exists( $path ) ? (string) filemtime( $path ) : ADEPTBUILD_VERSION;
+}
 
 /**
  * Basic theme setup.
@@ -457,13 +466,13 @@ add_action( 'after_setup_theme', 'adeptbuild_content_width', 0 );
 function adeptbuild_scripts() {
 
 	// The only web font is Quicksand, self-hosted via @font-face in style.css.
-	wp_enqueue_style( 'adeptbuild-style', get_stylesheet_uri(), array(), ADEPTBUILD_VERSION );
+	wp_enqueue_style( 'adeptbuild-style', get_stylesheet_uri(), array(), adeptbuild_asset_ver( '/style.css' ) );
 
 	wp_enqueue_script(
 		'adeptbuild-navigation',
 		get_theme_file_uri( '/assets/js/navigation.js' ),
 		array(),
-		ADEPTBUILD_VERSION,
+		adeptbuild_asset_ver( '/assets/js/navigation.js' ),
 		true
 	);
 
@@ -474,7 +483,7 @@ function adeptbuild_scripts() {
 			'adeptbuild-lite-embed',
 			get_theme_file_uri( '/assets/js/lite-embed.js' ),
 			array(),
-			ADEPTBUILD_VERSION,
+			adeptbuild_asset_ver( '/assets/js/lite-embed.js' ),
 			true
 		);
 	}

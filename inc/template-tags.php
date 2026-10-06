@@ -276,7 +276,7 @@ function adeptbuild_menu_item_image( $title ) {
 		'decking'               => 'decking.webp',
 		'pools'                 => 'pools.webp',
 		'pergolas'              => 'pergolas.webp',
-		'landscaping'           => 'landscaping.webp',
+		'backyard beautification'           => 'landscaping.webp',
 		'agnew project'         => 'agnew.webp',
 		'ensley project'        => 'ensley.webp',
 		'santa monica project'  => 'santa-monica.webp',
