@@ -345,7 +345,7 @@ function adeptbuild_local_business_schema( $data ) {
 }
 add_filter( 'wpseo_schema_organization', 'adeptbuild_local_business_schema' );
 
-define( 'ADEPTBUILD_VERSION', '1.8.3' );
+define( 'ADEPTBUILD_VERSION', '1.8.4' );
 
 /**
  * Basic theme setup.
