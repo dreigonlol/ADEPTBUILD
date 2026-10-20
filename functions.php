@@ -103,8 +103,8 @@ function adeptbuild_preload_hero_poster() {
 		return;
 	}
 	printf(
-		'<link rel="preload" as="image" href="%s" fetchpriority="high">' . "\n",
-		esc_url( get_theme_file_uri( '/assets/img/hero-poster.webp' ) )
+		'<link rel="preload" as="image" href="%s" imagesrcset="%s" imagesizes="100vw" fetchpriority="high">' . "\n",
+		'https://adeptbuild.com/wp-content/uploads/2026/10/adept-cheviot-hills-backyard-cabana-pool-night-2560.webp', 'https://adeptbuild.com/wp-content/uploads/2026/10/adept-cheviot-hills-backyard-cabana-pool-night-1280.webp 1280w, https://adeptbuild.com/wp-content/uploads/2026/10/adept-cheviot-hills-backyard-cabana-pool-night-2560.webp 2560w'
 	);
 }
 add_action( 'wp_head', 'adeptbuild_preload_hero_poster', 1 );
@@ -218,6 +218,7 @@ function adeptbuild_local_business_schema( $data ) {
 	$data['url']       = home_url( '/' );
 	$data['telephone'] = '+1-800-611-1776';
 	$data['email']     = 'office@adeptbuild.com';
+	$data['priceRange'] = '$$$$';
  
 	// Reuse the logo Yoast already registers instead of duplicating it.
 	$data['image'] = array( '@id' => home_url( '/#/schema/logo/image/' ) );
@@ -585,3 +586,10 @@ require_once get_template_directory() . '/inc/customizer.php';
 require_once get_template_directory() . '/inc/meta-boxes.php';
 require_once get_template_directory() . '/inc/class-mega-menu-walker.php';
 require_once get_template_directory() . '/inc/home-intro.php';
+
+/* Security header: HSTS (Magi, Oct 10 2026) */
+add_action( 'send_headers', function () {
+	if ( is_ssl() ) {
+		header( 'Strict-Transport-Security: max-age=31536000' );
+	}
+} );
